@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Mail, MessageCircle, Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, ArrowRight } from "lucide-react";
+
+const WA = "https://wa.me/573123198706?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20gratuita%20para%20mi%20p%C3%A1gina%20web.";
 
 const projectTypes = [
   "Landing Page",
   "Sitio Empresarial",
-  "Sitio Web Premium",
-  "Tienda Online (E-commerce)",
-  "Aplicación Web",
-  "Desarrollo de API",
+  "Tienda Virtual",
+  "Sistema Web Personalizado",
+  "Mantenimiento Web",
+  "Optimización SEO",
   "Rediseño de Sitio Web",
-  "Mantenimiento y Soporte",
   "Otro",
 ];
 
@@ -23,17 +24,15 @@ export function Contact() {
     projectType: "",
     budget: "",
     message: "",
-    website: "", // honeypot anti-spam — oculto para usuarios reales
+    website: "",
   });
-
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (form.website) return; // honeypot anti-bot
+    if (form.website) return;
 
-    // Validación básica de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
       setError("Por favor ingresa un correo electrónico válido.");
@@ -48,9 +47,7 @@ export function Contact() {
     setSending(true);
 
     try {
-      const FORM_ENDPOINT = "https://formspree.io/f/mbdbvjjz";
-
-      const res = await fetch(FORM_ENDPOINT, {
+      const res = await fetch("https://formspree.io/f/mbdbvjjz", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
@@ -60,355 +57,489 @@ export function Contact() {
           tipo_proyecto: form.projectType,
           presupuesto: form.budget,
           mensaje: form.message,
-          _subject: `Nuevo contacto: ${form.projectType || "Sin tipo"} — ${form.name}`,
+          _subject: `Cotización: ${form.projectType || "Sin tipo"} — ${form.name}`,
         }),
       });
 
       if (res.ok) {
         setSubmitted(true);
       } else {
-        setError("No se pudo enviar el mensaje. Por favor escríbenos directamente por WhatsApp.");
+        setError("No se pudo enviar. Por favor escríbenos directamente por WhatsApp.");
       }
     } catch {
-      setError("Error de red. Por favor escríbenos directamente por WhatsApp.");
+      setError("Error de red. Por favor escríbenos por WhatsApp.");
     } finally {
       setSending(false);
     }
   };
 
-  const inputClass =
-    "w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-400 focus:bg-white transition-all duration-200";
-  const labelClass = "block mb-1.5 text-zinc-700 text-sm";
-
   return (
-    <section id="contact" className="py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-zinc-100 rounded-full mb-6">
-            <span
-              className="text-zinc-500 text-sm"
-              style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
-            >
-              Contáctanos
-            </span>
-          </div>
-          <h2
-            className="text-zinc-900 mb-4"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)",
-              letterSpacing: "-0.03em",
-              lineHeight: 1.15,
-            }}
-          >
-            Construyamos algo
-            <br />extraordinario juntos
-          </h2>
-          <p
-            className="text-zinc-400 max-w-lg mx-auto"
-            style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", lineHeight: 1.7 }}
-          >
-            Cuéntanos tu proyecto y te respondemos en menos de 24 horas con una propuesta personalizada.
-          </p>
-        </motion.div>
+    <>
+      {/* CTA Final Banner */}
+      <section
+        className="relative py-20 overflow-hidden"
+        style={{ background: "linear-gradient(160deg, #09090b 0%, #0d0b1e 50%, #09090b 100%)" }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(99,102,241,0.12) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
+          }}
+        />
 
-        <div className="grid lg:grid-cols-5 gap-12">
-          {/* Left sidebar */}
+        <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2 flex flex-col gap-5"
           >
-            {/* WhatsApp — destacado */}
-            <a
-              href="https://wa.me/573123198706"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 p-5 bg-[#25D366]/10 border border-[#25D366]/30 rounded-2xl hover:border-[#25D366]/60 hover:shadow-md transition-all duration-200 group"
+            <div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+              style={{ background: "rgba(99,102,241,0.12)", border: "1px solid rgba(99,102,241,0.25)" }}
             >
-              <div className="w-12 h-12 rounded-xl bg-[#25D366] flex items-center justify-center shrink-0">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                  <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z"/>
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)" }}>
+                Disponible para nuevos proyectos
+              </span>
+            </div>
+
+            <h2
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 800,
+                fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                letterSpacing: "-0.04em",
+                lineHeight: 1.08,
+                color: "#fff",
+                marginBottom: "20px",
+              }}
+            >
+              Da el siguiente paso para{" "}
+              <span
+                style={{
+                  background: "linear-gradient(135deg, #818cf8, #a78bfa, #c084fc)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                fortalecer tu presencia digital.
+              </span>
+            </h2>
+
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "17px",
+                lineHeight: 1.7,
+                color: "rgba(255,255,255,0.45)",
+                maxWidth: "520px",
+                margin: "0 auto 36px",
+              }}
+            >
+              Solicita una cotización gratuita y descubre cómo podría verse tu nueva página web.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <motion.a
+                href={WA}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-3 cursor-pointer group"
+                style={{
+                  padding: "16px 32px",
+                  background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
+                  borderRadius: "14px",
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 700,
+                  fontSize: "16px",
+                  color: "#fff",
+                  textDecoration: "none",
+                  boxShadow: "0 10px 36px rgba(37,211,102,0.35)",
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                  <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
                 </svg>
-              </div>
-              <div>
-                <div
-                  className="text-[#25D366] text-xs mb-0.5 font-semibold uppercase tracking-wide"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  Respuesta inmediata
-                </div>
-                <div
-                  className="text-zinc-900"
-                  style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "15px" }}
-                >
-                  Hablar por WhatsApp
-                </div>
-                <div className="text-zinc-400 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
-                  La forma más rápida de contactarnos
-                </div>
-              </div>
-            </a>
+                Hablar por WhatsApp
+              </motion.a>
 
-            {/* Consulta gratuita info */}
-            <div className="flex items-center gap-4 p-5 bg-zinc-50 border border-zinc-100 rounded-2xl">
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: "#6366f115" }}
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => document.querySelector("#contact-form")?.scrollIntoView({ behavior: "smooth" })}
+                className="inline-flex items-center gap-2 cursor-pointer group transition-all duration-200"
+                style={{
+                  padding: "16px 32px",
+                  background: "rgba(255,255,255,0.07)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: "14px",
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "16px",
+                  color: "rgba(255,255,255,0.8)",
+                }}
               >
-                <MessageCircle size={22} style={{ color: "#6366f1" }} />
-              </div>
-              <div>
-                <div className="text-zinc-400 text-xs mb-0.5" style={{ fontFamily: "Inter, sans-serif" }}>
-                  Formulario de contacto
-                </div>
-                <div
-                  className="text-zinc-900"
-                  style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "15px" }}
-                >
-                  Cuéntanos tu proyecto
-                </div>
-                <div className="text-zinc-400 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>
-                  Respuesta en menos de 24 horas
-                </div>
-              </div>
+                Solicitar Cotización
+                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+              </motion.button>
             </div>
-
-            {/* Response guarantee */}
-            <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-100 rounded-xl">
-              <CheckCircle2 size={18} className="text-green-500 shrink-0" />
-              <p className="text-zinc-600 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
-                <span style={{ fontWeight: 600 }}>Garantía de respuesta:</span> Respondemos todas las consultas en menos de 24 horas, de lunes a viernes.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Right: Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-3"
-          >
-            {submitted ? (
-              <div className="h-full flex items-center justify-center py-20">
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5">
-                    <CheckCircle2 size={32} className="text-green-500" />
-                  </div>
-                  <h3
-                    className="text-zinc-900 mb-2"
-                    style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "20px" }}
-                  >
-                    ¡Mensaje recibido!
-                  </h3>
-                  <p
-                    className="text-zinc-400"
-                    style={{ fontFamily: "Inter, sans-serif", fontSize: "15px" }}
-                  >
-                    Revisaré los detalles de tu proyecto y te responderé en menos de 24 horas.
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="bg-zinc-50 border border-zinc-100 rounded-3xl p-8 flex flex-col gap-5"
-                noValidate
-              >
-                {/* Campo honeypot — invisible para usuarios, visible para bots */}
-                <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
-                  <label htmlFor="website">No llenar este campo</label>
-                  <input
-                    id="website"
-                    name="website"
-                    type="text"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    value={form.website}
-                    onChange={(e) => setForm({ ...form, website: e.target.value })}
-                  />
-                </div>
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label
-                      className={labelClass}
-                      style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
-                    >
-                      Nombre completo *
-                    </label>
-                    <input
-                      required
-                      type="text"
-                      placeholder="Tu nombre"
-                      className={inputClass}
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className={labelClass}
-                      style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
-                    >
-                      Correo electrónico *
-                    </label>
-                    <input
-                      required
-                      type="email"
-                      placeholder="tu@empresa.com"
-                      className={inputClass}
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label
-                      className={labelClass}
-                      style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
-                    >
-                      Teléfono / WhatsApp
-                    </label>
-                    <input
-                      type="tel"
-                      placeholder="Tu número de contacto"
-                      className={inputClass}
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className={labelClass}
-                      style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
-                    >
-                      Tipo de proyecto *
-                    </label>
-                    <select
-                      required
-                      className={inputClass + " cursor-pointer"}
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                      value={form.projectType}
-                      onChange={(e) => setForm({ ...form, projectType: e.target.value })}
-                    >
-                      <option value="">Seleccionar tipo...</option>
-                      {projectTypes.map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    className={labelClass}
-                    style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
-                  >
-                    Presupuesto aproximado
-                  </label>
-                  <select
-                    className={inputClass + " cursor-pointer"}
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                    value={form.budget}
-                    onChange={(e) => setForm({ ...form, budget: e.target.value })}
-                  >
-                    <option value="">Seleccionar rango...</option>
-                    <option>Menos de $600.000 COP</option>
-                    <option>$600.000 – $1.000.000 COP</option>
-                    <option>$1.000.000 – $2.000.000 COP</option>
-                    <option>$2.000.000 – $3.500.000 COP</option>
-                    <option>Más de $3.500.000 COP</option>
-                    <option>Aún no lo tengo definido</option>
-                  </select>
-                  {/* Nota visible sobre la forma de pago */}
-                  <p
-                    className="mt-1.5 text-zinc-400 text-xs flex items-center gap-1.5"
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                  >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <circle cx="12" cy="12" r="10"/>
-                      <line x1="12" y1="8" x2="12" y2="12"/>
-                      <line x1="12" y1="16" x2="12.01" y2="16"/>
-                    </svg>
-                    Forma de pago: <strong className="text-zinc-500">50% al iniciar — 50% al entregar</strong>
-                  </p>
-                </div>
-
-                <div>
-                  <label
-                    className={labelClass}
-                    style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
-                  >
-                    Cuéntanos sobre tu proyecto *
-                  </label>
-                  <textarea
-                    required
-                    rows={5}
-                    placeholder="Describe tu negocio, qué necesitas, tus objetivos y cualquier requisito o plazo específico..."
-                    className={inputClass + " resize-none"}
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  />
-                </div>
-
-                {error && (
-                  <p className="text-red-500 text-sm text-center" style={{ fontFamily: "Inter, sans-serif" }}>
-                    {error}
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={sending}
-                  className="w-full py-4 bg-zinc-900 text-white rounded-xl hover:bg-zinc-700 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
-                  style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "15px" }}
-                >
-                  {sending ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      <Send size={16} />
-                      Enviar Mensaje
-                      <span className="group-hover:translate-x-0.5 transition-transform">→</span>
-                    </>
-                  )}
-                </button>
-
-                <p
-                  className="text-center text-zinc-400 text-xs"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  Al enviar, aceptas que te contactemos sobre tu proyecto. Sin spam, nunca.
-                </p>
-              </form>
-            )}
           </motion.div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Contact form */}
+      <section id="contact" className="py-20" style={{ background: "#09090b", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div id="contact-form" className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
+            <div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+              style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+            >
+              <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>
+                Contáctanos
+              </span>
+            </div>
+            <h2
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 800,
+                fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)",
+                letterSpacing: "-0.03em",
+                lineHeight: 1.15,
+                color: "#fff",
+                marginBottom: "14px",
+              }}
+            >
+              Cuéntanos sobre tu proyecto
+            </h2>
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "16px",
+                lineHeight: 1.7,
+                color: "rgba(255,255,255,0.4)",
+                maxWidth: "440px",
+                margin: "0 auto",
+              }}
+            >
+              Te respondemos en menos de 24 horas con una propuesta personalizada.
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-5 gap-10">
+            {/* Left contact info */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-2 flex flex-col gap-4"
+            >
+              <a
+                href={WA}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-5 rounded-2xl transition-all duration-200 group"
+                style={{
+                  background: "rgba(37,211,102,0.08)",
+                  border: "1px solid rgba(37,211,102,0.2)",
+                  textDecoration: "none",
+                }}
+              >
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: "#25D366" }}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
+                  </svg>
+                </div>
+                <div>
+                  <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "11px", color: "#4ade80", letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: "2px" }}>
+                    Respuesta inmediata
+                  </div>
+                  <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "15px", color: "#fff" }}>
+                    Hablar por WhatsApp
+                  </div>
+                  <div style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.35)" }}>
+                    La forma más rápida de contactarnos
+                  </div>
+                </div>
+              </a>
+
+              <div
+                className="flex items-center gap-3 p-4 rounded-xl"
+                style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.15)" }}
+              >
+                <CheckCircle2 size={16} style={{ color: "#22c55e", flexShrink: 0 }} />
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>
+                  <strong style={{ color: "rgba(255,255,255,0.75)" }}>Garantía de respuesta:</strong> Respondemos todas las consultas en menos de 24 horas.
+                </p>
+              </div>
+
+              <div
+                className="p-5 rounded-2xl"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+              >
+                <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "14px", color: "rgba(255,255,255,0.7)", marginBottom: "12px" }}>
+                  ¿Para qué tipo de negocio?
+                </p>
+                {["Clínicas y consultorios", "Restaurantes", "Escuelas", "Empresas de servicios", "Emprendedores"].map((item) => (
+                  <div key={item} className="flex items-center gap-2 mb-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#818cf8" }} />
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right: Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-3"
+            >
+              {submitted ? (
+                <div className="flex items-center justify-center py-20">
+                  <div className="text-center">
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
+                      style={{ background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.25)" }}
+                    >
+                      <CheckCircle2 size={32} style={{ color: "#22c55e" }} />
+                    </div>
+                    <h3 style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "20px", color: "#fff", marginBottom: "8px" }}>
+                      ¡Mensaje recibido!
+                    </h3>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.4)" }}>
+                      Te responderemos en menos de 24 horas con una propuesta personalizada.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <form
+                  onSubmit={handleSubmit}
+                  className="rounded-3xl p-8 flex flex-col gap-5"
+                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}
+                  noValidate
+                >
+                  {/* Honeypot */}
+                  <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
+                    <input
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={form.website}
+                      onChange={(e) => setForm({ ...form, website: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
+                        Nombre completo *
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        placeholder="Tu nombre"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200"
+                        style={{
+                          background: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                          color: "#fff",
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "14px",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
+                        Correo electrónico *
+                      </label>
+                      <input
+                        required
+                        type="email"
+                        placeholder="tu@empresa.com"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200"
+                        style={{
+                          background: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                          color: "#fff",
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "14px",
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
+                        WhatsApp / Teléfono
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="Número de contacto"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200"
+                        style={{
+                          background: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                          color: "#fff",
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "14px",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
+                        Tipo de proyecto *
+                      </label>
+                      <select
+                        required
+                        value={form.projectType}
+                        onChange={(e) => setForm({ ...form, projectType: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 cursor-pointer"
+                        style={{
+                          background: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                          color: form.projectType ? "#fff" : "rgba(255,255,255,0.35)",
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "14px",
+                        }}
+                      >
+                        <option value="" style={{ background: "#18181b" }}>Seleccionar tipo...</option>
+                        {projectTypes.map((t) => (
+                          <option key={t} value={t} style={{ background: "#18181b" }}>{t}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
+                      Presupuesto aproximado
+                    </label>
+                    <select
+                      value={form.budget}
+                      onChange={(e) => setForm({ ...form, budget: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 cursor-pointer"
+                      style={{
+                        background: "rgba(255,255,255,0.05)",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        color: form.budget ? "#fff" : "rgba(255,255,255,0.35)",
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "14px",
+                      }}
+                    >
+                      <option value="" style={{ background: "#18181b" }}>Seleccionar rango...</option>
+                      <option style={{ background: "#18181b" }}>Menos de $600.000 COP</option>
+                      <option style={{ background: "#18181b" }}>$600.000 – $1.000.000 COP</option>
+                      <option style={{ background: "#18181b" }}>$1.000.000 – $2.000.000 COP</option>
+                      <option style={{ background: "#18181b" }}>$2.000.000 – $3.500.000 COP</option>
+                      <option style={{ background: "#18181b" }}>Más de $3.500.000 COP</option>
+                      <option style={{ background: "#18181b" }}>Aún no lo tengo definido</option>
+                    </select>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "6px" }}>
+                      Forma de pago:{" "}
+                      <strong style={{ color: "rgba(255,255,255,0.5)" }}>50% al iniciar · 50% al entregar</strong>
+                    </p>
+                  </div>
+
+                  <div>
+                    <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
+                      Cuéntanos sobre tu proyecto *
+                    </label>
+                    <textarea
+                      required
+                      rows={5}
+                      placeholder="Describe tu negocio, qué necesitas y cuáles son tus objetivos..."
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 resize-none"
+                      style={{
+                        background: "rgba(255,255,255,0.05)",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        color: "#fff",
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "14px",
+                      }}
+                    />
+                  </div>
+
+                  {error && (
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "#f87171", textAlign: "center" }}>
+                      {error}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="w-full py-4 rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed group"
+                    style={{
+                      background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
+                      color: "#fff",
+                      fontFamily: "Inter, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "15px",
+                      boxShadow: "0 8px 24px rgba(99,102,241,0.35)",
+                    }}
+                  >
+                    {sending ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Enviando...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={16} />
+                        Solicitar Cotización Gratuita
+                        <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+                      </>
+                    )}
+                  </button>
+
+                  <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.25)", textAlign: "center" }}>
+                    Al enviar aceptas que te contactemos sobre tu proyecto. Sin spam.
+                  </p>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

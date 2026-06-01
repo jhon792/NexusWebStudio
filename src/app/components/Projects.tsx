@@ -1,39 +1,56 @@
 import { motion } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
 
-const projects = [
+const demos = [
   {
-    title: "MedClinic Pro",
-    category: "Clínica Médica",
-    description: "Portal completo de gestión de pacientes con reservas online, recordatorios automatizados y sistema de historial clínico para una clínica multiespecialidad.",
-    tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    result: "+340% citas en línea",
-    image: "https://images.unsplash.com/photo-1589554881701-3902036d4d04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW50YWwlMjBjbGluaWMlMjBsdXh1cnklMjBtaW5pbWFsaXN0JTIwaW50ZXJpb3J8ZW58MXx8fHwxNzgwMTYxNjk1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    accent: "#6366f1",
-  },
-  {
-    title: "LexFirm Digital",
-    category: "Firma de Abogados",
-    description: "Presencia digital premium para un bufete boutique con páginas de casos de éxito, portal de clientes y embudos de captación de consultas calificadas.",
-    tags: ["Next.js", "Tailwind", "Sanity CMS"],
-    result: "+180% consultas calificadas",
-    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHdlYnNpdGUlMjBsYXB0b3AlMjBzY3JlZW4lMjBtb2Rlcm58ZW58MXx8fHwxNzgwMTYxNjk0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    accent: "#10b981",
-  },
-  {
-    title: "AesthetiQ Clinic",
     category: "Clínica Estética",
-    description: "Sitio web de marca de lujo para una clínica estética de alto nivel con catálogo de tratamientos, galerías antes/después y sistema de citas automatizado.",
-    tags: ["React", "Framer Motion", "Calendly API"],
-    result: "+260% reservas de consultas",
-    image: "https://images.unsplash.com/photo-1759262151080-e05ba1c6294f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxkZW50YWwlMjBjbGluaWMlMjBsdXh1cnklMjBtaW5pbWFsaXN0JTIwaW50ZXJpb3J8ZW58MXx8fHwxNzgwMTYxNjk1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    accent: "#f59e0b",
+    title: "Diseño para clínica de estética",
+    description:
+      "Ejemplo de cómo podría verse el sitio web de una clínica estética: presentación de tratamientos, galería de resultados, formulario de citas y sección de confianza.",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80&auto=format&fit=crop",
+    accent: "#c084fc",
+    tags: ["Citas online", "Galería de servicios", "WhatsApp integrado"],
+  },
+  {
+    category: "Escuela de Conducción",
+    title: "Diseño para autoescuela",
+    description:
+      "Sitio web orientado a captar estudiantes: cursos disponibles, horarios, precios, proceso de inscripción y contacto directo por WhatsApp.",
+    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80&auto=format&fit=crop",
+    accent: "#fbbf24",
+    tags: ["Inscripción online", "Horarios", "Cotización rápida"],
+  },
+  {
+    category: "Restaurante",
+    title: "Diseño para restaurante",
+    description:
+      "Presencia digital para restaurante con menú visual, reservas, ubicación interactiva y galería de platos para despertar el apetito antes de la visita.",
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format&fit=crop",
+    accent: "#fb923c",
+    tags: ["Menú digital", "Reservas", "Google Maps"],
+  },
+  {
+    category: "Odontología",
+    title: "Diseño para consultorio dental",
+    description:
+      "Sitio web para odontólogos con presentación de tratamientos, equipo profesional, sistema de citas y sección de confianza que convierte visitantes en pacientes.",
+    image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=800&q=80&auto=format&fit=crop",
+    accent: "#34d399",
+    tags: ["Agenda de citas", "Tratamientos", "Equipo médico"],
+  },
+  {
+    category: "Empresa Corporativa",
+    title: "Diseño corporativo empresarial",
+    description:
+      "Sitio web de imagen corporativa con presentación de empresa, servicios, portafolio de proyectos, equipo y canales de contacto para clientes B2B.",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop",
+    accent: "#60a5fa",
+    tags: ["Imagen corporativa", "Portafolio", "Contacto B2B"],
   },
 ];
 
 export function Projects() {
   return (
-    <section id="projects" className="py-28 bg-zinc-50">
+    <section id="portfolio" className="py-24" style={{ background: "#0d0d18" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -41,147 +58,199 @@ export function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16"
+          className="text-center mb-5"
         >
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-zinc-200 rounded-full mb-6">
-              <span
-                className="text-zinc-500 text-sm"
-                style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
-              >
-                Portafolio
-              </span>
-            </div>
-            <h2
-              className="text-zinc-900"
+          <div
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+          >
+            <span
               style={{
                 fontFamily: "Inter, sans-serif",
-                fontWeight: 800,
-                fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)",
-                letterSpacing: "-0.03em",
-                lineHeight: 1.15,
+                fontWeight: 500,
+                fontSize: "13px",
+                color: "rgba(255,255,255,0.5)",
               }}
             >
-              Proyectos que generan
-              <br />resultados reales
-            </h2>
+              Ejemplos de Diseño
+            </span>
           </div>
-          <p
-            className="text-zinc-400 max-w-sm"
-            style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", lineHeight: 1.7 }}
+          <h2
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)",
+              letterSpacing: "-0.03em",
+              lineHeight: 1.15,
+              color: "#fff",
+              marginBottom: "16px",
+            }}
           >
-            Cada proyecto es un caso de éxito: sitios web que se convierten en activos de negocio y generan ingresos medibles.
+            Proyectos{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #818cf8, #c084fc)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Demostrativos
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* Disclaimer */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-center mb-14"
+        >
+          <p
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "15px",
+              lineHeight: 1.6,
+              color: "rgba(255,255,255,0.4)",
+              maxWidth: "580px",
+              margin: "0 auto",
+            }}
+          >
+            Estos diseños muestran ejemplos de cómo podría verse la presencia digital de distintos tipos de negocios. Cada proyecto real se diseña completamente a medida para tu negocio específico.
           </p>
         </motion.div>
 
-        {/* Project cards */}
-        <div className="flex flex-col gap-6">
-          {projects.map((project, i) => (
+        {/* Portfolio grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {demos.map((demo, i) => (
             <motion.div
-              key={project.title}
+              key={demo.category}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={`group grid lg:grid-cols-2 gap-0 bg-white rounded-3xl border border-zinc-100 overflow-hidden hover:shadow-2xl transition-all duration-500 ${
-                i % 2 === 1 ? "lg:flex lg:flex-row-reverse" : ""
-              }`}
+              transition={{ duration: 0.5, delay: i * 0.09 }}
+              className="group relative rounded-2xl overflow-hidden cursor-default"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
             >
               {/* Image */}
-              <div className="relative overflow-hidden h-72 lg:h-auto">
+              <div className="relative overflow-hidden h-52">
                 <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  src={demo.image}
+                  alt={`Ejemplo de diseño web para ${demo.category}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-zinc-900/30 to-transparent" />
-                <div className="absolute top-5 left-5">
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%)" }}
+                />
+                <div className="absolute top-4 left-4">
                   <span
-                    className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs"
-                    style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, color: "#18181b" }}
+                    className="px-3 py-1 rounded-full text-xs font-semibold"
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      background: `${demo.accent}22`,
+                      border: `1px solid ${demo.accent}44`,
+                      color: demo.accent,
+                      backdropFilter: "blur(8px)",
+                    }}
                   >
-                    {project.category}
+                    {demo.category}
                   </span>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-8 lg:p-12 flex flex-col justify-center">
+              <div className="p-5">
                 <h3
-                  className="text-zinc-900 mb-3"
                   style={{
                     fontFamily: "Inter, sans-serif",
-                    fontWeight: 800,
-                    fontSize: "1.75rem",
-                    letterSpacing: "-0.02em",
+                    fontWeight: 700,
+                    fontSize: "16px",
+                    color: "#fff",
+                    marginBottom: "8px",
                   }}
                 >
-                  {project.title}
+                  {demo.title}
                 </h3>
                 <p
-                  className="text-zinc-500 mb-6"
-                  style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", lineHeight: 1.7 }}
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "13px",
+                    lineHeight: 1.65,
+                    color: "rgba(255,255,255,0.45)",
+                    marginBottom: "14px",
+                  }}
                 >
-                  {project.description}
+                  {demo.description}
                 </p>
-
-                {/* Result highlight */}
-                <div
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl mb-6 self-start"
-                  style={{ background: `${project.accent}12`, border: `1px solid ${project.accent}25` }}
-                >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke={project.accent}
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                    <polyline points="16 7 22 7 22 13" />
-                  </svg>
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      color: project.accent,
-                    }}
-                  >
-                    {project.result}
-                  </span>
-                </div>
-
-                {/* Tech tags */}
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {project.tags.map((tag) => (
+                <div className="flex flex-wrap gap-1.5">
+                  {demo.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-1 bg-zinc-100 text-zinc-500 rounded-lg text-xs"
-                      style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
+                      className="px-2.5 py-0.5 rounded-full text-xs"
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontWeight: 500,
+                        background: `${demo.accent}14`,
+                        color: demo.accent,
+                        border: `1px solid ${demo.accent}28`,
+                      }}
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-
-                <button
-                  className="inline-flex items-center gap-2 text-zinc-900 hover:text-zinc-600 transition-colors cursor-pointer self-start group/btn"
-                  style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "14px" }}
-                >
-                  Ver Caso de Éxito
-                  <ArrowUpRight
-                    size={16}
-                    className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
-                  />
-                </button>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-12 text-center"
+        >
+          <p
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "15px",
+              color: "rgba(255,255,255,0.4)",
+              marginBottom: "20px",
+            }}
+          >
+            ¿Quieres ver cómo podría verse el sitio web de tu negocio?
+          </p>
+          <a
+            href="https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20ver%20un%20dise%C3%B1o%20para%20mi%20negocio."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl cursor-pointer transition-all duration-200"
+            style={{
+              background: "linear-gradient(135deg, #6366f1, #a855f7)",
+              color: "#fff",
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 600,
+              fontSize: "15px",
+              textDecoration: "none",
+              boxShadow: "0 8px 28px rgba(99,102,241,0.3)",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
+            </svg>
+            Solicitar diseño para mi negocio
+          </a>
+        </motion.div>
       </div>
     </section>
   );

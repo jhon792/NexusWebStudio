@@ -2,36 +2,36 @@ import { useEffect } from "react";
 import { Navbar } from "../components/Navbar";
 import { Hero } from "../components/Hero";
 import { TrustSection } from "../components/TrustSection";
-import { Services } from "../components/Services";
 import { WhySellOnline } from "../components/WhySellOnline";
+import { Services } from "../components/Services";
+import { Projects } from "../components/Projects";
 import { Process } from "../components/Process";
-import { WhyMe } from "../components/WhyMe";
-import { Blog } from "../components/Blog";
 import { Pricing } from "../components/Pricing";
+import { WhyMe } from "../components/WhyMe";
 import { FAQ } from "../components/FAQ";
 import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
 
 export default function Home() {
   useEffect(() => {
-    document.title = "Desarrollo Web Profesional en Colombia | NexuStudio";
+    document.title = "Diseño Web Profesional en Colombia | Nexus Studio";
   }, []);
 
   return (
     <div
-      className="min-h-screen bg-white antialiased"
-      style={{ fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}
+      className="min-h-screen antialiased"
+      style={{ background: "#09090b", fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}
     >
       <Navbar />
       <main id="main-content">
         <Hero />
         <TrustSection />
-        <Services />
         <WhySellOnline />
+        <Services />
+        <Projects />
         <Process />
-        <WhyMe />
-        <Blog />
         <Pricing />
+        <WhyMe />
         <FAQ />
         <Contact />
       </main>
