@@ -391,7 +391,7 @@ export function PlanetHero() {
             style={{
               position: "absolute", top: 0, left: 0,
               width: D * 2, height: D,
-              backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/The_earth_at_night.jpg/2560px-The_earth_at_night.jpg)`,
+              backgroundImage: `url(/earth.jpg)`,
               backgroundSize: `${D * 2}px ${D}px`,
               backgroundRepeat: "no-repeat",
               // Filtro CSS para lograr el tono morado/neón de la referencia
@@ -405,7 +405,7 @@ export function PlanetHero() {
             style={{
               position: "absolute", top: 0, left: D,
               width: D * 2, height: D,
-              backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/The_earth_at_night.jpg/2560px-The_earth_at_night.jpg)`,
+              backgroundImage: `url(/earth.jpg)`,
               backgroundSize: `${D * 2}px ${D}px`,
               backgroundRepeat: "no-repeat",
               filter: "hue-rotate(248deg) saturate(3.2) brightness(1.25) contrast(1.15)",
