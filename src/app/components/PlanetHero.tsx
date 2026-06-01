@@ -2,7 +2,7 @@ import { useRef, useCallback, useMemo } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 
 // ── Dimensiones ────────────────────────────────────────────────────────────
-const R   = 293;         // 15% más pequeño que 345
+const R   = 255;         // 13% más pequeño que 293
 const D   = R * 2;       // 586
 const BOX = D + 320;     // 906 — espacio para órbitas + tarjetas
 
