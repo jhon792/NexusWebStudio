@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Bloquear rutas sin valor SEO
+Disallow: /src/
+Disallow: /*.json$
+Disallow: /node_modules/
+
+# Sitemap
+Sitemap: https://johndev.com/sitemap.xml
+
+# Crawl-delay respetuoso
+Crawl-delay: 1

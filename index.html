@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== SEO PRIMARIO ===== -->
+    <title>Desarrollo Web Profesional en Colombia | John Dev</title>
+    <meta name="description" content="Desarrollo web profesional en Colombia. Landing pages, sitios empresariales, tiendas online y aplicaciones web. Sitios rápidos, seguros y optimizados para Google. WhatsApp: 3123198706" />
+    <meta name="keywords" content="desarrollo web colombia, diseño web profesional, landing page colombia, tienda online, sitio web empresarial, SEO colombia, programador web" />
+    <meta name="author" content="John Dev" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="https://johndev.com/" />
+
+    <!-- ===== SEGURIDAD (CSP via meta — complementa los headers del servidor) ===== -->
+    <!--
+      NOTA: X-Frame-Options y frame-ancestors SOLO funcionan como HTTP headers.
+      Están correctamente configurados en vercel.json / _headers.
+      Aquí solo ponemos las directivas que sí son válidas en <meta>.
+    -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' data: https://fonts.gstatic.com;
+      img-src 'self' data: blob: https:;
+      media-src 'self' data: blob:;
+      connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://formspree.io;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://formspree.io;
+    " />
+
+    <!-- ===== OPEN GRAPH (Facebook, LinkedIn, WhatsApp preview) ===== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://johndev.com/" />
+    <meta property="og:title" content="Desarrollo Web Profesional en Colombia | John Dev" />
+    <meta property="og:description" content="Sitios web que convierten visitantes en clientes. Landing pages, sitios empresariales, tiendas online y apps web. Presupuesto sin costo." />
+    <meta property="og:image" content="https://johndev.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="John Dev - Desarrollo Web Profesional" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="John Dev" />
+
+    <!-- ===== TWITTER CARDS ===== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@johndev" />
+    <meta name="twitter:title" content="Desarrollo Web Profesional en Colombia | John Dev" />
+    <meta name="twitter:description" content="Sitios web que convierten visitantes en clientes. Landing pages, sitios empresariales, tiendas online." />
+    <meta name="twitter:image" content="https://johndev.com/og-image.jpg" />
+    <meta name="twitter:image:alt" content="John Dev - Desarrollo Web Profesional" />
+
+    <!-- ===== SCHEMA.ORG (Google Rich Results) ===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://johndev.com/#website",
+          "url": "https://johndev.com/",
+          "name": "John Dev - Desarrollo Web Profesional",
+          "description": "Desarrollo web profesional para empresas en Colombia y Latinoamérica",
+          "inLanguage": "es-CO",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://johndev.com/blog?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://johndev.com/#business",
+          "name": "John Dev",
+          "url": "https://johndev.com/",
+          "telephone": "+573123198706",
+          "description": "Desarrollo web profesional para empresas. Landing pages, sitios empresariales, tiendas online y aplicaciones web en Colombia y Latinoamérica.",
+          "priceRange": "$$",
+          "currenciesAccepted": "COP, USD",
+          "paymentAccepted": "Transferencia bancaria, PSE, Efecty",
+          "areaServed": [
+            {"@type": "Country", "name": "Colombia"},
+            {"@type": "Country", "name": "Latinoamérica"}
+          ],
+          "serviceType": ["Diseño Web", "Desarrollo Web", "SEO", "E-commerce", "Aplicaciones Web"],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+573123198706",
+            "contactType": "Atención al cliente",
+            "availableLanguage": ["Spanish", "English"],
+            "contactOption": "WhatsApp"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Desarrollo Web",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "name": "Landing Page",
+                "description": "Una página profesional diseñada para captar clientes",
+                "price": "600000",
+                "priceCurrency": "COP"
+              },
+              {
+                "@type": "Offer",
+                "name": "Sitio Empresarial",
+                "description": "Sitio web completo hasta 5 páginas con SEO",
+                "price": "1500000",
+                "priceCurrency": "COP"
+              },
+              {
+                "@type": "Offer",
+                "name": "Tienda Online",
+                "description": "E-commerce profesional con carrito y pagos",
+                "price": "3000000",
+                "priceCurrency": "COP"
+              }
+            ]
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- ===== PERFORMANCE: Preconnect a recursos externos ===== -->
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    <!-- ===== FAVICON (reemplaza con tu imagen) ===== -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%2318181b'/><text y='68' x='14' font-size='55' font-family='Inter,sans-serif' font-weight='800' fill='white'>JD</text></svg>" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#18181b" />
+
+    <!-- ===== ESTILOS BASE ===== -->
+    <style>
+      html, body { height: 100%; margin: 0; scroll-behavior: smooth; }
+      #root { height: 100%; }
+      /* Skip to content — accesibilidad WCAG 2.1 */
+      .skip-link {
+        position: absolute;
+        top: -9999px;
+        left: 0;
+        z-index: 9999;
+        padding: 8px 16px;
+        background: #18181b;
+        color: #fff;
+        font-family: Inter, sans-serif;
+        font-size: 14px;
+        border-radius: 0 0 8px 0;
+      }
+      .skip-link:focus { top: 0; }
+      /* Respeto por preferencias de movimiento reducido */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+
+    <!-- ===== GOOGLE TAG MANAGER (se activa solo con consentimiento via JS) ===== -->
+    <!-- El script de GA4 lo inyecta dinámicamente useAnalytics.ts -->
+  </head>
+
+  <body>
+    <!-- Accesibilidad: Skip navigation -->
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
