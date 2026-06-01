@@ -411,9 +411,9 @@ export function PlanetHero() {
               <pattern id="cp" x="0" y="0" width="4.5" height="4.5" patternUnits="userSpaceOnUse">
                 <circle cx="2.25" cy="2.25" r="1.15" fill="rgba(155,140,255,0.90)" />
               </pattern>
-              {/* Ciudades — naranja cálido "city lights from space" */}
-              <pattern id="czp" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
-                <circle cx="1.5" cy="1.5" r="1.05" fill="rgba(255,140,60,0.95)" />
+              {/* Ciudades — naranja cálido, puntos pequeños para no fusionarse */}
+              <pattern id="czp" x="0" y="0" width="3.5" height="3.5" patternUnits="userSpaceOnUse">
+                <circle cx="1.75" cy="1.75" r="0.72" fill="rgba(255,150,70,0.92)" />
               </pattern>
               {/* Grid lat/lon */}
               <pattern id="gp" x="0" y="0" width={D / 10} height={D / 10} patternUnits="userSpaceOnUse">
@@ -433,10 +433,12 @@ export function PlanetHero() {
             {/* Grid lat/lon */}
             <rect width={D * 2} height={D} fill="url(#gp)" opacity={0.60} />
             {/* Continentes — glow mínimo para no fusionar los puntos */}
+            {/* Continentes — leve glow por punto */}
             <rect width={D}   height={D} fill="url(#cp)"  clipPath="url(#cm1)" filter="url(#dot-glow)" />
-            <rect width={D}   height={D} fill="url(#czp)" clipPath="url(#cz1)" filter="url(#dot-glow)" />
             <rect x={D} width={D} height={D} fill="url(#cp)"  clipPath="url(#cm2)" filter="url(#dot-glow)" />
-            <rect x={D} width={D} height={D} fill="url(#czp)" clipPath="url(#cz2)" filter="url(#dot-glow)" />
+            {/* Ciudades naranja — sin filtro para puntos nítidos separados */}
+            <rect width={D}   height={D} fill="url(#czp)" clipPath="url(#cz1)" />
+            <rect x={D} width={D} height={D} fill="url(#czp)" clipPath="url(#cz2)" />
             {/* Mega-ciudades — glow fuerte individual */}
             <g filter="url(#city-glow)">
               {CITIES.map(([cx, cy], i) => (
