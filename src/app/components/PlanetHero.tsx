@@ -430,31 +430,32 @@ export function PlanetHero() {
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           >
             <defs>
-              {/* Filtros de glow */}
-              <filter id="cg" x="-80%" y="-80%" width="260%" height="260%">
-                <feGaussianBlur stdDeviation="2.8" result="b" />
-                <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <filter id="cgg" x="-60%" y="-60%" width="220%" height="220%">
-                <feGaussianBlur stdDeviation="1.5" result="b" />
+              {/* Glow leve para puntos individuales — NO fusiona los dots */}
+              <filter id="dot-glow" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="0.55" result="b" />
                 <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
-              {/* Patrón de puntos — océano */}
-              <pattern id="op" x="0" y="0" width="9" height="9" patternUnits="userSpaceOnUse">
-                <circle cx="4.5" cy="4.5" r="0.55" fill="rgba(99,102,241,0.20)" />
+              {/* Glow fuerte solo para mega-ciudades individuales */}
+              <filter id="city-glow" x="-200%" y="-200%" width="500%" height="500%">
+                <feGaussianBlur stdDeviation="3.5" result="b" />
+                <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              {/* Océano — puntos muy tenues */}
+              <pattern id="op" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                <circle cx="5" cy="5" r="0.5" fill="rgba(80,70,180,0.18)" />
               </pattern>
-              {/* Patrón de puntos — continentes */}
+              {/* Continentes — puntos medios, color morado brillante */}
               <pattern id="cp" x="0" y="0" width="4.5" height="4.5" patternUnits="userSpaceOnUse">
-                <circle cx="2.25" cy="2.25" r="1.20" fill="rgba(235,225,255,0.92)" />
+                <circle cx="2.25" cy="2.25" r="1.1" fill="rgba(168,148,255,0.88)" />
               </pattern>
-              {/* Patrón de puntos — ciudades (ultra denso) */}
-              <pattern id="czp" x="0" y="0" width="2.8" height="2.8" patternUnits="userSpaceOnUse">
-                <circle cx="1.4" cy="1.4" r="1.05" fill="rgba(255,252,255,0.98)" />
+              {/* Ciudades — puntos densos, más brillantes */}
+              <pattern id="czp" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
+                <circle cx="1.5" cy="1.5" r="1.0" fill="rgba(215,200,255,0.96)" />
               </pattern>
               {/* Grid lat/lon */}
               <pattern id="gp" x="0" y="0" width={D / 10} height={D / 10} patternUnits="userSpaceOnUse">
-                <line x1="0" y1="0" x2={D * 2} y2="0" stroke="rgba(129,140,248,0.16)" strokeWidth="0.5" />
-                <line x1="0" y1="0" x2="0" y2={D} stroke="rgba(129,140,248,0.13)" strokeWidth="0.5" />
+                <line x1="0" y1="0" x2={D * 2} y2="0" stroke="rgba(129,140,248,0.14)" strokeWidth="0.5" />
+                <line x1="0" y1="0" x2="0" y2={D} stroke="rgba(129,140,248,0.12)" strokeWidth="0.5" />
               </pattern>
               {/* Clipmasks continentes — mitad 1 */}
               <clipPath id="cm1">{CONTINENTS.map(cn => <polygon key={cn.id} points={pts(D, cn.c, 0)} />)}</clipPath>
@@ -464,26 +465,22 @@ export function PlanetHero() {
               <clipPath id="cz2">{CITY_ZONES.map(cz  => <polygon key={cz.id}  points={pts(D, cz.c, D)} />)}</clipPath>
             </defs>
 
-            {/* Océano */}
+            {/* Océano (sin filtro — puntos pequeños y nítidos) */}
             <rect width={D * 2} height={D} fill="url(#op)" />
-            {/* Grid */}
-            <rect width={D * 2} height={D} fill="url(#gp)" opacity={0.65} />
-            {/* Continentes mitad 1 */}
-            <rect width={D} height={D} fill="url(#cp)" clipPath="url(#cm1)" filter="url(#cg)" />
-            <rect width={D} height={D} fill="url(#czp)" clipPath="url(#cz1)" filter="url(#cg)" />
-            {/* Continentes mitad 2 */}
-            <rect x={D} width={D} height={D} fill="url(#cp)" clipPath="url(#cm2)" filter="url(#cg)" />
-            <rect x={D} width={D} height={D} fill="url(#czp)" clipPath="url(#cz2)" filter="url(#cg)" />
-            {/* Mega-ciudades mitad 1 */}
-            <g filter="url(#cg)">
+            {/* Grid lat/lon */}
+            <rect width={D * 2} height={D} fill="url(#gp)" opacity={0.60} />
+            {/* Continentes — glow mínimo para no fusionar los puntos */}
+            <rect width={D}   height={D} fill="url(#cp)"  clipPath="url(#cm1)" filter="url(#dot-glow)" />
+            <rect width={D}   height={D} fill="url(#czp)" clipPath="url(#cz1)" filter="url(#dot-glow)" />
+            <rect x={D} width={D} height={D} fill="url(#cp)"  clipPath="url(#cm2)" filter="url(#dot-glow)" />
+            <rect x={D} width={D} height={D} fill="url(#czp)" clipPath="url(#cz2)" filter="url(#dot-glow)" />
+            {/* Mega-ciudades — glow fuerte individual */}
+            <g filter="url(#city-glow)">
               {CITIES.map(([cx, cy], i) => (
-                <circle key={`m1-${i}`} cx={cx * D} cy={cy * D} r={2.8} fill="rgba(255,252,255,1)" opacity={0.98} />
+                <circle key={`m1-${i}`} cx={cx * D}     cy={cy * D} r={2.5} fill="rgba(255,248,255,1)" />
               ))}
-            </g>
-            {/* Mega-ciudades mitad 2 */}
-            <g filter="url(#cg)">
               {CITIES.map(([cx, cy], i) => (
-                <circle key={`m2-${i}`} cx={cx * D + D} cy={cy * D} r={2.8} fill="rgba(255,252,255,1)" opacity={0.98} />
+                <circle key={`m2-${i}`} cx={cx * D + D} cy={cy * D} r={2.5} fill="rgba(255,248,255,1)" />
               ))}
             </g>
           </motion.svg>
