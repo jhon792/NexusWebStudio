@@ -440,17 +440,17 @@ export function PlanetHero() {
                 <feGaussianBlur stdDeviation="3.5" result="b" />
                 <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
-              {/* Océano — puntos muy tenues */}
-              <pattern id="op" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="5" cy="5" r="0.5" fill="rgba(80,70,180,0.18)" />
+              {/* Océano — puntos minúsculos casi invisibles */}
+              <pattern id="op" x="0" y="0" width="11" height="11" patternUnits="userSpaceOnUse">
+                <circle cx="5.5" cy="5.5" r="0.45" fill="rgba(90,80,200,0.16)" />
               </pattern>
-              {/* Continentes — puntos medios, color morado brillante */}
+              {/* Continentes — puntos medianos azul-morado brillante */}
               <pattern id="cp" x="0" y="0" width="4.5" height="4.5" patternUnits="userSpaceOnUse">
-                <circle cx="2.25" cy="2.25" r="1.1" fill="rgba(168,148,255,0.88)" />
+                <circle cx="2.25" cy="2.25" r="1.15" fill="rgba(155,140,255,0.90)" />
               </pattern>
-              {/* Ciudades — puntos densos, más brillantes */}
+              {/* Ciudades — puntos densos, casi blancos */}
               <pattern id="czp" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
-                <circle cx="1.5" cy="1.5" r="1.0" fill="rgba(215,200,255,0.96)" />
+                <circle cx="1.5" cy="1.5" r="1.05" fill="rgba(210,200,255,0.97)" />
               </pattern>
               {/* Grid lat/lon */}
               <pattern id="gp" x="0" y="0" width={D / 10} height={D / 10} patternUnits="userSpaceOnUse">
@@ -496,22 +496,35 @@ export function PlanetHero() {
             transition={{ duration: 5.5, repeat: Infinity, ease: "linear", repeatDelay: 4 }}
           />
 
-          {/* Sombreado de esfera */}
+          {/* ── SOMBRA ESFERA: lado noche muy oscuro (derecha-abajo) ── */}
           <div className="absolute inset-0 pointer-events-none" style={{
-            background: "radial-gradient(circle at 33% 30%, transparent 0%, transparent 24%, rgba(0,0,0,0.24) 50%, rgba(0,0,0,0.70) 78%, rgba(0,0,0,0.94) 100%)",
+            background: "radial-gradient(circle at 32% 30%, transparent 0%, transparent 20%, rgba(0,0,0,0.18) 42%, rgba(0,0,0,0.58) 68%, rgba(0,0,0,0.90) 85%, rgba(0,0,0,0.97) 100%)",
           }} />
-          {/* Luz solar — destello superior izquierdo */}
+          {/* ── LUZ SOLAR: azul-blanco desde arriba-derecha (igual que la referencia) ── */}
           <div className="absolute inset-0 pointer-events-none" style={{
-            background: "radial-gradient(ellipse 54% 68% at 28% 28%, rgba(160,150,255,0.26) 0%, rgba(100,90,220,0.09) 44%, transparent 68%)",
+            background: "radial-gradient(ellipse 48% 55% at 72% 18%, rgba(180,210,255,0.38) 0%, rgba(130,160,255,0.15) 38%, transparent 65%)",
           }} />
-          {/* Destellos de lente — upper right */}
+          {/* ── HALO VIOLETA costado izquierdo (ilumina las Américas) ── */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: "radial-gradient(ellipse 50% 65% at 26% 34%, rgba(140,120,255,0.22) 0%, rgba(100,80,220,0.08) 45%, transparent 70%)",
+          }} />
+          {/* ── FRANJA ECUATORIAL brillante ── */}
           <div className="absolute pointer-events-none" style={{
-            top: "-8%", right: "-8%", width: "52%", height: "52%",
-            background: "radial-gradient(circle at 68% 28%, rgba(190,210,255,0.28) 0%, rgba(150,170,255,0.10) 40%, transparent 68%)",
+            top: "35%", left: 0, right: 0, height: "28%",
+            background: "radial-gradient(ellipse 80% 100% at 50% 50%, rgba(120,100,255,0.08) 0%, transparent 70%)",
           }} />
-          {/* Rimlight azul */}
+          {/* ── DESTELLO LENTE superior-derecho ── */}
+          <div className="absolute pointer-events-none" style={{
+            top: "-6%", right: "-6%", width: "48%", height: "48%",
+            background: "radial-gradient(circle at 65% 25%, rgba(200,220,255,0.36) 0%, rgba(160,185,255,0.14) 35%, transparent 65%)",
+          }} />
+          {/* ── RIM LIGHT azul-morado en todo el borde ── */}
           <div className="absolute inset-0 rounded-full pointer-events-none" style={{
-            boxShadow: "inset 0 0 70px 22px rgba(70,50,200,0.24), inset 0 0 30px 8px rgba(120,80,255,0.15)",
+            boxShadow: [
+              "inset 0 0 80px 28px rgba(60,40,180,0.30)",
+              "inset 0 0 35px 10px rgba(100,60,220,0.18)",
+              "inset 60px 40px 100px rgba(0,0,0,0.55)",
+            ].join(","),
           }} />
         </div>
 
