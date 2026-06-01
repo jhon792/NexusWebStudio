@@ -1,9 +1,5 @@
 import { useRef, useCallback, useMemo } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import {
-  Globe, Users, Zap, ShieldCheck, TrendingUp, Cpu, Activity,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 // ── Dimensiones ────────────────────────────────────────────────────────────
 const R   = 345;
@@ -155,48 +151,15 @@ function qp(a: {x:number;y:number}, b: {x:number;y:number}) {
   return `M${ax},${ay} Q${(ax+bx)/2},${(ay+by)/2-off} ${bx},${by}`;
 }
 
-// ── Tarjetas holográficas ──────────────────────────────────────────────────
-interface CardData {
-  Icon: LucideIcon;
-  label: string;
-  value: string;
-  unit: string;
-  trend: string;
-  pos: React.CSSProperties;
-  dy: number;
-  d: number;
-  color: string;
-}
-
-const CARDS: CardData[] = [
-  {
-    Icon: Globe, label: "Alcance Global", value: "127", unit: "países", trend: "+12%",
-    pos: { top: "3%", left: "8%" }, dy: 10, d: 0.0, color: "#818cf8",
-  },
-  {
-    Icon: Users, label: "Clientes Activos", value: "2.4K", unit: "empresas", trend: "+8%",
-    pos: { top: "4%", right: "6%" }, dy: 12, d: 0.4, color: "#a855f7",
-  },
-  {
-    Icon: Zap, label: "Rendimiento", value: "98", unit: "/ 100", trend: "Google",
-    pos: { top: "38%", left: "1%" }, dy: 8, d: 0.8, color: "#60a5fa",
-  },
-  {
-    Icon: ShieldCheck, label: "Seguridad SSL", value: "256", unit: "‑bit", trend: "Activo",
-    pos: { top: "40%", right: "1%" }, dy: 9, d: 1.2, color: "#34d399",
-  },
-  {
-    Icon: TrendingUp, label: "Conversión", value: "3.8×", unit: "más leads", trend: "+340%",
-    pos: { bottom: "22%", left: "5%" }, dy: 11, d: 1.6, color: "#fbbf24",
-  },
-  {
-    Icon: Cpu, label: "Tecnología", value: "React", unit: "Next.js", trend: "Premium",
-    pos: { bottom: "20%", right: "2%" }, dy: 10, d: 2.0, color: "#c084fc",
-  },
-  {
-    Icon: Activity, label: "Automatización", value: "24/7", unit: "Online", trend: "IA activa",
-    pos: { bottom: "3%", left: "31%" }, dy: 8, d: 2.4, color: "#f472b6",
-  },
+// ── Tarjetas simples (igual que la referencia) ─────────────────────────────
+const CARDS = [
+  { icon:"👥", t:"Empresas",    s:"Conectadas",        pos:{ top:"6%",   left:"13%"  }, dy:8,  d:0.0 },
+  { icon:"🌐", t:"Presencia",   s:"Global",             pos:{ top:"5%",   right:"4%"  }, dy:10, d:0.4 },
+  { icon:"🚀", t:"Rendimiento", s:"Optimizado",         pos:{ top:"38%",  left:"3%"   }, dy:7,  d:0.8 },
+  { icon:"📈", t:"Crecimiento", s:"Sin Límites",        pos:{ top:"38%",  right:"2%"  }, dy:9,  d:1.2 },
+  { icon:"💬", t:"Clientes",    s:"Siempre Conectados", pos:{ bottom:"20%",left:"8%"  }, dy:8,  d:1.6 },
+  { icon:"🔒", t:"Seguridad",   s:"Garantizada",        pos:{ bottom:"18%",right:"2%" }, dy:10, d:2.0 },
+  { icon:"☁️", t:"Tecnología",  s:"De alto nivel",      pos:{ bottom:"3%", left:"35%" }, dy:7,  d:2.4 },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -448,9 +411,9 @@ export function PlanetHero() {
               <pattern id="cp" x="0" y="0" width="4.5" height="4.5" patternUnits="userSpaceOnUse">
                 <circle cx="2.25" cy="2.25" r="1.15" fill="rgba(155,140,255,0.90)" />
               </pattern>
-              {/* Ciudades — puntos densos, casi blancos */}
+              {/* Ciudades — naranja cálido "city lights from space" */}
               <pattern id="czp" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
-                <circle cx="1.5" cy="1.5" r="1.05" fill="rgba(210,200,255,0.97)" />
+                <circle cx="1.5" cy="1.5" r="1.05" fill="rgba(255,140,60,0.95)" />
               </pattern>
               {/* Grid lat/lon */}
               <pattern id="gp" x="0" y="0" width={D / 10} height={D / 10} patternUnits="userSpaceOnUse">
@@ -608,102 +571,42 @@ export function PlanetHero() {
           })}
         </svg>
 
-        {/* ── TARJETAS HOLOGRÁFICAS ─────────────────────────────────────── */}
+        {/* ── TARJETAS SIMPLES (igual que la referencia) ───────────────── */}
         {CARDS.map((c, i) => (
           <motion.div key={i}
-            className="absolute"
+            className="absolute flex items-center gap-3 px-3.5 py-2.5 rounded-2xl"
             style={{
               ...c.pos,
-              background: `linear-gradient(135deg, rgba(8,6,30,0.96) 0%, rgba(14,10,42,0.92) 100%)`,
-              border: `1px solid ${c.color}44`,
-              borderRadius: 18,
-              padding: "14px 16px",
-              minWidth: 162,
-              boxShadow: [
-                "0 8px 44px rgba(0,0,0,0.72)",
-                `0 0 22px ${c.color}20`,
-                `inset 0 1px 0 ${c.color}28`,
-              ].join(","),
-              backdropFilter: "blur(22px)",
-              WebkitBackdropFilter: "blur(22px)",
+              background: "rgba(6,4,22,0.88)",
+              border: "1px solid rgba(129,140,248,0.35)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.65), 0 0 18px rgba(99,102,241,0.16)",
+              backdropFilter: "blur(18px)",
+              minWidth: 148,
             }}
-            initial={{ opacity: 0, scale: 0.72, y: 18 }}
+            initial={{ opacity: 0, scale: 0.80, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: [0, c.dy, 0] }}
             transition={{
               opacity: { duration: 0.5, delay: 0.9 + c.d },
               scale:   { duration: 0.5, delay: 0.9 + c.d },
-              y: { duration: 3.4 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: c.d * 0.45 },
+              y: { duration: 3.2 + i * 0.35, repeat: Infinity, ease: "easeInOut", delay: c.d * 0.4 },
             }}
           >
-            {/* Borde superior luminoso */}
-            <div style={{
-              position: "absolute", top: 0, left: "12%", right: "12%", height: 1,
-              background: `linear-gradient(90deg, transparent, ${c.color}90, transparent)`,
-            }} />
-
-            {/* Cabecera: ícono + estado */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
-              <div style={{
-                width: 30, height: 30, borderRadius: 9,
-                background: `${c.color}1e`,
-                border: `1px solid ${c.color}44`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                flexShrink: 0,
-              }}>
-                <c.Icon size={14} color={c.color} strokeWidth={2.2} />
-              </div>
-              <motion.div style={{
-                width: 6, height: 6, borderRadius: "50%",
-                background: c.color,
-                boxShadow: `0 0 9px ${c.color}`,
-              }}
-                animate={{ opacity: [1, 0.25, 1], scale: [1, 1.6, 1] }}
-                transition={{ duration: 1.9 + i * 0.28, repeat: Infinity, delay: i * 0.32 }}
-              />
+            <span style={{ fontSize: 17 }}>{c.icon}</span>
+            <div>
+              <p style={{ fontFamily:"Inter,sans-serif", fontWeight:700, fontSize:12, color:"#fff", lineHeight:1.25 }}>
+                {c.t}
+              </p>
+              <p style={{ fontFamily:"Inter,sans-serif", fontWeight:400, fontSize:10, color:"rgba(200,185,255,0.75)", lineHeight:1.25 }}>
+                {c.s}
+              </p>
             </div>
-
-            {/* Etiqueta */}
-            <p style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 9, fontWeight: 600,
-              color: "rgba(200,185,255,0.60)",
-              letterSpacing: "0.07em",
-              textTransform: "uppercase",
-              marginBottom: 5,
-            }}>
-              {c.label}
-            </p>
-
-            {/* Valor principal */}
-            <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: 8 }}>
-              <span style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: 24, fontWeight: 800,
-                color: "#fff", letterSpacing: "-0.03em", lineHeight: 1,
-              }}>
-                {c.value}
-              </span>
-              <span style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: 11, fontWeight: 500,
-                color: "rgba(255,255,255,0.38)", lineHeight: 1,
-              }}>
-                {c.unit}
-              </span>
-            </div>
-
-            {/* Badge de tendencia */}
-            <div style={{
-              display: "inline-flex", alignItems: "center",
-              background: `${c.color}1a`,
-              border: `1px solid ${c.color}30`,
-              borderRadius: 6, padding: "2px 8px",
-              fontFamily: "Inter, sans-serif",
-              fontSize: 9, fontWeight: 700,
-              color: c.color, letterSpacing: "0.05em",
-            }}>
-              {c.trend}
-            </div>
+            <motion.div style={{
+              width:6, height:6, borderRadius:"50%", background:"#a78bfa",
+              marginLeft:"auto", boxShadow:"0 0 10px rgba(167,139,250,1)",
+            }}
+              animate={{ opacity:[1,0.3,1], scale:[1,1.5,1] }}
+              transition={{ duration:1.8+i*0.2, repeat:Infinity, delay:i*0.3 }}
+            />
           </motion.div>
         ))}
 
