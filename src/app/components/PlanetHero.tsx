@@ -385,92 +385,34 @@ export function PlanetHero() {
           ].join(","),
         }}>
 
-          {/* Textura scrolling: océano + continentes + ciudades */}
-          <motion.svg
-            width={D * 2} height={D}
-            style={{ position: "absolute", top: 0, left: 0 }}
+          {/* ── TEXTURA: NASA Earth at Night con filtro morado/neón ── */}
+          {/* La imagen equirectangular (2:1) scrollea horizontalmente → rotación suave */}
+          <motion.div
+            style={{
+              position: "absolute", top: 0, left: 0,
+              width: D * 2, height: D,
+              backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/The_earth_at_night.jpg/2560px-The_earth_at_night.jpg)`,
+              backgroundSize: `${D * 2}px ${D}px`,
+              backgroundRepeat: "no-repeat",
+              // Filtro CSS para lograr el tono morado/neón de la referencia
+              filter: "hue-rotate(248deg) saturate(3.2) brightness(1.25) contrast(1.15)",
+            }}
             animate={{ x: [0, -D] }}
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          >
-            <defs>
-              {/* Glow suave continentes — forma orgánica sin aristas */}
-              <filter id="cspread" x="-35%" y="-35%" width="170%" height="170%">
-                <feGaussianBlur stdDeviation="22"/>
-              </filter>
-              {/* Glow borde costero — suavizado */}
-              <filter id="cedge" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="6" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              {/* Glow para ciudades */}
-              <filter id="cglow" x="-200%" y="-200%" width="500%" height="500%">
-                <feGaussianBlur stdDeviation="5" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              {/* Grid lat/lon */}
-              <pattern id="gp" x="0" y="0" width={D/10} height={D/10} patternUnits="userSpaceOnUse">
-                <line x1="0" y1="0" x2={D*2} y2="0" stroke="rgba(129,140,248,0.14)" strokeWidth="0.5"/>
-                <line x1="0" y1="0" x2="0" y2={D} stroke="rgba(129,140,248,0.12)" strokeWidth="0.5"/>
-              </pattern>
-            </defs>
-
-            {/* Grid lat/lon */}
-            <rect width={D*2} height={D} fill="url(#gp)" opacity={0.55}/>
-
-            {/* CONTINENTES: polígonos sólidos con glow — renderizados en ambas mitades */}
-            {([0, D] as number[]).map(shift => (
-              <g key={shift}>
-                {/* Capa 1: glow profundo difuso — forma orgánica */}
-                {CONTINENTS.map(cn => (
-                  <polygon key={`gs-${cn.id}`}
-                    points={pts(D, cn.c, shift)}
-                    fill="rgba(100,80,230,0.55)"
-                    filter="url(#cspread)"
-                  />
-                ))}
-                {/* Capa 2: segunda pasada más brillante */}
-                {CONTINENTS.map(cn => (
-                  <polygon key={`gs2-${cn.id}`}
-                    points={pts(D, cn.c, shift)}
-                    fill="rgba(130,110,250,0.35)"
-                    filter="url(#cspread)"
-                  />
-                ))}
-                {/* Capa 3: borde costero suavizado */}
-                {CONTINENTS.map(cn => (
-                  <polygon key={`ge-${cn.id}`}
-                    points={pts(D, cn.c, shift)}
-                    fill="none"
-                    stroke="rgba(190,170,255,0.65)"
-                    strokeWidth="1.2"
-                    filter="url(#cedge)"
-                  />
-                ))}
-                {/* Capa 4: luces de ciudad — resplandor naranja cálido */}
-                <g filter="url(#cglow)">
-                  {CITY_ZONES.map(cz => {
-                    const cxc = cz.c.reduce((s,p)=>s+p[0],0)/cz.c.length;
-                    const cyc = cz.c.reduce((s,p)=>s+p[1],0)/cz.c.length;
-                    return (
-                      <circle key={`cz-${cz.id}`}
-                        cx={cxc*D+shift} cy={cyc*D} r={9}
-                        fill="rgba(255,155,55,0.52)"
-                      />
-                    );
-                  })}
-                </g>
-                {/* Capa 5: mega-ciudades individuales doradas */}
-                <g filter="url(#cglow)">
-                  {CITIES.map(([cxc,cyc],i) => (
-                    <circle key={`mc-${i}`}
-                      cx={cxc*D+shift} cy={cyc*D} r={3.2}
-                      fill="rgba(255,220,140,1)"
-                    />
-                  ))}
-                </g>
-              </g>
-            ))}
-          </motion.svg>
+          />
+          {/* Segunda copia para loop seamless */}
+          <motion.div
+            style={{
+              position: "absolute", top: 0, left: D,
+              width: D * 2, height: D,
+              backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/The_earth_at_night.jpg/2560px-The_earth_at_night.jpg)`,
+              backgroundSize: `${D * 2}px ${D}px`,
+              backgroundRepeat: "no-repeat",
+              filter: "hue-rotate(248deg) saturate(3.2) brightness(1.25) contrast(1.15)",
+            }}
+            animate={{ x: [0, -D] }}
+            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          />
 
           {/* Escáner de datos — línea horizontal que barre el planeta */}
           <motion.div
