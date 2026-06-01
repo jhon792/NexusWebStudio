@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowRight, CheckCircle } from "lucide-react";
+import { PlanetHero } from "./PlanetHero";
 
 const WA = "https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20cotizar%20una%20p%C3%A1gina%20web%20para%20mi%20negocio.";
 
@@ -403,14 +404,14 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: Device mockups */}
+          {/* Right: Planet */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:flex justify-center items-center px-8 py-12"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden lg:flex justify-center items-center"
           >
-            <WebsiteMockup />
+            <PlanetHero />
           </motion.div>
         </div>
       </div>
