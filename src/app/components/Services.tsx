@@ -4,50 +4,50 @@ import { Globe, Building2, ShoppingBag, Code2, Wrench, Search } from "lucide-rea
 const services = [
   {
     icon: Globe,
-    title: "Landing Pages",
+    title: "Landing Page de Alto Impacto",
     description:
-      "Una página enfocada en convertir visitantes en clientes. Perfecta para promocionar un servicio específico, captar leads y generar contactos desde el primer día.",
-    benefit: "Ideal para campañas y negocios que arrancan",
+      "Una sola página diseñada para convertir: el visitante entra, entiende lo que ofreces y te contacta. Perfecta para captar clientes desde Google Ads o redes sociales.",
+    benefit: "Clientes desde el primer día",
     accent: "#818cf8",
   },
   {
     icon: Building2,
-    title: "Páginas Corporativas",
+    title: "Sitio Corporativo Profesional",
     description:
-      "Sitio web completo que presenta tu empresa de forma profesional: quiénes somos, servicios, equipo y contacto. Genera confianza y respalda tu marca.",
-    benefit: "Para empresas que quieren posicionarse",
+      "Tu empresa en internet con todo lo que genera confianza: servicios claros, equipo, casos de éxito y formulario de contacto. El cliente llega y ya quiere trabajar contigo.",
+    benefit: "Credibilidad que cierra ventas",
     accent: "#60a5fa",
   },
   {
     icon: ShoppingBag,
-    title: "Tiendas Virtuales",
+    title: "Tienda Virtual con Pagos Colombianos",
     description:
-      "Vende tus productos online las 24 horas. Catálogo, carrito de compras, integración con pasarelas de pago colombianas y panel de administración incluido.",
-    benefit: "Vende sin límite de horario ni ubicación",
+      "Vende tus productos online con PSE, Nequi y tarjetas. Catálogo, carrito y panel de administración incluidos. Tu tienda nunca cierra.",
+    benefit: "Ventas mientras duermes",
     accent: "#34d399",
   },
   {
     icon: Code2,
-    title: "Sistemas Web Personalizados",
+    title: "Sistema de Citas y Reservas",
     description:
-      "Aplicaciones web a medida para necesidades específicas de tu negocio: agendas online, portales de clientes, formularios avanzados e integraciones especiales.",
-    benefit: "Soluciones únicas para tu operación",
+      "Tus clientes agendan online sin necesidad de llamarte. Para clínicas, consultorios, salones y servicios por turnos. Reduce el trabajo administrativo hasta un 80%.",
+    benefit: "Sin llamadas, sin ausencias",
     accent: "#f59e0b",
   },
   {
     icon: Wrench,
-    title: "Mantenimiento Web",
+    title: "Mantenimiento y Soporte Continuo",
     description:
-      "Tu sitio actualizado, seguro y funcionando al 100%. Actualizaciones de contenido, copias de seguridad, monitoreo de seguridad y soporte técnico continuo.",
-    benefit: "Tranquilidad y continuidad garantizada",
+      "Tu sitio siempre actualizado, seguro y funcionando. Actualizamos contenido, monitoreamos caídas y respondemos en menos de 24 horas.",
+    benefit: "Tranquilidad sin preocupaciones",
     accent: "#c084fc",
   },
   {
     icon: Search,
-    title: "Optimización SEO Básica",
+    title: "Posicionamiento en Google",
     description:
-      "Configuración técnica para que Google pueda encontrar e indexar tu sitio: meta etiquetas, velocidad, sitemap, estructura semántica y Core Web Vitals.",
-    benefit: "Más visibilidad orgánica sin publicidad",
+      "Configuramos tu sitio para que aparezca cuando alguien busca tu servicio en tu ciudad. SEO local + Google Maps + Core Web Vitals. Clientes sin pagar publicidad.",
+    benefit: "Clientes orgánicos cada mes",
     accent: "#fb7185",
   },
 ];
@@ -91,7 +91,7 @@ export function Services() {
                 maxWidth: "520px",
               }}
             >
-              Todo lo que tu negocio necesita para{" "}
+              La web que necesita{" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -100,7 +100,7 @@ export function Services() {
                   backgroundClip: "text",
                 }}
               >
-                crecer en Internet
+                tu tipo de negocio
               </span>
             </h2>
             <p
@@ -112,7 +112,7 @@ export function Services() {
                 maxWidth: "340px",
               }}
             >
-              Cada servicio está diseñado con un objetivo claro: que tu negocio genere más clientes y transmita más confianza.
+              No vendemos plantillas. Construimos cada sitio para que funcione en tu sector específico.
             </p>
           </div>
         </motion.div>
@@ -202,7 +202,7 @@ export function Services() {
         >
           <button
             onClick={() => document.querySelector("#pricing")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-7 py-3.5 rounded-xl cursor-pointer transition-all duration-200"
+            className="px-7 py-3.5 rounded-xl cursor-pointer transition-all duration-200 inline-flex items-center gap-2 group"
             style={{
               background: "#fff",
               color: "#09090b",
@@ -211,29 +211,9 @@ export function Services() {
               fontSize: "15px",
             }}
           >
-            Ver planes y precios
+            Ver qué plan incluye cada servicio
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
-          <a
-            href="https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20cotizar%20un%20servicio."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-7 py-3.5 rounded-xl inline-flex items-center gap-2 cursor-pointer transition-all duration-200"
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "rgba(255,255,255,0.8)",
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 500,
-              fontSize: "15px",
-              textDecoration: "none",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-              <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
-            </svg>
-            Consultar por WhatsApp
-          </a>
         </motion.div>
       </div>
     </section>

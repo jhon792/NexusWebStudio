@@ -9,9 +9,9 @@ const faqs = [
       "Depende del plan elegido. Una landing page básica se entrega en 3 a 5 días hábiles. Un sitio empresarial completo toma entre 7 y 15 días hábiles. Para proyectos con funcionalidades especiales, el tiempo se acuerda al inicio según el alcance. Al confirmar tu proyecto recibes un cronograma con fechas claras.",
   },
   {
-    question: "¿Incluye dominio y hosting?",
+    question: "¿Por qué necesito web si ya tengo redes sociales?",
     answer:
-      "El dominio y el hosting no están incluidos por defecto, pero te asesoramos para elegir la opción más conveniente y económica según tu proyecto. Si lo prefieres, también podemos gestionarlos por ti a un costo adicional. El certificado SSL (HTTPS) sí está incluido en todos los planes.",
+      "Las redes sociales son prestadas. Facebook e Instagram pueden bloquearte, cambiar el algoritmo o simplemente desaparecer. Tu página web es tuya, está en tu dominio y funciona aunque Meta tenga caídas. Además, una web posicionada en Google te trae clientes que están buscando activamente tu servicio — algo que las redes sociales no replican de la misma forma. Tener ambas es lo ideal; depender solo de redes es un riesgo.",
   },
   {
     question: "¿El sitio funcionará bien en celulares?",
@@ -37,6 +37,16 @@ const faqs = [
     question: "¿Necesito saber de tecnología para manejar mi sitio?",
     answer:
       "No. Te entregamos tu sitio listo para usar y te explicamos cómo realizar cambios básicos de contenido de forma sencilla. Si en algún momento necesitas ayuda, nuestro equipo está disponible para apoyarte sin necesidad de que tengas conocimientos técnicos.",
+  },
+  {
+    question: "¿Vale la pena la inversión si mi negocio es pequeño?",
+    answer:
+      "El tamaño del negocio no define si necesitas web — lo define si tienes clientes potenciales que te buscan en internet. Si alguien en tu ciudad busca en Google 'dentista cerca' o 'restaurante italiano Bogotá' y tú no apareces, ese cliente va a tu competencia. Con el Plan Crecimiento ($990.000 pago único), un solo cliente nuevo que llegue por la web ya recupera toda la inversión. La mayoría de nuestros clientes los reciben en las primeras semanas.",
+  },
+  {
+    question: "¿Qué necesito tener listo para empezar?",
+    answer:
+      "Muy poco. Con el nombre de tu negocio, a qué te dedicas y algunas fotos (o usamos imágenes de calidad), ya podemos comenzar. Te hacemos las preguntas correctas en una llamada o chat de 20 minutos y desde ahí tomamos el control del proceso. No necesitas conocimientos técnicos ni preparar nada por adelantado.",
   },
 ];
 
@@ -145,7 +155,7 @@ export function FAQ() {
                 marginBottom: "16px",
               }}
             >
-              ¿Tienes dudas?{" "}
+              Las dudas más comunes{" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -154,7 +164,7 @@ export function FAQ() {
                   backgroundClip: "text",
                 }}
               >
-                Aquí las respondemos.
+                respondidas sin rodeos.
               </span>
             </h2>
             <p
@@ -166,7 +176,7 @@ export function FAQ() {
                 marginBottom: "28px",
               }}
             >
-              Si no encuentras lo que buscas, escríbenos directamente. Respondemos todas las consultas.
+              Si no encuentras lo que buscas, escríbenos y respondemos en menos de 1 hora.
             </p>
 
             <div className="flex flex-col gap-3">

@@ -5,11 +5,11 @@ import { PlanetHero } from "./PlanetHero";
 const WA = "https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20cotizar%20una%20p%C3%A1gina%20web%20para%20mi%20negocio.";
 
 const trustItems = [
-  "Diseño Profesional",
-  "Optimización para Google",
-  "Compatible con Celulares",
-  "Integración con WhatsApp",
-  "Certificado SSL",
+  "+40 negocios atendidos",
+  "Entrega en 3 a 15 días",
+  "Resultados verificables",
+  "Soporte post-entrega",
+  "Sin costos ocultos",
 ];
 
 const fadeUp = {
@@ -98,7 +98,7 @@ export function Hero() {
                   fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13,
                   color: "rgba(255,255,255,0.72)",
                 }}>
-                  Disponible para nuevos proyectos
+                  Solo quedan 2 cupos disponibles en junio
                 </span>
               </div>
             </motion.div>
@@ -116,16 +116,16 @@ export function Hero() {
                 marginBottom: 24,
               }}
             >
-              Tu negocio merece una{" "}
+              Consigue{" "}
               <span style={{
                 background: "linear-gradient(135deg, #818cf8 0%, #a78bfa 45%, #c084fc 80%, #e879f9 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-                página web
+                más clientes
               </span>
-              <br />que genere confianza.
+              <br />con una web que trabaja<br />por tu negocio 24/7.
             </motion.h1>
 
             {/* Subtítulo */}
@@ -138,9 +138,9 @@ export function Hero() {
                 marginBottom: 36, maxWidth: 500,
               }}
             >
-              Diseñamos páginas web modernas, rápidas y optimizadas para ayudar
-              a negocios y empresas a fortalecer su presencia digital y atraer
-              nuevos clientes.
+              Somos Nexus Studio — diseñamos webs para clínicas, restaurantes,
+              abogados y pymes en Colombia que necesitan resultados reales,
+              no solo un sitio bonito. +40 negocios ya confían en nosotros.
             </motion.p>
 
             {/* CTAs */}
@@ -148,11 +148,9 @@ export function Hero() {
               custom={3} variants={fadeUp} initial="hidden" animate="visible"
               className="flex flex-wrap gap-3 mb-10"
             >
-              <motion.a
-                href={WA}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 group"
+              <motion.button
+                onClick={() => scrollTo("#portfolio")}
+                className="inline-flex items-center gap-2.5 group cursor-pointer"
                 style={{
                   padding: "14px 28px",
                   background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
@@ -160,18 +158,19 @@ export function Hero() {
                   fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 15,
                   color: "#fff",
                   boxShadow: "0 8px 36px rgba(99,102,241,0.38), 0 2px 8px rgba(99,102,241,0.20)",
-                  textDecoration: "none",
                 }}
                 whileHover={{ scale: 1.03, boxShadow: "0 12px 44px rgba(99,102,241,0.55), 0 2px 8px rgba(99,102,241,0.25)" }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.18 }}
               >
-                Solicitar Cotización Gratuita
+                Ver ejemplos reales de trabajo
                 <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
-              </motion.a>
+              </motion.button>
 
-              <motion.button
-                onClick={() => scrollTo("#portfolio")}
+              <motion.a
+                href="https://wa.me/573123198706?text=Hola%2C%20quiero%20el%20diagn%C3%B3stico%20gratuito%20de%20mi%20p%C3%A1gina%20web."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 cursor-pointer"
                 style={{
                   padding: "14px 24px",
@@ -180,13 +179,14 @@ export function Hero() {
                   borderRadius: 14,
                   fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 15,
                   color: "rgba(255,255,255,0.80)",
+                  textDecoration: "none",
                 }}
                 whileHover={{ background: "rgba(255,255,255,0.09)", borderColor: "rgba(255,255,255,0.22)" }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.15 }}
               >
-                Ver Ejemplos de Diseño
-              </motion.button>
+                Diagnóstico web gratis (5 min)
+              </motion.a>
             </motion.div>
 
             {/* Trust indicators */}

@@ -93,7 +93,7 @@ export function WhyMe() {
               marginBottom: "16px",
             }}
           >
-            ¿Por qué elegir{" "}
+            No somos una fábrica de webs.{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -102,7 +102,7 @@ export function WhyMe() {
                 backgroundClip: "text",
               }}
             >
-              Nexus Studio?
+              Máximo 3 clientes al mes.
             </span>
           </h2>
           <p
@@ -115,7 +115,7 @@ export function WhyMe() {
               margin: "0 auto",
             }}
           >
-            Construimos relaciones de confianza, no solo sitios web.
+            Por eso cada sitio está construido 100% a medida, con atención directa y resultados verificables.
           </p>
         </motion.div>
 
@@ -200,26 +200,29 @@ export function WhyMe() {
                 marginBottom: "6px",
               }}
             >
-              ¿Listo para fortalecer la presencia digital de tu negocio?
+              Quedan 2 cupos en junio. ¿Tu negocio merece uno?
             </p>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.45)" }}>
-              Hablemos sin compromiso. Te respondemos en menos de 24 horas.
+              Empieza con un diagnóstico gratuito — sin compromiso, sin pagar nada, sin tecnicismos.
             </p>
           </div>
           <div className="relative flex flex-wrap gap-3 shrink-0">
-            <button
-              onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-6 py-3.5 rounded-xl cursor-pointer transition-all duration-200"
+            <a
+              href="https://wa.me/573123198706?text=Hola%2C%20quiero%20el%20diagn%C3%B3stico%20gratuito%20de%20mi%20p%C3%A1gina%20web."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3.5 rounded-xl cursor-pointer transition-all duration-200 inline-flex items-center gap-2"
               style={{
                 background: "#fff",
                 color: "#09090b",
                 fontFamily: "Inter, sans-serif",
                 fontWeight: 600,
                 fontSize: "15px",
+                textDecoration: "none",
               }}
             >
-              Solicitar Cotización
-            </button>
+              Diagnóstico gratuito
+            </a>
             <a
               href="https://wa.me/573123198706?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20servicios."
               target="_blank"

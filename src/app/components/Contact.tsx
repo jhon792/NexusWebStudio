@@ -123,7 +123,8 @@ export function Contact() {
                 marginBottom: "20px",
               }}
             >
-              Da el siguiente paso para{" "}
+              Cada semana que pasa sin web,
+              <br />
               <span
                 style={{
                   background: "linear-gradient(135deg, #818cf8, #a78bfa, #c084fc)",
@@ -132,7 +133,7 @@ export function Contact() {
                   backgroundClip: "text",
                 }}
               >
-                fortalecer tu presencia digital.
+                tu competencia recibe tus clientes.
               </span>
             </h2>
 
@@ -146,12 +147,12 @@ export function Contact() {
                 margin: "0 auto 36px",
               }}
             >
-              Solicita una cotización gratuita y descubre cómo podría verse tu nueva página web.
+              Solicita tu diagnóstico gratuito hoy. En 24 horas te decimos exactamente qué necesita tu negocio y cuánto costaría. Sin compromiso.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.a
-                href={WA}
+                href="https://wa.me/573123198706?text=Hola%2C%20quiero%20el%20diagn%C3%B3stico%20gratuito%20de%20mi%20p%C3%A1gina%20web."
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.04 }}
@@ -173,7 +174,7 @@ export function Contact() {
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
                   <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
                 </svg>
-                Hablar por WhatsApp
+                Quiero mi diagnóstico gratuito
               </motion.a>
 
               <motion.button
@@ -229,7 +230,8 @@ export function Contact() {
                 marginBottom: "14px",
               }}
             >
-              Cuéntanos sobre tu proyecto
+              Tu proyecto, en 24 horas tienes
+              una propuesta real en tu correo.
             </h2>
             <p
               style={{
@@ -241,7 +243,7 @@ export function Contact() {
                 margin: "0 auto",
               }}
             >
-              Te respondemos en menos de 24 horas con una propuesta personalizada.
+              Más de 40 negocios colombianos ya confiaron en este proceso. Tú serás el siguiente.
             </p>
           </motion.div>
 
@@ -304,10 +306,16 @@ export function Contact() {
                 <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "14px", color: "rgba(255,255,255,0.7)", marginBottom: "12px" }}>
                   ¿Para qué tipo de negocio?
                 </p>
-                {["Clínicas y consultorios", "Restaurantes", "Escuelas", "Empresas de servicios", "Emprendedores"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 mb-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#818cf8" }} />
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>
+                {[
+                  "Clínicas y consultorios → +citas online",
+                  "Restaurantes → reservas sin llamadas",
+                  "Escuelas → más inscripciones",
+                  "Empresas de servicios → más consultas",
+                  "Emprendedores → presencia profesional",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2 mb-2">
+                    <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ background: "#818cf8" }} />
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)", lineHeight: 1.4 }}>
                       {item}
                     </span>
                   </div>
@@ -525,7 +533,7 @@ export function Contact() {
                     ) : (
                       <>
                         <Send size={16} />
-                        Solicitar Cotización Gratuita
+                        Quiero mi cotización en 24 horas
                         <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
                       </>
                     )}

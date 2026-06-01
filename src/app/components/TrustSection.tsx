@@ -1,11 +1,12 @@
 import { motion } from "motion/react";
 
 const problems = [
-  "No apareces profesionalmente en internet.",
-  "Dependes únicamente de redes sociales.",
-  "Tus clientes no encuentran información fácilmente.",
-  "Tu competencia transmite más confianza.",
-  "Pierdes posibles contactos fuera del horario laboral.",
+  "Tu competencia aparece en Google cuando te buscan — tú no.",
+  "Pierdes clientes que buscan tu servicio a las 2am.",
+  "Sin web, pedir por WhatsApp parece informal y aleja prospectos.",
+  "Dependes de redes sociales que pueden bloquearte o desaparecer.",
+  "No puedes mostrar tu trabajo con credibilidad profesional.",
+  "Cada mes sin web son clientes que van directo a tu competencia.",
 ];
 
 export function TrustSection() {
@@ -51,7 +52,8 @@ export function TrustSection() {
               margin: "0 auto",
             }}
           >
-            Muchos negocios están perdiendo oportunidades por no tener una{" "}
+            Si tienes un negocio en Colombia y aún dependes del voz a voz,
+            estás{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #f87171, #fb923c)",
@@ -60,13 +62,13 @@ export function TrustSection() {
                 backgroundClip: "text",
               }}
             >
-              presencia digital profesional.
+              perdiendo clientes a diario.
             </span>
           </h2>
         </motion.div>
 
         {/* Problem cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {problems.map((problem, i) => (
             <motion.div
               key={i}
@@ -125,7 +127,7 @@ export function TrustSection() {
                 color: "rgba(255,255,255,0.85)",
               }}
             >
-              Una página web profesional trabaja para tu negocio las{" "}
+              Una web de Nexus Studio trabaja por tu negocio{" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -134,7 +136,7 @@ export function TrustSection() {
                   backgroundClip: "text",
                 }}
               >
-                24 horas del día.
+                24/7, en Google, en Maps, desde el celular.
               </span>
             </p>
           </div>

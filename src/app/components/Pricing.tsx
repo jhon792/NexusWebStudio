@@ -47,7 +47,7 @@ const plans = [
     badge: "⭐ MÁS ELEGIDO",
     name: "Plan Crecimiento",
     label: "La inversión más inteligente",
-    tagline: "La mejor relación entre inversión y resultados",
+    tagline: "El que usan el 70% de nuestros clientes colombianos",
     price: 990000,
     priceLabel: null,
     currency: "COP",
@@ -55,11 +55,11 @@ const plans = [
     accent: "#a78bfa",
     featured: true,
     cta: "Quiero más clientes",
-    roiNote: "Con 1 cliente nuevo ya recuperas la inversión",
-    urgency: "Solo 3 cupos disponibles este mes",
+    roiNote: "1 paciente o consulta cerrada = inversión recuperada",
+    urgency: "Solo 2 cupos disponibles en junio — uno ya está reservado",
     dailyCost: "$2.750 / día durante 1 año",
     socialProof: "7 de cada 10 clientes eligen este plan",
-    description: "Ideal para clínicas, restaurantes, abogados y escuelas que quieren aparecer en Google y recibir clientes constantemente.",
+    description: "Diseñado para negocios en Colombia que quieren aparecer en Google cuando alguien busca su servicio en su ciudad. Clínicas, consultorios, restaurantes, escuelas, abogados: este es el plan que genera clientes constantemente.",
     features: [
       "Todo lo del Plan Inicio incluido",
       "Apareces cuando alguien te busca en Google",
@@ -217,10 +217,10 @@ export function Pricing() {
               transition={{ duration: 0.6, delay: 0.1 }}
               style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 4vw, 2.75rem)", letterSpacing: "-0.04em", lineHeight: 1.1, color: "#fff", marginBottom: "16px" }}
             >
-              Tu web que atrae clientes,
+              Una valla publicitaria cuesta $800.000/mes.
               <br />
               <span style={{ background: "linear-gradient(135deg, #818cf8, #a78bfa, #c084fc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                no solo se ve bonita
+                Tu web trabaja 365 días por mucho menos.
               </span>
             </motion.h2>
 
@@ -229,9 +229,9 @@ export function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.4)", maxWidth: "440px", margin: "0 auto 24px" }}
+              style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.4)", maxWidth: "480px", margin: "0 auto 24px" }}
             >
-              Inversión transparente. Sin letra pequeña. Sin costos ocultos.
+              Inversión única. Sin mensualidades. El 90% de nuestros clientes recuperan la inversión con el primer cliente nuevo que llega por la web.
             </motion.p>
 
             {/* Social proof bar */}
@@ -492,8 +492,8 @@ export function Pricing() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               </div>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
-                ¿No sabes cuál elegir?{" "}
-                <span style={{ color: "rgba(255,255,255,0.65)" }}>El <strong style={{ color: "#a78bfa" }}>Plan Crecimiento</strong> es la opción más elegida por clínicas, restaurantes y empresas locales.</span>
+                ¿Tienes una clínica, restaurante o empresa de servicios?{" "}
+                <span style={{ color: "rgba(255,255,255,0.65)" }}>El <strong style={{ color: "#a78bfa" }}>Plan Crecimiento</strong> fue diseñado exactamente para ti. 7 de cada 10 clientes nuestros lo eligen.</span>
               </p>
             </div>
             <motion.a

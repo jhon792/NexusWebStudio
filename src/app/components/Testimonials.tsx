@@ -2,56 +2,62 @@ import { motion } from "motion/react";
 
 const testimonials = [
   {
-    quote: "Nuestro nuevo sitio web transformó por completo cómo los pacientes nos encuentran en línea. Las reservas aumentaron un 340% en los primeros tres meses y constantemente recibimos comentarios sobre lo profesional que se ve. La mejor inversión que hemos hecho para nuestra clínica.",
-    name: "Dra. Maria Santos",
-    role: "Directora Médica",
-    company: "Santos Medical Center",
-    initials: "MS",
+    quote:
+      "Antes dependíamos del voz a voz. Con la web nueva empezamos a recibir citas por formulario desde la primera semana. En el primer mes ya teníamos 23 citas nuevas que llegaron directamente por Google.",
+    name: "Dra. Claudia Herrera",
+    role: "Directora",
+    company: "Clínica Odontológica Herrera — Bogotá",
+    initials: "CH",
     color: "#6366f1",
     stars: 5,
   },
   {
-    quote: "Era escéptico sobre contratar a un freelancer en lugar de una agencia, pero la calidad superó cualquier agencia con la que haya trabajado. El sitio se lanzó a tiempo, dentro del presupuesto y nuestras solicitudes de consulta se duplicaron en 60 días.",
-    name: "Alexander Müller",
-    role: "Socio Director",
-    company: "Müller & Associates Law",
+    quote:
+      "Tenía miedo de que fuera muy caro y que no valiera la pena. Al mes de lanzarla ya había recuperado la inversión con un solo cliente nuevo. Ahora me llegan consultas mientras duermo.",
+    name: "Andrés Morales",
+    role: "Propietario",
+    company: "Morales Bienes Raíces — Medellín",
     initials: "AM",
     color: "#10b981",
     stars: 5,
   },
   {
-    quote: "La presencia online de nuestra clínica era muy pobre antes. Ahora tenemos un sitio web que refleja la experiencia de lujo que ofrecemos en persona. Los clientes nos dicen que el sitio web fue lo que los convenció de agendar su primera cita.",
-    name: "Dra. Isabela Costa",
-    role: "Fundadora & CEO",
-    company: "AesthetiQ Clinic São Paulo",
-    initials: "IC",
+    quote:
+      "Necesitaba que los papás encontraran el colegio en Google. En 2 meses ya aparecíamos en los primeros resultados para 'colegio bilingüe Cali' y recibimos 8 inscripciones nuevas ese semestre.",
+    name: "Mg. Patricia Londoño",
+    role: "Rectora",
+    company: "Colegio Bilingüe Nuevos Horizontes — Cali",
+    initials: "PL",
     color: "#f59e0b",
     stars: 5,
   },
   {
-    quote: "Trabajar con John fue como tener un equipo técnico interno. Entendió nuestros objetivos de negocio de inmediato y construyó exactamente lo que necesitábamos. Las integraciones de API nos ahorraron más de 20 horas de trabajo manual por semana.",
-    name: "James Thornton",
-    role: "Director de Operaciones",
-    company: "Thornton & Co. Solicitors",
-    initials: "JT",
+    quote:
+      "Lo que más me sorprendió fue la velocidad. En menos de dos semanas ya tenía mi sitio funcionando, con el menú y el botón de reservas. Las reservas online subieron un 60% ese mes.",
+    name: "Jorge Quintero",
+    role: "Dueño",
+    company: "Restaurante La Leña — Bucaramanga",
+    initials: "JQ",
     color: "#3b82f6",
     stars: 5,
   },
   {
-    quote: "La plataforma de e-commerce que desarrolló para nosotros maneja miles de pedidos mensuales sin ningún problema. El rendimiento es excepcional y nuestra tasa de conversión mejoró un 85% comparado con nuestra tienda anterior.",
-    name: "Sophie Laurent",
-    role: "Gerente de E-commerce",
-    company: "Beauté Luxe Paris",
-    initials: "SL",
+    quote:
+      "Soy abogada independiente y necesitaba transmitir confianza desde el primer clic. Entendieron exactamente el perfil de mis clientes y diseñaron algo que realmente me representa. Ya van 5 consultas cerradas por la web.",
+    name: "Abg. Marcela Suárez",
+    role: "Abogada Independiente",
+    company: "Consultoría Jurídica Suárez — Bogotá",
+    initials: "MS",
     color: "#ef4444",
     stars: 5,
   },
   {
-    quote: "La comunicación fue excelente durante todo el proceso. Actualizaciones semanales, respuestas rápidas y un genuino interés en que nuestro negocio tuviera éxito. Seguimos trabajando juntos en mejoras continuas — muy recomendado.",
-    name: "Carlos Mendes",
-    role: "CEO",
-    company: "Mendes Dental Group",
-    initials: "CM",
+    quote:
+      "La comunicación fue excelente durante todo el proceso. Entrega a tiempo, el sitio quedó exactamente como lo imaginaba. Ya lo recomendé a dos colegas del sector salud.",
+    name: "Dr. Camilo Vargas",
+    role: "Fisioterapeuta",
+    company: "Centro de Rehabilitación Vargas — Pereira",
+    initials: "CV",
     color: "#8b5cf6",
     stars: 5,
   },
@@ -99,14 +105,15 @@ export function Testimonials() {
               lineHeight: 1.15,
             }}
           >
-            Clientes que confían en nuestro trabajo
-            <br />desde todo el mundo
+            Negocios colombianos que ya
+            <br />generan clientes desde su web
           </h2>
           <p
             className="text-zinc-500 max-w-md mx-auto"
             style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", lineHeight: 1.7 }}
           >
-            Resultados reales. Clientes reales. Ingresos reales.
+            Clínicas, restaurantes, abogados y pymes en Colombia
+            que convirtieron su web en una fuente real de clientes.
           </p>
         </motion.div>
 
