@@ -393,61 +393,82 @@ export function PlanetHero() {
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           >
             <defs>
-              {/* Glow leve para puntos individuales — NO fusiona los dots */}
-              <filter id="dot-glow" x="-60%" y="-60%" width="220%" height="220%">
-                <feGaussianBlur stdDeviation="0.55" result="b" />
+              {/* Difuminado exterior de continentes */}
+              <filter id="cspread" x="-25%" y="-25%" width="150%" height="150%">
+                <feGaussianBlur stdDeviation="12"/>
+              </filter>
+              {/* Glow borde costero */}
+              <filter id="cedge" x="-15%" y="-15%" width="130%" height="130%">
+                <feGaussianBlur stdDeviation="4" result="b"/>
                 <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
-              {/* Glow fuerte solo para mega-ciudades individuales */}
-              <filter id="city-glow" x="-200%" y="-200%" width="500%" height="500%">
-                <feGaussianBlur stdDeviation="3.5" result="b" />
+              {/* Glow para ciudades */}
+              <filter id="cglow" x="-200%" y="-200%" width="500%" height="500%">
+                <feGaussianBlur stdDeviation="5" result="b"/>
                 <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
-              {/* Océano — puntos minúsculos casi invisibles */}
-              <pattern id="op" x="0" y="0" width="11" height="11" patternUnits="userSpaceOnUse">
-                <circle cx="5.5" cy="5.5" r="0.45" fill="rgba(90,80,200,0.16)" />
-              </pattern>
-              {/* Continentes — puntos medianos azul-morado brillante */}
-              <pattern id="cp" x="0" y="0" width="4.5" height="4.5" patternUnits="userSpaceOnUse">
-                <circle cx="2.25" cy="2.25" r="1.15" fill="rgba(155,140,255,0.90)" />
-              </pattern>
-              {/* Ciudades — naranja cálido, puntos pequeños para no fusionarse */}
-              <pattern id="czp" x="0" y="0" width="3.5" height="3.5" patternUnits="userSpaceOnUse">
-                <circle cx="1.75" cy="1.75" r="0.72" fill="rgba(255,150,70,0.92)" />
-              </pattern>
               {/* Grid lat/lon */}
-              <pattern id="gp" x="0" y="0" width={D / 10} height={D / 10} patternUnits="userSpaceOnUse">
-                <line x1="0" y1="0" x2={D * 2} y2="0" stroke="rgba(129,140,248,0.14)" strokeWidth="0.5" />
-                <line x1="0" y1="0" x2="0" y2={D} stroke="rgba(129,140,248,0.12)" strokeWidth="0.5" />
+              <pattern id="gp" x="0" y="0" width={D/10} height={D/10} patternUnits="userSpaceOnUse">
+                <line x1="0" y1="0" x2={D*2} y2="0" stroke="rgba(129,140,248,0.14)" strokeWidth="0.5"/>
+                <line x1="0" y1="0" x2="0" y2={D} stroke="rgba(129,140,248,0.12)" strokeWidth="0.5"/>
               </pattern>
-              {/* Clipmasks continentes — mitad 1 */}
-              <clipPath id="cm1">{CONTINENTS.map(cn => <polygon key={cn.id} points={pts(D, cn.c, 0)} />)}</clipPath>
-              <clipPath id="cz1">{CITY_ZONES.map(cz  => <polygon key={cz.id}  points={pts(D, cz.c, 0)} />)}</clipPath>
-              {/* Clipmasks continentes — mitad 2 */}
-              <clipPath id="cm2">{CONTINENTS.map(cn => <polygon key={cn.id} points={pts(D, cn.c, D)} />)}</clipPath>
-              <clipPath id="cz2">{CITY_ZONES.map(cz  => <polygon key={cz.id}  points={pts(D, cz.c, D)} />)}</clipPath>
             </defs>
 
-            {/* Océano (sin filtro — puntos pequeños y nítidos) */}
-            <rect width={D * 2} height={D} fill="url(#op)" />
             {/* Grid lat/lon */}
-            <rect width={D * 2} height={D} fill="url(#gp)" opacity={0.60} />
-            {/* Continentes — glow mínimo para no fusionar los puntos */}
-            {/* Continentes — leve glow por punto */}
-            <rect width={D}   height={D} fill="url(#cp)"  clipPath="url(#cm1)" filter="url(#dot-glow)" />
-            <rect x={D} width={D} height={D} fill="url(#cp)"  clipPath="url(#cm2)" filter="url(#dot-glow)" />
-            {/* Ciudades naranja — sin filtro para puntos nítidos separados */}
-            <rect width={D}   height={D} fill="url(#czp)" clipPath="url(#cz1)" />
-            <rect x={D} width={D} height={D} fill="url(#czp)" clipPath="url(#cz2)" />
-            {/* Mega-ciudades — glow fuerte individual */}
-            <g filter="url(#city-glow)">
-              {CITIES.map(([cx, cy], i) => (
-                <circle key={`m1-${i}`} cx={cx * D}     cy={cy * D} r={2.5} fill="rgba(255,248,255,1)" />
-              ))}
-              {CITIES.map(([cx, cy], i) => (
-                <circle key={`m2-${i}`} cx={cx * D + D} cy={cy * D} r={2.5} fill="rgba(255,248,255,1)" />
-              ))}
-            </g>
+            <rect width={D*2} height={D} fill="url(#gp)" opacity={0.55}/>
+
+            {/* CONTINENTES: polígonos sólidos con glow — renderizados en ambas mitades */}
+            {([0, D] as number[]).map(shift => (
+              <g key={shift}>
+                {/* Capa 1: resplandor exterior difuso */}
+                {CONTINENTS.map(cn => (
+                  <polygon key={`gs-${cn.id}`}
+                    points={pts(D, cn.c, shift)}
+                    fill="rgba(90,70,210,0.30)"
+                    filter="url(#cspread)"
+                  />
+                ))}
+                {/* Capa 2: relleno base sólido */}
+                {CONTINENTS.map(cn => (
+                  <polygon key={`gf-${cn.id}`}
+                    points={pts(D, cn.c, shift)}
+                    fill="rgba(110,90,230,0.50)"
+                  />
+                ))}
+                {/* Capa 3: borde costero brillante */}
+                {CONTINENTS.map(cn => (
+                  <polygon key={`ge-${cn.id}`}
+                    points={pts(D, cn.c, shift)}
+                    fill="none"
+                    stroke="rgba(175,155,255,0.82)"
+                    strokeWidth="1.8"
+                    filter="url(#cedge)"
+                  />
+                ))}
+                {/* Capa 4: luces de ciudad — resplandor naranja cálido */}
+                <g filter="url(#cglow)">
+                  {CITY_ZONES.map(cz => {
+                    const cxc = cz.c.reduce((s,p)=>s+p[0],0)/cz.c.length;
+                    const cyc = cz.c.reduce((s,p)=>s+p[1],0)/cz.c.length;
+                    return (
+                      <circle key={`cz-${cz.id}`}
+                        cx={cxc*D+shift} cy={cyc*D} r={9}
+                        fill="rgba(255,155,55,0.52)"
+                      />
+                    );
+                  })}
+                </g>
+                {/* Capa 5: mega-ciudades individuales doradas */}
+                <g filter="url(#cglow)">
+                  {CITIES.map(([cxc,cyc],i) => (
+                    <circle key={`mc-${i}`}
+                      cx={cxc*D+shift} cy={cyc*D} r={3.2}
+                      fill="rgba(255,220,140,1)"
+                    />
+                  ))}
+                </g>
+              </g>
+            ))}
           </motion.svg>
 
           {/* Escáner de datos — línea horizontal que barre el planeta */}
