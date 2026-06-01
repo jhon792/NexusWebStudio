@@ -2,9 +2,9 @@ import { useRef, useCallback, useMemo } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 
 // ── Dimensiones ────────────────────────────────────────────────────────────
-const R   = 345;
-const D   = R * 2;      // 690
-const BOX = D + 320;    // 1010 — espacio para órbitas + tarjetas
+const R   = 293;         // 15% más pequeño que 345
+const D   = R * 2;       // 586
+const BOX = D + 320;     // 906 — espacio para órbitas + tarjetas
 
 // ── Helper: polígono de puntos normalizados → string SVG ──────────────────
 function pts(size: number, coords: [number, number][], shift = 0) {
@@ -393,13 +393,13 @@ export function PlanetHero() {
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           >
             <defs>
-              {/* Difuminado exterior de continentes */}
-              <filter id="cspread" x="-25%" y="-25%" width="150%" height="150%">
-                <feGaussianBlur stdDeviation="12"/>
+              {/* Glow suave continentes — forma orgánica sin aristas */}
+              <filter id="cspread" x="-35%" y="-35%" width="170%" height="170%">
+                <feGaussianBlur stdDeviation="22"/>
               </filter>
-              {/* Glow borde costero */}
-              <filter id="cedge" x="-15%" y="-15%" width="130%" height="130%">
-                <feGaussianBlur stdDeviation="4" result="b"/>
+              {/* Glow borde costero — suavizado */}
+              <filter id="cedge" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="6" result="b"/>
                 <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
               {/* Glow para ciudades */}
@@ -420,28 +420,29 @@ export function PlanetHero() {
             {/* CONTINENTES: polígonos sólidos con glow — renderizados en ambas mitades */}
             {([0, D] as number[]).map(shift => (
               <g key={shift}>
-                {/* Capa 1: resplandor exterior difuso */}
+                {/* Capa 1: glow profundo difuso — forma orgánica */}
                 {CONTINENTS.map(cn => (
                   <polygon key={`gs-${cn.id}`}
                     points={pts(D, cn.c, shift)}
-                    fill="rgba(90,70,210,0.30)"
+                    fill="rgba(100,80,230,0.55)"
                     filter="url(#cspread)"
                   />
                 ))}
-                {/* Capa 2: relleno base sólido */}
+                {/* Capa 2: segunda pasada más brillante */}
                 {CONTINENTS.map(cn => (
-                  <polygon key={`gf-${cn.id}`}
+                  <polygon key={`gs2-${cn.id}`}
                     points={pts(D, cn.c, shift)}
-                    fill="rgba(110,90,230,0.50)"
+                    fill="rgba(130,110,250,0.35)"
+                    filter="url(#cspread)"
                   />
                 ))}
-                {/* Capa 3: borde costero brillante */}
+                {/* Capa 3: borde costero suavizado */}
                 {CONTINENTS.map(cn => (
                   <polygon key={`ge-${cn.id}`}
                     points={pts(D, cn.c, shift)}
                     fill="none"
-                    stroke="rgba(175,155,255,0.82)"
-                    strokeWidth="1.8"
+                    stroke="rgba(190,170,255,0.65)"
+                    strokeWidth="1.2"
                     filter="url(#cedge)"
                   />
                 ))}
