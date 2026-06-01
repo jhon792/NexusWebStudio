@@ -404,12 +404,13 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: Planet */}
+          {/* Right: Planet — overflow visible so it bleeds off-screen like reference */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
+            initial={{ opacity: 0, scale: 0.90 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.3, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="hidden lg:flex justify-center items-center"
+            style={{ overflow: "visible" }}
           >
             <PlanetHero />
           </motion.div>
