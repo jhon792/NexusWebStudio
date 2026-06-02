@@ -4,37 +4,37 @@
 
   <!-- Página principal -->
   <url>
-    <loc>https://nexusstudio.co/</loc>
+    <loc>https://nexsustudio.site/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://nexusstudio.co/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://nexsustudio.site/"/>
   </url>
 
   <!-- Páginas legales -->
   <url>
-    <loc>https://nexusstudio.co/privacidad</loc>
+    <loc>https://nexsustudio.site/privacidad</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://nexusstudio.co/cookies</loc>
+    <loc>https://nexsustudio.site/cookies</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://nexusstudio.co/terminos</loc>
+    <loc>https://nexsustudio.site/terminos</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://nexusstudio.co/aviso-legal</loc>
+    <loc>https://nexsustudio.site/aviso-legal</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
@@ -42,42 +42,42 @@
 
   <!-- Artículos del Blog -->
   <url>
-    <loc>https://nexusstudio.co/blog/como-atraer-clientes-por-internet</loc>
+    <loc>https://nexsustudio.site/blog/como-atraer-clientes-por-internet</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://nexusstudio.co/blog/posicionamiento-en-google-guia-empresas</loc>
+    <loc>https://nexsustudio.site/blog/posicionamiento-en-google-guia-empresas</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://nexusstudio.co/blog/diseno-web-afecta-ventas</loc>
+    <loc>https://nexsustudio.site/blog/diseno-web-afecta-ventas</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://nexusstudio.co/blog/como-crear-tienda-online-exitosa</loc>
+    <loc>https://nexsustudio.site/blog/como-crear-tienda-online-exitosa</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://nexusstudio.co/blog/optimizacion-conversiones-ventas</loc>
+    <loc>https://nexsustudio.site/blog/optimizacion-conversiones-ventas</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://nexusstudio.co/blog/tendencias-tecnologicas-negocios-2025</loc>
+    <loc>https://nexsustudio.site/blog/tendencias-tecnologicas-negocios-2025</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

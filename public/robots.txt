@@ -7,7 +7,7 @@ Disallow: /*.json$
 Disallow: /node_modules/
 
 # Sitemap
-Sitemap: https://nexusstudio.co/sitemap.xml
+Sitemap: https://nexsustudio.site/sitemap.xml
 
 # Crawl-delay respetuoso
 Crawl-delay: 1
