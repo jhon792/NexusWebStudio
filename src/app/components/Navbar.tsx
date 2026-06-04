@@ -23,7 +23,11 @@ export function Navbar() {
   const handleNav = (href: string) => {
     setMobileOpen(false);
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = "/" + href;
+    }
   };
 
   return (
@@ -47,11 +51,13 @@ export function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <a
-              href="#"
+              href="/"
               className="flex items-center gap-2.5 group"
               onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                if (window.location.pathname === "/") {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
               }}
             >
               <div
