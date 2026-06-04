@@ -5,82 +5,82 @@
   <!-- Página principal -->
   <url>
     <loc>https://nexsustudio.site/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://nexsustudio.site/"/>
-  </url>
-
-  <!-- Páginas legales -->
-  <url>
-    <loc>https://nexsustudio.site/privacidad</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://nexsustudio.site/cookies</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://nexsustudio.site/terminos</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://nexsustudio.site/aviso-legal</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://nexsustudio.site/"/>
   </url>
 
   <!-- Artículos del Blog -->
   <url>
     <loc>https://nexsustudio.site/blog/como-atraer-clientes-por-internet</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2025-05-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://nexsustudio.site/blog/posicionamiento-en-google-guia-empresas</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2025-05-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://nexsustudio.site/blog/diseno-web-afecta-ventas</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2025-05-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://nexsustudio.site/blog/como-crear-tienda-online-exitosa</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2025-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://nexsustudio.site/blog/optimizacion-conversiones-ventas</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2025-04-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://nexsustudio.site/blog/tendencias-tecnologicas-negocios-2025</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2025-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- Páginas legales -->
+  <url>
+    <loc>https://nexsustudio.site/privacidad</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://nexsustudio.site/cookies</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://nexsustudio.site/terminos</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://nexsustudio.site/aviso-legal</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>

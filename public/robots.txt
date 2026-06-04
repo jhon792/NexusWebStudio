@@ -1,11 +1,6 @@
 User-agent: *
 Allow: /
 
-# Bloquear rutas sin valor SEO
-Disallow: /src/
-Disallow: /*.json$
-Disallow: /node_modules/
-
 # Sitemap
 Sitemap: https://nexsustudio.site/sitemap.xml
 
