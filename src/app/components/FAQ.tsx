@@ -2,51 +2,60 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus, Minus, MessageCircle } from "lucide-react";
 
+// Las primeras 6 preguntas están sincronizadas con el schema FAQPage de SEOSchemas.tsx
+// → activan el acordeón de preguntas directamente en los resultados de Google.
+// Orden: mayor intención de compra primero.
 const faqs = [
   {
-    question: "¿Cuánto tarda el desarrollo de una página web?",
+    question: "¿Cuánto cuesta una página web en Colombia?",
     answer:
-      "Depende del plan elegido. Una landing page básica se entrega en 3 a 5 días hábiles. Un sitio empresarial completo toma entre 7 y 15 días hábiles. Para proyectos con funcionalidades especiales, el tiempo se acuerda al inicio según el alcance. Al confirmar tu proyecto recibes un cronograma con fechas claras.",
+      "Manejamos tres planes de inversión. El Plan Inicio vale $590.000 COP e incluye landing page profesional lista en 3 a 5 días. El Plan Crecimiento vale $990.000 COP e incluye SEO, dominio propio y hosting por un año completo — es el más elegido por negocios colombianos que quieren aparecer en Google. Para proyectos a medida —tiendas virtuales, sistemas de citas o apps web— el Plan Empresarial parte desde $2.500.000 COP. Todos son pagos únicos, sin mensualidades.",
   },
+  {
+    question: "¿Las páginas web que hacen aparecen en Google?",
+    answer:
+      "Sí. Todos los sitios se entregan optimizados para Google: configuramos Google Search Console para rastreo correcto, aplicamos SEO técnico (velocidad de carga, encabezados y metadatos) y vinculamos el negocio en Google Maps si aplica. El Plan Crecimiento y el Plan Empresarial incluyen posicionamiento SEO local sin costo adicional. Los resultados orgánicos comienzan a verse entre 4 y 12 semanas según la competencia del sector en tu ciudad.",
+  },
+  {
+    question: "¿Cuánto tiempo tarda el desarrollo de un sitio web?",
+    answer:
+      "Depende del proyecto: una landing page se entrega en 3 a 5 días hábiles; un sitio empresarial completo toma de 7 a 15 días hábiles. Los proyectos con funcionalidades especiales —tiendas virtuales o sistemas de citas y reservas— tienen un plazo acordado al inicio según el alcance. Al confirmar tu proyecto recibes un cronograma detallado con fechas de entrega claras.",
+  },
+  {
+    question: "¿Trabajan con clientes de toda Colombia?",
+    answer:
+      "Sí, trabajamos con negocios de toda Colombia de forma 100% remota. Hemos desarrollado proyectos para clientes en Bogotá, Medellín, Cali, Barranquilla, Bucaramanga, Pereira y Villavicencio. Todo el proceso —reunión inicial, diseño, revisiones y entrega— se gestiona por WhatsApp, videollamada y correo. No necesitas reuniones presenciales para iniciar tu proyecto.",
+  },
+  {
+    question: "¿Puedo ver el sitio antes de hacer el pago final?",
+    answer:
+      "Sí. Trabajamos con pago dividido: 50% al inicio del proyecto y 50% al entregar. Antes del pago final te compartimos un enlace de vista previa con el sitio terminado para que lo revises en detalle, solicites los ajustes que necesites y des tu aprobación. Solo cuando el resultado cumple tus expectativas se realiza el pago final y el sitio se publica en tu dominio.",
+  },
+  {
+    question: "¿Qué incluye el mantenimiento mensual de un sitio web?",
+    answer:
+      "El plan de mantenimiento mensual incluye: actualizaciones de seguridad contra vulnerabilidades, copias de seguridad automáticas semanales, cambios de contenido (textos, imágenes, precios), monitoreo de disponibilidad 24/7 y soporte técnico con respuesta en menos de 24 horas. También incluye revisión periódica del posicionamiento en Google y ajustes menores de diseño. Es el servicio ideal para mantener tu negocio digital activo y seguro sin preocuparte por la parte técnica.",
+  },
+  // ── Preguntas de alta conversión ──────────────────────────────────────────
   {
     question: "¿Por qué necesito web si ya tengo redes sociales?",
     answer:
-      "Las redes sociales son prestadas. Facebook e Instagram pueden bloquearte, cambiar el algoritmo o simplemente desaparecer. Tu página web es tuya, está en tu dominio y funciona aunque Meta tenga caídas. Además, una web posicionada en Google te trae clientes que están buscando activamente tu servicio — algo que las redes sociales no replican de la misma forma. Tener ambas es lo ideal; depender solo de redes es un riesgo.",
+      "Las redes sociales son prestadas. Facebook e Instagram pueden bloquearte, cambiar el algoritmo o simplemente desaparecer. Tu página web es tuya, vive en tu dominio y funciona aunque Meta tenga caídas. Además, una web posicionada en Google trae clientes que buscan activamente tu servicio — algo que las redes no replican igual. Tener ambas es lo ideal; depender solo de redes es un riesgo que no vale la pena asumir.",
   },
   {
     question: "¿El sitio funcionará bien en celulares?",
     answer:
-      "Sí. Todos nuestros sitios web son 100% responsive, lo que significa que se adaptan perfectamente a teléfonos, tablets y computadores. Diseñamos primero para móvil porque la mayoría del tráfico web proviene de dispositivos móviles, y también es un factor clave para el posicionamiento en Google.",
-  },
-  {
-    question: "¿Puedo solicitar cambios durante el desarrollo?",
-    answer:
-      "Sí. Durante el proceso de desarrollo tienes rondas de revisión para ajustar el diseño y el contenido hasta que quedes satisfecho. Una vez lanzado el sitio, también ofrecemos planes de mantenimiento que incluyen ajustes de contenido y mejoras continuas.",
-  },
-  {
-    question: "¿Cómo se realiza el pago?",
-    answer:
-      "El pago se divide en dos partes: 50% al inicio del proyecto y 50% al entregar el sitio terminado. Aceptamos transferencia bancaria, Nequi, Daviplata y otros medios de pago colombianos. Antes de iniciar te entregamos una cotización detallada sin compromisos.",
-  },
-  {
-    question: "¿Ofrecen soporte después de la entrega?",
-    answer:
-      "Sí. Todos los planes incluyen un período de soporte post-entrega para resolver dudas y ajustes. Adicionalmente, ofrecemos planes de mantenimiento mensual que incluyen actualizaciones de seguridad, copias de seguridad, cambios de contenido y soporte técnico continuo.",
-  },
-  {
-    question: "¿Necesito saber de tecnología para manejar mi sitio?",
-    answer:
-      "No. Te entregamos tu sitio listo para usar y te explicamos cómo realizar cambios básicos de contenido de forma sencilla. Si en algún momento necesitas ayuda, nuestro equipo está disponible para apoyarte sin necesidad de que tengas conocimientos técnicos.",
+      "Sí. Todos nuestros sitios son 100% responsive: se adaptan perfectamente a teléfonos, tablets y computadores. Diseñamos primero para móvil porque más del 65% del tráfico web en Colombia viene de dispositivos móviles, y también es un factor determinante para el posicionamiento en Google. Un sitio que no funciona bien en celular pierde clientes y posiciones.",
   },
   {
     question: "¿Vale la pena la inversión si mi negocio es pequeño?",
     answer:
-      "El tamaño del negocio no define si necesitas web — lo define si tienes clientes potenciales que te buscan en internet. Si alguien en tu ciudad busca en Google 'dentista cerca' o 'restaurante italiano Bogotá' y tú no apareces, ese cliente va a tu competencia. Con el Plan Crecimiento ($990.000 pago único), un solo cliente nuevo que llegue por la web ya recupera toda la inversión. La mayoría de nuestros clientes los reciben en las primeras semanas.",
+      "El tamaño del negocio no define si necesitas web — lo define si tienes clientes que te buscan en internet. Si alguien en tu ciudad busca en Google 'dentista cerca' o 'restaurante en Villavicencio' y tú no apareces, ese cliente va a tu competencia. Con el Plan Crecimiento ($990.000, pago único), un solo cliente nuevo recupera toda la inversión. La mayoría de nuestros clientes lo reciben en las primeras semanas.",
   },
   {
     question: "¿Qué necesito tener listo para empezar?",
     answer:
-      "Muy poco. Con el nombre de tu negocio, a qué te dedicas y algunas fotos (o usamos imágenes de calidad), ya podemos comenzar. Te hacemos las preguntas correctas en una llamada o chat de 20 minutos y desde ahí tomamos el control del proceso. No necesitas conocimientos técnicos ni preparar nada por adelantado.",
+      "Muy poco. Con el nombre de tu negocio, a qué te dedicas y algunas fotos (o usamos imágenes de calidad profesional), ya podemos comenzar. Te hacemos las preguntas correctas en una llamada o chat de 20 minutos y desde ahí tomamos el control del proceso. No necesitas conocimientos técnicos ni preparar nada por adelantado.",
   },
 ];
 
