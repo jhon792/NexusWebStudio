@@ -116,16 +116,17 @@ export function Hero() {
                 marginBottom: 24,
               }}
             >
-              Consigue{" "}
+              Diseño web que{" "}
               <span style={{
                 background: "linear-gradient(135deg, #818cf8 0%, #a78bfa 45%, #c084fc 80%, #e879f9 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-                más clientes
+                genera clientes
               </span>
-              <br />con una web que trabaja<br />por tu negocio 24/7.
+              <br />para tu negocio
+              <br />en Colombia.
             </motion.h1>
 
             {/* Subtítulo */}

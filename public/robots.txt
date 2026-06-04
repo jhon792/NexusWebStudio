@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://nexsustudio.site/sitemap.xml
+Sitemap: https://www.nexsustudio.site/sitemap.xml
 
 # Crawl-delay respetuoso
 Crawl-delay: 1
