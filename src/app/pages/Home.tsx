@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { usePageSEO } from "../../hooks/usePageSEO";
 import { Navbar } from "../components/Navbar";
 import { Hero } from "../components/Hero";
 import { TrustSection } from "../components/TrustSection";
@@ -14,9 +14,11 @@ import { Footer } from "../components/Footer";
 import { SEOSchemas } from "../components/SEOSchemas";
 
 export default function Home() {
-  useEffect(() => {
-    document.title = "Diseño Web Profesional en Colombia | Nexus Studio";
-  }, []);
+  usePageSEO({
+    title: "Diseño Web en Colombia | Bogotá, Medellín, Villavicencio | Nexus Studio",
+    description: "Diseño web en Bogotá, Medellín y Villavicencio. Nexus Studio crea sitios que generan clientes para tu negocio colombiano. ¡Cotiza gratis!",
+    canonical: "https://www.nexsustudio.site/",
+  });
 
   return (
     <div

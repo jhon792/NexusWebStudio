@@ -13,6 +13,11 @@ const TermsConditions = lazy(() => import("./pages/TermsConditions"));
 const LegalNotice = lazy(() => import("./pages/LegalNotice"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
+// Landing pages por ciudad
+const Villavicencio = lazy(() => import("./pages/Villavicencio"));
+const Bogota = lazy(() => import("./pages/Bogota"));
+const Medellin = lazy(() => import("./pages/Medellin"));
+
 function PageLoader() {
   return (
     <div
@@ -37,6 +42,9 @@ function AppRoutes() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/villavicencio" element={<Villavicencio />} />
+        <Route path="/bogota" element={<Bogota />} />
+        <Route path="/medellin" element={<Medellin />} />
         <Route path="/blog/:slug" element={<BlogArticle />} />
         <Route path="/privacidad" element={<PrivacyPolicy />} />
         <Route path="/cookies" element={<CookiePolicy />} />

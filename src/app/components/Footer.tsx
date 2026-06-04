@@ -16,6 +16,11 @@ const footerNav = {
     { label: "Preguntas Frecuentes", href: "/#faq" },
     { label: "Contacto", href: "/#contact" },
   ],
+  Ciudades: [
+    { label: "Diseño web Villavicencio", href: "/villavicencio" },
+    { label: "Diseño web Bogotá", href: "/bogota" },
+    { label: "Diseño web Medellín", href: "/medellin" },
+  ],
   Legal: [
     { label: "Política de Privacidad", href: "/privacidad" },
     { label: "Política de Cookies", href: "/cookies" },
@@ -29,7 +34,7 @@ export function Footer() {
     <footer style={{ background: "#030305", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Top */}
-        <div className="py-14 grid lg:grid-cols-5 gap-10">
+        <div className="py-14 grid lg:grid-cols-6 gap-10">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-5">
@@ -116,6 +121,17 @@ export function Footer() {
                 Disponible para nuevos proyectos
               </span>
             </div>
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "12px",
+                color: "rgba(255,255,255,0.22)",
+                marginTop: "12px",
+              }}
+            >
+              Servicio 100% remoto para toda Colombia.
+              <br />Sede: Villavicencio, Meta.
+            </p>
           </div>
 
           {/* Nav links */}
