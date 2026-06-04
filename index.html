@@ -54,7 +54,7 @@
     <meta name="twitter:image" content="https://www.nexsustudio.site/og-image.jpg" />
     <meta name="twitter:image:alt" content="Nexus Studio - Desarrollo Web Profesional" />
 
-    <!-- ===== SCHEMA.ORG (Google Rich Results) ===== -->
+    <!-- ===== SCHEMA.ORG — LocalBusiness + WebSite (Knowledge Panel / Maps) ===== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -65,7 +65,8 @@
           "url": "https://www.nexsustudio.site/",
           "name": "Nexus Studio",
           "description": "Diseño y desarrollo web profesional para empresas en Colombia",
-          "inLanguage": "es-CO"
+          "inLanguage": "es-CO",
+          "publisher": { "@id": "https://www.nexsustudio.site/#business" }
         },
         {
           "@type": ["LocalBusiness", "ProfessionalService"],
@@ -81,7 +82,7 @@
           "description": "Diseño y desarrollo web profesional para empresas en Colombia. Landing pages, sitios empresariales, tiendas virtuales y aplicaciones web a medida.",
           "priceRange": "$$",
           "currenciesAccepted": "COP",
-          "paymentAccepted": "Transferencia bancaria, PSE, Nequi, Efecty",
+          "paymentAccepted": "Nequi, Daviplata, Transferencia bancaria, PSE",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Barrio La Rosita",
@@ -92,60 +93,60 @@
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": 4.1420,
-            "longitude": -73.6266
+            "latitude": 4.142,
+            "longitude": -73.626
           },
-          "openingHours": ["Mo-Fr 08:00-18:00", "Sa 09:00-13:00"],
-          "areaServed": [
-            {"@type": "Country", "name": "Colombia"},
-            {"@type": "City", "name": "Bogotá"},
-            {"@type": "City", "name": "Medellín"},
-            {"@type": "City", "name": "Cali"},
-            {"@type": "City", "name": "Villavicencio"}
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+              "opens": "08:00",
+              "closes": "18:00"
+            }
           ],
+          "areaServed": { "@type": "Country", "name": "Colombia" },
           "serviceType": [
             "Diseño Web Profesional",
             "Desarrollo Web",
             "Landing Pages",
             "Tiendas Virtuales",
-            "SEO",
+            "SEO Local",
             "Aplicaciones Web"
           ],
           "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+573123198706",
-            "contactType": "Servicio al cliente",
-            "availableLanguage": ["Spanish"],
-            "contactOption": "WhatsApp"
+            "contactType": "customer service",
+            "areaServed": "CO",
+            "availableLanguage": ["Spanish"]
           },
           "sameAs": [
-            "https://x.com/johndev",
             "https://www.instagram.com/nexsustudio",
             "https://wa.me/573123198706"
           ],
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Servicios de Desarrollo Web",
+            "name": "Planes de Desarrollo Web",
             "itemListElement": [
               {
                 "@type": "Offer",
-                "name": "Landing Page Profesional",
-                "description": "Página web diseñada para captar clientes y generar conversiones para tu negocio",
-                "price": "600000",
+                "name": "Plan Inicio — Landing Page",
+                "description": "Landing page profesional diseñada para captar clientes desde el primer día",
+                "price": "590000",
                 "priceCurrency": "COP"
               },
               {
                 "@type": "Offer",
-                "name": "Sitio Web Empresarial",
-                "description": "Sitio web completo hasta 5 páginas con diseño profesional y SEO incluido",
-                "price": "1500000",
+                "name": "Plan Crecimiento — Sitio con SEO",
+                "description": "Sitio web completo con SEO, dominio y hosting por un año",
+                "price": "990000",
                 "priceCurrency": "COP"
               },
               {
                 "@type": "Offer",
-                "name": "Tienda Virtual",
-                "description": "Tienda online con carrito de compras, pasarelas de pago colombianas y gestión de pedidos",
-                "price": "3000000",
+                "name": "Plan Empresarial — A medida",
+                "description": "Tienda virtual, sistema de citas o aplicación web personalizada",
+                "price": "2500000",
                 "priceCurrency": "COP"
               }
             ]

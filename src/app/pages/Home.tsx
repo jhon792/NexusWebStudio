@@ -11,6 +11,7 @@ import { WhyMe } from "../components/WhyMe";
 import { FAQ } from "../components/FAQ";
 import { Contact } from "../components/Contact";
 import { Footer } from "../components/Footer";
+import { SEOSchemas } from "../components/SEOSchemas";
 
 export default function Home() {
   useEffect(() => {
@@ -23,6 +24,7 @@ export default function Home() {
       style={{ background: "#09090b", fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}
     >
       <Navbar />
+      <SEOSchemas />
       <main id="main-content">
         <Hero />
         <TrustSection />
