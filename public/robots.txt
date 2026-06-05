@@ -1,8 +1,17 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Bloquear rutas innecesarias
+Disallow: /cdn-cgi/
+Disallow: /*.json$
+Disallow: /api/
+
+# Sitemaps
 Sitemap: https://www.nexsustudio.site/sitemap.xml
 
-# Crawl-delay respetuoso
-Crawl-delay: 1
+# Crawl delay para bots secundarios
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10

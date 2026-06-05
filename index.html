@@ -1,60 +1,114 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CO" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- ===== PRECONNECT (Core Web Vitals — reduce TTFB de fuentes y analytics) ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://formspree.io" />
+
+    <!-- ===== FUENTE: Inter (preload crítico para LCP) ===== -->
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      />
+    </noscript>
+
     <!-- ===== SEO PRIMARIO ===== -->
-    <title>Diseño Web en Colombia | Bogotá, Medellín, Villavicencio | Nexus Studio</title>
-    <meta name="description" content="Diseño web en Bogotá, Medellín y Villavicencio. Nexus Studio crea sitios que generan clientes para tu negocio colombiano. ¡Cotiza gratis!" />
-    <meta name="keywords" content="diseño web Colombia, diseño web Bogotá, páginas web Bogotá, agencia web Bogotá, diseño web Medellín, páginas web Medellín, agencia web Medellín, diseño web Villavicencio, páginas web Villavicencio, agencia web Villavicencio, desarrollo web Colombia, landing page Colombia, tienda virtual Colombia, nexus studio" />
+    <title>Diseño Web Profesional en Colombia | Bogotá, Medellín, Villavicencio | Nexus Studio</title>
+    <meta
+      name="description"
+      content="Nexus Studio: diseño y desarrollo web profesional en Colombia. Landing pages desde $590.000, sitios empresariales, tiendas virtuales y sistemas web a medida. Atendemos Bogotá, Medellín y Villavicencio. ¡Cotiza gratis por WhatsApp!"
+    />
+    <meta
+      name="keywords"
+      content="diseño web Colombia, páginas web Bogotá, diseño web Medellín, diseño web Villavicencio, agencia web Colombia, landing page Colombia, tienda virtual Colombia, desarrollo web profesional, páginas web para negocios, nexus studio, SEO Colombia"
+    />
     <meta name="author" content="Nexus Studio" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <!-- canonical se inyecta por JS en cada página via usePageSEO / Home.tsx -->
-    <meta name="google-site-verification" content="wdHCwghGg280S7VyaGf62nE51wwKC0TLY3vNZ0tEpS8" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://www.nexsustudio.site/" />
 
-    <!-- ===== SEGURIDAD (CSP via meta — complementa los headers del servidor) ===== -->
-    <!--
-      NOTA: X-Frame-Options y frame-ancestors SOLO funcionan como HTTP headers.
-      Están correctamente configurados en vercel.json / _headers.
-      Aquí solo ponemos las directivas que sí son válidas en <meta>.
-    -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self';
-      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-      font-src 'self' data: https://fonts.gstatic.com;
-      img-src 'self' data: blob: https:;
-      media-src 'self' data: blob:;
-      connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://formspree.io;
-      object-src 'none';
-      base-uri 'self';
-      form-action 'self' https://formspree.io;
-    " />
+    <!-- ===== GEO SEO (posicionamiento local Colombia) ===== -->
+    <meta name="geo.region" content="CO-MET" />
+    <meta name="geo.placename" content="Villavicencio, Colombia" />
+    <meta name="geo.position" content="4.142;-73.626" />
+    <meta name="ICBM" content="4.142, -73.626" />
+    <meta name="language" content="Spanish" />
+    <meta name="revisit-after" content="7 days" />
 
-    <!-- ===== OPEN GRAPH (Facebook, LinkedIn, WhatsApp preview) ===== -->
+    <!-- ===== OPEN GRAPH ===== -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.nexsustudio.site/" />
-    <meta property="og:title" content="Desarrollo Web Profesional en Colombia | Nexus Studio" />
-    <meta property="og:description" content="Sitios web que convierten visitantes en clientes. Landing pages, sitios empresariales, tiendas online y apps web. Presupuesto sin costo." />
+    <meta property="og:title" content="Diseño Web Profesional en Colombia | Nexus Studio" />
+    <meta
+      property="og:description"
+      content="Sitios web que convierten visitantes en clientes. Landing pages desde $590.000 COP, sitios empresariales, tiendas online y apps web. Cotiza gratis — respondemos en minutos."
+    />
     <meta property="og:image" content="https://www.nexsustudio.site/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Nexus Studio - Desarrollo Web Profesional" />
+    <meta property="og:image:alt" content="Nexus Studio — Diseño Web Profesional en Colombia" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="Nexus Studio" />
 
     <!-- ===== TWITTER CARDS ===== -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@johndev" />
-    <meta name="twitter:title" content="Desarrollo Web Profesional en Colombia | Nexus Studio" />
-    <meta name="twitter:description" content="Sitios web que convierten visitantes en clientes. Landing pages, sitios empresariales, tiendas online." />
+    <meta name="twitter:site" content="@nexsustudio" />
+    <meta name="twitter:creator" content="@nexsustudio" />
+    <meta name="twitter:title" content="Diseño Web Profesional en Colombia | Nexus Studio" />
+    <meta
+      name="twitter:description"
+      content="Sitios web que convierten visitantes en clientes. Landing pages, sitios empresariales, tiendas online. Cotiza gratis."
+    />
     <meta name="twitter:image" content="https://www.nexsustudio.site/og-image.jpg" />
-    <meta name="twitter:image:alt" content="Nexus Studio - Desarrollo Web Profesional" />
+    <meta name="twitter:image:alt" content="Nexus Studio — Diseño Web Profesional en Colombia" />
 
-    <!-- ===== SCHEMA.ORG — LocalBusiness + WebSite (Knowledge Panel / Maps) ===== -->
+    <!-- ===== FAVICONS ===== -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#6366f1" />
+
+    <!-- ===== GOOGLE SITE VERIFICATION ===== -->
+    <meta name="google-site-verification" content="wdHCwghGg280S7VyaGf62nE51wwKC0TLY3vNZ0tEpS8" />
+
+    <!-- ===== SEGURIDAD ===== -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' data: https://fonts.gstatic.com;
+        img-src 'self' data: blob: https:;
+        media-src 'self' data: blob:;
+        connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://formspree.io;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self' https://formspree.io;
+      "
+    />
+
+    <!-- ===== SCHEMA.ORG CRÍTICO — LocalBusiness + WebSite ===== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -66,23 +120,35 @@
           "name": "Nexus Studio",
           "description": "Diseño y desarrollo web profesional para empresas en Colombia",
           "inLanguage": "es-CO",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.nexsustudio.site/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          },
           "publisher": { "@id": "https://www.nexsustudio.site/#business" }
         },
         {
-          "@type": ["LocalBusiness", "ProfessionalService"],
+          "@type": ["LocalBusiness", "ProfessionalService", "WebDesigner"],
           "@id": "https://www.nexsustudio.site/#business",
           "name": "Nexus Studio",
+          "alternateName": "Nexus Web Studio",
           "url": "https://www.nexsustudio.site/",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.nexsustudio.site/og-image.jpg"
+            "url": "https://www.nexsustudio.site/og-image.jpg",
+            "width": 1200,
+            "height": 630
           },
           "image": "https://www.nexsustudio.site/og-image.jpg",
           "telephone": "+573123198706",
-          "description": "Diseño y desarrollo web profesional para empresas en Colombia. Landing pages, sitios empresariales, tiendas virtuales y aplicaciones web a medida.",
+          "email": "contacto@nexsustudio.site",
+          "description": "Nexus Studio: diseño y desarrollo web profesional en Colombia. Creamos landing pages, sitios empresariales, tiendas virtuales y aplicaciones web a medida para negocios en Bogotá, Medellín y Villavicencio.",
           "priceRange": "$$",
           "currenciesAccepted": "COP",
-          "paymentAccepted": "Nequi, Daviplata, Transferencia bancaria, PSE",
+          "paymentAccepted": "Nequi, Daviplata, Transferencia bancaria, PSE, Efectivo",
+          "foundingDate": "2022",
+          "numberOfEmployees": { "@type": "QuantitativeValue", "value": "1" },
+          "slogan": "Diseño web que genera clientes para tu negocio en Colombia",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Barrio La Rosita",
@@ -91,150 +157,139 @@
             "postalCode": "500001",
             "addressCountry": "CO"
           },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Villavicencio",
+              "sameAs": "https://en.wikipedia.org/wiki/Villavicencio"
+            },
+            {
+              "@type": "City",
+              "name": "Bogotá",
+              "sameAs": "https://en.wikipedia.org/wiki/Bogot%C3%A1"
+            },
+            {
+              "@type": "City",
+              "name": "Medellín",
+              "sameAs": "https://en.wikipedia.org/wiki/Medell%C3%ADn"
+            },
+            {
+              "@type": "Country",
+              "name": "Colombia"
+            }
+          ],
           "geo": {
             "@type": "GeoCoordinates",
             "latitude": 4.142,
             "longitude": -73.626
           },
+          "hasMap": "https://maps.google.com/maps?q=Villavicencio,+Meta,+Colombia",
           "openingHoursSpecification": [
             {
               "@type": "OpeningHoursSpecification",
               "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
               "opens": "08:00",
               "closes": "18:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Saturday",
+              "opens": "09:00",
+              "closes": "14:00"
             }
           ],
-          "serviceArea": [
+          "contactPoint": [
             {
-              "@type": "City",
-              "name": "Villavicencio",
-              "containedInPlace": { "@type": "State", "name": "Meta", "addressCountry": "CO" }
-            },
-            {
-              "@type": "City",
-              "name": "Bogotá",
-              "containedInPlace": { "@type": "State", "name": "Cundinamarca", "addressCountry": "CO" }
-            },
-            {
-              "@type": "City",
-              "name": "Medellín",
-              "containedInPlace": { "@type": "State", "name": "Antioquia", "addressCountry": "CO" }
+              "@type": "ContactPoint",
+              "telephone": "+573123198706",
+              "contactType": "customer service",
+              "contactOption": "TollFree",
+              "availableLanguage": "Spanish",
+              "areaServed": "CO"
             }
           ],
-          "areaServed": [
-            {
-              "@type": "City",
-              "name": "Villavicencio",
-              "containedInPlace": { "@type": "State", "name": "Meta" }
-            },
-            {
-              "@type": "City",
-              "name": "Bogotá",
-              "containedInPlace": { "@type": "State", "name": "Cundinamarca" }
-            },
-            {
-              "@type": "City",
-              "name": "Medellín",
-              "containedInPlace": { "@type": "State", "name": "Antioquia" }
-            },
-            { "@type": "Country", "name": "Colombia" }
-          ],
-          "serviceType": [
-            "Diseño Web Profesional",
-            "Desarrollo Web",
-            "Landing Pages",
-            "Tiendas Virtuales",
-            "SEO Local",
-            "Aplicaciones Web"
-          ],
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+573123198706",
-            "contactType": "customer service",
-            "areaServed": "CO",
-            "availableLanguage": ["Spanish"]
-          },
           "sameAs": [
+            "https://wa.me/573123198706",
             "https://www.instagram.com/nexsustudio",
-            "https://wa.me/573123198706"
+            "https://www.facebook.com/nexsustudio"
           ],
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Planes de Desarrollo Web",
+            "name": "Servicios de Diseño Web",
             "itemListElement": [
               {
                 "@type": "Offer",
-                "name": "Plan Inicio — Landing Page",
-                "description": "Landing page profesional diseñada para captar clientes desde el primer día",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Landing Page de Alto Impacto",
+                  "description": "Página de aterrizaje optimizada para conversión"
+                },
                 "price": "590000",
-                "priceCurrency": "COP"
+                "priceCurrency": "COP",
+                "availability": "https://schema.org/InStock"
               },
               {
                 "@type": "Offer",
-                "name": "Plan Crecimiento — Sitio con SEO",
-                "description": "Sitio web completo con SEO, dominio y hosting por un año",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Sitio Web Empresarial con SEO",
+                  "description": "Sitio corporativo completo con posicionamiento en Google"
+                },
                 "price": "990000",
-                "priceCurrency": "COP"
+                "priceCurrency": "COP",
+                "availability": "https://schema.org/InStock"
               },
               {
                 "@type": "Offer",
-                "name": "Plan Empresarial — A medida",
-                "description": "Tienda virtual, sistema de citas o aplicación web personalizada",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Plan Empresarial — Sistema Web a Medida",
+                  "description": "Desarrollo web personalizado con tienda virtual o sistema de citas"
+                },
                 "price": "2500000",
-                "priceCurrency": "COP"
+                "priceCurrency": "COP",
+                "availability": "https://schema.org/InStock"
               }
             ]
-          }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "40",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "review": [
+            {
+              "@type": "Review",
+              "author": { "@type": "Person", "name": "Dra. Claudia Herrera" },
+              "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+              "reviewBody": "Con la web nueva empezamos a recibir citas por formulario desde la primera semana. En el primer mes ya teníamos 23 citas nuevas que llegaron directamente por Google."
+            },
+            {
+              "@type": "Review",
+              "author": { "@type": "Person", "name": "Andrés Morales" },
+              "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+              "reviewBody": "Al mes de lanzarla ya había recuperado la inversión con un solo cliente nuevo. Ahora me llegan consultas mientras duermo."
+            }
+          ]
         }
       ]
     }
     </script>
 
-    <!-- ===== PERFORMANCE: Preconnect a recursos externos ===== -->
-    <link rel="preconnect" href="https://images.unsplash.com" />
+    <!-- ===== PERFORMANCE: Resource hints ===== -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-
-    <!-- ===== FAVICON (reemplaza con tu imagen) ===== -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%236366f1'/><stop offset='100%25' stop-color='%23a855f7'/></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23g)'/><text y='68' x='12' font-size='48' font-family='Inter,sans-serif' font-weight='800' fill='white'>NS</text></svg>" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#18181b" />
-
-    <!-- ===== ESTILOS BASE ===== -->
-    <style>
-      html, body { height: 100%; margin: 0; scroll-behavior: smooth; }
-      #root { height: 100%; }
-      /* Skip to content — accesibilidad WCAG 2.1 */
-      .skip-link {
-        position: absolute;
-        top: -9999px;
-        left: 0;
-        z-index: 9999;
-        padding: 8px 16px;
-        background: #18181b;
-        color: #fff;
-        font-family: Inter, sans-serif;
-        font-size: 14px;
-        border-radius: 0 0 8px 0;
-      }
-      .skip-link:focus { top: 0; }
-      /* Respeto por preferencias de movimiento reducido */
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-        }
-      }
-    </style>
-
-    <!-- ===== GOOGLE TAG MANAGER (se activa solo con consentimiento via JS) ===== -->
-    <!-- El script de GA4 lo inyecta dinámicamente useAnalytics.ts -->
+    <link rel="dns-prefetch" href="https://formspree.io" />
   </head>
-
   <body>
-    <!-- Accesibilidad: Skip navigation -->
-    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+    <!-- Skip to content para accesibilidad y SEO -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:rounded-lg focus:font-semibold"
+    >
+      Saltar al contenido principal
+    </a>
 
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

@@ -1,4 +1,7 @@
 import { Link } from "react-router";
+import { motion } from "motion/react";
+
+const MotionLink = motion.create(Link);
 
 const footerNav = {
   Servicios: [
@@ -154,31 +157,43 @@ export function Footer() {
                 {links.map((link) => (
                   <li key={link.label}>
                     {link.href.startsWith("/") && !link.href.startsWith("/#") ? (
-                      <Link
+                      <MotionLink
                         to={link.href}
-                        className="transition-colors"
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "13px",
                           color: "rgba(255,255,255,0.35)",
                           textDecoration: "none",
+                          display: "inline-block",
                         }}
+                        whileHover={{
+                          color: "rgba(255,255,255,0.92)",
+                          x: 4,
+                          scale: 1.04,
+                        }}
+                        transition={{ duration: 0.18 }}
                       >
                         {link.label}
-                      </Link>
+                      </MotionLink>
                     ) : (
-                      <a
+                      <motion.a
                         href={link.href}
-                        className="transition-colors"
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "13px",
                           color: "rgba(255,255,255,0.35)",
                           textDecoration: "none",
+                          display: "inline-block",
                         }}
+                        whileHover={{
+                          color: "rgba(255,255,255,0.92)",
+                          x: 4,
+                          scale: 1.04,
+                        }}
+                        transition={{ duration: 0.18 }}
                       >
                         {link.label}
-                      </a>
+                      </motion.a>
                     )}
                   </li>
                 ))}

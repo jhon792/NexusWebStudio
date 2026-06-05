@@ -154,9 +154,9 @@ export function Projects() {
                     className="px-3 py-1 rounded-full text-xs font-semibold"
                     style={{
                       fontFamily: "Inter, sans-serif",
-                      background: `${demo.accent}22`,
-                      border: `1px solid ${demo.accent}44`,
-                      color: demo.accent,
+                      background: "rgba(0,0,0,0.55)",
+                      border: `1px solid ${demo.accent}80`,
+                      color: "#fff",
                       backdropFilter: "blur(8px)",
                     }}
                   >

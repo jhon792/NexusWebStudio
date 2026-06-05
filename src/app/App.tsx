@@ -2,9 +2,9 @@ import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router";
 import { CookieBanner } from "./components/CookieBanner";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
+import { GlobalEffects } from "./components/GlobalEffects";
 import { useAnalytics } from "../hooks/useAnalytics";
 
-// Lazy loading de páginas → code splitting automático
 const Home = lazy(() => import("./pages/Home"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -13,7 +13,6 @@ const TermsConditions = lazy(() => import("./pages/TermsConditions"));
 const LegalNotice = lazy(() => import("./pages/LegalNotice"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Landing pages por ciudad
 const Villavicencio = lazy(() => import("./pages/Villavicencio"));
 const Bogota = lazy(() => import("./pages/Bogota"));
 const Medellin = lazy(() => import("./pages/Medellin"));
@@ -21,13 +20,23 @@ const Medellin = lazy(() => import("./pages/Medellin"));
 function PageLoader() {
   return (
     <div
-      className="min-h-screen bg-white flex items-center justify-center"
+      className="min-h-screen flex items-center justify-center"
       aria-label="Cargando página..."
       role="status"
+      style={{ background: "#09090b" }}
     >
       <div className="flex flex-col items-center gap-4">
-        <div className="w-8 h-8 border-2 border-zinc-200 border-t-zinc-900 rounded-full animate-spin" />
-        <span className="text-zinc-500 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+        <div
+          className="w-8 h-8 rounded-full border-2 animate-spin"
+          style={{ borderColor: "rgba(99,102,241,0.2)", borderTopColor: "#6366f1" }}
+        />
+        <span
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: "14px",
+            color: "rgba(255,255,255,0.35)",
+          }}
+        >
           Cargando...
         </span>
       </div>
@@ -36,7 +45,7 @@ function PageLoader() {
 }
 
 function AppRoutes() {
-  useAnalytics(); // carga GA4 solo si hay consentimiento
+  useAnalytics();
 
   return (
     <Suspense fallback={<PageLoader />}>
@@ -59,6 +68,8 @@ function AppRoutes() {
 export default function App() {
   return (
     <>
+      {/* Efectos globales: cursor + barra de progreso */}
+      <GlobalEffects />
       <CookieBanner />
       <FloatingWhatsApp />
       <AppRoutes />

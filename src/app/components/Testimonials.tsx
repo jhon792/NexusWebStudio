@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useAnimation } from "motion/react";
 
 const testimonials = [
   {
@@ -63,105 +64,239 @@ const testimonials = [
   },
 ];
 
+/* Duplicar para scroll infinito */
+const doubled = [...testimonials, ...testimonials];
+
 function StarRating({ count }: { count: number }) {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex gap-0.5" aria-label={`${count} de 5 estrellas`}>
       {Array.from({ length: count }).map((_, i) => (
-        <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
+        <motion.svg
+          key={i}
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          initial={{ scale: 0, rotate: -30 }}
+          whileInView={{ scale: 1, rotate: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            type: "spring",
+            bounce: 0.6,
+            delay: i * 0.07,
+          }}
+          aria-hidden="true"
+        >
+          <path
+            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+            fill="#FBBF24"
+          />
+        </motion.svg>
       ))}
     </div>
   );
 }
 
-export function Testimonials() {
+function TestimonialCard({
+  t,
+  index,
+}: {
+  t: (typeof testimonials)[0];
+  index: number;
+}) {
   return (
-    <section id="testimonials" className="py-28 bg-zinc-950">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
+    <motion.article
+      className="flex-shrink-0 w-[340px] sm:w-[380px] rounded-2xl p-6 mx-3"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.08)",
+      }}
+      whileHover={{
+        y: -6,
+        boxShadow: "0 20px 48px rgba(99,102,241,0.15)",
+        borderColor: "rgba(99,102,241,0.25)",
+      }}
+      transition={{ type: "spring", stiffness: 380, damping: 24 }}
+      aria-label={`Testimonio de ${t.name}`}
+    >
+      <StarRating count={t.stars} />
+
+      <blockquote
+        style={{
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 400,
+          fontSize: "0.92rem",
+          lineHeight: 1.75,
+          color: "rgba(255,255,255,0.58)",
+          margin: "14px 0 18px",
+          fontStyle: "italic",
+        }}
+      >
+        "{t.quote}"
+      </blockquote>
+
+      <div className="flex items-center gap-3">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+          style={{
+            background: `${t.color}22`,
+            border: `1.5px solid ${t.color}44`,
+          }}
+          animate={{ y: [0, -4, 0] }}
+          transition={{
+            duration: 3 + index * 0.4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          aria-hidden="true"
+        >
+          <span
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 700,
+              fontSize: "12px",
+              color: t.color,
+            }}
+          >
+            {t.initials}
+          </span>
+        </motion.div>
+        <div>
+          <p
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 600,
+              fontSize: "13px",
+              color: "#fff",
+            }}
+          >
+            {t.name}
+          </p>
+          <p
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 400,
+              fontSize: "12px",
+              color: "rgba(255,255,255,0.38)",
+            }}
+          >
+            {t.role} · {t.company}
+          </p>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+export function Testimonials() {
+  const controls = useAnimation();
+
+  const startMarquee = () => {
+    controls.start({
+      x: ["-0%", "-50%"],
+      transition: { duration: 38, ease: "linear", repeat: Infinity },
+    });
+  };
+
+  const pauseMarquee = () => controls.stop();
+
+  /* Arrancar al montar */
+  if (typeof window !== "undefined") {
+    setTimeout(startMarquee, 100);
+  }
+
+  return (
+    <section
+      id="testimonials"
+      className="py-28 overflow-hidden"
+      style={{ background: "#0a0a0f" }}
+      aria-labelledby="testimonials-heading"
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
+          <div
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
+          >
             <span
-              className="text-zinc-400 text-sm"
-              style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 500,
+                fontSize: "13px",
+                color: "rgba(255,255,255,0.5)",
+              }}
             >
-              Testimonios de clientes
+              Lo que dicen nuestros clientes
             </span>
           </div>
           <h2
-            className="text-white mb-4"
+            id="testimonials-heading"
             style={{
               fontFamily: "Inter, sans-serif",
               fontWeight: 800,
               fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)",
               letterSpacing: "-0.03em",
-              lineHeight: 1.15,
+              color: "#fff",
+              lineHeight: 1.2,
             }}
           >
-            Negocios colombianos que ya
-            <br />generan clientes desde su web
-          </h2>
-          <p
-            className="text-zinc-500 max-w-md mx-auto"
-            style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", lineHeight: 1.7 }}
-          >
-            Clínicas, restaurantes, abogados y pymes en Colombia
-            que convirtieron su web en una fuente real de clientes.
-          </p>
-        </motion.div>
-
-        {/* Masonry-style grid */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="break-inside-avoid bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6 hover:bg-white/[0.07] transition-all duration-300 cursor-default"
+            Resultados reales de negocios{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #818cf8, #c084fc)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
             >
-              <StarRating count={t.stars} />
+              como el tuyo
+            </span>
+          </h2>
+        </motion.div>
+      </div>
 
-              <p
-                className="text-zinc-300 my-4"
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", lineHeight: 1.75 }}
-              >
-                "{t.quote}"
-              </p>
+      {/* Marquee container */}
+      <div
+        className="relative"
+        onMouseEnter={pauseMarquee}
+        onMouseLeave={startMarquee}
+        role="region"
+        aria-label="Testimonios de clientes — pausa al pasar el cursor"
+      >
+        {/* Gradient masks */}
+        <div
+          className="absolute inset-y-0 left-0 w-24 z-10 pointer-events-none"
+          style={{
+            background: "linear-gradient(90deg, #0a0a0f, transparent)",
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-y-0 right-0 w-24 z-10 pointer-events-none"
+          style={{
+            background: "linear-gradient(-90deg, #0a0a0f, transparent)",
+          }}
+          aria-hidden="true"
+        />
 
-              <div className="flex items-center gap-3 pt-3 border-t border-white/[0.07]">
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs shrink-0"
-                  style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, background: t.color }}
-                >
-                  {t.initials}
-                </div>
-                <div>
-                  <div
-                    className="text-white text-sm"
-                    style={{ fontFamily: "Inter, sans-serif", fontWeight: 600 }}
-                  >
-                    {t.name}
-                  </div>
-                  <div
-                    className="text-zinc-500 text-xs"
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                  >
-                    {t.role} · {t.company}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+        {/* Scrolling track */}
+        <motion.div
+          className="flex"
+          animate={controls}
+          style={{ willChange: "transform" }}
+        >
+          {doubled.map((t, i) => (
+            <TestimonialCard key={`${t.name}-${i}`} t={t} index={i % testimonials.length} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

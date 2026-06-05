@@ -1,0 +1,35 @@
+{
+  "name": "Nexus Studio — Diseño Web Profesional en Colombia",
+  "short_name": "Nexus Studio",
+  "description": "Diseño y desarrollo web profesional en Colombia. Landing pages, sitios empresariales, tiendas virtuales.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#6366f1",
+  "lang": "es-CO",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Nexus Studio — Página principal"
+    }
+  ]
+}

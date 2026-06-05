@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { useRef, useCallback } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { Globe, Building2, ShoppingBag, Code2, Wrench, Search } from "lucide-react";
 
 const services = [
@@ -52,21 +53,192 @@ const services = [
   },
 ];
 
+/* ─── Card con efecto 3D tilt ────────────────────────────────────────────── */
+function TiltCard({
+  service,
+  index,
+}: {
+  service: (typeof services)[0];
+  index: number;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const Icon = service.icon;
+
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const glowOpacity = useMotionValue(0);
+
+  const springRotX = useSpring(rotateX, { stiffness: 280, damping: 22 });
+  const springRotY = useSpring(rotateY, { stiffness: 280, damping: 22 });
+  const springGlow = useSpring(glowOpacity, { stiffness: 200, damping: 20 });
+
+  const handleMove = useCallback((e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const halfW = rect.width / 2;
+    const halfH = rect.height / 2;
+    rotateY.set(((x - halfW) / halfW) * 7);
+    rotateX.set(((y - halfH) / halfH) * -7);
+    glowOpacity.set(1);
+  }, []);
+
+  const handleLeave = useCallback(() => {
+    rotateX.set(0);
+    rotateY.set(0);
+    glowOpacity.set(0);
+  }, []);
+
+  return (
+    <motion.article
+      ref={cardRef}
+      initial={{ opacity: 0, y: 50, scale: 0.96 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        delay: index * 0.1,
+        duration: 0.65,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      style={{
+        rotateX: springRotX,
+        rotateY: springRotY,
+        transformPerspective: 1000,
+        transformStyle: "preserve-3d",
+        willChange: "transform",
+      }}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className="relative rounded-2xl p-6 cursor-default"
+      aria-label={`Servicio: ${service.title}`}
+    >
+      {/* Card background */}
+      <div
+        className="absolute inset-0 rounded-2xl"
+        style={{
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.08)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Glow dinámico que sigue al mouse */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at 50% 50%, ${service.accent}18, transparent 70%)`,
+          opacity: springGlow,
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative">
+        {/* Ícono con bounce al entrar y glow en hover */}
+        <motion.div
+          initial={{ scale: 0, rotate: -15 }}
+          whileInView={{ scale: 1, rotate: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            type: "spring",
+            delay: index * 0.1 + 0.2,
+            bounce: 0.55,
+            duration: 0.7,
+          }}
+          className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5"
+          style={{ background: `${service.accent}18` }}
+          whileHover={{ boxShadow: `0 0 22px ${service.accent}60, 0 0 8px ${service.accent}40` }}
+        >
+          <Icon
+            size={22}
+            style={{ color: service.accent }}
+            aria-hidden="true"
+          />
+        </motion.div>
+
+        {/* Título */}
+        <h3
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 700,
+            fontSize: "1.05rem",
+            color: "#fff",
+            marginBottom: 8,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          {service.title}
+        </h3>
+
+        {/* Descripción */}
+        <p
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 400,
+            fontSize: "0.9rem",
+            lineHeight: 1.7,
+            color: "rgba(255,255,255,0.48)",
+            marginBottom: 16,
+          }}
+        >
+          {service.description}
+        </p>
+
+        {/* Benefit pill */}
+        <motion.div
+          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full"
+          style={{
+            background: `${service.accent}14`,
+            border: `1px solid ${service.accent}30`,
+          }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.15 }}
+        >
+          <div
+            className="w-1.5 h-1.5 rounded-full"
+            style={{ background: service.accent }}
+            aria-hidden="true"
+          />
+          <span
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 500,
+              fontSize: "12px",
+              color: service.accent,
+            }}
+          >
+            {service.benefit}
+          </span>
+        </motion.div>
+      </div>
+    </motion.article>
+  );
+}
+
 export function Services() {
   return (
-    <section id="services" className="py-24" style={{ background: "#09090b" }}>
+    <section
+      id="services"
+      className="py-24"
+      style={{ background: "#09090b" }}
+      aria-labelledby="services-heading"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
+
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mb-14"
         >
           <div
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
-            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
           >
             <span
               style={{
@@ -79,142 +251,38 @@ export function Services() {
               Nuestros Servicios
             </span>
           </div>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-            <h2
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 800,
-                fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)",
-                letterSpacing: "-0.03em",
-                lineHeight: 1.15,
-                color: "#fff",
-                maxWidth: "520px",
-              }}
-            >
-              La web que necesita{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #818cf8, #c084fc)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                tu tipo de negocio
-              </span>
-            </h2>
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "15px",
-                lineHeight: 1.7,
-                color: "rgba(255,255,255,0.4)",
-                maxWidth: "340px",
-              }}
-            >
-              No vendemos plantillas. Construimos cada sitio para que funcione en tu sector específico.
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {services.map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="group relative rounded-2xl p-6 cursor-default overflow-hidden transition-all duration-300"
-              style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.07)",
-              }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            >
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                style={{
-                  background: `radial-gradient(ellipse at 50% -20%, ${s.accent}14, transparent 70%)`,
-                }}
-              />
-              <div className="relative">
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
-                  style={{ background: `${s.accent}18`, border: `1px solid ${s.accent}28` }}
-                >
-                  <s.icon size={20} style={{ color: s.accent }} />
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "16px",
-                    color: "#fff",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {s.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "14px",
-                    lineHeight: 1.65,
-                    color: "rgba(255,255,255,0.45)",
-                    marginBottom: "16px",
-                  }}
-                >
-                  {s.description}
-                </p>
-                <div
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full"
-                  style={{
-                    background: `${s.accent}12`,
-                    border: `1px solid ${s.accent}22`,
-                  }}
-                >
-                  <div className="w-1.5 h-1.5 rounded-full" style={{ background: s.accent }} />
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 500,
-                      fontSize: "12px",
-                      color: s.accent,
-                    }}
-                  >
-                    {s.benefit}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <button
-            onClick={() => document.querySelector("#pricing")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-7 py-3.5 rounded-xl cursor-pointer transition-all duration-200 inline-flex items-center gap-2 group"
+          <h2
+            id="services-heading"
             style={{
-              background: "#fff",
-              color: "#09090b",
               fontFamily: "Inter, sans-serif",
-              fontWeight: 600,
-              fontSize: "15px",
+              fontWeight: 800,
+              fontSize: "clamp(1.9rem, 3.8vw, 2.9rem)",
+              letterSpacing: "-0.03em",
+              color: "#fff",
+              lineHeight: 1.15,
+              maxWidth: 600,
             }}
           >
-            Ver qué plan incluye cada servicio
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
+            Todo lo que tu negocio necesita para{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #818cf8, #c084fc)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              crecer en internet
+            </span>
+          </h2>
         </motion.div>
+
+        {/* Grid de servicios */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {services.map((service, index) => (
+            <TiltCard key={service.title} service={service} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
