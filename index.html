@@ -8,21 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://formspree.io" />
+    <link rel="preconnect" href="https://api.emailjs.com" />
 
-    <!-- ===== FUENTE: Inter (preload crítico para LCP) ===== -->
+    <!-- ===== FUENTE: Inter ===== -->
     <link
-      rel="preload"
+      rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
+      crossorigin="anonymous"
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-      />
-    </noscript>
 
     <!-- ===== SEO PRIMARIO ===== -->
     <title>Diseño Web Profesional en Colombia | Bogotá, Medellín, Villavicencio | Nexus Studio</title>
@@ -101,10 +94,10 @@
         font-src 'self' data: https://fonts.gstatic.com;
         img-src 'self' data: blob: https:;
         media-src 'self' data: blob:;
-        connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://formspree.io;
+        connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://api.emailjs.com;
         object-src 'none';
         base-uri 'self';
-        form-action 'self' https://formspree.io;
+        form-action 'self';
       "
     />
 
@@ -280,7 +273,7 @@
 
     <!-- ===== PERFORMANCE: Resource hints ===== -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-    <link rel="dns-prefetch" href="https://formspree.io" />
+    <link rel="dns-prefetch" href="https://api.emailjs.com" />
   </head>
   <body>
     <!-- Skip to content para accesibilidad y SEO -->

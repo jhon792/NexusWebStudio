@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Send, CheckCircle2, ArrowRight } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const WA = "https://wa.me/573123198706?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20gratuita%20para%20mi%20p%C3%A1gina%20web.";
 
@@ -47,27 +48,23 @@ export function Contact() {
     setSending(true);
 
     try {
-      const res = await fetch("https://formspree.io/f/mbdbvjjz", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          nombre: form.name,
-          email: form.email,
-          telefono: form.phone,
-          tipo_proyecto: form.projectType,
-          presupuesto: form.budget,
-          mensaje: form.message,
-          _subject: `Cotización: ${form.projectType || "Sin tipo"} — ${form.name}`,
-        }),
-      });
-
-      if (res.ok) {
-        setSubmitted(true);
-      } else {
-        setError("No se pudo enviar. Por favor escríbenos directamente por WhatsApp.");
-      }
-    } catch {
-      setError("Error de red. Por favor escríbenos por WhatsApp.");
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          nombre:       form.name,
+          email:        form.email,
+          phone:        form.phone,
+          project_type: form.projectType,
+          budget:       form.budget,
+          message:      form.message,
+        },
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
+      );
+      setSubmitted(true);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setError("No se pudo enviar. Por favor escríbenos directamente por WhatsApp.");
     } finally {
       setSending(false);
     }
@@ -375,6 +372,7 @@ export function Contact() {
                       <input
                         required
                         type="text"
+                        name="from_name"
                         placeholder="Tu nombre"
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -395,6 +393,7 @@ export function Contact() {
                       <input
                         required
                         type="email"
+                        name="from_email"
                         placeholder="tu@empresa.com"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -417,6 +416,7 @@ export function Contact() {
                       </label>
                       <input
                         type="tel"
+                        name="phone"
                         placeholder="Número de contacto"
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
@@ -436,6 +436,7 @@ export function Contact() {
                       </label>
                       <select
                         required
+                        name="project_type"
                         value={form.projectType}
                         onChange={(e) => setForm({ ...form, projectType: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 cursor-pointer"
@@ -460,6 +461,7 @@ export function Contact() {
                       Presupuesto aproximado
                     </label>
                     <select
+                      name="budget"
                       value={form.budget}
                       onChange={(e) => setForm({ ...form, budget: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 cursor-pointer"
@@ -492,6 +494,7 @@ export function Contact() {
                     <textarea
                       required
                       rows={5}
+                      name="message"
                       placeholder="Describe tu negocio, qué necesitas y cuáles son tus objetivos..."
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
