@@ -2,59 +2,155 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Página principal -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!--  HOME — Colombia (es-CO) + España (es-ES)                  -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
   <url>
     <loc>https://www.nexsustudio.site/</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es-CO" href="https://www.nexsustudio.site/"/>
+    <xhtml:link rel="alternate" hreflang="es-CO"   href="https://www.nexsustudio.site/"/>
+    <xhtml:link rel="alternate" hreflang="es-ES"   href="https://www.nexsustudio.site/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nexsustudio.site/"/>
   </url>
 
-  <!-- Landing pages por ciudad (SEO local crítico) -->
+  <url>
+    <loc>https://www.nexsustudio.site/en/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO"   href="https://www.nexsustudio.site/"/>
+    <xhtml:link rel="alternate" hreflang="es-ES"   href="https://www.nexsustudio.site/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nexsustudio.site/"/>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!--  LANDING PAGES COLOMBIA — ciudades                         -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
   <url>
     <loc>https://www.nexsustudio.site/villavicencio</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.nexsustudio.site/bogota</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.nexsustudio.site/medellin</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Páginas legales -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!--  SECTORES ESPAÑA — /en/sectores/* (Phase 6)                -->
+  <!--  Estas URLs se activarán cuando se creen las páginas.      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!--
+  <url>
+    <loc>https://www.nexsustudio.site/en/sectores/diseno-web-para-abogados/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.nexsustudio.site/en/sectores/diseno-web-para-abogados/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nexsustudio.site/"/>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/sectores/diseno-web-para-clinicas-esteticas/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/sectores/diseno-web-para-odontologos/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/sectores/diseno-web-para-inmobiliarias/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/sectores/diseno-web-para-constructoras/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/sectores/diseno-web-para-concesionarios/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/sectores/diseno-web-para-talleres-mecanicos/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  -->
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!--  PÁGINAS LEGALES                                           -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
   <url>
     <loc>https://www.nexsustudio.site/privacidad</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.nexsustudio.site/cookies</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.nexsustudio.site/terminos</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.nexsustudio.site/aviso-legal</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/privacidad</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/cookies</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/terminos</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/en/aviso-legal</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 
 </urlset>

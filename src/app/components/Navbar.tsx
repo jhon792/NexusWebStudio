@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "motion/react";
 import { Menu, X } from "lucide-react";
+import { useRegion } from "../../hooks/useRegion";
 
 const navLinks = [
   { label: "Servicios", href: "#services" },
@@ -16,6 +17,13 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const scrollY = useMotionValue(0);
+  const region = useRegion();
+  const isCO = region === "CO";
+  const switchHref = isCO ? "/en/" : "/";
+  const currentFlag = isCO ? "🇨🇴" : "🇪🇸";
+  const currentLabel = isCO ? "Colombia" : "España";
+  const switchFlag = isCO ? "🇪🇸" : "🇨🇴";
+  const switchLabel = isCO ? "España" : "Colombia";
 
   /* Smooth backdrop */
   const blurAmount = useTransform(scrollY, [0, 80], [0, 20]);
@@ -199,6 +207,23 @@ export function Navbar() {
               })}
             </nav>
 
+            {/* Region / Language switcher — desktop */}
+            <div className="hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-full" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)" }}>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.75)" }}>
+                {currentFlag} {currentLabel}
+              </span>
+              <span style={{ color: "rgba(255,255,255,0.2)", margin: "0 4px", fontSize: 11 }}>|</span>
+              <a
+                href={switchHref}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 500, color: "rgba(167,139,250,0.75)", textDecoration: "none" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#a78bfa"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(167,139,250,0.75)"; }}
+                aria-label={`Cambiar a versión ${switchLabel}`}
+              >
+                {switchFlag} {switchLabel}
+              </a>
+            </div>
+
             {/* CTA desktop */}
             <div className="hidden md:flex items-center gap-3">
               <motion.a
@@ -313,6 +338,23 @@ export function Navbar() {
               }}
             >
               <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
+                {/* Region switcher — mobile */}
+                <motion.a
+                  href={switchHref}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.02, duration: 0.3 }}
+                  className="flex items-center justify-between px-4 py-2.5 rounded-xl mb-1"
+                  style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", textDecoration: "none" }}
+                >
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.8)" }}>
+                    {currentFlag} {currentLabel}
+                  </span>
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#a78bfa" }}>
+                    Cambiar a {switchFlag} {switchLabel} →
+                  </span>
+                </motion.a>
+
                 {navLinks.map((link, i) => (
                   <motion.button
                     key={link.label}
