@@ -1,53 +1,35 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
+import { useRegion } from "../../hooks/useRegion";
+import { PROCESS_SPAIN, type Region4 } from "../../i18n/spainContent";
 
-const steps = [
-  {
-    number: "01",
-    title: "Nos cuentas tu idea",
-    description:
-      "Hablamos por WhatsApp o formulario. Cuéntanos qué hace tu negocio, a quién va dirigido y qué esperas de tu sitio web. Sin tecnicismos, en tu idioma.",
-    accent: "#818cf8",
-  },
-  {
-    number: "02",
-    title: "Analizamos tu negocio",
-    description:
-      "Estudiamos tu sector, tu competencia y tu público objetivo para entender cómo tu sitio web puede generar el mayor impacto posible para tu negocio.",
-    accent: "#a78bfa",
-  },
-  {
-    number: "03",
-    title: "Diseñamos una propuesta visual",
-    description:
-      "Creamos una propuesta de diseño personalizada para tu negocio. Ves cómo se verá tu sitio antes de que comience el desarrollo técnico.",
-    accent: "#c084fc",
-  },
-  {
-    number: "04",
-    title: "Desarrollamos tu sitio",
-    description:
-      "Construimos tu página web con código limpio, carga rápida y todas las funcionalidades acordadas. Te mantenemos informado durante todo el proceso.",
-    accent: "#818cf8",
-  },
-  {
-    number: "05",
-    title: "Publicamos tu página web",
-    description:
-      "Configuramos el dominio, el hosting y el certificado SSL. Tu sitio queda publicado, visible en Google y funcionando al 100%.",
-    accent: "#a78bfa",
-  },
-  {
-    number: "06",
-    title: "Te acompañamos en el lanzamiento",
-    description:
-      "Te explicamos cómo usar y actualizar tu sitio. Resolvemos dudas, ajustamos detalles y te damos soporte para que el lanzamiento sea un éxito.",
-    accent: "#c084fc",
-  },
+const STEP_ACCENTS = ["#818cf8", "#a78bfa", "#c084fc", "#818cf8", "#a78bfa", "#c084fc"];
+
+const CO_STEPS = [
+  { number: "01", title: "Nos cuentas tu idea",              description: "Hablamos por WhatsApp o formulario. Cuéntanos qué hace tu negocio, a quién va dirigido y qué esperas de tu sitio web. Sin tecnicismos, en tu idioma." },
+  { number: "02", title: "Analizamos tu negocio",            description: "Estudiamos tu sector, tu competencia y tu público objetivo para entender cómo tu sitio web puede generar el mayor impacto posible para tu negocio." },
+  { number: "03", title: "Diseñamos una propuesta visual",   description: "Creamos una propuesta de diseño personalizada para tu negocio. Ves cómo se verá tu sitio antes de que comience el desarrollo técnico." },
+  { number: "04", title: "Desarrollamos tu sitio",           description: "Construimos tu página web con código limpio, carga rápida y todas las funcionalidades acordadas. Te mantenemos informado durante todo el proceso." },
+  { number: "05", title: "Publicamos tu página web",         description: "Configuramos el dominio, el hosting y el certificado SSL. Tu sitio queda publicado, visible en Google y funcionando al 100%." },
+  { number: "06", title: "Te acompañamos en el lanzamiento", description: "Te explicamos cómo usar y actualizar tu sitio. Resolvemos dudas, ajustamos detalles y te damos soporte para que el lanzamiento sea un éxito." },
 ];
 
 export function Process() {
   const sectionRef = useRef<HTMLElement>(null);
+  const region = useRegion();
+  const isSpain = region !== "CO";
+  const r = region as Region4;
+  const d = isSpain ? (PROCESS_SPAIN[r] ?? PROCESS_SPAIN.ES) : null;
+
+  const badge     = d?.badge     ?? "Nuestro Proceso";
+  const heading   = d?.heading   ?? "De la idea a la web en";
+  const highlight = d?.headingHighlight ?? "6 pasos claros";
+  const rawSteps  = d?.steps ?? CO_STEPS;
+
+  const steps = (rawSteps as readonly { number: string; title: string; description: string }[]).map((s, i) => ({
+    ...s,
+    accent: STEP_ACCENTS[i],
+  }));
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -92,7 +74,7 @@ export function Process() {
                 color: "rgba(255,255,255,0.5)",
               }}
             >
-              Nuestro Proceso
+              {badge}
             </span>
           </div>
           <h2
@@ -106,7 +88,7 @@ export function Process() {
               lineHeight: 1.2,
             }}
           >
-            De la idea a la web en{" "}
+            {heading}{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -115,14 +97,14 @@ export function Process() {
                 backgroundClip: "text",
               }}
             >
-              6 pasos claros
+              {highlight}
             </span>
           </h2>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Línea vertical que se dibuja al scroll */}
+          {/* Línea vertical */}
           <div
             className="absolute left-[28px] top-0 bottom-0 w-px overflow-hidden"
             style={{ background: "rgba(255,255,255,0.06)" }}

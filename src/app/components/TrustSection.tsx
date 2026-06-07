@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
+import { useRegion } from "../../hooks/useRegion";
+import { TRUST_SPAIN, type Region4 } from "../../i18n/spainContent";
 
-const problems = [
+const CO_PROBLEMS = [
   "Tu competencia aparece en Google cuando te buscan — tú no.",
   "Pierdes clientes que buscan tu servicio a las 2am.",
   "Sin web, pedir por WhatsApp parece informal y aleja prospectos.",
@@ -10,6 +12,17 @@ const problems = [
 ];
 
 export function TrustSection() {
+  const region = useRegion();
+  const isSpain = region !== "CO";
+  const d = isSpain ? (TRUST_SPAIN[region as Region4] ?? TRUST_SPAIN.ES) : null;
+
+  const badge = d?.badge ?? "El problema";
+  const heading = d?.heading ?? "Si tienes un negocio en Colombia y aún dependes del voz a voz, estás";
+  const headingHighlight = d?.headingHighlight ?? "perdiendo clientes a diario.";
+  const problems = d?.problems ?? CO_PROBLEMS;
+  const closing = d?.closing ?? "Una web de Nexus Studio trabaja por tu negocio";
+  const closingHighlight = d?.closingHighlight ?? "24/7, en Google, en Maps, desde el celular.";
+
   return (
     <section
       id="problem"
@@ -37,7 +50,7 @@ export function TrustSection() {
                 color: "rgba(252,165,165,0.9)",
               }}
             >
-              El problema
+              {badge}
             </span>
           </div>
           <h2
@@ -52,8 +65,7 @@ export function TrustSection() {
               margin: "0 auto",
             }}
           >
-            Si tienes un negocio en Colombia y aún dependes del voz a voz,
-            estás{" "}
+            {heading}{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #f87171, #fb923c)",
@@ -62,14 +74,14 @@ export function TrustSection() {
                 backgroundClip: "text",
               }}
             >
-              perdiendo clientes a diario.
+              {headingHighlight}
             </span>
           </h2>
         </motion.div>
 
         {/* Problem cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-          {problems.map((problem, i) => (
+          {(problems as readonly string[]).map((problem, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -127,7 +139,7 @@ export function TrustSection() {
                 color: "rgba(255,255,255,0.85)",
               }}
             >
-              Una web de Nexus Studio trabaja por tu negocio{" "}
+              {closing}{" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -136,7 +148,7 @@ export function TrustSection() {
                   backgroundClip: "text",
                 }}
               >
-                24/7, en Google, en Maps, desde el celular.
+                {closingHighlight}
               </span>
             </p>
           </div>

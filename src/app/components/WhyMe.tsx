@@ -3,59 +3,57 @@ import {
   HeartHandshake, Palette, Smartphone, Users,
   MessageSquare, Code2, Zap, ShieldCheck,
 } from "lucide-react";
+import { useRegion } from "../../hooks/useRegion";
+import { WHYME_SPAIN, type Region4 } from "../../i18n/spainContent";
 
-const differentiators = [
-  {
-    icon: HeartHandshake,
-    title: "Atención personalizada",
-    description: "Trabajamos directamente contigo, sin intermediarios. Cada proyecto recibe atención dedicada desde el inicio hasta el lanzamiento.",
-    accent: "#818cf8",
-  },
-  {
-    icon: Palette,
-    title: "Diseño moderno",
-    description: "Creamos diseños visualmente atractivos y actuales, alineados con las tendencias del sector y adaptados a la identidad de tu negocio.",
-    accent: "#c084fc",
-  },
-  {
-    icon: Smartphone,
-    title: "Optimización móvil",
-    description: "Tu sitio se ve perfecto en celulares. Diseñamos primero para móvil porque la mayoría de tus clientes potenciales llegan desde su teléfono.",
-    accent: "#60a5fa",
-  },
-  {
-    icon: Users,
-    title: "Enfoque en experiencia de usuario",
-    description: "Cada elemento está pensado para guiar al visitante hacia la acción que más te interesa: llamarte, escribirte o solicitar información.",
-    accent: "#34d399",
-  },
-  {
-    icon: MessageSquare,
-    title: "Comunicación constante",
-    description: "Te mantenemos informado durante todo el proceso. Respondemos tus preguntas y te explicamos cada decisión de diseño y desarrollo.",
-    accent: "#25D366",
-  },
-  {
-    icon: Code2,
-    title: "Desarrollo a medida",
-    description: "No usamos plantillas genéricas. Tu sitio web es creado específicamente para tu negocio, sus objetivos y su público objetivo.",
-    accent: "#fbbf24",
-  },
-  {
-    icon: Zap,
-    title: "Tecnología actual",
-    description: "Construimos con tecnologías modernas que garantizan velocidad, seguridad y escalabilidad para que tu sitio funcione de forma óptima.",
-    accent: "#f59e0b",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Seguridad web",
-    description: "Implementamos certificado SSL, cabeceras de seguridad y buenas prácticas para proteger tu sitio y la información de tus visitantes.",
-    accent: "#fb7185",
-  },
+const DIFF_META = [
+  { icon: HeartHandshake, accent: "#818cf8" },
+  { icon: Palette,        accent: "#c084fc" },
+  { icon: Smartphone,     accent: "#60a5fa" },
+  { icon: Users,          accent: "#34d399" },
+  { icon: MessageSquare,  accent: "#25D366" },
+  { icon: Code2,          accent: "#fbbf24" },
+  { icon: Zap,            accent: "#f59e0b" },
+  { icon: ShieldCheck,    accent: "#fb7185" },
 ];
 
+const CO_DIFFS = [
+  { title: "Atención personalizada",         description: "Trabajamos directamente contigo, sin intermediarios. Cada proyecto recibe atención dedicada desde el inicio hasta el lanzamiento." },
+  { title: "Diseño moderno",                 description: "Creamos diseños visualmente atractivos y actuales, alineados con las tendencias del sector y adaptados a la identidad de tu negocio." },
+  { title: "Optimización móvil",             description: "Tu sitio se ve perfecto en celulares. Diseñamos primero para móvil porque la mayoría de tus clientes potenciales llegan desde su teléfono." },
+  { title: "Enfoque en experiencia de usuario",description: "Cada elemento está pensado para guiar al visitante hacia la acción que más te interesa: llamarte, escribirte o solicitar información." },
+  { title: "Comunicación constante",         description: "Te mantenemos informado durante todo el proceso. Respondemos tus preguntas y te explicamos cada decisión de diseño y desarrollo." },
+  { title: "Desarrollo a medida",            description: "No usamos plantillas genéricas. Tu sitio web es creado específicamente para tu negocio, sus objetivos y su público objetivo." },
+  { title: "Tecnología actual",              description: "Construimos con tecnologías modernas que garantizan velocidad, seguridad y escalabilidad para que tu sitio funcione de forma óptima." },
+  { title: "Seguridad web",                  description: "Implementamos certificado SSL, cabeceras de seguridad y buenas prácticas para proteger tu sitio y la información de tus visitantes." },
+];
+
+const WA_CO = "https://wa.me/573123198706?text=Hola%2C%20quiero%20el%20diagn%C3%B3stico%20gratuito%20de%20mi%20p%C3%A1gina%20web.";
+const WA_ES = "https://wa.me/573123198706?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20servicios%20para%20Espa%C3%B1a.";
+
 export function WhyMe() {
+  const region = useRegion();
+  const isSpain = region !== "CO";
+  const r = region as Region4;
+  const d = isSpain ? (WHYME_SPAIN[r] ?? WHYME_SPAIN.ES) : null;
+
+  const badge      = d?.badge      ?? "Nuestros diferenciadores";
+  const heading    = d?.heading    ?? "No somos una fábrica de webs.";
+  const highlight  = d?.headingHighlight ?? "Máximo 3 clientes al mes.";
+  const subtitle   = d?.subtitle   ?? "Por eso cada sitio está construido 100% a medida, con atención directa y resultados verificables.";
+  const ctaTitle   = d?.ctaTitle   ?? "Quedan 2 cupos en junio. ¿Tu negocio merece uno?";
+  const ctaSub     = d?.ctaSubtitle?? "Empieza con un diagnóstico gratuito — sin compromiso, sin pagar nada, sin tecnicismos.";
+  const ctaBtn     = d?.ctaBtn     ?? "Diagnóstico gratuito";
+  const ctaWA      = d?.ctaWA      ?? "WhatsApp";
+  const waLink     = isSpain ? WA_ES : WA_CO;
+
+  const textDiffs = d?.differentiators ?? CO_DIFFS;
+  const differentiators = DIFF_META.map((meta, i) => ({
+    ...meta,
+    title: (textDiffs as readonly { title: string; description: string }[])[i]?.title ?? "",
+    description: (textDiffs as readonly { title: string; description: string }[])[i]?.description ?? "",
+  }));
+
   return (
     <section id="why" className="py-24" style={{ background: "#0d0d18" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -79,7 +77,7 @@ export function WhyMe() {
                 color: "rgba(255,255,255,0.5)",
               }}
             >
-              Nuestros diferenciadores
+              {badge}
             </span>
           </div>
           <h2
@@ -93,7 +91,7 @@ export function WhyMe() {
               marginBottom: "16px",
             }}
           >
-            No somos una fábrica de webs.{" "}
+            {heading}{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -102,7 +100,7 @@ export function WhyMe() {
                 backgroundClip: "text",
               }}
             >
-              Máximo 3 clientes al mes.
+              {highlight}
             </span>
           </h2>
           <p
@@ -115,7 +113,7 @@ export function WhyMe() {
               margin: "0 auto",
             }}
           >
-            Por eso cada sitio está construido 100% a medida, con atención directa y resultados verificables.
+            {subtitle}
           </p>
         </motion.div>
 
@@ -123,7 +121,7 @@ export function WhyMe() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {differentiators.map((d, i) => (
             <motion.div
-              key={d.title}
+              key={i}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -200,15 +198,15 @@ export function WhyMe() {
                 marginBottom: "6px",
               }}
             >
-              Quedan 2 cupos en junio. ¿Tu negocio merece uno?
+              {ctaTitle}
             </p>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.45)" }}>
-              Empieza con un diagnóstico gratuito — sin compromiso, sin pagar nada, sin tecnicismos.
+              {ctaSub}
             </p>
           </div>
           <div className="relative flex flex-wrap gap-3 shrink-0">
             <a
-              href="https://wa.me/573123198706?text=Hola%2C%20quiero%20el%20diagn%C3%B3stico%20gratuito%20de%20mi%20p%C3%A1gina%20web."
+              href={waLink}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3.5 rounded-xl cursor-pointer transition-all duration-200 inline-flex items-center gap-2"
@@ -221,10 +219,10 @@ export function WhyMe() {
                 textDecoration: "none",
               }}
             >
-              Diagnóstico gratuito
+              {ctaBtn}
             </a>
             <a
-              href="https://wa.me/573123198706?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20servicios."
+              href={waLink}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3.5 rounded-xl inline-flex items-center gap-2 cursor-pointer transition-all duration-200"
@@ -242,7 +240,7 @@ export function WhyMe() {
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
                 <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
               </svg>
-              WhatsApp
+              {ctaWA}
             </a>
           </div>
         </motion.div>

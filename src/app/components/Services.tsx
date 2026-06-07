@@ -1,72 +1,38 @@
 import { useRef, useCallback } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { Globe, Building2, ShoppingBag, Code2, Wrench, Search, Clock } from "lucide-react";
+import { useRegion } from "../../hooks/useRegion";
+import { SERVICES_SPAIN, type Region4 } from "../../i18n/spainContent";
 
-const services = [
-  {
-    icon: Globe,
-    title: "Landing Page de Alto Impacto",
-    description:
-      "Una sola página diseñada para convertir: el visitante entra, entiende lo que ofreces y te contacta. Perfecta para captar clientes desde Google Ads o redes sociales.",
-    benefit: "Clientes desde el primer día",
-    delivery: "Entrega en 1 a 3 días",
-    accent: "#818cf8",
-  },
-  {
-    icon: Building2,
-    title: "Sitio Corporativo Profesional",
-    description:
-      "Tu empresa en internet con todo lo que genera confianza: servicios claros, equipo, casos de éxito y formulario de contacto. El cliente llega y ya quiere trabajar contigo.",
-    benefit: "Credibilidad que cierra ventas",
-    delivery: "Entrega en 5 a 8 días",
-    accent: "#60a5fa",
-  },
-  {
-    icon: ShoppingBag,
-    title: "Tienda Virtual con Pagos Colombianos",
-    description:
-      "Vende tus productos online con PSE, Nequi y tarjetas. Catálogo, carrito y panel de administración incluidos. Tu tienda nunca cierra.",
-    benefit: "Ventas mientras duermes",
-    delivery: null,
-    accent: "#34d399",
-  },
-  {
-    icon: Code2,
-    title: "Sistema de Citas y Reservas",
-    description:
-      "Tus clientes agendan online sin necesidad de llamarte. Para clínicas, consultorios, salones y servicios por turnos. Reduce el trabajo administrativo hasta un 80%.",
-    benefit: "Sin llamadas, sin ausencias",
-    delivery: null,
-    accent: "#f59e0b",
-  },
-  {
-    icon: Wrench,
-    title: "Mantenimiento y Soporte Continuo",
-    description:
-      "Tu sitio siempre actualizado, seguro y funcionando. Actualizamos contenido, monitoreamos caídas y respondemos en menos de 24 horas.",
-    benefit: "Tranquilidad sin preocupaciones",
-    delivery: null,
-    accent: "#c084fc",
-  },
-  {
-    icon: Search,
-    title: "Posicionamiento en Google",
-    description:
-      "Configuramos tu sitio para que aparezca cuando alguien busca tu servicio en tu ciudad. SEO local + Google Maps + Core Web Vitals. Clientes sin pagar publicidad.",
-    benefit: "Clientes orgánicos cada mes",
-    delivery: null,
-    accent: "#fb7185",
-  },
+const SERVICE_META = [
+  { icon: Globe,      accent: "#818cf8" },
+  { icon: Building2,  accent: "#60a5fa" },
+  { icon: ShoppingBag,accent: "#34d399" },
+  { icon: Code2,      accent: "#f59e0b" },
+  { icon: Wrench,     accent: "#c084fc" },
+  { icon: Search,     accent: "#fb7185" },
+];
+
+const CO_SERVICES = [
+  { title: "Landing Page de Alto Impacto",       description: "Una sola página diseñada para convertir: el visitante entra, entiende lo que ofreces y te contacta. Perfecta para captar clientes desde Google Ads o redes sociales.", benefit: "Clientes desde el primer día",    delivery: "Entrega en 1 a 3 días" },
+  { title: "Sitio Corporativo Profesional",       description: "Tu empresa en internet con todo lo que genera confianza: servicios claros, equipo, casos de éxito y formulario de contacto. El cliente llega y ya quiere trabajar contigo.", benefit: "Credibilidad que cierra ventas", delivery: "Entrega en 5 a 8 días" },
+  { title: "Tienda Virtual con Pagos Colombianos",description: "Vende tus productos online con PSE, Nequi y tarjetas. Catálogo, carrito y panel de administración incluidos. Tu tienda nunca cierra.", benefit: "Ventas mientras duermes",         delivery: null },
+  { title: "Sistema de Citas y Reservas",         description: "Tus clientes agendan online sin necesidad de llamarte. Para clínicas, consultorios, salones y servicios por turnos. Reduce el trabajo administrativo hasta un 80%.", benefit: "Sin llamadas, sin ausencias",    delivery: null },
+  { title: "Mantenimiento y Soporte Continuo",    description: "Tu sitio siempre actualizado, seguro y funcionando. Actualizamos contenido, monitoreamos caídas y respondemos en menos de 24 horas.", benefit: "Tranquilidad sin preocupaciones", delivery: null },
+  { title: "Posicionamiento en Google",           description: "Configuramos tu sitio para que aparezca cuando alguien busca tu servicio en tu ciudad. SEO local + Google Maps + Core Web Vitals. Clientes sin pagar publicidad.", benefit: "Clientes orgánicos cada mes",    delivery: null },
 ];
 
 /* ─── Card con efecto 3D tilt ────────────────────────────────────────────── */
-function TiltCard({
-  service,
-  index,
-}: {
-  service: (typeof services)[0];
-  index: number;
-}) {
+type ServiceItem = {
+  icon: typeof Globe;
+  accent: string;
+  title: string;
+  description: string;
+  benefit: string;
+  delivery: string | null;
+};
+
+function TiltCard({ service, index }: { service: ServiceItem; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const Icon = service.icon;
 
@@ -129,7 +95,7 @@ function TiltCard({
         aria-hidden="true"
       />
 
-      {/* Glow dinámico que sigue al mouse */}
+      {/* Glow dinámico */}
       <motion.div
         className="absolute inset-0 rounded-2xl pointer-events-none"
         style={{
@@ -140,7 +106,7 @@ function TiltCard({
       />
 
       <div className="relative">
-        {/* Ícono con bounce al entrar y glow en hover */}
+        {/* Ícono */}
         <motion.div
           initial={{ scale: 0, rotate: -15 }}
           whileInView={{ scale: 1, rotate: 0 }}
@@ -155,11 +121,7 @@ function TiltCard({
           style={{ background: `${service.accent}18` }}
           whileHover={{ boxShadow: `0 0 22px ${service.accent}60, 0 0 8px ${service.accent}40` }}
         >
-          <Icon
-            size={22}
-            style={{ color: service.accent }}
-            aria-hidden="true"
-          />
+          <Icon size={22} style={{ color: service.accent }} aria-hidden="true" />
         </motion.div>
 
         {/* Título */}
@@ -200,19 +162,8 @@ function TiltCard({
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.15 }}
         >
-          <div
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ background: service.accent }}
-            aria-hidden="true"
-          />
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 500,
-              fontSize: "12px",
-              color: service.accent,
-            }}
-          >
+          <div className="w-1.5 h-1.5 rounded-full" style={{ background: service.accent }} aria-hidden="true" />
+          <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "12px", color: service.accent }}>
             {service.benefit}
           </span>
         </motion.div>
@@ -237,6 +188,20 @@ function TiltCard({
 }
 
 export function Services() {
+  const region = useRegion();
+  const isSpain = region !== "CO";
+  const r = region as Region4;
+  const sd = isSpain ? (SERVICES_SPAIN[r] ?? SERVICES_SPAIN.ES) : null;
+
+  const badge     = sd?.badge     ?? "Nuestros Servicios";
+  const heading   = sd?.heading   ?? "Todo lo que tu negocio necesita para";
+  const highlight = sd?.headingHighlight ?? "crecer en internet";
+
+  const services: ServiceItem[] = (sd?.items ?? CO_SERVICES).map((item, i) => ({
+    ...SERVICE_META[i],
+    ...item,
+  }));
+
   return (
     <section
       id="services"
@@ -269,7 +234,7 @@ export function Services() {
                 color: "rgba(255,255,255,0.5)",
               }}
             >
-              Nuestros Servicios
+              {badge}
             </span>
           </div>
           <h2
@@ -284,7 +249,7 @@ export function Services() {
               maxWidth: 600,
             }}
           >
-            Todo lo que tu negocio necesita para{" "}
+            {heading}{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -293,7 +258,7 @@ export function Services() {
                 backgroundClip: "text",
               }}
             >
-              crecer en internet
+              {highlight}
             </span>
           </h2>
         </motion.div>
@@ -301,7 +266,7 @@ export function Services() {
         {/* Grid de servicios */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((service, index) => (
-            <TiltCard key={service.title} service={service} index={index} />
+            <TiltCard key={index} service={service} index={index} />
           ))}
         </div>
       </div>

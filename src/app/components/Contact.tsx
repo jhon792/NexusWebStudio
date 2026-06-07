@@ -3,10 +3,12 @@ import { useLocation } from "react-router";
 import { motion } from "motion/react";
 import { Send, CheckCircle2, ArrowRight } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { useRegion } from "../../hooks/useRegion";
+import { CONTACT_SPAIN, type Region4 } from "../../i18n/spainContent";
 
 const WA = "https://wa.me/573123198706?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20gratuita%20para%20mi%20p%C3%A1gina%20web.";
 
-const projectTypes = [
+const projectTypesCO = [
   "Landing Page",
   "Sitio Empresarial",
   "Tienda Virtual",
@@ -17,9 +19,55 @@ const projectTypes = [
   "Otro",
 ];
 
+const projectTypesES = {
+  ES: ["Landing Page", "Sitio Corporativo", "Tienda Online", "Sistema de Citas", "Mantenimiento Web", "SEO España", "Rediseño de Sitio Web", "Otro"],
+  EN: ["Landing Page", "Corporate Website", "Online Store", "Booking System", "Web Maintenance", "Spain SEO", "Website Redesign", "Other"],
+  FR: ["Landing Page", "Site Corporatif", "Boutique en Ligne", "Système de Réservation", "Maintenance Web", "SEO Espagne", "Refonte de Site Web", "Autre"],
+  IT: ["Landing Page", "Sito Aziendale", "Negozio Online", "Sistema di Prenotazione", "Manutenzione Web", "SEO Spagna", "Ridisegno Sito Web", "Altro"],
+} as const;
+
+const CO_TEXT = {
+  available: "Disponible para nuevos proyectos",
+  ctaBadge: "Disponible para nuevos proyectos",
+  ctaTitle1: "Cada semana que pasa sin web,",
+  ctaTitle2: "tu competencia recibe tus clientes.",
+  ctaSubtitle: "Solicita tu diagnóstico gratuito hoy. En 24 horas te decimos exactamente qué necesita tu negocio y cuánto costaría. Sin compromiso.",
+  ctaBtn: "Quiero mi diagnóstico gratuito",
+  ctaBtn2: "Solicitar Cotización",
+  formBadge: "Contáctanos",
+  formTitle1: "Tu proyecto, en 24 horas tienes",
+  formTitle2: "una propuesta real en tu correo.",
+  formSubtitle: "Más de 40 negocios colombianos ya confiaron en este proceso. Tú serás el siguiente.",
+  labelName: "Nombre completo",
+  labelEmail: "Correo electrónico",
+  labelPhone: "WhatsApp / Teléfono",
+  labelProject: "Tipo de proyecto",
+  labelBudget: "Presupuesto aproximado",
+  labelMessage: "Cuéntanos sobre tu proyecto",
+  placeholderName: "Tu nombre",
+  placeholderEmail: "tu@empresa.com",
+  placeholderPhone: "Número de contacto",
+  placeholderMessage: "Describe tu negocio, qué necesitas y cuáles son tus objetivos...",
+  submit: "Quiero mi cotización en 24 horas",
+  sending: "Enviando...",
+  successTitle: "¡Mensaje recibido!",
+  successBody: "Te responderemos en menos de 24 horas con una propuesta personalizada.",
+  successBtn: "Escríbenos por WhatsApp",
+  errorEmail: "Por favor ingresa un correo electrónico válido.",
+  errorMessage: "Por favor describe tu proyecto con al menos 20 caracteres.",
+  errorSend: "No se pudo enviar. Por favor escríbenos directamente por WhatsApp.",
+  waBtn: "Escríbenos directo por WhatsApp",
+  waLabel: "WhatsApp — Respuesta en menos de 2 horas",
+  formNote: "Al enviar aceptas que te contactemos sobre tu proyecto. Sin spam.",
+};
+
 export function Contact() {
   const { pathname } = useLocation();
+  const region = useRegion();
   const isSpain = pathname.startsWith("/en");
+  const r = region as Region4;
+
+  const t = isSpain ? (CONTACT_SPAIN[r] ?? CONTACT_SPAIN.ES) : CO_TEXT;
 
   const budgetOptions = isSpain
     ? [
@@ -37,6 +85,8 @@ export function Contact() {
         "Más de $3.500.000 COP",
         "Aún no lo tengo definido",
       ];
+
+  const projectTypes = isSpain ? (projectTypesES[r] ?? projectTypesES.ES) : projectTypesCO;
 
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
@@ -57,11 +107,11 @@ export function Contact() {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
-      setError("Por favor ingresa un correo electrónico válido.");
+      setError(t.errorEmail);
       return;
     }
     if (form.message.trim().length < 20) {
-      setError("Por favor describe tu proyecto con al menos 20 caracteres.");
+      setError(t.errorMessage);
       return;
     }
 
@@ -85,7 +135,7 @@ export function Contact() {
       setSubmitted(true);
     } catch (err) {
       console.error("EmailJS error:", err);
-      setError("No se pudo enviar. Por favor escríbenos directamente por WhatsApp.");
+      setError(t.errorSend);
     } finally {
       setSending(false);
     }
@@ -126,7 +176,7 @@ export function Contact() {
             >
               <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)" }}>
-                Disponible para nuevos proyectos
+                {t.ctaBadge}
               </span>
             </div>
 
@@ -141,7 +191,7 @@ export function Contact() {
                 marginBottom: "20px",
               }}
             >
-              Cada semana que pasa sin web,
+              {t.ctaTitle1}
               <br />
               <span
                 style={{
@@ -151,7 +201,7 @@ export function Contact() {
                   backgroundClip: "text",
                 }}
               >
-                tu competencia recibe tus clientes.
+                {t.ctaTitle2}
               </span>
             </h2>
 
@@ -165,7 +215,7 @@ export function Contact() {
                 margin: "0 auto 36px",
               }}
             >
-              Solicita tu diagnóstico gratuito hoy. En 24 horas te decimos exactamente qué necesita tu negocio y cuánto costaría. Sin compromiso.
+              {t.ctaSubtitle}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -192,7 +242,7 @@ export function Contact() {
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
                   <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
                 </svg>
-                Quiero mi diagnóstico gratuito
+                {t.ctaBtn}
               </motion.a>
 
               <motion.button
@@ -211,7 +261,7 @@ export function Contact() {
                   color: "rgba(255,255,255,0.8)",
                 }}
               >
-                Solicitar Cotización
+                {t.ctaBtn2}
                 <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
               </motion.button>
             </div>
@@ -234,7 +284,7 @@ export function Contact() {
               style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
             >
               <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>
-                Contáctanos
+                {t.formBadge}
               </span>
             </div>
             <h2
@@ -248,8 +298,8 @@ export function Contact() {
                 marginBottom: "14px",
               }}
             >
-              Tu proyecto, en 24 horas tienes
-              una propuesta real en tu correo.
+              {t.formTitle1}
+              {" "}{t.formTitle2}
             </h2>
             <p
               style={{
@@ -261,7 +311,7 @@ export function Contact() {
                 margin: "0 auto",
               }}
             >
-              Más de 40 negocios colombianos ya confiaron en este proceso. Tú serás el siguiente.
+              {t.formSubtitle}
             </p>
           </motion.div>
 
@@ -296,13 +346,10 @@ export function Contact() {
                 </div>
                 <div>
                   <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "11px", color: "#4ade80", letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: "2px" }}>
-                    Respuesta inmediata
+                    {t.waLabel}
                   </div>
                   <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "15px", color: "#fff" }}>
-                    Hablar por WhatsApp
-                  </div>
-                  <div style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.35)" }}>
-                    La forma más rápida de contactarnos
+                    {t.waBtn}
                   </div>
                 </div>
               </a>
@@ -313,7 +360,10 @@ export function Contact() {
               >
                 <CheckCircle2 size={16} style={{ color: "#22c55e", flexShrink: 0 }} />
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>
-                  <strong style={{ color: "rgba(255,255,255,0.75)" }}>Garantía de respuesta:</strong> Respondemos todas las consultas en menos de 24 horas.
+                  <strong style={{ color: "rgba(255,255,255,0.75)" }}>
+                    {isSpain ? (r === "EN" ? "Response guarantee:" : r === "FR" ? "Garantie de réponse :" : r === "IT" ? "Garanzia di risposta:" : "Garantía de respuesta:") : "Garantía de respuesta:"}
+                  </strong>{" "}
+                  {isSpain ? (r === "EN" ? "We respond to all enquiries in less than 24 hours." : r === "FR" ? "Nous répondons à toutes les demandes en moins de 24 heures." : r === "IT" ? "Rispondiamo a tutte le richieste in meno di 24 ore." : "Respondemos todas las consultas en menos de 24 horas.") : "Respondemos todas las consultas en menos de 24 horas."}
                 </p>
               </div>
 
@@ -322,15 +372,19 @@ export function Contact() {
                 style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
               >
                 <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "14px", color: "rgba(255,255,255,0.7)", marginBottom: "12px" }}>
-                  ¿Para qué tipo de negocio?
+                  {isSpain ? (r === "EN" ? "What type of business?" : r === "FR" ? "Quel type d'entreprise ?" : r === "IT" ? "Che tipo di azienda?" : "¿Para qué tipo de negocio?") : "¿Para qué tipo de negocio?"}
                 </p>
-                {[
-                  "Clínicas y consultorios → +citas online",
-                  "Restaurantes → reservas sin llamadas",
-                  "Escuelas → más inscripciones",
-                  "Empresas de servicios → más consultas",
-                  "Emprendedores → presencia profesional",
-                ].map((item) => (
+                {(isSpain
+                  ? (r === "EN"
+                      ? ["Clinics → +online appointments", "Restaurants → reservations, no calls", "Schools → more enrollments", "Service companies → more enquiries", "Entrepreneurs → professional presence"]
+                      : r === "FR"
+                        ? ["Cliniques → +rendez-vous en ligne", "Restaurants → réservations sans appels", "Écoles → plus d'inscriptions", "Sociétés de services → plus de demandes", "Entrepreneurs → présence professionnelle"]
+                        : r === "IT"
+                          ? ["Cliniche → +appuntamenti online", "Ristoranti → prenotazioni senza chiamate", "Scuole → più iscrizioni", "Aziende di servizi → più richieste", "Imprenditori → presenza professionale"]
+                          : ["Clínicas y consultorios → +citas online", "Restaurantes → reservas sin llamadas", "Despachos → captación de clientes", "Empresas de servicios → más consultas", "Emprendedores → presencia profesional"]
+                    )
+                  : ["Clínicas y consultorios → +citas online", "Restaurantes → reservas sin llamadas", "Escuelas → más inscripciones", "Empresas de servicios → más consultas", "Emprendedores → presencia profesional"]
+                ).map((item) => (
                   <div key={item} className="flex items-start gap-2 mb-2">
                     <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ background: "#818cf8" }} />
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)", lineHeight: 1.4 }}>
@@ -359,10 +413,10 @@ export function Contact() {
                       <CheckCircle2 size={32} style={{ color: "#22c55e" }} />
                     </div>
                     <h3 style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "20px", color: "#fff", marginBottom: "8px" }}>
-                      ¡Mensaje recibido!
+                      {t.successTitle}
                     </h3>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.4)" }}>
-                      Te responderemos en menos de 24 horas con una propuesta personalizada.
+                      {t.successBody}
                     </p>
                   </div>
                 </div>
@@ -388,13 +442,13 @@ export function Contact() {
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
-                        Nombre completo *
+                        {t.labelName} *
                       </label>
                       <input
                         required
                         type="text"
                         name="from_name"
-                        placeholder="Tu nombre"
+                        placeholder={t.placeholderName}
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200"
@@ -409,13 +463,13 @@ export function Contact() {
                     </div>
                     <div>
                       <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
-                        Correo electrónico *
+                        {t.labelEmail} *
                       </label>
                       <input
                         required
                         type="email"
                         name="from_email"
-                        placeholder="tu@empresa.com"
+                        placeholder={t.placeholderEmail}
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200"
@@ -433,12 +487,12 @@ export function Contact() {
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
-                        WhatsApp / Teléfono
+                        {t.labelPhone}
                       </label>
                       <input
                         type="tel"
                         name="phone"
-                        placeholder="Número de contacto"
+                        placeholder={t.placeholderPhone}
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200"
@@ -453,7 +507,7 @@ export function Contact() {
                     </div>
                     <div>
                       <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
-                        Tipo de proyecto *
+                        {t.labelProject} *
                       </label>
                       <select
                         required
@@ -469,9 +523,11 @@ export function Contact() {
                           fontSize: "14px",
                         }}
                       >
-                        <option value="" style={{ background: "#18181b" }}>Seleccionar tipo...</option>
-                        {projectTypes.map((t) => (
-                          <option key={t} value={t} style={{ background: "#18181b" }}>{t}</option>
+                        <option value="" style={{ background: "#18181b" }}>
+                          {isSpain ? (r === "EN" ? "Select type..." : r === "FR" ? "Sélectionner..." : r === "IT" ? "Selezionare..." : "Seleccionar tipo...") : "Seleccionar tipo..."}
+                        </option>
+                        {(projectTypes as readonly string[]).map((pt) => (
+                          <option key={pt} value={pt} style={{ background: "#18181b" }}>{pt}</option>
                         ))}
                       </select>
                     </div>
@@ -479,7 +535,7 @@ export function Contact() {
 
                   <div>
                     <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
-                      Presupuesto aproximado
+                      {t.labelBudget}
                     </label>
                     <select
                       name="budget"
@@ -494,26 +550,34 @@ export function Contact() {
                         fontSize: "14px",
                       }}
                     >
-                      <option value="" style={{ background: "#18181b" }}>Seleccionar rango...</option>
+                      <option value="" style={{ background: "#18181b" }}>
+                        {isSpain ? (r === "EN" ? "Select range..." : r === "FR" ? "Sélectionner..." : r === "IT" ? "Selezionare..." : "Seleccionar rango...") : "Seleccionar rango..."}
+                      </option>
                       {budgetOptions.map((opt) => (
                         <option key={opt} style={{ background: "#18181b" }}>{opt}</option>
                       ))}
                     </select>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "6px" }}>
-                      Forma de pago:{" "}
-                      <strong style={{ color: "rgba(255,255,255,0.5)" }}>50% al iniciar · 50% al entregar</strong>
+                      {isSpain
+                        ? (r === "EN" ? "Payment: " : r === "FR" ? "Paiement : " : r === "IT" ? "Pagamento: " : "Forma de pago: ")
+                        : "Forma de pago: "}
+                      <strong style={{ color: "rgba(255,255,255,0.5)" }}>
+                        {isSpain
+                          ? (r === "EN" ? "50% to start · 50% on delivery" : r === "FR" ? "50% au départ · 50% à la livraison" : r === "IT" ? "50% all'inizio · 50% alla consegna" : "50% al iniciar · 50% al entregar")
+                          : "50% al iniciar · 50% al entregar"}
+                      </strong>
                     </p>
                   </div>
 
                   <div>
                     <label style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.6)", display: "block", marginBottom: "6px" }}>
-                      Cuéntanos sobre tu proyecto *
+                      {t.labelMessage} *
                     </label>
                     <textarea
                       required
                       rows={5}
                       name="message"
-                      placeholder="Describe tu negocio, qué necesitas y cuáles son tus objetivos..."
+                      placeholder={t.placeholderMessage}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 resize-none"
@@ -549,19 +613,19 @@ export function Contact() {
                     {sending ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Enviando...
+                        {t.sending}
                       </>
                     ) : (
                       <>
                         <Send size={16} />
-                        Quiero mi cotización en 24 horas
+                        {t.submit}
                         <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
                       </>
                     )}
                   </button>
 
                   <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.25)", textAlign: "center" }}>
-                    Al enviar aceptas que te contactemos sobre tu proyecto. Sin spam.
+                    {t.formNote}
                   </p>
                 </form>
               )}

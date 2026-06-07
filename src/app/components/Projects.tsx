@@ -1,54 +1,55 @@
 import { motion } from "motion/react";
+import { useRegion } from "../../hooks/useRegion";
+import { PROJECTS_SPAIN, type Region4 } from "../../i18n/spainContent";
 
-const demos = [
-  {
-    category: "Clínica Estética",
-    title: "Diseño para clínica de estética",
-    description:
-      "Ejemplo de cómo podría verse el sitio web de una clínica estética: presentación de tratamientos, galería de resultados, formulario de citas y sección de confianza.",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80&auto=format&fit=crop",
-    accent: "#c084fc",
-    tags: ["Citas online", "Galería de servicios", "WhatsApp integrado"],
-  },
-  {
-    category: "Escuela de Conducción",
-    title: "Diseño para autoescuela",
-    description:
-      "Sitio web orientado a captar estudiantes: cursos disponibles, horarios, precios, proceso de inscripción y contacto directo por WhatsApp.",
-    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80&auto=format&fit=crop",
-    accent: "#fbbf24",
-    tags: ["Inscripción online", "Horarios", "Cotización rápida"],
-  },
-  {
-    category: "Restaurante",
-    title: "Diseño para restaurante",
-    description:
-      "Presencia digital para restaurante con menú visual, reservas, ubicación interactiva y galería de platos para despertar el apetito antes de la visita.",
-    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format&fit=crop",
-    accent: "#fb923c",
-    tags: ["Menú digital", "Reservas", "Google Maps"],
-  },
-  {
-    category: "Odontología",
-    title: "Diseño para consultorio dental",
-    description:
-      "Sitio web para odontólogos con presentación de tratamientos, equipo profesional, sistema de citas y sección de confianza que convierte visitantes en pacientes.",
-    image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=800&q=80&auto=format&fit=crop",
-    accent: "#34d399",
-    tags: ["Agenda de citas", "Tratamientos", "Equipo médico"],
-  },
-  {
-    category: "Empresa Corporativa",
-    title: "Diseño corporativo empresarial",
-    description:
-      "Sitio web de imagen corporativa con presentación de empresa, servicios, portafolio de proyectos, equipo y canales de contacto para clientes B2B.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop",
-    accent: "#60a5fa",
-    tags: ["Imagen corporativa", "Portafolio", "Contacto B2B"],
-  },
+const DEMO_IMAGES = [
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=800&q=80&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop",
 ];
 
+const DEMO_ACCENTS = ["#c084fc", "#fbbf24", "#fb923c", "#34d399", "#60a5fa"];
+
+const CO_ITEMS = [
+  { category: "Clínica Estética",    title: "Diseño para clínica de estética",    description: "Ejemplo de cómo podría verse el sitio web de una clínica estética: presentación de tratamientos, galería de resultados, formulario de citas y sección de confianza.", tags: ["Citas online", "Galería de servicios", "WhatsApp integrado"] },
+  { category: "Escuela de Conducción",title: "Diseño para autoescuela",            description: "Sitio web orientado a captar estudiantes: cursos disponibles, horarios, precios, proceso de inscripción y contacto directo por WhatsApp.", tags: ["Inscripción online", "Horarios", "Cotización rápida"] },
+  { category: "Restaurante",          title: "Diseño para restaurante",            description: "Presencia digital para restaurante con menú visual, reservas, ubicación interactiva y galería de platos para despertar el apetito antes de la visita.", tags: ["Menú digital", "Reservas", "Google Maps"] },
+  { category: "Odontología",          title: "Diseño para consultorio dental",     description: "Sitio web para odontólogos con presentación de tratamientos, equipo profesional, sistema de citas y sección de confianza que convierte visitantes en pacientes.", tags: ["Agenda de citas", "Tratamientos", "Equipo médico"] },
+  { category: "Empresa Corporativa",  title: "Diseño corporativo empresarial",    description: "Sitio web de imagen corporativa con presentación de empresa, servicios, portafolio de proyectos, equipo y canales de contacto para clientes B2B.", tags: ["Imagen corporativa", "Portafolio", "Contacto B2B"] },
+];
+
+const WA_CO = "https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20ver%20un%20dise%C3%B1o%20para%20mi%20negocio.";
+const WA_ES = "https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20ver%20un%20dise%C3%B1o%20para%20mi%20negocio%20en%20Espa%C3%B1a.";
+
 export function Projects() {
+  const region = useRegion();
+  const isSpain = region !== "CO";
+  const r = region as Region4;
+  const d = isSpain ? (PROJECTS_SPAIN[r] ?? PROJECTS_SPAIN.ES) : null;
+
+  const badge     = d?.badge ?? "Ejemplos de Diseño";
+  const heading   = d?.heading ?? "Proyectos";
+  const highlight = d?.headingHighlight ?? "Demostrativos";
+  const subtitle  = d?.subtitle ?? "Estos diseños muestran ejemplos de cómo podría verse la presencia digital de distintos tipos de negocios. Cada proyecto real se diseña completamente a medida para tu negocio específico.";
+  const rawItems  = d?.items ?? CO_ITEMS;
+  const waLink    = isSpain ? WA_ES : WA_CO;
+
+  const ctaLabel = isSpain
+    ? (r === "EN" ? "Request design for my business" : r === "FR" ? "Demander un design pour mon entreprise" : r === "IT" ? "Richiedere un design per la mia azienda" : "Solicitar diseño para mi negocio")
+    : "Solicitar diseño para mi negocio";
+
+  const ctaQuestion = isSpain
+    ? (r === "EN" ? "Want to see what your business website could look like?" : r === "FR" ? "Vous voulez voir à quoi pourrait ressembler le site web de votre entreprise ?" : r === "IT" ? "Vuoi vedere come potrebbe essere il sito web della tua azienda?" : "¿Quieres ver cómo podría verse el sitio web de tu negocio?")
+    : "¿Quieres ver cómo podría verse el sitio web de tu negocio?";
+
+  const demos = (rawItems as readonly { category: string; title: string; description: string; tags: readonly string[] }[]).map((item, i) => ({
+    ...item,
+    image: DEMO_IMAGES[i],
+    accent: DEMO_ACCENTS[i],
+  }));
+
   return (
     <section id="portfolio" className="py-24" style={{ background: "#0d0d18" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -72,7 +73,7 @@ export function Projects() {
                 color: "rgba(255,255,255,0.5)",
               }}
             >
-              Ejemplos de Diseño
+              {badge}
             </span>
           </div>
           <h2
@@ -86,7 +87,7 @@ export function Projects() {
               marginBottom: "16px",
             }}
           >
-            Proyectos{" "}
+            {heading}{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -95,7 +96,7 @@ export function Projects() {
                 backgroundClip: "text",
               }}
             >
-              Demostrativos
+              {highlight}
             </span>
           </h2>
         </motion.div>
@@ -118,7 +119,7 @@ export function Projects() {
               margin: "0 auto",
             }}
           >
-            Estos diseños muestran ejemplos de cómo podría verse la presencia digital de distintos tipos de negocios. Cada proyecto real se diseña completamente a medida para tu negocio específico.
+            {subtitle}
           </p>
         </motion.div>
 
@@ -126,7 +127,7 @@ export function Projects() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {demos.map((demo, i) => (
             <motion.div
-              key={demo.category}
+              key={i}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -190,7 +191,7 @@ export function Projects() {
                   {demo.description}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
-                  {demo.tags.map((tag) => (
+                  {(demo.tags as readonly string[]).map((tag) => (
                     <span
                       key={tag}
                       className="px-2.5 py-0.5 rounded-full text-xs"
@@ -227,10 +228,10 @@ export function Projects() {
               marginBottom: "20px",
             }}
           >
-            ¿Quieres ver cómo podría verse el sitio web de tu negocio?
+            {ctaQuestion}
           </p>
           <a
-            href="https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20ver%20un%20dise%C3%B1o%20para%20mi%20negocio."
+            href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl cursor-pointer transition-all duration-200"
@@ -248,7 +249,7 @@ export function Projects() {
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
               <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
             </svg>
-            Solicitar diseño para mi negocio
+            {ctaLabel}
           </a>
         </motion.div>
       </div>

@@ -1,44 +1,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus, Minus, MessageCircle } from "lucide-react";
+import { useRegion } from "../../hooks/useRegion";
+import { FAQ_SPAIN, type Region4 } from "../../i18n/spainContent";
 
 const WA = "https://wa.me/573123198706?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20dise%C3%B1o%20web%20para%20mi%20negocio%20en%20Espa%C3%B1a.";
 
-const faqs = [
-  {
-    question: "¿Cuánto cuesta una página web para abogados en España?",
-    answer:
-      "Una página web profesional para despachos de abogados en España cuesta entre 390 € y 1.490 € según el plan. El Plan Esencial cuesta 390 €, el Plan Profesional 790 € y el Plan Premium 1.490 €. Nexsu Studio incluye diseño personalizado, SEO local y formulario de captación de clientes. Entrega garantizada en 10 a 21 días hábiles. Precio cerrado, sin mensualidades ocultas.",
-  },
-  {
-    question: "¿Cuánto tiempo tarda en estar lista mi web?",
-    answer:
-      "El Plan Esencial se entrega en 10 días hábiles. El Plan Profesional en 15 días hábiles y el Plan Premium en 21 días hábiles. Todos los plazos están garantizados en el contrato. Al confirmar el proyecto recibes un cronograma detallado con hitos y fechas claras.",
-  },
-  {
-    question: "¿Mi web va a aparecer en Google?",
-    answer:
-      "Sí. Todos nuestros proyectos incluyen SEO técnico inicial, configuración de Google Search Console e indexación garantizada. El posicionamiento orgánico en resultados relevantes tarda entre 3 y 6 meses desde la publicación. El Plan Premium incluye SEO avanzado y GEO SEO para aparecer también en respuestas de ChatGPT, Gemini y Claude.",
-  },
-  {
-    question: "¿Qué pasa si quiero cambiar algo después de entregada la web?",
-    answer:
-      "Tienes soporte incluido según tu plan: 30 días en Plan Esencial, 60 días en Plan Profesional y 90 días prioritario en Plan Premium. Después del periodo de soporte ofrecemos mantenimiento mensual opcional. Antes del pago final recibes una previsualización para revisar y aprobar el resultado.",
-  },
-  {
-    question: "¿Trabajan con clientes de toda España o solo de Barcelona y Madrid?",
-    answer:
-      "Trabajamos con clientes de toda España de forma 100% remota. Hemos entregado proyectos en Madrid, Barcelona, Valencia, Sevilla, Bilbao y otras ciudades. El proceso es completamente online: WhatsApp, videollamada y correo. No necesitas estar en ninguna ciudad concreta para trabajar con nosotros.",
-  },
-  {
-    question: "¿Qué es el GEO SEO que incluye el Plan Premium?",
-    answer:
-      "El GEO SEO (Generative Engine Optimization) es la optimización de tu web para aparecer citada en respuestas de inteligencias artificiales como ChatGPT, Google Gemini, Perplexity y Claude. Cada vez más personas en España preguntan a estas IAs 'qué agencia de diseño web me recomiendas para mi despacho' y la IA les da una respuesta. El Plan Premium incluye estructura de contenido extractable, schema markup avanzado y FAQ optimizadas para que tu negocio sea citado en esas respuestas.",
-  },
-];
-
 export function FAQUES() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const region = useRegion();
+  const r = region as Region4;
+  const d = FAQ_SPAIN[r] ?? FAQ_SPAIN.ES;
 
   return (
     <section
@@ -60,7 +32,7 @@ export function FAQUES() {
             style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
           >
             <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>
-              Preguntas frecuentes
+              {d.badge}
             </span>
           </motion.div>
 
@@ -72,10 +44,10 @@ export function FAQUES() {
             transition={{ duration: 0.6, delay: 0.1 }}
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", letterSpacing: "-0.04em", lineHeight: 1.1, color: "#fff", marginBottom: "14px" }}
           >
-            Todo lo que necesitas saber
+            {d.heading}
             <br />
             <span style={{ background: "linear-gradient(135deg, #818cf8, #a78bfa, #c084fc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              antes de empezar
+              {d.headingHighlight}
             </span>
           </motion.h2>
 
@@ -86,13 +58,13 @@ export function FAQUES() {
             transition={{ duration: 0.5, delay: 0.15 }}
             style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.4)", maxWidth: "480px", margin: "0 auto" }}
           >
-            Las preguntas que nos hacen los despachos, clínicas e inmobiliarias en España antes de contratar.
+            {d.subtitle}
           </motion.p>
         </div>
 
         {/* Accordion */}
         <div className="flex flex-col gap-3">
-          {faqs.map((faq, i) => {
+          {(d.items as readonly { question: string; answer: string }[]).map((faq, i) => {
             const isOpen = openIndex === i;
             return (
               <motion.div
@@ -192,8 +164,8 @@ export function FAQUES() {
           style={{ background: "rgba(99,102,241,0.06)", border: "1px solid rgba(129,140,248,0.2)" }}
         >
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", color: "rgba(255,255,255,0.6)", lineHeight: 1.5 }}>
-            ¿Tienes alguna pregunta más?{" "}
-            <span style={{ color: "rgba(255,255,255,0.85)" }}>Te respondemos en menos de 2 horas.</span>
+            {d.ctaText}{" "}
+            <span style={{ color: "rgba(255,255,255,0.85)" }}>{d.ctaHighlight}</span>
           </p>
           <a
             href={WA}
@@ -201,10 +173,9 @@ export function FAQUES() {
             rel="noopener noreferrer"
             className="shrink-0 px-5 py-2.5 rounded-xl flex items-center gap-2"
             style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "14px", background: "rgba(37,211,102,0.1)", color: "#4ade80", border: "1px solid rgba(37,211,102,0.2)", textDecoration: "none" }}
-            aria-label="Preguntar por WhatsApp — respuesta en menos de 2 horas"
           >
             <MessageCircle size={15} aria-hidden="true" />
-            Preguntar por WhatsApp
+            {d.ctaBtn}
           </a>
         </motion.div>
       </div>
