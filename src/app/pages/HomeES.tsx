@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { usePageSEO } from "../../hooks/usePageSEO";
+import { useRegion } from "../../hooks/useRegion";
 import { Navbar } from "../components/Navbar";
 import { TrustSection } from "../components/TrustSection";
 import { WhySellOnline } from "../components/WhySellOnline";
@@ -16,16 +17,6 @@ import { Footer } from "../components/Footer";
 
 const WA =
   "https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20solicitar%20presupuesto%20para%20una%20p%C3%A1gina%20web.";
-
-const trustItems = [
-  "+40 negocios atendidos",
-  "Entrega en 15 a 30 días",
-  "Resultados medibles",
-  "Soporte incluido",
-  "Sin costes ocultos",
-];
-
-const HEADING_LINES = ["Páginas web que", "generan clientes", "en España."];
 
 // ── Schema JSON-LD España ───────────────────────────────────────────────────
 const schemaES = {
@@ -141,14 +132,96 @@ const schemaES = {
   ],
 };
 
+// ── Contenido multilingüe del Hero ─────────────────────────────────────────
+type HeroLang = { badge: string; headingLines: string[]; subtitle: string; sectorsLabel: string; sectors: {label:string;href:string}[]; pricePrefix: string; priceValue: string; priceMid: string; priceLast: string; seePlans: string; seePlansAriaLabel: string; ctaPrimary: string; ctaSecondary: string; ctaPrimaryAriaLabel: string; ctaSecondaryAriaLabel: string; trustItems: string[] };
+
+const HERO_CONTENT: Record<string, HeroLang> = {
+  ES: {
+    badge: "🇪🇸 Especialistas en web para España y Europa",
+    headingLines: ["Páginas web que", "generan clientes", "en España."],
+    subtitle: "Diseño web premium con SEO, automatización con IA y entrega en 15 días. Especialistas en abogados, clínicas estéticas, odontólogos e inmobiliarias en España.",
+    sectorsLabel: "Sectores:",
+    sectors: [
+      { label: "Abogados", href: "/en/sectores/diseno-web-para-abogados/" },
+      { label: "Clínicas Estéticas", href: "/en/sectores/diseno-web-para-clinicas-esteticas/" },
+      { label: "Odontólogos", href: "/en/sectores/diseno-web-para-odontologos/" },
+      { label: "Inmobiliarias", href: "/en/sectores/diseno-web-para-inmobiliarias/" },
+      { label: "Constructoras", href: "/en/sectores/diseno-web-para-constructoras/" },
+    ],
+    pricePrefix: "Desde", priceValue: "390 €", priceMid: "Entrega en 10 días", priceLast: "Precio cerrado",
+    seePlans: "→ Ver planes", seePlansAriaLabel: "Ver todos los planes de precios para España",
+    ctaPrimary: "Solicitar presupuesto — WhatsApp", ctaSecondary: "Ver casos de éxito",
+    ctaPrimaryAriaLabel: "Solicitar presupuesto de diseño web por WhatsApp",
+    ctaSecondaryAriaLabel: "Ver casos de éxito y ejemplos de diseño web para España",
+    trustItems: ["+40 negocios atendidos", "Entrega en 15 a 30 días", "Resultados medibles", "Soporte incluido", "Sin costes ocultos"],
+  },
+  EN: {
+    badge: "🇪🇸 Web specialists for Spain and Europe",
+    headingLines: ["Websites that", "generate clients", "in Spain."],
+    subtitle: "Premium web design with SEO, AI automation and 15-day delivery. Specialists for law firms, aesthetic clinics, dentists and real estate in Spain.",
+    sectorsLabel: "Sectors:",
+    sectors: [
+      { label: "Lawyers", href: "/en/sectores/diseno-web-para-abogados/" },
+      { label: "Aesthetic Clinics", href: "/en/sectores/diseno-web-para-clinicas-esteticas/" },
+      { label: "Dentists", href: "/en/sectores/diseno-web-para-odontologos/" },
+      { label: "Real Estate", href: "/en/sectores/diseno-web-para-inmobiliarias/" },
+      { label: "Construction", href: "/en/sectores/diseno-web-para-constructoras/" },
+    ],
+    pricePrefix: "From", priceValue: "390 €", priceMid: "10-day delivery", priceLast: "Fixed price",
+    seePlans: "→ View plans", seePlansAriaLabel: "View all pricing plans for Spain",
+    ctaPrimary: "Request a quote — WhatsApp", ctaSecondary: "See case studies",
+    ctaPrimaryAriaLabel: "Request a web design quote via WhatsApp",
+    ctaSecondaryAriaLabel: "See web design case studies for Spain",
+    trustItems: ["+40 businesses served", "15 to 30 day delivery", "Measurable results", "Support included", "No hidden fees"],
+  },
+  FR: {
+    badge: "🇪🇸 Spécialistes web pour l'Espagne et l'Europe",
+    headingLines: ["Sites web qui", "génèrent des clients", "en Espagne."],
+    subtitle: "Design web premium avec SEO, automatisation IA et livraison en 15 jours. Spécialistes avocats, cliniques esthétiques, dentistes et immobilier en Espagne.",
+    sectorsLabel: "Secteurs :",
+    sectors: [
+      { label: "Avocats", href: "/en/sectores/diseno-web-para-abogados/" },
+      { label: "Cliniques esthétiques", href: "/en/sectores/diseno-web-para-clinicas-esteticas/" },
+      { label: "Dentistes", href: "/en/sectores/diseno-web-para-odontologos/" },
+      { label: "Immobilier", href: "/en/sectores/diseno-web-para-inmobiliarias/" },
+      { label: "Construction", href: "/en/sectores/diseno-web-para-constructoras/" },
+    ],
+    pricePrefix: "À partir de", priceValue: "390 €", priceMid: "Livraison en 10 jours", priceLast: "Prix fixe",
+    seePlans: "→ Voir les offres", seePlansAriaLabel: "Voir tous les forfaits tarifaires pour l'Espagne",
+    ctaPrimary: "Demander un devis — WhatsApp", ctaSecondary: "Voir les réalisations",
+    ctaPrimaryAriaLabel: "Demander un devis web design via WhatsApp",
+    ctaSecondaryAriaLabel: "Voir les réalisations de design web pour l'Espagne",
+    trustItems: ["+40 entreprises servies", "Livraison en 15 à 30 jours", "Résultats mesurables", "Support inclus", "Sans frais cachés"],
+  },
+  IT: {
+    badge: "🇪🇸 Specialisti web per la Spagna e l'Europa",
+    headingLines: ["Siti web che", "generano clienti", "in Spagna."],
+    subtitle: "Web design premium con SEO, automazione AI e consegna in 15 giorni. Specialisti per studi legali, cliniche estetiche, dentisti e immobiliare in Spagna.",
+    sectorsLabel: "Settori:",
+    sectors: [
+      { label: "Avvocati", href: "/en/sectores/diseno-web-para-abogados/" },
+      { label: "Cliniche estetiche", href: "/en/sectores/diseno-web-para-clinicas-esteticas/" },
+      { label: "Odontoiatri", href: "/en/sectores/diseno-web-para-odontologos/" },
+      { label: "Immobiliare", href: "/en/sectores/diseno-web-para-inmobiliarias/" },
+      { label: "Costruzioni", href: "/en/sectores/diseno-web-para-constructoras/" },
+    ],
+    pricePrefix: "Da", priceValue: "390 €", priceMid: "Consegna in 10 giorni", priceLast: "Prezzo fisso",
+    seePlans: "→ Vedi piani", seePlansAriaLabel: "Vedi tutti i piani tariffari per la Spagna",
+    ctaPrimary: "Richiedi preventivo — WhatsApp", ctaSecondary: "Vedi casi di successo",
+    ctaPrimaryAriaLabel: "Richiedi un preventivo web design via WhatsApp",
+    ctaSecondaryAriaLabel: "Vedi casi di successo di web design per la Spagna",
+    trustItems: ["+40 aziende servite", "Consegna in 15-30 giorni", "Risultati misurabili", "Supporto incluso", "Senza costi nascosti"],
+  },
+};
+
 // ── Typewriter heading ──────────────────────────────────────────────────────
-function TypewriterHeading() {
+function TypewriterHeading({ lines }: { lines: string[] }) {
   const [displayed, setDisplayed] = useState<string[]>(["", "", ""]);
   const [showCursor, setShowCursor] = useState(true);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    const allChars = HEADING_LINES.join("\n");
+    const allChars = lines.join("\n");
     let charIndex = 0;
     const interval = setInterval(() => {
       charIndex++;
@@ -246,6 +319,9 @@ function MagneticWrapper({ children, strength = 0.35, radius = 130 }: { children
 
 // ── Hero España ─────────────────────────────────────────────────────────────
 function HeroES() {
+  const region = useRegion();
+  const c = HERO_CONTENT[region] ?? HERO_CONTENT.ES;
+
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const nebulaTopY = useTransform(scrollYProgress, [0, 1], [0, -70]);
@@ -261,14 +337,6 @@ function HeroES() {
       transition: { duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] },
     }),
   };
-
-  const sectors = [
-    { label: "Abogados", href: "/en/sectores/diseno-web-para-abogados/" },
-    { label: "Clínicas Estéticas", href: "/en/sectores/diseno-web-para-clinicas-esteticas/" },
-    { label: "Odontólogos", href: "/en/sectores/diseno-web-para-odontologos/" },
-    { label: "Inmobiliarias", href: "/en/sectores/diseno-web-para-inmobiliarias/" },
-    { label: "Constructoras", href: "/en/sectores/diseno-web-para-constructoras/" },
-  ];
 
   return (
     <section
@@ -294,23 +362,23 @@ function HeroES() {
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full" style={{ background: "rgba(99,102,241,0.10)", border: "1px solid rgba(99,102,241,0.28)" }}>
               <motion.div className="w-2 h-2 rounded-full bg-green-400" animate={{ opacity: [1, 0.3, 1], scale: [1, 1.4, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
               <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "rgba(255,255,255,0.72)" }}>
-                🇪🇸 Especialistas en web para España y Europa
+                {c.badge}
               </span>
             </div>
           </motion.div>
 
           {/* H1 typewriter */}
-          <TypewriterHeading />
+          <TypewriterHeading key={region} lines={c.headingLines} />
 
           {/* Subtítulo */}
           <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: "1.1rem", lineHeight: 1.78, color: "rgba(255,255,255,0.48)", marginBottom: 24, maxWidth: 560 }}>
-            Diseño web premium con SEO, automatización con IA y entrega en 15 días. Especialistas en abogados, clínicas estéticas, odontólogos e inmobiliarias en España.
+            {c.subtitle}
           </motion.p>
 
           {/* Sectores */}
           <motion.nav custom={3} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap items-center gap-2 mb-8" aria-label="Sectores que atendemos en España">
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.32)", flexShrink: 0 }}>Sectores:</span>
-            {sectors.map(({ label, href }) => (
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.32)", flexShrink: 0 }}>{c.sectorsLabel}</span>
+            {c.sectors.map(({ label, href }) => (
               <motion.a key={label} href={href} whileHover={{ scale: 1.05, borderColor: "rgba(99,102,241,0.5)" }} transition={{ duration: 0.15 }} style={{ display: "inline-flex", alignItems: "center", padding: "4px 12px", borderRadius: 999, background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.22)", fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 12, color: "rgba(199,193,255,0.75)", textDecoration: "none" }}>
                 {label}
               </motion.a>
@@ -320,17 +388,17 @@ function HeroES() {
           {/* Price anchor */}
           <motion.div custom={3.5} variants={fadeUp} initial="hidden" animate="visible" className="flex items-center gap-3 mb-8">
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.38)", lineHeight: 1.5 }}>
-              Desde <strong style={{ color: "rgba(255,255,255,0.65)" }}>390 €</strong>
-              {" · "}Entrega en 10 días
-              {" · "}Precio cerrado
+              {c.pricePrefix}{" "}<strong style={{ color: "rgba(255,255,255,0.65)" }}>{c.priceValue}</strong>
+              {" · "}{c.priceMid}
+              {" · "}{c.priceLast}
             </p>
             <button
               type="button"
               onClick={() => scrollTo("#pricing")}
               style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#818cf8", background: "none", border: "none", cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px", padding: 0, minHeight: "unset", minWidth: "unset" }}
-              aria-label="Ver todos los planes de precios para España"
+              aria-label={c.seePlansAriaLabel}
             >
-              → Ver planes
+              {c.seePlans}
             </button>
           </motion.div>
 
@@ -345,13 +413,13 @@ function HeroES() {
                 whileHover={{ scale: 1.04, boxShadow: "0 14px 48px rgba(99,102,241,0.6), 0 2px 8px rgba(99,102,241,0.25)" }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.18 }}
-                aria-label="Solicitar presupuesto de diseño web por WhatsApp"
+                aria-label={c.ctaPrimaryAriaLabel}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
                   <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
                 </svg>
-                Solicitar presupuesto — WhatsApp
+                {c.ctaPrimary}
               </motion.a>
             </MagneticWrapper>
 
@@ -363,16 +431,16 @@ function HeroES() {
               whileHover={{ background: "rgba(255,255,255,0.09)", borderColor: "rgba(255,255,255,0.22)" }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.15 }}
-              aria-label="Ver casos de éxito y ejemplos de diseño web para España"
+              aria-label={c.ctaSecondaryAriaLabel}
             >
-              Ver casos de éxito
+              {c.ctaSecondary}
               <ArrowRight size={16} aria-hidden="true" />
             </motion.button>
           </motion.div>
 
           {/* Trust items */}
           <motion.ul custom={5} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap gap-x-5 gap-y-2" style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {trustItems.map((item, i) => (
+            {c.trustItems.map((item, i) => (
               <motion.li key={item} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.7 + i * 0.08, duration: 0.4 }} className="flex items-center gap-1.5">
                 <CheckCircle size={14} style={{ color: "#818cf8", flexShrink: 0 }} aria-hidden="true" />
                 <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "rgba(255,255,255,0.52)" }}>{item}</span>

@@ -1,6 +1,6 @@
 import { useRef, useCallback } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { Globe, Building2, ShoppingBag, Code2, Wrench, Search } from "lucide-react";
+import { Globe, Building2, ShoppingBag, Code2, Wrench, Search, Clock } from "lucide-react";
 
 const services = [
   {
@@ -9,6 +9,7 @@ const services = [
     description:
       "Una sola página diseñada para convertir: el visitante entra, entiende lo que ofreces y te contacta. Perfecta para captar clientes desde Google Ads o redes sociales.",
     benefit: "Clientes desde el primer día",
+    delivery: "Entrega en 1 a 3 días",
     accent: "#818cf8",
   },
   {
@@ -17,6 +18,7 @@ const services = [
     description:
       "Tu empresa en internet con todo lo que genera confianza: servicios claros, equipo, casos de éxito y formulario de contacto. El cliente llega y ya quiere trabajar contigo.",
     benefit: "Credibilidad que cierra ventas",
+    delivery: "Entrega en 5 a 8 días",
     accent: "#60a5fa",
   },
   {
@@ -25,6 +27,7 @@ const services = [
     description:
       "Vende tus productos online con PSE, Nequi y tarjetas. Catálogo, carrito y panel de administración incluidos. Tu tienda nunca cierra.",
     benefit: "Ventas mientras duermes",
+    delivery: null,
     accent: "#34d399",
   },
   {
@@ -33,6 +36,7 @@ const services = [
     description:
       "Tus clientes agendan online sin necesidad de llamarte. Para clínicas, consultorios, salones y servicios por turnos. Reduce el trabajo administrativo hasta un 80%.",
     benefit: "Sin llamadas, sin ausencias",
+    delivery: null,
     accent: "#f59e0b",
   },
   {
@@ -41,6 +45,7 @@ const services = [
     description:
       "Tu sitio siempre actualizado, seguro y funcionando. Actualizamos contenido, monitoreamos caídas y respondemos en menos de 24 horas.",
     benefit: "Tranquilidad sin preocupaciones",
+    delivery: null,
     accent: "#c084fc",
   },
   {
@@ -49,6 +54,7 @@ const services = [
     description:
       "Configuramos tu sitio para que aparezca cuando alguien busca tu servicio en tu ciudad. SEO local + Google Maps + Core Web Vitals. Clientes sin pagar publicidad.",
     benefit: "Clientes orgánicos cada mes",
+    delivery: null,
     accent: "#fb7185",
   },
 ];
@@ -210,6 +216,21 @@ function TiltCard({
             {service.benefit}
           </span>
         </motion.div>
+
+        {service.delivery && (
+          <div
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mt-2"
+            style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.09)",
+            }}
+          >
+            <Clock size={11} style={{ color: "rgba(255,255,255,0.4)" }} aria-hidden="true" />
+            <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>
+              {service.delivery}
+            </span>
+          </div>
+        )}
       </div>
     </motion.article>
   );

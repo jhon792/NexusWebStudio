@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { PlanetHero } from "./PlanetHero";
@@ -6,24 +7,14 @@ import { PlanetHero } from "./PlanetHero";
 const WA =
   "https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20cotizar%20una%20p%C3%A1gina%20web%20para%20mi%20negocio.";
 
-const trustItems = [
-  "+40 negocios atendidos",
-  "Entrega en 3 a 15 días",
-  "Resultados verificables",
-  "Soporte post-entrega",
-  "Sin costos ocultos",
-];
-
 /* ─── Typewriter heading ─────────────────────────────────────────────────── */
-const HEADING_LINES = ["Diseño web que", "genera clientes", "en Colombia."];
-
-function TypewriterHeading() {
+function TypewriterHeading({ lines }: { lines: string[] }) {
   const [displayed, setDisplayed] = useState<string[]>(["", "", ""]);
   const [showCursor, setShowCursor] = useState(true);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    const allChars = HEADING_LINES.join("\n");
+    const allChars = lines.join("\n");
     let charIndex = 0;
 
     const interval = setInterval(() => {
@@ -146,6 +137,39 @@ function MagneticWrapper({
 
 /* ─── Hero ───────────────────────────────────────────────────────────────── */
 export function Hero() {
+  const { i18n } = useTranslation();
+  const isEN = i18n.language === "en";
+
+  const content = isEN ? {
+    badge: "Only 2 spots available in June",
+    headingLines: ["Web design that", "generates clients", "in Colombia."],
+    subtitle: "We are Nexsu Studio — we design websites for clinics, restaurants, lawyers and SMEs in Villavicencio, Bogotá and Medellín that need real results, not just a pretty site. +40 businesses trust us.",
+    citiesLabel: "We serve in:",
+    ctaPrimary: "Get a free quote — WhatsApp",
+    ctaSecondary: "See design examples",
+    pricePrefix: "From",
+    priceValue: "$590,000 COP",
+    priceMid: "10-day delivery",
+    priceLast: "No contracts",
+    seePlans: "→ View plans",
+    seePlansAriaLabel: "View all pricing plans",
+    trustItems: ["+40 businesses served", "3 to 15 day delivery", "Verifiable results", "Post-delivery support", "No hidden costs"],
+  } : {
+    badge: "Solo quedan 2 cupos disponibles en junio",
+    headingLines: ["Diseño web que", "genera clientes", "en Colombia."],
+    subtitle: "Somos Nexus Studio — diseñamos webs para clínicas, restaurantes, abogados y pymes en Villavicencio, Bogotá y Medellín que necesitan resultados reales, no solo un sitio bonito. +40 negocios ya confían en nosotros.",
+    citiesLabel: "Atendemos en:",
+    ctaPrimary: "Cotizar gratis — WhatsApp",
+    ctaSecondary: "Ver ejemplos de diseño",
+    pricePrefix: "Desde",
+    priceValue: "$590.000 COP",
+    priceMid: "Entrega en 10 días",
+    priceLast: "Sin permanencia",
+    seePlans: "→ Ver planes",
+    seePlansAriaLabel: "Ver todos los planes de precios",
+    trustItems: ["+40 negocios atendidos", "Entrega en 3 a 15 días", "Resultados verificables", "Soporte post-entrega", "Sin costos ocultos"],
+  };
+
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -286,13 +310,13 @@ export function Hero() {
                     color: "rgba(255,255,255,0.72)",
                   }}
                 >
-                  Solo quedan 2 cupos disponibles en junio
+                  {content.badge}
                 </span>
               </div>
             </motion.div>
 
             {/* Heading con typewriter */}
-            <TypewriterHeading />
+            <TypewriterHeading key={i18n.language} lines={content.headingLines} />
 
             {/* Subtítulo */}
             <motion.p
@@ -310,10 +334,7 @@ export function Hero() {
                 maxWidth: 500,
               }}
             >
-              Somos Nexus Studio — diseñamos webs para clínicas, restaurantes,
-              abogados y pymes en Villavicencio, Bogotá y Medellín que necesitan
-              resultados reales, no solo un sitio bonito. +40 negocios ya confían
-              en nosotros.
+              {content.subtitle}
             </motion.p>
 
             {/* Ciudades */}
@@ -334,7 +355,7 @@ export function Hero() {
                   flexShrink: 0,
                 }}
               >
-                Atendemos en:
+                {content.citiesLabel}
               </span>
               {[
                 { label: "Villavicencio", href: "/villavicencio" },
@@ -416,7 +437,7 @@ export function Hero() {
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
                     <path d="M12.05 2C6.495 2 2 6.495 2 12.05c0 1.87.51 3.622 1.397 5.126L2 22l4.981-1.305A10.02 10.02 0 0 0 12.05 22C17.605 22 22 17.505 22 11.95 22 6.495 17.605 2 12.05 2zm0 18.333a8.28 8.28 0 0 1-4.222-1.154l-.302-.18-3.133.82.838-3.063-.198-.313A8.283 8.283 0 0 1 3.667 11.95c0-4.62 3.763-8.383 8.383-8.383 4.62 0 8.383 3.763 8.383 8.383 0 4.62-3.763 8.383-8.383 8.383z" />
                   </svg>
-                  Cotizar gratis — WhatsApp
+                  {content.ctaPrimary}
                 </motion.a>
               </MagneticWrapper>
 
@@ -443,7 +464,7 @@ export function Hero() {
                 transition={{ duration: 0.15 }}
                 aria-label="Ver ejemplos de diseño web"
               >
-                Ver ejemplos de diseño
+                {content.ctaSecondary}
                 <ArrowRight size={16} aria-hidden="true" />
               </motion.button>
             </motion.div>
@@ -457,17 +478,17 @@ export function Hero() {
               className="flex items-center gap-3 mb-8"
             >
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.38)", lineHeight: 1.5 }}>
-                Desde <strong style={{ color: "rgba(255,255,255,0.65)" }}>$590.000 COP</strong>
-                {" · "}Entrega en 10 días
-                {" · "}Sin permanencia
+                {content.pricePrefix}{" "}<strong style={{ color: "rgba(255,255,255,0.65)" }}>{content.priceValue}</strong>
+                {" · "}{content.priceMid}
+                {" · "}{content.priceLast}
               </p>
               <button
                 type="button"
                 onClick={() => scrollTo("#pricing")}
                 style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#818cf8", background: "none", border: "none", cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px", padding: 0, minHeight: "unset", minWidth: "unset" }}
-                aria-label="Ver todos los planes de precios"
+                aria-label={content.seePlansAriaLabel}
               >
-                → Ver planes
+                {content.seePlans}
               </button>
             </motion.div>
 
@@ -481,7 +502,7 @@ export function Hero() {
               aria-label="Por qué elegirnos"
               style={{ listStyle: "none", padding: 0, margin: 0 }}
             >
-              {trustItems.map((item, i) => (
+              {content.trustItems.map((item, i) => (
                 <motion.li
                   key={item}
                   initial={{ opacity: 0, x: -12 }}

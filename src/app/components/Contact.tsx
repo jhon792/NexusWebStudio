@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router";
 import { motion } from "motion/react";
 import { Send, CheckCircle2, ArrowRight } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -17,6 +18,26 @@ const projectTypes = [
 ];
 
 export function Contact() {
+  const { pathname } = useLocation();
+  const isSpain = pathname.startsWith("/en");
+
+  const budgetOptions = isSpain
+    ? [
+        "Plan Esencial — 390 €",
+        "Plan Profesional — 790 €",
+        "Plan Premium — 1.490 €",
+        "Más de 1.490 €",
+        "Aún no lo tengo definido",
+      ]
+    : [
+        "Menos de $600.000 COP",
+        "$600.000 – $1.000.000 COP",
+        "$1.000.000 – $2.000.000 COP",
+        "$2.000.000 – $3.500.000 COP",
+        "Más de $3.500.000 COP",
+        "Aún no lo tengo definido",
+      ];
+
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -474,12 +495,9 @@ export function Contact() {
                       }}
                     >
                       <option value="" style={{ background: "#18181b" }}>Seleccionar rango...</option>
-                      <option style={{ background: "#18181b" }}>Menos de $600.000 COP</option>
-                      <option style={{ background: "#18181b" }}>$600.000 – $1.000.000 COP</option>
-                      <option style={{ background: "#18181b" }}>$1.000.000 – $2.000.000 COP</option>
-                      <option style={{ background: "#18181b" }}>$2.000.000 – $3.500.000 COP</option>
-                      <option style={{ background: "#18181b" }}>Más de $3.500.000 COP</option>
-                      <option style={{ background: "#18181b" }}>Aún no lo tengo definido</option>
+                      {budgetOptions.map((opt) => (
+                        <option key={opt} style={{ background: "#18181b" }}>{opt}</option>
+                      ))}
                     </select>
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "6px" }}>
                       Forma de pago:{" "}
