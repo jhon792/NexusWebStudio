@@ -1,0 +1,39 @@
+{
+  "currency": "COP",
+  "currency_symbol": "$",
+  "unit_label": "COP · pago único",
+  "payment_note": "50% al iniciar · 50% al entregar",
+  "daily_cost_note": "$2.750 / día durante 1 año",
+  "plans": {
+    "starter": {
+      "id": "inicio",
+      "name": "Plan Inicio",
+      "label": "Para dar el primer paso",
+      "tagline": "Tu negocio visible en internet desde hoy",
+      "price": 590000,
+      "price_display": "$590.000",
+      "delivery": "3 a 5 días hábiles",
+      "cta": "Quiero empezar"
+    },
+    "growth": {
+      "id": "crecimiento",
+      "name": "Plan Crecimiento",
+      "label": "La inversión más inteligente",
+      "tagline": "El que usan el 70% de nuestros clientes colombianos",
+      "price": 990000,
+      "price_display": "$990.000",
+      "delivery": "7 a 15 días hábiles",
+      "cta": "Quiero más clientes"
+    },
+    "enterprise": {
+      "id": "empresarial",
+      "name": "Plan Empresarial",
+      "label": "Para proyectos a medida",
+      "tagline": "Funcionalidades únicas para tu negocio",
+      "price": 0,
+      "price_display": "Desde $2.500.000",
+      "delivery": "Según alcance del proyecto",
+      "cta": "Solicitar cotización"
+    }
+  }
+}

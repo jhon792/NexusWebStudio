@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "portfolio": "Proyectos",
+    "pricing": "Precios",
+    "process": "Proceso",
+    "contact": "Contacto",
+    "cta_primary": "Solicitar Presupuesto",
+    "whatsapp": "WhatsApp"
+  },
+  "whatsapp": {
+    "number": "573123198706",
+    "message": "Hola%2C%20me%20interesa%20solicitar%20presupuesto%20para%20una%20p%C3%A1gina%20web.",
+    "float_title": "¡Hola! 👋",
+    "float_subtitle": "¿En qué podemos ayudarte?"
+  },
+  "region": {
+    "flag": "🇪🇸",
+    "label": "España",
+    "banner_text": "¿Tu negocio está en Colombia?",
+    "banner_cta": "Ver versión para Colombia →",
+    "banner_url": "/"
+  },
+  "cta": {
+    "quote": "Solicitar presupuesto — WhatsApp",
+    "secondary": "Ver casos de éxito",
+    "contact_form": "Quiero mi página web ahora"
+  },
+  "trust": {
+    "clients": "+40 negocios atendidos",
+    "delivery": "Entrega en 15 a 30 días",
+    "results": "Resultados medibles",
+    "support": "Soporte incluido",
+    "no_hidden_fees": "Sin costes ocultos"
+  }
+}

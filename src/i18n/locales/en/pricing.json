@@ -1,0 +1,39 @@
+{
+  "currency": "EUR",
+  "currency_symbol": "€",
+  "unit_label": "EUR · one-time payment",
+  "payment_note": "50% upfront · 50% on delivery",
+  "daily_cost_note": "€2.44 / day for 1 year",
+  "plans": {
+    "starter": {
+      "id": "professional",
+      "name": "Professional Plan",
+      "label": "Start getting clients online",
+      "tagline": "Your business visible on Google from day one",
+      "price": 890,
+      "price_display": "€890",
+      "delivery": "15 to 21 business days",
+      "cta": "Get started"
+    },
+    "growth": {
+      "id": "premium",
+      "name": "Premium Plan",
+      "label": "The most complete option",
+      "tagline": "Advanced SEO, blog, AI automation and more",
+      "price": 1490,
+      "price_display": "€1,490",
+      "delivery": "21 to 30 business days",
+      "cta": "Get more clients"
+    },
+    "enterprise": {
+      "id": "enterprise",
+      "name": "Enterprise Plan",
+      "label": "Custom development",
+      "tagline": "Unique features for your business",
+      "price": 0,
+      "price_display": "From €2,500",
+      "delivery": "Project-based timeline",
+      "cta": "Request a quote"
+    }
+  }
+}

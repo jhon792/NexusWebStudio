@@ -1,0 +1,39 @@
+{
+  "currency": "EUR",
+  "currency_symbol": "€",
+  "unit_label": "EUR · pago único",
+  "payment_note": "50% al inicio · 50% en la entrega",
+  "daily_cost_note": "2,44 € / día durante 1 año",
+  "plans": {
+    "starter": {
+      "id": "profesional",
+      "name": "Plan Profesional",
+      "label": "Para empezar a captar clientes",
+      "tagline": "Tu negocio visible en Google desde el primer mes",
+      "price": 890,
+      "price_display": "890 €",
+      "delivery": "15 a 21 días hábiles",
+      "cta": "Quiero empezar"
+    },
+    "growth": {
+      "id": "premium",
+      "name": "Plan Premium",
+      "label": "La opción más completa",
+      "tagline": "SEO avanzado, blog, automatización con IA y más",
+      "price": 1490,
+      "price_display": "1.490 €",
+      "delivery": "21 a 30 días hábiles",
+      "cta": "Quiero más clientes"
+    },
+    "enterprise": {
+      "id": "empresarial",
+      "name": "Plan Empresarial",
+      "label": "Para proyectos a medida",
+      "tagline": "Funcionalidades únicas para tu empresa",
+      "price": 0,
+      "price_display": "Desde 2.500 €",
+      "delivery": "Según alcance del proyecto",
+      "cta": "Solicitar presupuesto"
+    }
+  }
+}

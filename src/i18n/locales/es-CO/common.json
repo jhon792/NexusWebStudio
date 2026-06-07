@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "portfolio": "Ejemplos",
+    "pricing": "Planes",
+    "process": "Proceso",
+    "contact": "Contacto",
+    "cta_primary": "Cotizar Proyecto",
+    "whatsapp": "WhatsApp"
+  },
+  "whatsapp": {
+    "number": "573123198706",
+    "message": "Hola%2C%20me%20interesa%20cotizar%20una%20p%C3%A1gina%20web%20para%20mi%20negocio.",
+    "float_title": "¡Hola! 👋",
+    "float_subtitle": "¿Cómo podemos ayudarte?"
+  },
+  "region": {
+    "flag": "🇨🇴",
+    "label": "Colombia",
+    "banner_text": "¿Tu negocio está en España o Europa?",
+    "banner_cta": "Ver versión para España →",
+    "banner_url": "/en/"
+  },
+  "cta": {
+    "quote": "Cotizar gratis — WhatsApp",
+    "secondary": "Ver ejemplos de diseño",
+    "contact_form": "Quiero mi página web ahora"
+  },
+  "trust": {
+    "clients": "+40 negocios atendidos",
+    "delivery": "Entrega en 3 a 15 días",
+    "results": "Resultados verificables",
+    "support": "Soporte post-entrega",
+    "no_hidden_fees": "Sin costos ocultos"
+  }
+}

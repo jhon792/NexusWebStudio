@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "services": "Services",
+    "portfolio": "Projects",
+    "pricing": "Pricing",
+    "process": "Process",
+    "contact": "Contact",
+    "cta_primary": "Get a Quote",
+    "whatsapp": "WhatsApp"
+  },
+  "whatsapp": {
+    "number": "573123198706",
+    "message": "Hello%2C%20I%27m%20interested%20in%20getting%20a%20quote%20for%20a%20website.",
+    "float_title": "Hello! 👋",
+    "float_subtitle": "How can we help you?"
+  },
+  "region": {
+    "flag": "🌍",
+    "label": "International",
+    "banner_text": "También atendemos en Colombia",
+    "banner_cta": "Ver versión Colombia →",
+    "banner_url": "/"
+  },
+  "cta": {
+    "quote": "Get a free quote — WhatsApp",
+    "secondary": "View projects",
+    "contact_form": "I want my website now"
+  },
+  "trust": {
+    "clients": "+40 businesses served",
+    "delivery": "Delivery in 15 to 30 days",
+    "results": "Measurable results",
+    "support": "Support included",
+    "no_hidden_fees": "No hidden fees"
+  }
+}
