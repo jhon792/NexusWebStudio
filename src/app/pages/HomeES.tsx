@@ -25,7 +25,7 @@ const trustItems = [
   "Sin costes ocultos",
 ];
 
-const HEADING_LINES = ["Diseño web que", "genera clientes", "en España."];
+const HEADING_LINES = ["Páginas web que", "generan clientes", "en España."];
 
 // ── Schema JSON-LD España ───────────────────────────────────────────────────
 const schemaES = {
@@ -45,7 +45,7 @@ const schemaES = {
       "name": "Nexsu Studio — Diseño Web España",
       "url": "https://www.nexsustudio.site/en/",
       "description":
-        "Agencia de diseño web premium para España y Europa. Especializados en despachos de abogados, clínicas estéticas, odontólogos e inmobiliarias. Planes desde 450 €.",
+        "Agencia de diseño web para España y Europa. Especializados en despachos de abogados, clínicas estéticas, odontólogos e inmobiliarias. Planes desde 390 €. Precio cerrado, entrega en 10 días.",
       "priceRange": "€€",
       "currenciesAccepted": "EUR",
       "areaServed": [
@@ -53,6 +53,8 @@ const schemaES = {
         { "@type": "City", "name": "Madrid" },
         { "@type": "City", "name": "Barcelona" },
         { "@type": "City", "name": "Valencia" },
+        { "@type": "City", "name": "Sevilla" },
+        { "@type": "City", "name": "Bilbao" },
         { "@type": "AdministrativeArea", "name": "Europa" },
       ],
       "hasOfferCatalog": {
@@ -61,22 +63,22 @@ const schemaES = {
         "itemListElement": [
           {
             "@type": "Offer",
-            "itemOffered": { "@type": "Service", "name": "Plan Profesional — Diseño Web España" },
-            "price": "450",
+            "itemOffered": { "@type": "Service", "name": "Plan Esencial — Primera Presencia Online Profesional" },
+            "price": "390",
             "priceCurrency": "EUR",
             "availability": "https://schema.org/InStock",
           },
           {
             "@type": "Offer",
-            "itemOffered": { "@type": "Service", "name": "Plan Premium — Web con SEO Avanzado e IA" },
+            "itemOffered": { "@type": "Service", "name": "Plan Profesional — Web que Genera Clientes en España" },
             "price": "790",
             "priceCurrency": "EUR",
             "availability": "https://schema.org/InStock",
           },
           {
             "@type": "Offer",
-            "itemOffered": { "@type": "Service", "name": "Plan Empresarial — Desarrollo Web a Medida" },
-            "price": "1700",
+            "itemOffered": { "@type": "Service", "name": "Plan Premium — Estrategia Digital Completa con GEO SEO" },
+            "price": "1490",
             "priceCurrency": "EUR",
             "availability": "https://schema.org/InStock",
           },
@@ -88,26 +90,50 @@ const schemaES = {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "¿Cuánto cuesta una página web profesional en España?",
+          "name": "¿Cuánto cuesta una página web para abogados en España?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "En Nexsu Studio ofrecemos tres planes: Plan Profesional desde 450 €, Plan Premium desde 790 € y Plan Empresarial desde 1.700 €. Todos incluyen diseño responsive, SEO técnico inicial, hosting, dominio y soporte. Inversión única sin mensualidades.",
+            "text": "Una página web profesional para despachos de abogados en España cuesta entre 390 € y 1.490 € según el plan. El Plan Esencial cuesta 390 €, el Plan Profesional 790 € y el Plan Premium 1.490 €. Todos incluyen diseño personalizado, SEO técnico inicial y soporte. Precio cerrado, sin mensualidades.",
           },
         },
         {
           "@type": "Question",
-          "name": "¿Cuánto tiempo tarda en estar lista la web?",
+          "name": "¿Cuánto tiempo tarda en estar lista mi web?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "El Plan Profesional se entrega en 15 a 21 días hábiles. El Plan Premium en 21 a 30 días hábiles. Los proyectos empresariales tienen un plazo acordado al inicio según el alcance.",
+            "text": "El Plan Esencial se entrega en 10 días hábiles. El Plan Profesional en 15 días hábiles y el Plan Premium en 21 días hábiles. Todos los plazos están garantizados en el contrato.",
           },
         },
         {
           "@type": "Question",
-          "name": "¿Podéis hacer la web en varios idiomas?",
+          "name": "¿Mi web va a aparecer en Google?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sí. El Plan Profesional incluye 2 idiomas (español e inglés). El Plan Premium permite hasta 4 idiomas: español, inglés, francés y alemán, con hreflang correcto para SEO internacional.",
+            "text": "Sí. Todos nuestros proyectos incluyen SEO técnico inicial, configuración de Google Search Console e indexación garantizada. El posicionamiento orgánico en resultados relevantes tarda entre 3 y 6 meses desde la publicación.",
+          },
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si quiero cambiar algo después de entregada la web?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tienes soporte incluido según tu plan: 30 días en Plan Esencial, 60 días en Plan Profesional y 90 días prioritario en Plan Premium. Después del periodo de soporte ofrecemos mantenimiento mensual opcional.",
+          },
+        },
+        {
+          "@type": "Question",
+          "name": "¿Trabajan con clientes de toda España o solo de Barcelona y Madrid?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trabajamos con clientes de toda España de forma 100% remota. Hemos entregado proyectos en Madrid, Barcelona, Valencia, Sevilla, Bilbao y otras ciudades. El proceso es completamente online y en español.",
+          },
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el GEO SEO que incluye el Plan Premium?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El GEO SEO es la optimización de tu web para aparecer citada en respuestas de inteligencias artificiales como ChatGPT, Google Gemini y Claude. Incluye estructura de contenido extractable, schema markup avanzado y FAQ optimizadas para búsqueda por IA.",
           },
         },
       ],
@@ -277,8 +303,8 @@ function HeroES() {
           <TypewriterHeading />
 
           {/* Subtítulo */}
-          <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: "1.1rem", lineHeight: 1.78, color: "rgba(255,255,255,0.48)", marginBottom: 24, maxWidth: 540 }}>
-            Somos Nexsu Studio — diseñamos webs para despachos de abogados, clínicas estéticas, odontólogos e inmobiliarias en España que necesitan resultados reales, no solo un sitio bonito. +40 negocios ya confían en nosotros.
+          <motion.p custom={2} variants={fadeUp} initial="hidden" animate="visible" style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: "1.1rem", lineHeight: 1.78, color: "rgba(255,255,255,0.48)", marginBottom: 24, maxWidth: 560 }}>
+            Diseño web premium con SEO, automatización con IA y entrega en 15 días. Especialistas en abogados, clínicas estéticas, odontólogos e inmobiliarias en España.
           </motion.p>
 
           {/* Sectores */}
@@ -290,6 +316,23 @@ function HeroES() {
               </motion.a>
             ))}
           </motion.nav>
+
+          {/* Price anchor */}
+          <motion.div custom={3.5} variants={fadeUp} initial="hidden" animate="visible" className="flex items-center gap-3 mb-8">
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.38)", lineHeight: 1.5 }}>
+              Desde <strong style={{ color: "rgba(255,255,255,0.65)" }}>390 €</strong>
+              {" · "}Entrega en 10 días
+              {" · "}Precio cerrado
+            </p>
+            <button
+              type="button"
+              onClick={() => scrollTo("#pricing")}
+              style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#818cf8", background: "none", border: "none", cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px", padding: 0, minHeight: "unset", minWidth: "unset" }}
+              aria-label="Ver todos los planes de precios para España"
+            >
+              → Ver planes
+            </button>
+          </motion.div>
 
           {/* CTAs */}
           <motion.div custom={4} variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap gap-3 mb-10">
@@ -313,12 +356,14 @@ function HeroES() {
             </MagneticWrapper>
 
             <motion.button
+              type="button"
               onClick={() => scrollTo("#portfolio")}
               className="inline-flex items-center gap-2 cursor-pointer"
               style={{ padding: "14px 24px", background: "rgba(255,255,255,0.055)", border: "1px solid rgba(255,255,255,0.13)", borderRadius: 14, fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 15, color: "rgba(255,255,255,0.80)" }}
               whileHover={{ background: "rgba(255,255,255,0.09)", borderColor: "rgba(255,255,255,0.22)" }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.15 }}
+              aria-label="Ver casos de éxito y ejemplos de diseño web para España"
             >
               Ver casos de éxito
               <ArrowRight size={16} aria-hidden="true" />
@@ -343,9 +388,9 @@ function HeroES() {
 // ── Página completa España ──────────────────────────────────────────────────
 export default function HomeES() {
   usePageSEO({
-    title: "Diseño Web para España | Abogados, Clínicas e Inmobiliarias | Nexsu Studio",
+    title: "Páginas web que generan clientes para empresas, abogados y clínicas en España | Nexsu Studio",
     description:
-      "Agencia de diseño web premium para España y Europa. Especializados en despachos de abogados, clínicas estéticas, odontólogos e inmobiliarias. Planes desde 450 €. Presupuesto gratuito.",
+      "Diseño web premium con SEO, automatización con IA y entrega en 15 días. Especialistas en abogados, clínicas estéticas, odontólogos e inmobiliarias en España. Desde 390 €. Presupuesto gratuito.",
     canonical: "https://www.nexsustudio.site/en/",
   });
 

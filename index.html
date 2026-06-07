@@ -4,24 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ===== PRECONNECT (Core Web Vitals — reduce TTFB de fuentes y analytics) ===== -->
+    <!-- ===== PRECONNECT (Core Web Vitals — reduce TTFB) ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://api.emailjs.com" />
 
-    <!-- ===== FUENTE: Inter ===== -->
+    <!-- ===== FUENTE: Inter — carga asíncrona (no bloquea render) ===== -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      media="print"
+      onload="this.media='all'"
       crossorigin="anonymous"
     />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
+    </noscript>
 
     <!-- ===== SEO PRIMARIO ===== -->
     <title>Diseño Web Profesional en Colombia | Bogotá, Medellín, Villavicencio | Nexus Studio</title>
     <meta
       name="description"
-      content="Nexus Studio: diseño y desarrollo web profesional en Colombia. Landing pages desde $590.000, sitios empresariales, tiendas virtuales y sistemas web a medida. Atendemos Bogotá, Medellín y Villavicencio. ¡Cotiza gratis por WhatsApp!"
+      content="Nexus Studio: diseño y desarrollo web profesional en Colombia. Páginas web desde $590.000 COP, entrega en 10 días. Atendemos Bogotá, Medellín y Villavicencio. Cotiza gratis por WhatsApp."
     />
     <meta
       name="keywords"
@@ -48,7 +54,7 @@
     <meta property="og:title" content="Diseño Web Profesional en Colombia | Nexus Studio" />
     <meta
       property="og:description"
-      content="Sitios web que convierten visitantes en clientes. Landing pages desde $590.000 COP, sitios empresariales, tiendas online y apps web. Cotiza gratis — respondemos en minutos."
+      content="Sitios web que convierten visitantes en clientes. Páginas web desde $590.000 COP, entrega en 10 días. Cotiza gratis — respondemos en minutos."
     />
     <meta property="og:image" content="https://www.nexsustudio.site/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -65,7 +71,7 @@
     <meta name="twitter:title" content="Diseño Web Profesional en Colombia | Nexus Studio" />
     <meta
       name="twitter:description"
-      content="Sitios web que convierten visitantes en clientes. Landing pages, sitios empresariales, tiendas online. Cotiza gratis."
+      content="Sitios web que convierten visitantes en clientes. Páginas web desde $590.000 COP, entrega en 10 días. Cotiza gratis."
     />
     <meta name="twitter:image" content="https://www.nexsustudio.site/og-image.jpg" />
     <meta name="twitter:image:alt" content="Nexus Studio — Diseño Web Profesional en Colombia" />
@@ -135,7 +141,7 @@
           "image": "https://www.nexsustudio.site/og-image.jpg",
           "telephone": "+573123198706",
           "email": "contacto@nexsustudio.site",
-          "description": "Nexus Studio: diseño y desarrollo web profesional en Colombia. Creamos landing pages, sitios empresariales, tiendas virtuales y aplicaciones web a medida para negocios en Bogotá, Medellín y Villavicencio.",
+          "description": "Nexus Studio: diseño y desarrollo web profesional en Colombia. Creamos páginas web desde $590.000 COP con entrega en 10 días, SEO incluido y soporte real.",
           "priceRange": "$$",
           "currenciesAccepted": "COP",
           "paymentAccepted": "Nequi, Daviplata, Transferencia bancaria, PSE, Efectivo",
@@ -151,121 +157,29 @@
             "addressCountry": "CO"
           },
           "areaServed": [
-            {
-              "@type": "City",
-              "name": "Villavicencio",
-              "sameAs": "https://en.wikipedia.org/wiki/Villavicencio"
-            },
-            {
-              "@type": "City",
-              "name": "Bogotá",
-              "sameAs": "https://en.wikipedia.org/wiki/Bogot%C3%A1"
-            },
-            {
-              "@type": "City",
-              "name": "Medellín",
-              "sameAs": "https://en.wikipedia.org/wiki/Medell%C3%ADn"
-            },
-            {
-              "@type": "Country",
-              "name": "Colombia"
-            }
+            { "@type": "City", "name": "Villavicencio", "sameAs": "https://en.wikipedia.org/wiki/Villavicencio" },
+            { "@type": "City", "name": "Bogotá", "sameAs": "https://en.wikipedia.org/wiki/Bogot%C3%A1" },
+            { "@type": "City", "name": "Medellín", "sameAs": "https://en.wikipedia.org/wiki/Medell%C3%ADn" },
+            { "@type": "Country", "name": "Colombia" }
           ],
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 4.142,
-            "longitude": -73.626
-          },
+          "geo": { "@type": "GeoCoordinates", "latitude": 4.142, "longitude": -73.626 },
           "hasMap": "https://maps.google.com/maps?q=Villavicencio,+Meta,+Colombia",
           "openingHoursSpecification": [
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-              "opens": "08:00",
-              "closes": "18:00"
-            },
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": "Saturday",
-              "opens": "09:00",
-              "closes": "14:00"
-            }
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "14:00" }
           ],
-          "contactPoint": [
-            {
-              "@type": "ContactPoint",
-              "telephone": "+573123198706",
-              "contactType": "customer service",
-              "contactOption": "TollFree",
-              "availableLanguage": "Spanish",
-              "areaServed": "CO"
-            }
-          ],
-          "sameAs": [
-            "https://wa.me/573123198706",
-            "https://www.instagram.com/nexsustudio",
-            "https://www.facebook.com/nexsustudio"
-          ],
+          "contactPoint": [{ "@type": "ContactPoint", "telephone": "+573123198706", "contactType": "customer service", "contactOption": "TollFree", "availableLanguage": "Spanish", "areaServed": "CO" }],
+          "sameAs": ["https://wa.me/573123198706", "https://www.instagram.com/nexsustudio", "https://www.facebook.com/nexsustudio"],
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Servicios de Diseño Web",
+            "name": "Planes de Diseño Web — Colombia",
             "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Landing Page de Alto Impacto",
-                  "description": "Página de aterrizaje optimizada para conversión"
-                },
-                "price": "590000",
-                "priceCurrency": "COP",
-                "availability": "https://schema.org/InStock"
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Sitio Web Empresarial con SEO",
-                  "description": "Sitio corporativo completo con posicionamiento en Google"
-                },
-                "price": "990000",
-                "priceCurrency": "COP",
-                "availability": "https://schema.org/InStock"
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Plan Empresarial — Sistema Web a Medida",
-                  "description": "Desarrollo web personalizado con tienda virtual o sistema de citas"
-                },
-                "price": "2500000",
-                "priceCurrency": "COP",
-                "availability": "https://schema.org/InStock"
-              }
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan Esencial — Presencia Web Profesional" }, "price": "590000", "priceCurrency": "COP", "availability": "https://schema.org/InStock" },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan Profesional — Web con SEO y Captación de Clientes" }, "price": "990000", "priceCurrency": "COP", "availability": "https://schema.org/InStock" },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan Empresarial — Desarrollo Web a Medida" }, "price": "2500000", "priceCurrency": "COP", "availability": "https://schema.org/InStock" }
             ]
           },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "40",
-            "bestRating": "5",
-            "worstRating": "1"
-          },
-          "review": [
-            {
-              "@type": "Review",
-              "author": { "@type": "Person", "name": "Dra. Claudia Herrera" },
-              "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-              "reviewBody": "Con la web nueva empezamos a recibir citas por formulario desde la primera semana. En el primer mes ya teníamos 23 citas nuevas que llegaron directamente por Google."
-            },
-            {
-              "@type": "Review",
-              "author": { "@type": "Person", "name": "Andrés Morales" },
-              "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-              "reviewBody": "Al mes de lanzarla ya había recuperado la inversión con un solo cliente nuevo. Ahora me llegan consultas mientras duermo."
-            }
-          ]
+          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "40", "bestRating": "5", "worstRating": "1" }
         }
       ]
     }
@@ -274,6 +188,19 @@
     <!-- ===== PERFORMANCE: Resource hints ===== -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
     <link rel="dns-prefetch" href="https://api.emailjs.com" />
+
+    <!-- ===== LANG DINÁMICO: sincroniza <html lang> con la ruta ===== -->
+    <script>
+      (function() {
+        var p = window.location.pathname;
+        var lang = p.startsWith('/en/it') ? 'it'
+                 : p.startsWith('/en/fr') ? 'fr'
+                 : p.startsWith('/en/en') ? 'en'
+                 : p.startsWith('/en') ? 'es-ES'
+                 : 'es-CO';
+        document.documentElement.lang = lang;
+      })();
+    </script>
   </head>
   <body>
     <!-- Skip to content para accesibilidad y SEO -->

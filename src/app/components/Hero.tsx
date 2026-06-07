@@ -422,6 +422,7 @@ export function Hero() {
 
               {/* Botón secundario */}
               <motion.button
+                type="button"
                 onClick={() => scrollTo("#portfolio")}
                 className="inline-flex items-center gap-2 cursor-pointer"
                 style={{
@@ -445,6 +446,29 @@ export function Hero() {
                 Ver ejemplos de diseño
                 <ArrowRight size={16} aria-hidden="true" />
               </motion.button>
+            </motion.div>
+
+            {/* Price anchor */}
+            <motion.div
+              custom={4.5}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              className="flex items-center gap-3 mb-8"
+            >
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.38)", lineHeight: 1.5 }}>
+                Desde <strong style={{ color: "rgba(255,255,255,0.65)" }}>$590.000 COP</strong>
+                {" · "}Entrega en 10 días
+                {" · "}Sin permanencia
+              </p>
+              <button
+                type="button"
+                onClick={() => scrollTo("#pricing")}
+                style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#818cf8", background: "none", border: "none", cursor: "pointer", textDecoration: "underline", textUnderlineOffset: "3px", padding: 0, minHeight: "unset", minWidth: "unset" }}
+                aria-label="Ver todos los planes de precios"
+              >
+                → Ver planes
+              </button>
             </motion.div>
 
             {/* Trust indicators */}

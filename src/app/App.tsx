@@ -80,9 +80,17 @@ function AppRoutes() {
           <Route path="/terminos" element={<TermsConditions />} />
           <Route path="/aviso-legal" element={<LegalNotice />} />
 
-          {/* ── España / Europa (es-ES) — rutas /en/* ─────────────────── */}
+          {/* ── España / Europa — rutas /en/* ────────────────────────── */}
           <Route path="/en" element={<HomeES />} />
           <Route path="/en/" element={<HomeES />} />
+          {/* Versiones idiomáticas España */}
+          <Route path="/en/en" element={<HomeES />} />
+          <Route path="/en/en/" element={<HomeES />} />
+          <Route path="/en/fr" element={<HomeES />} />
+          <Route path="/en/fr/" element={<HomeES />} />
+          <Route path="/en/it" element={<HomeES />} />
+          <Route path="/en/it/" element={<HomeES />} />
+          {/* Legales */}
           <Route path="/en/blog/:slug" element={<BlogArticle />} />
           <Route path="/en/privacidad" element={<PrivacyPolicy />} />
           <Route path="/en/cookies" element={<CookiePolicy />} />

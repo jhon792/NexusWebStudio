@@ -6,19 +6,25 @@ import {
   BarChart2, Lock, Monitor, Eye, Globe,
 } from "lucide-react";
 
-const WA = "https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20cotizar%20una%20p%C3%A1gina%20web.";
+const WA_BASE = "https://wa.me/573123198706?text=";
+const WA_PLANS: Record<string, string> = {
+  inicio: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Esencial ($590.000 COP). ¿Pueden darme más información?"),
+  crecimiento: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Profesional ($990.000 COP). ¿Pueden darme más información?"),
+  empresarial: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Empresarial (desde $2.500.000 COP). ¿Pueden darme más información?"),
+};
+const WA = WA_BASE + encodeURIComponent("Hola, me interesa cotizar una página web para mi negocio.");
 
 const plans = [
   {
     id: "inicio",
     badge: null,
-    name: "Plan Inicio",
-    label: "Para dar el primer paso",
-    tagline: "Tu negocio visible en internet desde hoy",
+    name: "Plan Esencial",
+    label: "Presencia online profesional",
+    tagline: "Presencia online profesional para tu negocio",
     price: 590000,
     priceLabel: null,
     currency: "COP",
-    delivery: "3 a 5 días hábiles",
+    delivery: "10 días hábiles",
     accent: "#818cf8",
     featured: false,
     cta: "Quiero empezar",
@@ -26,28 +32,30 @@ const plans = [
     urgency: null,
     dailyCost: null,
     socialProof: null,
-    description: "Para negocios que necesitan presencia profesional rápida y comenzar a recibir consultas por internet.",
+    description: "Ideal para emprendedores, profesionales independientes y pequeños negocios en Colombia que necesitan una web seria que genere confianza y contactos.",
     features: [
-      "Tu negocio disponible las 24 horas",
-      "Clientes te contactan por WhatsApp directo",
-      "Diseño moderno que transmite confianza",
-      "Formulario para captar nuevos contactos",
-      "Sitio seguro con candado verde",
-      "Lista en 3 a 5 días hábiles",
+      "Diseño web responsive hasta 5 páginas",
+      "SEO técnico inicial + indexación en Google",
+      "Google Analytics + Search Console configurado",
+      "SSL incluido + formulario de contacto",
+      "WhatsApp Business integrado",
+      "Velocidad optimizada (Lighthouse +90)",
+      "Entrega garantizada en 10 días hábiles",
+      "Soporte técnico 30 días",
     ],
     missing: [
-      "Sin aparición en Google cuando te buscan",
+      "Sin blog optimizado para SEO",
       "Sin dominio propio (ej: tunegocio.com)",
-      "Sin estadísticas de cuántos te visitan",
       "Sin posicionamiento en Google Maps",
+      "Sin landing page de captación por servicio",
     ],
   },
   {
     id: "crecimiento",
-    badge: "⭐ MÁS ELEGIDO",
-    name: "Plan Crecimiento",
-    label: "La inversión más inteligente",
-    tagline: "El que usan el 70% de nuestros clientes colombianos",
+    badge: "⭐ MÁS POPULAR",
+    name: "Plan Profesional",
+    label: "La web que trabaja por tu negocio 24/7",
+    tagline: "La web que trabaja por tu negocio 24/7",
     price: 990000,
     priceLabel: null,
     currency: "COP",
@@ -55,20 +63,20 @@ const plans = [
     accent: "#a78bfa",
     featured: true,
     cta: "Quiero más clientes",
-    roiNote: "1 paciente o consulta cerrada = inversión recuperada",
-    urgency: "Solo 2 cupos disponibles en junio — uno ya está reservado",
+    roiNote: "1 consulta cerrada = inversión recuperada",
+    urgency: "Solo 2 cupos disponibles — uno ya reservado",
     dailyCost: "$2.750 / día durante 1 año",
-    socialProof: "7 de cada 10 clientes eligen este plan",
-    description: "Diseñado para negocios en Colombia que quieren aparecer en Google cuando alguien busca su servicio en su ciudad. Clínicas, consultorios, restaurantes, escuelas, abogados: este es el plan que genera clientes constantemente.",
+    socialProof: "7 de cada 10 clientes colombianos eligen este plan",
+    description: "Para clínicas, consultorios, abogados y pymes colombianas que quieren captar clientes por internet con SEO, WhatsApp y diseño premium.",
     features: [
-      "Todo lo del Plan Inicio incluido",
-      "Apareces cuando alguien te busca en Google",
-      "Hasta 5 secciones diseñadas para vender",
-      "Tus clientes te encuentran en Google Maps",
-      "Dominio profesional tuyo (ej: tuclinica.co)",
-      "Hosting incluido por 1 año completo",
+      "Todo lo del Plan Esencial incluido",
+      "Hasta 8 páginas + blog configurado",
+      "SEO avanzado por sector (abogados, clínicas…)",
+      "Copy de conversión incluido por nuestro equipo",
+      "Dominio .com.co tuyo + hosting 1 año",
       "Sabes cuántas personas visitan tu web",
       "Formularios avanzados de captura de leads",
+      "Tus clientes te encuentran en Google Maps",
       "Soporte y ajustes durante 60 días",
       "Diseño adaptado a tu sector de negocio",
     ],
@@ -78,8 +86,8 @@ const plans = [
     id: "empresarial",
     badge: null,
     name: "Plan Empresarial",
-    label: "Para proyectos a medida",
-    tagline: "Funcionalidades únicas para tu negocio",
+    label: "Estrategia digital completa",
+    tagline: "Estrategia digital completa para liderar tu sector",
     price: 0,
     priceLabel: "Desde $2.500.000",
     currency: "COP",
@@ -91,16 +99,16 @@ const plans = [
     urgency: null,
     dailyCost: null,
     socialProof: null,
-    description: "Para negocios que necesitan algo único: sistema de citas, tienda virtual, automatizaciones o plataformas completamente a medida.",
+    description: "Para negocios que quieren dominar su categoría en Google, aparecer en ChatGPT y Gemini, y automatizar la captación de clientes con IA.",
     features: [
       "Sistema de citas o reservas online",
       "Tienda virtual para vender tus productos",
       "Automatizaciones que trabajan por ti",
       "Integración con tus herramientas actuales",
       "Panel para gestionar tu contenido",
-      "Crece y escala sin límites",
+      "GEO SEO: visible en ChatGPT, Gemini y Claude",
       "Posicionamiento avanzado en Google",
-      "Soporte prioritario dedicado",
+      "Soporte prioritario dedicado 6 meses",
     ],
     missing: [],
   },
@@ -443,6 +451,7 @@ export function Pricing() {
                   {/* CTAs */}
                   <div className="flex flex-col gap-2.5 mt-auto">
                     <motion.button
+                      type="button"
                       onClick={scrollToContact}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -456,20 +465,22 @@ export function Pricing() {
                           ? { background: `${plan.accent}15`, color: plan.accent, border: `1px solid ${plan.accent}30` }
                           : { background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.85)", border: "1px solid rgba(255,255,255,0.1)" }),
                       }}
+                      aria-label={`${plan.cta} — ${plan.name}`}
                     >
                       {plan.cta}
-                      <ArrowRight size={15} />
+                      <ArrowRight size={15} aria-hidden="true" />
                     </motion.button>
 
                     <motion.a
-                      href={WA}
+                      href={WA_PLANS[plan.id] ?? WA}
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.01 }}
                       className="w-full py-2.5 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-sm"
                       style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, background: "rgba(37,211,102,0.08)", color: "#4ade80", border: "1px solid rgba(37,211,102,0.18)", textDecoration: "none" }}
+                      aria-label={`Preguntar por WhatsApp sobre ${plan.name}`}
                     >
-                      <MessageCircle size={14} />
+                      <MessageCircle size={14} aria-hidden="true" />
                       Preguntar por WhatsApp
                     </motion.a>
                   </div>
@@ -565,14 +576,16 @@ export function Pricing() {
             className="mt-10 flex flex-col sm:flex-row gap-3 items-center justify-center"
           >
             <motion.button
+              type="button"
               onClick={scrollToContact}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="px-8 py-3.5 rounded-xl font-semibold text-sm cursor-pointer inline-flex items-center gap-2 group"
               style={{ fontFamily: "Inter, sans-serif", background: "linear-gradient(135deg, #6366f1, #a855f7)", color: "#fff", boxShadow: "0 8px 24px rgba(99,102,241,0.3)" }}
+              aria-label="Quiero mi página web ahora — ir al formulario de contacto"
             >
               Quiero mi página web ahora
-              <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
             </motion.button>
             <motion.a
               href={WA}

@@ -1,0 +1,63 @@
+/* ── Focus visible global — accesibilidad teclado ─────────────────────────── */
+:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Eliminar outline en click (solo mostrar en teclado) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Prefers reduced motion — rendimiento + accesibilidad ─────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Mínimo tap target (accesibilidad móvil) ─────────────────────────────── */
+button,
+[role="button"],
+a {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Excluir elementos decorativos de la regla anterior */
+button.no-min,
+a.no-min {
+  min-height: unset;
+  min-width: unset;
+}
+
+/* ── Sr-only (skip to content) ───────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only.focus\:not-sr-only:focus,
+.focus\:not-sr-only:focus {
+  position: fixed;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
