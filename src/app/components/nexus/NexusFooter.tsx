@@ -74,10 +74,6 @@ export function NexusFooter() {
 
       <div className="nx-footer__bottom">
         <p>© 2025 Nexus Studio. {fo.rights}</p>
-        <div className="nx-footer__legal">
-          <Link to="/">{fo.co}</Link>
-          <Link to="/es">{fo.eu}</Link>
-        </div>
       </div>
     </footer>
   );

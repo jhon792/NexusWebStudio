@@ -51,8 +51,8 @@ export function NexusTopBar() {
         </nav>
 
         <div className="nx-topbar__right">
-          <span className="nx-topbar__region" title="Región detectada por IP">
-            {region === "CO" ? "🇨🇴 COP" : "🇪🇺 EUR"}
+          <span className="nx-topbar__region" title="Moneda según tu ubicación">
+            {region === "CO" ? "COP" : "EUR"}
           </span>
           <NexusLangSwitcher />
           <button type="button" className="nx-topbar__cta" onClick={() => scrollTo("#nx-funnel")}>
