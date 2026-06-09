@@ -1,0 +1,308 @@
+/* ============================================================================
+   COMPONENTE 3 · EMBUDO DE CONVERSIÓN MULTI-PASO (estilo SaaS de lujo)
+   ============================================================================ */
+
+.nx-funnel {
+  position: relative;
+  background: var(--nx-navy);
+  padding: clamp(4.5rem, 10vh, 7rem) 1.5rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+.nx-funnel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(50% 50% at 85% 0%, rgba(212, 175, 55, 0.16), transparent 60%),
+    radial-gradient(50% 60% at 10% 100%, rgba(44, 79, 124, 0.5), transparent 60%);
+}
+
+.nx-funnel__head {
+  max-width: 640px;
+  margin: 0 auto 2.4rem;
+  text-align: center;
+}
+.nx-funnel__eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nx-gold);
+}
+.nx-funnel__title {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  line-height: 1.12;
+  color: #fff;
+  margin: 0.7rem 0 0;
+}
+
+/* ── Tarjeta del formulario ────────────────────────────────── */
+.nx-funnel__card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--nx-surface);
+  border-radius: var(--nx-radius);
+  box-shadow: var(--nx-shadow-lg);
+  overflow: hidden;
+}
+
+/* Barra de progreso de 1px (efecto Zeigarnik) */
+.nx-funnel__progress {
+  height: 2px;
+  width: 100%;
+  background: var(--nx-line);
+}
+.nx-funnel__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--nx-gold), var(--nx-gold-hover));
+  transition: width 0.5s ease-in-out;
+}
+
+.nx-funnel__inner { padding: clamp(1.6rem, 4vw, 2.6rem); }
+
+.nx-funnel__steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.8rem;
+  font-size: 0.78rem;
+  color: var(--nx-muted);
+  font-weight: 600;
+}
+.nx-funnel__step-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--nx-line-strong);
+  transition: background 0.4s var(--nx-ease), transform 0.4s var(--nx-ease);
+}
+.nx-funnel__step-dot--on { background: var(--nx-gold); transform: scale(1.3); }
+.nx-funnel__step-sep { width: 18px; height: 1px; background: var(--nx-line-strong); }
+
+.nx-funnel__q {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+  color: var(--nx-ink);
+  text-align: center;
+  margin: 0 0 0.4rem;
+}
+.nx-funnel__hint {
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--nx-muted);
+  margin: 0 0 1.8rem;
+}
+
+/* ── Tarjetas de selección (sin dropdowns) ─────────────────── */
+.nx-funnel__options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.85rem;
+}
+.nx-funnel__option {
+  position: relative;
+  text-align: left;
+  border: 1.5px solid var(--nx-line-strong);
+  background: var(--nx-surface);
+  border-radius: var(--nx-radius-sm);
+  padding: 1.1rem 1.1rem 1rem;
+  cursor: pointer;
+  transition: border-color 0.35s var(--nx-ease),
+              box-shadow 0.35s var(--nx-ease),
+              transform 0.35s var(--nx-ease),
+              background 0.35s var(--nx-ease);
+}
+.nx-funnel__option:hover {
+  border-color: var(--nx-navy-500);
+  transform: translateY(-3px);
+  box-shadow: var(--nx-shadow-md);
+}
+.nx-funnel__option:focus-visible {
+  outline: 2px solid var(--nx-gold);
+  outline-offset: 2px;
+}
+/* Cambio de estado DRÁSTICO al activarse */
+.nx-funnel__option--on {
+  border-color: var(--nx-gold);
+  background: var(--nx-gold-soft);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18), var(--nx-shadow-md);
+  transform: translateY(-3px);
+}
+.nx-funnel__option-icon {
+  width: 40px; height: 40px;
+  border-radius: 11px;
+  display: grid; place-items: center;
+  background: var(--nx-surface-2);
+  color: var(--nx-navy);
+  margin-bottom: 0.75rem;
+  transition: background 0.35s var(--nx-ease), color 0.35s var(--nx-ease);
+}
+.nx-funnel__option--on .nx-funnel__option-icon {
+  background: var(--nx-gold);
+  color: var(--nx-navy);
+}
+.nx-funnel__option-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--nx-ink);
+  margin-bottom: 0.2rem;
+}
+.nx-funnel__option-desc {
+  font-size: 0.82rem;
+  color: var(--nx-muted);
+  line-height: 1.4;
+}
+.nx-funnel__check {
+  position: absolute;
+  top: 0.85rem; right: 0.85rem;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--nx-gold);
+  display: grid; place-items: center;
+  color: var(--nx-navy);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.3s var(--nx-ease), transform 0.3s var(--nx-ease-magnet);
+}
+.nx-funnel__option--on .nx-funnel__check { opacity: 1; transform: scale(1); }
+
+/* ── Paso 3 · inputs ───────────────────────────────────────── */
+.nx-funnel__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.nx-funnel__field { display: flex; flex-direction: column; gap: 0.45rem; }
+.nx-funnel__field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--nx-ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.nx-funnel__input {
+  width: 100%;
+  border: 1.5px solid var(--nx-line-strong);
+  border-radius: var(--nx-radius-sm);
+  padding: 0.9rem 1rem;
+  font-family: var(--nx-sans);
+  font-size: 1rem;
+  color: var(--nx-ink);
+  background: var(--nx-surface);
+  transition: border-color 0.3s var(--nx-ease), box-shadow 0.3s var(--nx-ease);
+}
+.nx-funnel__input::placeholder { color: #9aa7b4; }
+.nx-funnel__input:focus {
+  outline: none;
+  border-color: var(--nx-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.16);
+}
+.nx-funnel__input--error {
+  border-color: var(--nx-danger);
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+}
+.nx-funnel__error {
+  font-size: 0.78rem;
+  color: var(--nx-danger);
+  font-weight: 600;
+}
+.nx-funnel__consent {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: 0.8rem;
+  color: var(--nx-muted);
+  line-height: 1.45;
+}
+.nx-funnel__consent input { margin-top: 3px; accent-color: var(--nx-gold-hover); }
+
+/* ── Navegación ────────────────────────────────────────────── */
+.nx-funnel__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+.nx-funnel__back {
+  border: none;
+  background: transparent;
+  color: var(--nx-muted);
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.3rem;
+  transition: color 0.3s var(--nx-ease);
+}
+.nx-funnel__back:hover { color: var(--nx-navy); }
+.nx-funnel__back:disabled { opacity: 0; pointer-events: none; }
+
+.nx-funnel__next {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 1.7rem;
+  font-family: var(--nx-sans);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  background: var(--nx-navy);
+  color: #fff;
+  box-shadow: var(--nx-shadow-md);
+  transition: transform 0.4s var(--nx-ease-magnet),
+              background 0.4s var(--nx-ease),
+              box-shadow 0.4s var(--nx-ease), opacity 0.3s;
+}
+.nx-funnel__next:hover:not(:disabled) { transform: translateY(-2px); }
+.nx-funnel__next:disabled { opacity: 0.45; cursor: not-allowed; }
+.nx-funnel__next--submit {
+  background: var(--nx-gold);
+  color: var(--nx-navy);
+  box-shadow: var(--nx-shadow-gold);
+}
+.nx-funnel__next svg { transition: transform 0.4s var(--nx-ease); }
+.nx-funnel__next:hover:not(:disabled) svg { transform: translateX(4px); }
+
+/* ── Pantalla de éxito ─────────────────────────────────────── */
+.nx-funnel__success {
+  text-align: center;
+  padding: 1rem 0.5rem;
+}
+.nx-funnel__success-badge {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 1.3rem;
+  display: grid; place-items: center;
+  background: rgba(31, 157, 107, 0.12);
+  color: var(--nx-success);
+}
+.nx-funnel__success h3 {
+  font-family: var(--nx-serif);
+  font-size: 1.6rem;
+  color: var(--nx-ink);
+  margin: 0 0 0.6rem;
+}
+.nx-funnel__success p {
+  color: var(--nx-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  max-width: 38ch;
+  margin: 0 auto;
+}
+
+@media (max-width: 480px) {
+  .nx-funnel__options { grid-template-columns: 1fr; }
+  .nx-funnel__next { padding: 0.9rem 1.3rem; font-size: 0.95rem; }
+}

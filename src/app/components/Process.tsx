@@ -1,11 +1,12 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { useRegion } from "../../hooks/useRegion";
+import { useLang } from "../../hooks/useLang";
 import { PROCESS_SPAIN, type Region4 } from "../../i18n/spainContent";
 
 const STEP_ACCENTS = ["#818cf8", "#a78bfa", "#c084fc", "#818cf8", "#a78bfa", "#c084fc"];
 
-const CO_STEPS = [
+const CO_STEPS_ES = [
   { number: "01", title: "Nos cuentas tu idea",              description: "Hablamos por WhatsApp o formulario. Cuéntanos qué hace tu negocio, a quién va dirigido y qué esperas de tu sitio web. Sin tecnicismos, en tu idioma." },
   { number: "02", title: "Analizamos tu negocio",            description: "Estudiamos tu sector, tu competencia y tu público objetivo para entender cómo tu sitio web puede generar el mayor impacto posible para tu negocio." },
   { number: "03", title: "Diseñamos una propuesta visual",   description: "Creamos una propuesta de diseño personalizada para tu negocio. Ves cómo se verá tu sitio antes de que comience el desarrollo técnico." },
@@ -14,17 +15,28 @@ const CO_STEPS = [
   { number: "06", title: "Te acompañamos en el lanzamiento", description: "Te explicamos cómo usar y actualizar tu sitio. Resolvemos dudas, ajustamos detalles y te damos soporte para que el lanzamiento sea un éxito." },
 ];
 
+const CO_STEPS_EN = [
+  { number: "01", title: "You tell us your idea",           description: "We talk via WhatsApp or form. Tell us what your business does, who it's aimed at and what you expect from your website. No technical jargon, in plain language." },
+  { number: "02", title: "We analyse your business",        description: "We study your sector, your competition and your target audience to understand how your website can generate the greatest possible impact for your business." },
+  { number: "03", title: "We design a visual proposal",     description: "We create a personalised design proposal for your business. You see how your site will look before technical development begins." },
+  { number: "04", title: "We develop your site",            description: "We build your website with clean code, fast loading and all agreed features. We keep you informed throughout the entire process." },
+  { number: "05", title: "We launch your website",          description: "We configure the domain, hosting and SSL certificate. Your site is published, visible on Google and working 100%." },
+  { number: "06", title: "We support your launch",          description: "We explain how to use and update your site. We answer questions, adjust details and provide support so your launch is a success." },
+];
+
 export function Process() {
   const sectionRef = useRef<HTMLElement>(null);
   const region = useRegion();
+  const lang = useLang();
   const isSpain = region !== "CO";
   const r = region as Region4;
   const d = isSpain ? (PROCESS_SPAIN[r] ?? PROCESS_SPAIN.ES) : null;
+  const isCOEn = !isSpain && lang.startsWith("en");
 
-  const badge     = d?.badge     ?? "Nuestro Proceso";
-  const heading   = d?.heading   ?? "De la idea a la web en";
-  const highlight = d?.headingHighlight ?? "6 pasos claros";
-  const rawSteps  = d?.steps ?? CO_STEPS;
+  const badge     = d?.badge     ?? (isCOEn ? "Our Process"            : "Nuestro Proceso");
+  const heading   = d?.heading   ?? (isCOEn ? "From idea to website in" : "De la idea a la web en");
+  const highlight = d?.headingHighlight ?? (isCOEn ? "6 clear steps"   : "6 pasos claros");
+  const rawSteps  = d?.steps ?? (isCOEn ? CO_STEPS_EN : CO_STEPS_ES);
 
   const steps = (rawSteps as readonly { number: string; title: string; description: string }[]).map((s, i) => ({
     ...s,

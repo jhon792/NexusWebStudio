@@ -1,8 +1,9 @@
 import { motion } from "motion/react";
 import { useRegion } from "../../hooks/useRegion";
+import { useLang } from "../../hooks/useLang";
 import { TRUST_SPAIN, type Region4 } from "../../i18n/spainContent";
 
-const CO_PROBLEMS = [
+const CO_PROBLEMS_ES = [
   "Tu competencia aparece en Google cuando te buscan — tú no.",
   "Pierdes clientes que buscan tu servicio a las 2am.",
   "Sin web, pedir por WhatsApp parece informal y aleja prospectos.",
@@ -11,17 +12,47 @@ const CO_PROBLEMS = [
   "Cada mes sin web son clientes que van directo a tu competencia.",
 ];
 
+const CO_PROBLEMS_EN = [
+  "Your competitors appear on Google when customers search — you don't.",
+  "You lose clients who search for your service at 2am.",
+  "Without a website, WhatsApp-only businesses look informal and push away prospects.",
+  "You depend on social media that can block you or disappear at any time.",
+  "You can't showcase your work with professional credibility.",
+  "Every month without a website means clients going straight to your competition.",
+];
+
+const CO_TEXT = {
+  ES: {
+    badge: "El problema",
+    heading: "Si tienes un negocio en Colombia y aún dependes del voz a voz, estás",
+    headingHighlight: "perdiendo clientes a diario.",
+    problems: CO_PROBLEMS_ES,
+    closing: "Una web de Nexus Studio trabaja por tu negocio",
+    closingHighlight: "24/7, en Google, en Maps, desde el celular.",
+  },
+  EN: {
+    badge: "The Problem",
+    heading: "If you have a business in Colombia and still rely on word of mouth, you're",
+    headingHighlight: "losing clients every day.",
+    problems: CO_PROBLEMS_EN,
+    closing: "A Nexus Studio website works for your business",
+    closingHighlight: "24/7, on Google, on Maps, from any phone.",
+  },
+};
+
 export function TrustSection() {
   const region = useRegion();
+  const lang = useLang();
   const isSpain = region !== "CO";
   const d = isSpain ? (TRUST_SPAIN[region as Region4] ?? TRUST_SPAIN.ES) : null;
+  const co = CO_TEXT[!isSpain && lang.startsWith("en") ? "EN" : "ES"];
 
-  const badge = d?.badge ?? "El problema";
-  const heading = d?.heading ?? "Si tienes un negocio en Colombia y aún dependes del voz a voz, estás";
-  const headingHighlight = d?.headingHighlight ?? "perdiendo clientes a diario.";
-  const problems = d?.problems ?? CO_PROBLEMS;
-  const closing = d?.closing ?? "Una web de Nexus Studio trabaja por tu negocio";
-  const closingHighlight = d?.closingHighlight ?? "24/7, en Google, en Maps, desde el celular.";
+  const badge = d?.badge ?? co.badge;
+  const heading = d?.heading ?? co.heading;
+  const headingHighlight = d?.headingHighlight ?? co.headingHighlight;
+  const problems = d?.problems ?? co.problems;
+  const closing = d?.closing ?? co.closing;
+  const closingHighlight = d?.closingHighlight ?? co.closingHighlight;
 
   return (
     <section

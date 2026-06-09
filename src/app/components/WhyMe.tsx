@@ -4,6 +4,7 @@ import {
   MessageSquare, Code2, Zap, ShieldCheck,
 } from "lucide-react";
 import { useRegion } from "../../hooks/useRegion";
+import { useLang } from "../../hooks/useLang";
 import { WHYME_SPAIN, type Region4 } from "../../i18n/spainContent";
 
 const DIFF_META = [
@@ -17,37 +18,74 @@ const DIFF_META = [
   { icon: ShieldCheck,    accent: "#fb7185" },
 ];
 
-const CO_DIFFS = [
-  { title: "Atención personalizada",         description: "Trabajamos directamente contigo, sin intermediarios. Cada proyecto recibe atención dedicada desde el inicio hasta el lanzamiento." },
-  { title: "Diseño moderno",                 description: "Creamos diseños visualmente atractivos y actuales, alineados con las tendencias del sector y adaptados a la identidad de tu negocio." },
-  { title: "Optimización móvil",             description: "Tu sitio se ve perfecto en celulares. Diseñamos primero para móvil porque la mayoría de tus clientes potenciales llegan desde su teléfono." },
+const CO_DIFFS_ES = [
+  { title: "Atención personalizada",           description: "Trabajamos directamente contigo, sin intermediarios. Cada proyecto recibe atención dedicada desde el inicio hasta el lanzamiento." },
+  { title: "Diseño moderno",                   description: "Creamos diseños visualmente atractivos y actuales, alineados con las tendencias del sector y adaptados a la identidad de tu negocio." },
+  { title: "Optimización móvil",               description: "Tu sitio se ve perfecto en celulares. Diseñamos primero para móvil porque la mayoría de tus clientes potenciales llegan desde su teléfono." },
   { title: "Enfoque en experiencia de usuario",description: "Cada elemento está pensado para guiar al visitante hacia la acción que más te interesa: llamarte, escribirte o solicitar información." },
-  { title: "Comunicación constante",         description: "Te mantenemos informado durante todo el proceso. Respondemos tus preguntas y te explicamos cada decisión de diseño y desarrollo." },
-  { title: "Desarrollo a medida",            description: "No usamos plantillas genéricas. Tu sitio web es creado específicamente para tu negocio, sus objetivos y su público objetivo." },
-  { title: "Tecnología actual",              description: "Construimos con tecnologías modernas que garantizan velocidad, seguridad y escalabilidad para que tu sitio funcione de forma óptima." },
-  { title: "Seguridad web",                  description: "Implementamos certificado SSL, cabeceras de seguridad y buenas prácticas para proteger tu sitio y la información de tus visitantes." },
+  { title: "Comunicación constante",           description: "Te mantenemos informado durante todo el proceso. Respondemos tus preguntas y te explicamos cada decisión de diseño y desarrollo." },
+  { title: "Desarrollo a medida",              description: "No usamos plantillas genéricas. Tu sitio web es creado específicamente para tu negocio, sus objetivos y su público objetivo." },
+  { title: "Tecnología actual",                description: "Construimos con tecnologías modernas que garantizan velocidad, seguridad y escalabilidad para que tu sitio funcione de forma óptima." },
+  { title: "Seguridad web",                    description: "Implementamos certificado SSL, cabeceras de seguridad y buenas prácticas para proteger tu sitio y la información de tus visitantes." },
 ];
+
+const CO_DIFFS_EN = [
+  { title: "Personalised attention",          description: "We work directly with you, no intermediaries. Every project receives dedicated attention from start to launch." },
+  { title: "Modern design",                   description: "We create visually attractive and current designs, aligned with industry trends and adapted to your brand identity." },
+  { title: "Mobile optimisation",             description: "Your site looks perfect on phones. We design mobile-first because most of your potential clients arrive from their smartphone." },
+  { title: "User experience focus",           description: "Every element is designed to guide the visitor toward the action that matters most: calling you, messaging you or requesting information." },
+  { title: "Constant communication",          description: "We keep you informed throughout the entire process. We answer your questions and explain every design and development decision." },
+  { title: "Custom development",              description: "We don't use generic templates. Your website is created specifically for your business, its goals and its target audience." },
+  { title: "Current technology",              description: "We build with modern technologies that guarantee speed, security and scalability so your site works optimally." },
+  { title: "Web security",                    description: "We implement SSL certificate, security headers and best practices to protect your site and your visitors' information." },
+];
+
+const CO_CTA = {
+  ES: {
+    badge: "Nuestros diferenciadores",
+    heading: "No somos una fábrica de webs.",
+    highlight: "Máximo 3 clientes al mes.",
+    subtitle: "Por eso cada sitio está construido 100% a medida, con atención directa y resultados verificables.",
+    ctaTitle: "Quedan 2 cupos en junio. ¿Tu negocio merece uno?",
+    ctaSub: "Empieza con un diagnóstico gratuito — sin compromiso, sin pagar nada, sin tecnicismos.",
+    ctaBtn: "Diagnóstico gratuito",
+    ctaWA: "WhatsApp",
+  },
+  EN: {
+    badge: "Our differentiators",
+    heading: "We're not a web factory.",
+    highlight: "Maximum 3 clients per month.",
+    subtitle: "That's why every site is built 100% custom, with direct attention and verifiable results.",
+    ctaTitle: "2 spots left in June. Does your business deserve one?",
+    ctaSub: "Start with a free diagnosis — no commitment, no payment, no technical jargon.",
+    ctaBtn: "Free diagnosis",
+    ctaWA: "WhatsApp",
+  },
+};
 
 const WA_CO = "https://wa.me/573123198706?text=Hola%2C%20quiero%20el%20diagn%C3%B3stico%20gratuito%20de%20mi%20p%C3%A1gina%20web.";
 const WA_ES = "https://wa.me/573123198706?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20servicios%20para%20Espa%C3%B1a.";
 
 export function WhyMe() {
   const region = useRegion();
+  const lang = useLang();
   const isSpain = region !== "CO";
   const r = region as Region4;
   const d = isSpain ? (WHYME_SPAIN[r] ?? WHYME_SPAIN.ES) : null;
+  const isCOEn = !isSpain && lang.startsWith("en");
+  const co = CO_CTA[isCOEn ? "EN" : "ES"];
 
-  const badge      = d?.badge      ?? "Nuestros diferenciadores";
-  const heading    = d?.heading    ?? "No somos una fábrica de webs.";
-  const highlight  = d?.headingHighlight ?? "Máximo 3 clientes al mes.";
-  const subtitle   = d?.subtitle   ?? "Por eso cada sitio está construido 100% a medida, con atención directa y resultados verificables.";
-  const ctaTitle   = d?.ctaTitle   ?? "Quedan 2 cupos en junio. ¿Tu negocio merece uno?";
-  const ctaSub     = d?.ctaSubtitle?? "Empieza con un diagnóstico gratuito — sin compromiso, sin pagar nada, sin tecnicismos.";
-  const ctaBtn     = d?.ctaBtn     ?? "Diagnóstico gratuito";
-  const ctaWA      = d?.ctaWA      ?? "WhatsApp";
+  const badge      = d?.badge      ?? co.badge;
+  const heading    = d?.heading    ?? co.heading;
+  const highlight  = d?.headingHighlight ?? co.highlight;
+  const subtitle   = d?.subtitle   ?? co.subtitle;
+  const ctaTitle   = d?.ctaTitle   ?? co.ctaTitle;
+  const ctaSub     = d?.ctaSubtitle?? co.ctaSub;
+  const ctaBtn     = d?.ctaBtn     ?? co.ctaBtn;
+  const ctaWA      = d?.ctaWA      ?? co.ctaWA;
   const waLink     = isSpain ? WA_ES : WA_CO;
 
-  const textDiffs = d?.differentiators ?? CO_DIFFS;
+  const textDiffs = d?.differentiators ?? (isCOEn ? CO_DIFFS_EN : CO_DIFFS_ES);
   const differentiators = DIFF_META.map((meta, i) => ({
     ...meta,
     title: (textDiffs as readonly { title: string; description: string }[])[i]?.title ?? "",

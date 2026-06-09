@@ -1,12 +1,30 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useRegion } from "../../hooks/useRegion";
+import { useLang } from "../../hooks/useLang";
 
 const WA =
   "https://wa.me/573123198706?text=Hola%2C%20vi%20tu%20sitio%20web%20y%20me%20interesa%20cotizar%20un%20proyecto.";
 
+const TOOLTIP_TEXT: Record<string, { title: string; subtitle: string }> = {
+  ES:    { title: "¿Tienes dudas?",    subtitle: "Escríbenos ahora, respondemos en minutos." },
+  EN:    { title: "Have questions?",   subtitle: "Write to us now, we reply in minutes." },
+  FR:    { title: "Des questions ?",   subtitle: "Écrivez-nous, nous répondons en quelques minutes." },
+  IT:    { title: "Hai domande?",      subtitle: "Scrivici ora, rispondiamo in pochi minuti." },
+  CO_ES: { title: "¿Tienes dudas?",    subtitle: "Escríbenos ahora, respondemos en minutos." },
+  CO_EN: { title: "Have questions?",   subtitle: "Write to us now, we reply in minutes." },
+};
+
 export function FloatingWhatsApp() {
+  const region = useRegion();
+  const lang = useLang();
   const [visible, setVisible] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+
+  const tooltipKey = region === "CO"
+    ? (lang === "en" ? "CO_EN" : "CO_ES")
+    : (region as string);
+  const tooltip = TOOLTIP_TEXT[tooltipKey] ?? TOOLTIP_TEXT.ES;
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 2500);
@@ -41,13 +59,13 @@ export function FloatingWhatsApp() {
                   className="text-zinc-900 font-semibold text-sm leading-snug"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
-                  ¿Tienes dudas?
+                  {tooltip.title}
                 </p>
                 <p
                   className="text-zinc-500 text-xs mt-0.5"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
-                  Escríbenos ahora, respondemos en minutos.
+                  {tooltip.subtitle}
                 </p>
                 <div
                   className="absolute -right-2 top-1/2 -translate-y-1/2 w-0 h-0"

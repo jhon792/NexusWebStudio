@@ -2,6 +2,7 @@ import { useRef, useCallback } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { Globe, Building2, ShoppingBag, Code2, Wrench, Search, Clock } from "lucide-react";
 import { useRegion } from "../../hooks/useRegion";
+import { useLang } from "../../hooks/useLang";
 import { SERVICES_SPAIN, type Region4 } from "../../i18n/spainContent";
 
 const SERVICE_META = [
@@ -13,13 +14,22 @@ const SERVICE_META = [
   { icon: Search,     accent: "#fb7185" },
 ];
 
-const CO_SERVICES = [
+const CO_SERVICES_ES = [
   { title: "Landing Page de Alto Impacto",       description: "Una sola página diseñada para convertir: el visitante entra, entiende lo que ofreces y te contacta. Perfecta para captar clientes desde Google Ads o redes sociales.", benefit: "Clientes desde el primer día",    delivery: "Entrega en 1 a 3 días" },
   { title: "Sitio Corporativo Profesional",       description: "Tu empresa en internet con todo lo que genera confianza: servicios claros, equipo, casos de éxito y formulario de contacto. El cliente llega y ya quiere trabajar contigo.", benefit: "Credibilidad que cierra ventas", delivery: "Entrega en 5 a 8 días" },
   { title: "Tienda Virtual con Pagos Colombianos",description: "Vende tus productos online con PSE, Nequi y tarjetas. Catálogo, carrito y panel de administración incluidos. Tu tienda nunca cierra.", benefit: "Ventas mientras duermes",         delivery: null },
   { title: "Sistema de Citas y Reservas",         description: "Tus clientes agendan online sin necesidad de llamarte. Para clínicas, consultorios, salones y servicios por turnos. Reduce el trabajo administrativo hasta un 80%.", benefit: "Sin llamadas, sin ausencias",    delivery: null },
   { title: "Mantenimiento y Soporte Continuo",    description: "Tu sitio siempre actualizado, seguro y funcionando. Actualizamos contenido, monitoreamos caídas y respondemos en menos de 24 horas.", benefit: "Tranquilidad sin preocupaciones", delivery: null },
   { title: "Posicionamiento en Google",           description: "Configuramos tu sitio para que aparezca cuando alguien busca tu servicio en tu ciudad. SEO local + Google Maps + Core Web Vitals. Clientes sin pagar publicidad.", benefit: "Clientes orgánicos cada mes",    delivery: null },
+];
+
+const CO_SERVICES_EN = [
+  { title: "High-Impact Landing Page",     description: "A single page designed to convert: the visitor arrives, understands what you offer and contacts you. Perfect for capturing clients from Google Ads or social media.", benefit: "Clients from day one",          delivery: "Delivered in 1 to 3 days" },
+  { title: "Professional Corporate Site",  description: "Your business on the internet with everything that builds trust: clear services, team, success stories and contact form. The client arrives ready to work with you.", benefit: "Credibility that closes sales", delivery: "Delivered in 5 to 8 days" },
+  { title: "Online Store with Local Payment",description: "Sell your products online with PSE, Nequi and cards. Catalogue, cart and admin panel included. Your store never closes.", benefit: "Sales while you sleep",         delivery: null },
+  { title: "Booking & Appointment System", description: "Your clients book online without needing to call you. For clinics, offices, salons and shift-based services. Reduces administrative work by up to 80%.", benefit: "No calls, no no-shows",          delivery: null },
+  { title: "Maintenance & Ongoing Support",description: "Your site always updated, secure and running. We update content, monitor downtime and respond in less than 24 hours.", benefit: "Peace of mind, no worries",     delivery: null },
+  { title: "Google Positioning (SEO)",     description: "We configure your site to appear when someone searches for your service in your city. Local SEO + Google Maps + Core Web Vitals. Clients without paying for ads.", benefit: "Organic clients every month",   delivery: null },
 ];
 
 /* ─── Card con efecto 3D tilt ────────────────────────────────────────────── */
@@ -189,15 +199,17 @@ function TiltCard({ service, index }: { service: ServiceItem; index: number }) {
 
 export function Services() {
   const region = useRegion();
+  const lang = useLang();
   const isSpain = region !== "CO";
   const r = region as Region4;
   const sd = isSpain ? (SERVICES_SPAIN[r] ?? SERVICES_SPAIN.ES) : null;
+  const isCOEn = !isSpain && lang.startsWith("en");
 
-  const badge     = sd?.badge     ?? "Nuestros Servicios";
-  const heading   = sd?.heading   ?? "Todo lo que tu negocio necesita para";
-  const highlight = sd?.headingHighlight ?? "crecer en internet";
+  const badge     = sd?.badge     ?? (isCOEn ? "Our Services"                        : "Nuestros Servicios");
+  const heading   = sd?.heading   ?? (isCOEn ? "Everything your business needs to"   : "Todo lo que tu negocio necesita para");
+  const highlight = sd?.headingHighlight ?? (isCOEn ? "grow online"                  : "crecer en internet");
 
-  const services: ServiceItem[] = (sd?.items ?? CO_SERVICES).map((item, i) => ({
+  const services: ServiceItem[] = (sd?.items ?? (isCOEn ? CO_SERVICES_EN : CO_SERVICES_ES)).map((item, i) => ({
     ...SERVICE_META[i],
     ...item,
   }));

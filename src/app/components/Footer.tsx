@@ -1,11 +1,12 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { useRegion } from "../../hooks/useRegion";
+import { useLang } from "../../hooks/useLang";
 import { FOOTER_SPAIN, type Region4 } from "../../i18n/spainContent";
 
 const MotionLink = motion.create(Link);
 
-const CO_NAV = {
+const CO_NAV_ES = {
   Servicios: [
     { label: "Landing Pages",        href: "/#services" },
     { label: "Páginas Corporativas",  href: "/#services" },
@@ -34,25 +35,73 @@ const CO_NAV = {
   ],
 };
 
+const CO_NAV_EN = {
+  Services: [
+    { label: "Landing Pages",         href: "/#services" },
+    { label: "Corporate Websites",    href: "/#services" },
+    { label: "Online Stores",         href: "/#services" },
+    { label: "Web Systems",           href: "/#services" },
+    { label: "Maintenance",           href: "/#pricing" },
+    { label: "Basic SEO",             href: "/#services" },
+  ],
+  Navigation: [
+    { label: "Design Examples",       href: "/#portfolio" },
+    { label: "Plans & Pricing",       href: "/#pricing" },
+    { label: "Work Process",          href: "/#process" },
+    { label: "FAQ",                   href: "/#faq" },
+    { label: "Contact",               href: "/#contact" },
+  ],
+  Cities: [
+    { label: "Web design Villavicencio", href: "/villavicencio" },
+    { label: "Web design Bogotá",        href: "/bogota" },
+    { label: "Web design Medellín",      href: "/medellin" },
+  ],
+  Legal: [
+    { label: "Privacy Policy",           href: "/privacidad" },
+    { label: "Cookie Policy",            href: "/cookies" },
+    { label: "Terms & Conditions",       href: "/terminos" },
+    { label: "Legal Notice",             href: "/aviso-legal" },
+  ],
+};
+
+const CO_TEXT_ES = {
+  tagline: "Diseño y desarrollo web profesional para negocios y empresas en Colombia. Páginas que generan confianza y atraen nuevos clientes.",
+  waBtn: "Escríbenos por WhatsApp",
+  available: "Disponible para nuevos proyectos",
+  location: "Servicio 100% remoto para toda Colombia.\nSede: Villavicencio, Meta.",
+  copyright: "Nexus Studio. Todos los derechos reservados.",
+};
+
+const CO_TEXT_EN = {
+  tagline: "Professional web design and development for businesses and companies in Colombia. Websites that build trust and attract new clients.",
+  waBtn: "Write to us on WhatsApp",
+  available: "Available for new projects",
+  location: "100% remote service throughout Colombia.\nHeadquarters: Villavicencio, Meta.",
+  copyright: "Nexus Studio. All rights reserved.",
+};
+
 export function Footer() {
   const region = useRegion();
+  const lang = useLang();
   const isSpain = region !== "CO";
   const r = region as Region4;
+  const isCOEn = !isSpain && lang.startsWith("en");
   const fd = isSpain ? (FOOTER_SPAIN[r] ?? FOOTER_SPAIN.ES) : null;
+  const co = isCOEn ? CO_TEXT_EN : CO_TEXT_ES;
 
-  const tagline   = fd?.tagline   ?? "Diseño y desarrollo web profesional para negocios y empresas en Colombia. Páginas que generan confianza y atraen nuevos clientes.";
-  const waBtn     = fd?.waBtn     ?? "Escríbenos por WhatsApp";
-  const available = fd?.available ?? "Disponible para nuevos proyectos";
-  const location  = fd?.location  ?? "Servicio 100% remoto para toda Colombia.\nSede: Villavicencio, Meta.";
-  const copyright = fd?.copyright ?? "Nexus Studio. Todos los derechos reservados.";
+  const tagline   = fd?.tagline   ?? co.tagline;
+  const waBtn     = fd?.waBtn     ?? co.waBtn;
+  const available = fd?.available ?? co.available;
+  const location  = fd?.location  ?? co.location;
+  const copyright = fd?.copyright ?? co.copyright;
   const rights    = fd?.rights    ?? "";
-  const activeNav = fd?.nav ?? CO_NAV;
+  const activeNav = fd?.nav ?? (isCOEn ? CO_NAV_EN : CO_NAV_ES);
 
   const privacyHref  = isSpain ? "/en/privacidad"  : "/privacidad";
   const termosHref   = isSpain ? "/en/terminos"    : "/terminos";
   const cookiesHref  = isSpain ? "/en/cookies"     : "/cookies";
-  const privacyLabel = isSpain ? (r === "EN" ? "Privacy" : r === "FR" ? "Confidentialité" : r === "IT" ? "Privacy" : "Privacidad") : "Privacidad";
-  const termosLabel  = isSpain ? (r === "EN" ? "Terms" : r === "FR" ? "Conditions" : r === "IT" ? "Termini" : "Términos") : "Términos";
+  const privacyLabel = isSpain ? (r === "EN" ? "Privacy" : r === "FR" ? "Confidentialité" : r === "IT" ? "Privacy" : "Privacidad") : (isCOEn ? "Privacy" : "Privacidad");
+  const termosLabel  = isSpain ? (r === "EN" ? "Terms" : r === "FR" ? "Conditions" : r === "IT" ? "Termini" : "Términos") : (isCOEn ? "Terms" : "Términos");
   const cookiesLabel = isSpain ? (r === "EN" ? "Cookies" : r === "FR" ? "Cookies" : r === "IT" ? "Cookie" : "Cookies") : "Cookies";
 
   return (
@@ -231,6 +280,13 @@ export function Footer() {
             © 2025 {copyright} {rights}
           </p>
           <div className="flex items-center gap-5">
+            <Link
+              to="/nexus"
+              style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", fontWeight: 600, color: "#d4af37", textDecoration: "none" }}
+              aria-label="Ver propuesta Premium"
+            >
+              ✦ Premium
+            </Link>
             <Link
               to={privacyHref}
               style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.2)", textDecoration: "none" }}

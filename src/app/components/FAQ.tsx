@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus, Minus, MessageCircle } from "lucide-react";
+import { useLang } from "../../hooks/useLang";
 
 // Las primeras 6 preguntas están sincronizadas con el schema FAQPage de SEOSchemas.tsx
 // → activan el acordeón de preguntas directamente en los resultados de Google.
 // Orden: mayor intención de compra primero.
-const faqs = [
+const FAQS_ES = [
   {
     question: "¿Cuánto cuesta una página web en Colombia?",
     answer:
@@ -36,7 +37,6 @@ const faqs = [
     answer:
       "El plan de mantenimiento mensual incluye: actualizaciones de seguridad contra vulnerabilidades, copias de seguridad automáticas semanales, cambios de contenido (textos, imágenes, precios), monitoreo de disponibilidad 24/7 y soporte técnico con respuesta en menos de 24 horas. También incluye revisión periódica del posicionamiento en Google y ajustes menores de diseño. Es el servicio ideal para mantener tu negocio digital activo y seguro sin preocuparte por la parte técnica.",
   },
-  // ── Preguntas de alta conversión ──────────────────────────────────────────
   {
     question: "¿Por qué necesito web si ya tengo redes sociales?",
     answer:
@@ -59,7 +59,62 @@ const faqs = [
   },
 ];
 
-function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
+const FAQS_EN = [
+  {
+    question: "How much does a website cost in Colombia?",
+    answer:
+      "We offer three investment plans. The Starter Plan costs $590,000 COP and includes a professional landing page ready in 3 to 5 days. The Growth Plan costs $990,000 COP and includes SEO, a custom domain and hosting for a full year — it's the most popular choice for Colombian businesses that want to appear on Google. For custom projects — online stores, booking systems or web apps — the Business Plan starts at $2,500,000 COP. All are one-time payments, no monthly fees.",
+  },
+  {
+    question: "Do your websites appear on Google?",
+    answer:
+      "Yes. All sites are delivered optimised for Google: we configure Google Search Console for correct crawling, apply technical SEO (loading speed, headings and metadata) and link the business on Google Maps if applicable. The Growth Plan and Business Plan include local SEO positioning at no extra cost. Organic results start to appear between 4 and 12 weeks depending on the competition in your sector and city.",
+  },
+  {
+    question: "How long does website development take?",
+    answer:
+      "It depends on the project: a landing page is delivered in 3 to 5 business days; a complete corporate site takes 7 to 15 business days. Projects with special features — online stores or booking and reservation systems — have a deadline agreed at the start based on scope. When you confirm your project you receive a detailed schedule with clear delivery dates.",
+  },
+  {
+    question: "Do you work with clients from all over Colombia?",
+    answer:
+      "Yes, we work with businesses from all over Colombia 100% remotely. We have developed projects for clients in Bogotá, Medellín, Cali, Barranquilla, Bucaramanga, Pereira and Villavicencio. The entire process — initial meeting, design, revisions and delivery — is managed via WhatsApp, video call and email. You don't need in-person meetings to start your project.",
+  },
+  {
+    question: "Can I see the site before making the final payment?",
+    answer:
+      "Yes. We work with split payment: 50% at the start of the project and 50% on delivery. Before the final payment we share a preview link with the finished site so you can review it in detail, request any adjustments you need and give your approval. Only when the result meets your expectations is the final payment made and the site published on your domain.",
+  },
+  {
+    question: "What does the monthly website maintenance include?",
+    answer:
+      "The monthly maintenance plan includes: security updates against vulnerabilities, automatic weekly backups, content changes (text, images, prices), 24/7 availability monitoring and technical support with a response in less than 24 hours. It also includes periodic review of Google positioning and minor design adjustments. It's the ideal service to keep your digital business active and secure without worrying about the technical side.",
+  },
+  {
+    question: "Why do I need a website if I already have social media?",
+    answer:
+      "Social media is borrowed. Facebook and Instagram can block you, change the algorithm or simply disappear. Your website is yours, lives on your domain and works even when Meta goes down. Also, a website ranked on Google brings clients who are actively searching for your service — something social media doesn't replicate in the same way. Having both is ideal; relying only on social media is a risk not worth taking.",
+  },
+  {
+    question: "Will the site work well on mobile phones?",
+    answer:
+      "Yes. All our sites are 100% responsive: they adapt perfectly to phones, tablets and computers. We design mobile-first because over 65% of web traffic in Colombia comes from mobile devices, and it's also a determining factor for Google ranking. A site that doesn't work well on mobile loses clients and positions.",
+  },
+  {
+    question: "Is the investment worth it if my business is small?",
+    answer:
+      "The size of the business doesn't define whether you need a website — what defines it is whether you have clients searching for you online. If someone in your city searches Google for 'dentist nearby' or 'restaurant in Villavicencio' and you don't appear, that client goes to your competition. With the Growth Plan ($990,000, one-time payment), a single new client recovers the entire investment. Most of our clients receive it within the first few weeks.",
+  },
+  {
+    question: "What do I need to have ready to get started?",
+    answer:
+      "Very little. With your business name, what you do and a few photos (or we use professional-quality images), we can begin. We ask you the right questions in a 20-minute call or chat and from there we take control of the process. You don't need technical knowledge or to prepare anything in advance.",
+  },
+];
+
+type FaqItem = { question: string; answer: string };
+
+function FAQItem({ faq, index }: { faq: FaqItem; index: number }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -132,7 +187,33 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
   );
 }
 
+const FAQ_TEXT = {
+  ES: {
+    badge: "Preguntas Frecuentes",
+    heading: "Las dudas más comunes",
+    highlight: "respondidas sin rodeos.",
+    sub: "Si no encuentras lo que buscas, escríbenos y respondemos en menos de 1 hora.",
+    askBtn: "Hacer una pregunta",
+    waBtn: "Preguntar por WhatsApp",
+    waMsg: "Hola%2C%20tengo%20una%20pregunta%20sobre%20sus%20servicios.",
+  },
+  EN: {
+    badge: "FAQ",
+    heading: "The most common questions",
+    highlight: "answered straight.",
+    sub: "If you can't find what you're looking for, write to us and we'll reply in under 1 hour.",
+    askBtn: "Ask a question",
+    waBtn: "Ask on WhatsApp",
+    waMsg: "Hello%2C%20I%20have%20a%20question%20about%20your%20services.",
+  },
+};
+
 export function FAQ() {
+  const lang = useLang();
+  const isCOEn = lang.startsWith("en");
+  const t = FAQ_TEXT[isCOEn ? "EN" : "ES"];
+  const faqs = isCOEn ? FAQS_EN : FAQS_ES;
+
   return (
     <section id="faq" className="py-24" style={{ background: "#09090b" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -150,7 +231,7 @@ export function FAQ() {
               style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
             >
               <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>
-                Preguntas Frecuentes
+                {t.badge}
               </span>
             </div>
             <h2
@@ -164,7 +245,7 @@ export function FAQ() {
                 marginBottom: "16px",
               }}
             >
-              Las dudas más comunes{" "}
+              {t.heading}{" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, #818cf8, #c084fc)",
@@ -173,7 +254,7 @@ export function FAQ() {
                   backgroundClip: "text",
                 }}
               >
-                respondidas sin rodeos.
+                {t.highlight}
               </span>
             </h2>
             <p
@@ -185,7 +266,7 @@ export function FAQ() {
                 marginBottom: "28px",
               }}
             >
-              Si no encuentras lo que buscas, escríbenos y respondemos en menos de 1 hora.
+              {t.sub}
             </p>
 
             <div className="flex flex-col gap-3">
@@ -201,10 +282,10 @@ export function FAQ() {
                   boxShadow: "0 6px 20px rgba(99,102,241,0.3)",
                 }}
               >
-                Hacer una pregunta
+                {t.askBtn}
               </button>
               <a
-                href="https://wa.me/573123198706?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20sus%20servicios."
+                href={`https://wa.me/573123198706?text=${t.waMsg}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl cursor-pointer transition-all duration-200"
@@ -219,7 +300,7 @@ export function FAQ() {
                 }}
               >
                 <MessageCircle size={16} />
-                Preguntar por WhatsApp
+                {t.waBtn}
               </a>
             </div>
           </motion.div>

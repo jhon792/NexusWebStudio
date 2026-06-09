@@ -1,0 +1,125 @@
+/* ============================================================================
+   COMPONENTE 5 · FAQ ACORDEÓN (SEO + FAQ Schema)
+   ============================================================================ */
+
+.nx-faq {
+  background: var(--nx-surface);
+  padding: clamp(4.5rem, 10vh, 7rem) 1.5rem;
+  border-top: 1px solid var(--nx-line);
+}
+.nx-faq__wrap {
+  max-width: 820px;
+  margin: 0 auto;
+}
+.nx-faq__head { text-align: center; margin-bottom: 2.8rem; }
+.nx-faq__eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nx-gold-hover);
+}
+.nx-faq__title {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  line-height: 1.12;
+  color: var(--nx-ink);
+  margin: 0.7rem 0 0;
+}
+
+.nx-faq__list { display: flex; flex-direction: column; gap: 0.85rem; }
+
+/* Item — <details> nativo, marcado Schema-friendly */
+.nx-faq__item {
+  border: 1px solid var(--nx-line);
+  border-radius: var(--nx-radius);
+  background: var(--nx-surface);
+  overflow: hidden;
+  transition: border-color 0.4s var(--nx-ease), box-shadow 0.4s var(--nx-ease);
+}
+.nx-faq__item[open] {
+  border-color: var(--nx-line-strong);
+  box-shadow: var(--nx-shadow-md);
+}
+
+.nx-faq__q {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 1.6rem;
+  font-family: var(--nx-sans);
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  color: var(--nx-ink);
+  user-select: none;
+}
+.nx-faq__q::-webkit-details-marker { display: none; }
+.nx-faq__q:focus-visible {
+  outline: 2px solid var(--nx-gold);
+  outline-offset: -2px;
+  border-radius: var(--nx-radius);
+}
+
+/* Icono +/× que rota */
+.nx-faq__icon {
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--nx-surface-2);
+  color: var(--nx-navy);
+  transition: background 0.4s var(--nx-ease), transform 0.45s var(--nx-ease), color 0.4s var(--nx-ease);
+}
+.nx-faq__item[open] .nx-faq__icon {
+  background: var(--nx-gold);
+  color: var(--nx-navy);
+  transform: rotate(135deg);
+}
+
+/* Cuerpo con transición max-height fluida */
+.nx-faq__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--nx-ease);
+}
+.nx-faq__item[open] .nx-faq__body { grid-template-rows: 1fr; }
+.nx-faq__body-inner { overflow: hidden; }
+.nx-faq__a {
+  padding: 0 1.6rem 1.5rem;
+  font-size: 0.98rem;
+  line-height: 1.72;
+  color: var(--nx-muted);
+  margin: 0;
+}
+.nx-faq__a strong { color: var(--nx-ink-soft); }
+
+/* Fallback para navegadores sin animación de grid: usa el atributo open */
+@supports not (grid-template-rows: 1fr) {
+  .nx-faq__body { display: block; max-height: 0; overflow: hidden; transition: max-height 0.45s var(--nx-ease); }
+  .nx-faq__item[open] .nx-faq__body { max-height: 600px; }
+}
+
+/* CTA de cierre tras el FAQ */
+.nx-faq__foot {
+  margin-top: 2.4rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--nx-muted);
+}
+.nx-faq__foot a {
+  color: var(--nx-gold-hover);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 0.35s var(--nx-ease);
+}
+.nx-faq__foot a:hover { border-color: var(--nx-gold-hover); }
+
+@media (max-width: 480px) {
+  .nx-faq__q { padding: 1.15rem 1.2rem; }
+  .nx-faq__a { padding: 0 1.2rem 1.25rem; }
+}

@@ -12,13 +12,50 @@ const navLinksCO = [
   { label: "Contacto", href: "#contact" },
 ];
 
-const navLinksES = [
-  { label: "Servicios", href: "#services" },
-  { label: "Ejemplos", href: "#portfolio" },
-  { label: "Precios", href: "#pricing" },
-  { label: "Proceso", href: "#process" },
-  { label: "Contacto", href: "#contact" },
-];
+const NAV_LINKS_ES: Record<string, { label: string; href: string }[]> = {
+  ES: [
+    { label: "Servicios", href: "#services" },
+    { label: "Ejemplos", href: "#portfolio" },
+    { label: "Precios", href: "#pricing" },
+    { label: "Proceso", href: "#process" },
+    { label: "Contacto", href: "#contact" },
+  ],
+  EN: [
+    { label: "Services", href: "#services" },
+    { label: "Examples", href: "#portfolio" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "Process", href: "#process" },
+    { label: "Contact", href: "#contact" },
+  ],
+  FR: [
+    { label: "Services", href: "#services" },
+    { label: "Exemples", href: "#portfolio" },
+    { label: "Tarifs", href: "#pricing" },
+    { label: "Processus", href: "#process" },
+    { label: "Contact", href: "#contact" },
+  ],
+  IT: [
+    { label: "Servizi", href: "#services" },
+    { label: "Esempi", href: "#portfolio" },
+    { label: "Prezzi", href: "#pricing" },
+    { label: "Processo", href: "#process" },
+    { label: "Contatto", href: "#contact" },
+  ],
+};
+
+const CTA_LABEL: Record<string, string> = {
+  ES: "Cotizar",
+  EN: "Get a Quote",
+  FR: "Devis",
+  IT: "Preventivo",
+};
+
+const PREMIUM_LABEL: Record<string, string> = {
+  ES: "Premium",
+  EN: "Premium",
+  FR: "Premium",
+  IT: "Premium",
+};
 
 const SECTIONS = ["services", "portfolio", "pricing", "process", "contact"];
 
@@ -45,7 +82,9 @@ export function Navbar() {
   const isSpainContext = !isCO;
 
   /* Colombia: active lang via i18n */
-  const [activeLangCO, setActiveLangCO] = useState<"es-CO" | "en">("es-CO");
+  const [activeLangCO, setActiveLangCO] = useState<"es-CO" | "en">(() =>
+    i18n.language?.startsWith("en") ? "en" : "es-CO"
+  );
 
   /* Spain: active lang via pathname */
   const currentPath = typeof window !== "undefined" ? window.location.pathname : "/en/";
@@ -94,7 +133,10 @@ export function Navbar() {
     i18n.changeLanguage(code);
   };
 
-  const navLinks = isCO ? navLinksCO : navLinksES;
+  const isCOEn = isCO && activeLangCO === "en";
+  const navLinks = isCO ? (isCOEn ? NAV_LINKS_ES.EN : navLinksCO) : (NAV_LINKS_ES[region] ?? NAV_LINKS_ES.ES);
+  const ctaLabel = isCO ? (isCOEn ? CTA_LABEL.EN : "Cotizar") : (CTA_LABEL[region] ?? CTA_LABEL.ES);
+  const premiumLabel = isCO ? PREMIUM_LABEL.ES : (PREMIUM_LABEL[region] ?? PREMIUM_LABEL.ES);
 
   return (
     <>
@@ -182,6 +224,26 @@ export function Navbar() {
                   </button>
                 );
               })}
+
+              {/* Enlace landing Premium (Nexus) */}
+              <motion.a
+                href="/nexus"
+                className="relative ml-1 px-3.5 py-2 rounded-lg inline-flex items-center gap-1.5"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  color: "#d4af37",
+                  textDecoration: "none",
+                  minHeight: "36px",
+                }}
+                whileHover={{ background: "rgba(212,175,55,0.1)" as any }}
+                transition={{ duration: 0.15 }}
+                aria-label="Ver propuesta Premium"
+              >
+                <span aria-hidden="true">✦</span>
+                {premiumLabel}
+              </motion.a>
             </nav>
 
             {/* Language switcher — desktop */}
@@ -292,7 +354,7 @@ export function Navbar() {
                 transition={{ duration: 0.15 }}
                 aria-label="Cotizar proyecto"
               >
-                Cotizar
+                {ctaLabel}
               </motion.button>
             </div>
 
@@ -436,6 +498,29 @@ export function Navbar() {
                   </motion.button>
                 ))}
 
+                {/* Enlace landing Premium (Nexus) — móvil */}
+                <motion.a
+                  href="/nexus"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navLinks.length * 0.04 + 0.05, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-left px-4 py-3 rounded-xl flex items-center gap-2"
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                    color: "#d4af37",
+                    background: "rgba(212,175,55,0.08)",
+                    border: "1px solid rgba(212,175,55,0.18)",
+                    textDecoration: "none",
+                    minHeight: "48px",
+                  }}
+                  aria-label="Ver propuesta Premium"
+                >
+                  <span aria-hidden="true">✦</span> {premiumLabel}
+                </motion.a>
+
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -460,7 +545,7 @@ export function Navbar() {
                     style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "#fff", fontFamily: "Inter, sans-serif", fontWeight: 600, border: "none", minHeight: "48px" }}
                     aria-label="Cotizar proyecto"
                   >
-                    Cotizar Proyecto
+                    {ctaLabel}
                   </button>
                 </motion.div>
               </div>

@@ -1,0 +1,172 @@
+/* ============================================================================
+   BARRA SUPERIOR · navegación + selector de idioma (region-aware)
+   ============================================================================ */
+
+.nx-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background 0.4s var(--nx-ease), box-shadow 0.4s var(--nx-ease),
+              border-color 0.4s var(--nx-ease);
+  border-bottom: 1px solid transparent;
+}
+.nx-topbar--solid {
+  background: rgba(248, 249, 250, 0.85);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--nx-line);
+  box-shadow: 0 6px 24px -18px rgba(11, 34, 64, 0.5);
+}
+
+.nx-topbar__inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* Marca */
+.nx-topbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.nx-topbar__logo {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--nx-navy), var(--nx-navy-700));
+  color: #fff;
+  font-family: var(--nx-sans);
+  font-weight: 800;
+  font-size: 0.78rem;
+}
+.nx-topbar__name {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: 1.12rem;
+  color: var(--nx-ink);
+}
+
+/* Navegación de secciones */
+.nx-topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin: 0 auto;
+}
+.nx-topbar__link {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  font-family: var(--nx-sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--nx-ink-soft);
+  transition: background 0.3s var(--nx-ease), color 0.3s var(--nx-ease);
+}
+.nx-topbar__link:hover { background: var(--nx-surface-2); color: var(--nx-navy); }
+
+/* Cluster derecho */
+.nx-topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.nx-topbar__region {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--nx-muted);
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  background: var(--nx-gold-soft);
+}
+.nx-topbar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--nx-gold);
+  color: var(--nx-navy);
+  font-family: var(--nx-sans);
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  box-shadow: var(--nx-shadow-gold);
+  transition: transform 0.4s var(--nx-ease-magnet);
+}
+.nx-topbar__cta:hover { transform: translateY(-2px); }
+
+/* Botón menú móvil */
+.nx-topbar__burger {
+  display: none;
+  border: none;
+  background: var(--nx-surface-2);
+  border-radius: 10px;
+  width: 40px; height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--nx-navy);
+}
+
+/* Panel móvil */
+.nx-topbar__mobile {
+  overflow: hidden;
+  border-top: 1px solid var(--nx-line);
+  background: var(--nx-surface);
+}
+.nx-topbar__mobile-inner {
+  padding: 1rem 1.5rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.nx-topbar__mlink {
+  text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.85rem 0.6rem;
+  border-radius: 10px;
+  font-family: var(--nx-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--nx-ink);
+}
+.nx-topbar__mlink:hover { background: var(--nx-surface-2); }
+.nx-topbar__mcta {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.2rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--nx-gold);
+  color: var(--nx-navy);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+@media (max-width: 860px) {
+  .nx-topbar__nav { display: none; }
+  .nx-topbar__cta { display: none; }
+  .nx-topbar__burger { display: inline-flex; }
+  .nx-topbar__right { margin-left: auto; }
+}

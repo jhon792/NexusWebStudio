@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://api.emailjs.com" />
 
     <!-- ===== FUENTE: Inter — carga asíncrona (no bloquea render) ===== -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" crossorigin="anonymous" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
@@ -100,15 +100,19 @@
         font-src 'self' data: https://fonts.gstatic.com;
         img-src 'self' data: blob: https:;
         media-src 'self' data: blob:;
-        connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://api.emailjs.com;
+        connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://api.emailjs.com https://get.geojs.io https://ipapi.co;
+        frame-src https://www.youtube-nocookie.com https://www.youtube.com;
         object-src 'none';
         base-uri 'self';
         form-action 'self';
       "
     />
 
-    <!-- ===== SCHEMA.ORG CRÍTICO — LocalBusiness + WebSite ===== -->
-    <script type="application/ld+json">
+    <!-- ===== SCHEMA.ORG — WebSite + LocalBusiness Colombia (Villavicencio) =====
+         id="ld-graph-co": en /es (España) este @graph se retira por JS para no
+         mezclar señales geográficas CO/ES. El schema de España (areaServed:
+         Spain, sin dirección colombiana) lo inyecta NexusBusinessSchema.tsx. -->
+    <script id="ld-graph-co" type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
@@ -178,8 +182,7 @@
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan Profesional — Web con SEO y Captación de Clientes" }, "price": "990000", "priceCurrency": "COP", "availability": "https://schema.org/InStock" },
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plan Empresarial — Desarrollo Web a Medida" }, "price": "2500000", "priceCurrency": "COP", "availability": "https://schema.org/InStock" }
             ]
-          },
-          "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "40", "bestRating": "5", "worstRating": "1" }
+          }
         }
       ]
     }

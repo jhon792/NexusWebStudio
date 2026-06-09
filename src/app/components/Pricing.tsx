@@ -5,33 +5,40 @@ import {
   TrendingUp, ShieldCheck, Zap, Smartphone, Search,
   BarChart2, Lock, Monitor, Eye, Globe,
 } from "lucide-react";
+import { useLang } from "../../hooks/useLang";
 
 const WA_BASE = "https://wa.me/573123198706?text=";
-const WA_PLANS: Record<string, string> = {
-  inicio: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Esencial ($590.000 COP). ¿Pueden darme más información?"),
+const WA_PLANS_ES: Record<string, string> = {
+  inicio:      WA_BASE + encodeURIComponent("Hola, me interesa el Plan Esencial ($590.000 COP). ¿Pueden darme más información?"),
   crecimiento: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Profesional ($990.000 COP). ¿Pueden darme más información?"),
   empresarial: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Empresarial (desde $2.500.000 COP). ¿Pueden darme más información?"),
 };
+const WA_PLANS_EN: Record<string, string> = {
+  inicio:      WA_BASE + encodeURIComponent("Hello, I'm interested in the Essential Plan ($590,000 COP). Can you give me more information?"),
+  crecimiento: WA_BASE + encodeURIComponent("Hello, I'm interested in the Professional Plan ($990,000 COP). Can you give me more information?"),
+  empresarial: WA_BASE + encodeURIComponent("Hello, I'm interested in the Business Plan (from $2,500,000 COP). Can you give me more information?"),
+};
 const WA = WA_BASE + encodeURIComponent("Hola, me interesa cotizar una página web para mi negocio.");
 
-const plans = [
+const PLAN_VISUAL = [
+  { id: "inicio",      price: 590000, priceLabel: null,              accent: "#818cf8", featured: false },
+  { id: "crecimiento", price: 990000, priceLabel: null,              accent: "#a78bfa", featured: true  },
+  { id: "empresarial", price: 0,      priceLabel: "Desde $2.500.000",accent: "#34d399", featured: false },
+];
+
+const PLANS_ES = [
   {
     id: "inicio",
     badge: null,
     name: "Plan Esencial",
     label: "Presencia online profesional",
     tagline: "Presencia online profesional para tu negocio",
-    price: 590000,
-    priceLabel: null,
-    currency: "COP",
     delivery: "10 días hábiles",
-    accent: "#818cf8",
-    featured: false,
     cta: "Quiero empezar",
-    roiNote: null,
-    urgency: null,
-    dailyCost: null,
-    socialProof: null,
+    roiNote: null as string | null,
+    urgency: null as string | null,
+    dailyCost: null as string | null,
+    socialProof: null as string | null,
     description: "Ideal para emprendedores, profesionales independientes y pequeños negocios en Colombia que necesitan una web seria que genere confianza y contactos.",
     features: [
       "Diseño web responsive hasta 5 páginas",
@@ -56,17 +63,12 @@ const plans = [
     name: "Plan Profesional",
     label: "La web que trabaja por tu negocio 24/7",
     tagline: "La web que trabaja por tu negocio 24/7",
-    price: 990000,
-    priceLabel: null,
-    currency: "COP",
     delivery: "7 a 15 días hábiles",
-    accent: "#a78bfa",
-    featured: true,
     cta: "Quiero más clientes",
-    roiNote: "1 consulta cerrada = inversión recuperada",
-    urgency: "Solo 2 cupos disponibles — uno ya reservado",
-    dailyCost: "$2.750 / día durante 1 año",
-    socialProof: "7 de cada 10 clientes colombianos eligen este plan",
+    roiNote: "1 consulta cerrada = inversión recuperada" as string | null,
+    urgency: "Solo 2 cupos disponibles — uno ya reservado" as string | null,
+    dailyCost: "$2.750 / día durante 1 año" as string | null,
+    socialProof: "7 de cada 10 clientes colombianos eligen este plan" as string | null,
     description: "Para clínicas, consultorios, abogados y pymes colombianas que quieren captar clientes por internet con SEO, WhatsApp y diseño premium.",
     features: [
       "Todo lo del Plan Esencial incluido",
@@ -80,7 +82,7 @@ const plans = [
       "Soporte y ajustes durante 60 días",
       "Diseño adaptado a tu sector de negocio",
     ],
-    missing: [],
+    missing: [] as string[],
   },
   {
     id: "empresarial",
@@ -88,17 +90,12 @@ const plans = [
     name: "Plan Empresarial",
     label: "Estrategia digital completa",
     tagline: "Estrategia digital completa para liderar tu sector",
-    price: 0,
-    priceLabel: "Desde $2.500.000",
-    currency: "COP",
     delivery: "Según alcance del proyecto",
-    accent: "#34d399",
-    featured: false,
     cta: "Solicitar cotización",
-    roiNote: null,
-    urgency: null,
-    dailyCost: null,
-    socialProof: null,
+    roiNote: null as string | null,
+    urgency: null as string | null,
+    dailyCost: null as string | null,
+    socialProof: null as string | null,
     description: "Para negocios que quieren dominar su categoría en Google, aparecer en ChatGPT y Gemini, y automatizar la captación de clientes con IA.",
     features: [
       "Sistema de citas o reservas online",
@@ -110,24 +107,173 @@ const plans = [
       "Posicionamiento avanzado en Google",
       "Soporte prioritario dedicado 6 meses",
     ],
-    missing: [],
+    missing: [] as string[],
   },
 ];
 
-const standards = [
-  { Icon: ShieldCheck, label: "Sitio seguro", tooltip: "Tu página muestra el candado verde. Los clientes confían más en sitios seguros y Google los posiciona mejor en los resultados de búsqueda." },
-  { Icon: Smartphone, label: "Perfecto en celular", tooltip: "Tu web se ve impecable en cualquier teléfono. La mayoría de tus clientes potenciales te visitan desde el celular, no desde computador." },
-  { Icon: Zap, label: "Carga en segundos", tooltip: "Cada segundo de demora aleja clientes. Tu web está optimizada para cargar rápido, mantener la atención y aparecer mejor en Google." },
-  { Icon: Search, label: "Visible en Google", tooltip: "Configuramos tu sitio para que Google lo encuentre. Sin esto, tu web existe pero nadie la ve en los resultados de búsqueda." },
-  { Icon: BarChart2, label: "Estadísticas reales", tooltip: "Sabes exactamente cuántas personas visitan tu web, qué buscan y desde dónde llegan. Información para tomar mejores decisiones." },
-  { Icon: Globe, label: "Indexado en Google", tooltip: "Le decimos a Google todas tus páginas para que las muestre a las personas correctas en el momento correcto." },
-  { Icon: Lock, label: "Protección activa", tooltip: "Tu sitio está protegido contra ataques automáticos comunes en internet. La información de tus visitantes siempre segura." },
-  { Icon: Monitor, label: "Todos los navegadores", tooltip: "Funciona perfectamente en Chrome, Safari, Firefox y Edge, sin importar el dispositivo o navegador del visitante." },
-  { Icon: Eye, label: "Fácil de navegar", tooltip: "Diseñado para que cualquier persona encuentre lo que busca sin dificultad. Una buena experiencia convierte más visitantes en clientes." },
-  { Icon: TrendingUp, label: "Orientado a vender", tooltip: "Cada botón, sección y texto tiene un objetivo claro: que el visitante te llame, te escriba o te compre." },
+const PLANS_EN = [
+  {
+    id: "inicio",
+    badge: null,
+    name: "Essential Plan",
+    label: "Professional online presence",
+    tagline: "Professional online presence for your business",
+    delivery: "10 business days",
+    cta: "Get started",
+    roiNote: null as string | null,
+    urgency: null as string | null,
+    dailyCost: null as string | null,
+    socialProof: null as string | null,
+    description: "Ideal for entrepreneurs, independent professionals and small businesses in Colombia that need a serious website that builds trust and generates leads.",
+    features: [
+      "Responsive web design up to 5 pages",
+      "Initial technical SEO + Google indexing",
+      "Google Analytics + Search Console configured",
+      "SSL included + contact form",
+      "WhatsApp Business integrated",
+      "Optimised speed (Lighthouse +90)",
+      "Guaranteed delivery in 10 business days",
+      "30-day technical support",
+    ],
+    missing: [
+      "No SEO-optimised blog",
+      "No custom domain (e.g. yourbusiness.com)",
+      "No Google Maps positioning",
+      "No lead capture landing page per service",
+    ],
+  },
+  {
+    id: "crecimiento",
+    badge: "⭐ MOST POPULAR",
+    name: "Professional Plan",
+    label: "The website that works for your business 24/7",
+    tagline: "The website that works for your business 24/7",
+    delivery: "7 to 15 business days",
+    cta: "I want more clients",
+    roiNote: "1 closed consultation = investment recovered" as string | null,
+    urgency: "Only 2 spots available — one already reserved" as string | null,
+    dailyCost: "$2,750 / day over 1 year" as string | null,
+    socialProof: "7 out of 10 Colombian clients choose this plan" as string | null,
+    description: "For clinics, practices, lawyers and Colombian SMEs that want to attract clients online with SEO, WhatsApp and premium design.",
+    features: [
+      "Everything in the Essential Plan included",
+      "Up to 8 pages + blog configured",
+      "Advanced SEO by sector (lawyers, clinics…)",
+      "Conversion copy included by our team",
+      "Your own .com.co domain + 1 year hosting",
+      "Know how many people visit your website",
+      "Advanced lead capture forms",
+      "Your clients find you on Google Maps",
+      "Support and adjustments for 60 days",
+      "Design adapted to your business sector",
+    ],
+    missing: [] as string[],
+  },
+  {
+    id: "empresarial",
+    badge: null,
+    name: "Business Plan",
+    label: "Complete digital strategy",
+    tagline: "Complete digital strategy to lead your sector",
+    delivery: "According to project scope",
+    cta: "Request a quote",
+    roiNote: null as string | null,
+    urgency: null as string | null,
+    dailyCost: null as string | null,
+    socialProof: null as string | null,
+    description: "For businesses that want to dominate their category on Google, appear on ChatGPT and Gemini, and automate lead generation with AI.",
+    features: [
+      "Online appointment or booking system",
+      "Online store to sell your products",
+      "Automations that work for you",
+      "Integration with your current tools",
+      "Panel to manage your content",
+      "GEO SEO: visible on ChatGPT, Gemini and Claude",
+      "Advanced Google positioning",
+      "Dedicated priority support 6 months",
+    ],
+    missing: [] as string[],
+  },
 ];
 
-function AnimatedPrice({ value }: { value: number }) {
+const STANDARDS_ES = [
+  { Icon: ShieldCheck, label: "Sitio seguro",        tooltip: "Tu página muestra el candado verde. Los clientes confían más en sitios seguros y Google los posiciona mejor en los resultados de búsqueda." },
+  { Icon: Smartphone, label: "Perfecto en celular",  tooltip: "Tu web se ve impecable en cualquier teléfono. La mayoría de tus clientes potenciales te visitan desde el celular, no desde computador." },
+  { Icon: Zap,        label: "Carga en segundos",    tooltip: "Cada segundo de demora aleja clientes. Tu web está optimizada para cargar rápido, mantener la atención y aparecer mejor en Google." },
+  { Icon: Search,     label: "Visible en Google",    tooltip: "Configuramos tu sitio para que Google lo encuentre. Sin esto, tu web existe pero nadie la ve en los resultados de búsqueda." },
+  { Icon: BarChart2,  label: "Estadísticas reales",  tooltip: "Sabes exactamente cuántas personas visitan tu web, qué buscan y desde dónde llegan. Información para tomar mejores decisiones." },
+  { Icon: Globe,      label: "Indexado en Google",   tooltip: "Le decimos a Google todas tus páginas para que las muestre a las personas correctas en el momento correcto." },
+  { Icon: Lock,       label: "Protección activa",    tooltip: "Tu sitio está protegido contra ataques automáticos comunes en internet. La información de tus visitantes siempre segura." },
+  { Icon: Monitor,    label: "Todos los navegadores",tooltip: "Funciona perfectamente en Chrome, Safari, Firefox y Edge, sin importar el dispositivo o navegador del visitante." },
+  { Icon: Eye,        label: "Fácil de navegar",     tooltip: "Diseñado para que cualquier persona encuentre lo que busca sin dificultad. Una buena experiencia convierte más visitantes en clientes." },
+  { Icon: TrendingUp, label: "Orientado a vender",   tooltip: "Cada botón, sección y texto tiene un objetivo claro: que el visitante te llame, te escriba o te compre." },
+];
+
+const STANDARDS_EN = [
+  { Icon: ShieldCheck, label: "Secure site",        tooltip: "Your page shows the green padlock. Clients trust secure sites more and Google ranks them better in search results." },
+  { Icon: Smartphone, label: "Perfect on mobile",   tooltip: "Your website looks impeccable on any phone. Most of your potential clients visit you from mobile, not a computer." },
+  { Icon: Zap,        label: "Loads in seconds",    tooltip: "Every second of delay drives clients away. Your website is optimised to load fast, hold attention and rank better on Google." },
+  { Icon: Search,     label: "Visible on Google",   tooltip: "We configure your site so Google finds it. Without this, your website exists but nobody sees it in search results." },
+  { Icon: BarChart2,  label: "Real statistics",     tooltip: "You know exactly how many people visit your website, what they search for and where they come from. Data to make better decisions." },
+  { Icon: Globe,      label: "Indexed on Google",   tooltip: "We tell Google all your pages so it shows them to the right people at the right moment." },
+  { Icon: Lock,       label: "Active protection",   tooltip: "Your site is protected against common automated internet attacks. Your visitors' information always safe." },
+  { Icon: Monitor,    label: "All browsers",        tooltip: "Works perfectly in Chrome, Safari, Firefox and Edge, regardless of the visitor's device or browser." },
+  { Icon: Eye,        label: "Easy to navigate",    tooltip: "Designed so anyone finds what they're looking for without difficulty. A good experience converts more visitors into clients." },
+  { Icon: TrendingUp, label: "Sales-oriented",      tooltip: "Every button, section and text has a clear goal: for the visitor to call you, message you or buy from you." },
+];
+
+const PRICING_UI = {
+  ES: {
+    badge: "Planes e Inversión",
+    h2: "Una valla publicitaria cuesta $800.000/mes.",
+    h2Highlight: "Tu web trabaja 365 días por mucho menos.",
+    subtitle: "Inversión única. Sin mensualidades. El 90% de nuestros clientes recuperan la inversión con el primer cliente nuevo que llega por la web.",
+    socialProofCount: "+40 negocios",
+    socialProofSuffix: "ya confían en nosotros",
+    paymentTerms: "50% al iniciar · 50% al entregar",
+    deliveryLabel: "Entrega:",
+    priceOneTime: "Inversión única",
+    priceNote: "COP · pago único",
+    missingTitle: "Lo que NO incluye este plan",
+    waBtn: "Preguntar por WhatsApp",
+    comparisonText: "¿Tienes una clínica, restaurante o empresa de servicios?",
+    comparisonHighlight: "El Plan Profesional fue diseñado exactamente para ti. 7 de cada 10 clientes nuestros lo eligen.",
+    comparisonCta: "Asesoría gratuita",
+    standardsBadge: "Incluido en todos los planes",
+    standardsTitle: "Todo lo que garantizamos en cada proyecto",
+    standardsSubtitle: "Pasa el cursor sobre cada elemento para saber qué significa para tu negocio.",
+    trustItems: ["SSL incluido en todos los planes", "Sin costos ocultos", "Precios fijos garantizados", "50% inicio · 50% entrega"],
+    ctaMain: "Quiero mi página web ahora",
+    ctaWA: "Hablar por WhatsApp",
+    locale: "es-CO",
+  },
+  EN: {
+    badge: "Plans & Investment",
+    h2: "A billboard costs $800,000/month.",
+    h2Highlight: "Your website works 365 days for much less.",
+    subtitle: "One-time investment. No monthly fees. 90% of our clients recover their investment with the first new client from the web.",
+    socialProofCount: "+40 businesses",
+    socialProofSuffix: "already trust us",
+    paymentTerms: "50% to start · 50% on delivery",
+    deliveryLabel: "Delivery:",
+    priceOneTime: "One-time investment",
+    priceNote: "COP · one-time payment",
+    missingTitle: "What this plan does NOT include",
+    waBtn: "Ask on WhatsApp",
+    comparisonText: "Do you have a clinic, restaurant or service business?",
+    comparisonHighlight: "The Professional Plan was designed exactly for you. 7 out of 10 of our clients choose it.",
+    comparisonCta: "Free advice",
+    standardsBadge: "Included in all plans",
+    standardsTitle: "Everything we guarantee in every project",
+    standardsSubtitle: "Hover over each item to see what it means for your business.",
+    trustItems: ["SSL included in all plans", "No hidden costs", "Guaranteed fixed prices", "50% start · 50% delivery"],
+    ctaMain: "I want my website now",
+    ctaWA: "Talk on WhatsApp",
+    locale: "en-US",
+  },
+};
+
+function AnimatedPrice({ value, locale }: { value: number; locale: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   const [displayed, setDisplayed] = useState(0);
@@ -145,7 +291,7 @@ function AnimatedPrice({ value }: { value: number }) {
     requestAnimationFrame(tick);
   }, [isInView, value]);
 
-  return <span ref={ref}>${displayed.toLocaleString("es-CO")}</span>;
+  return <span ref={ref}>${displayed.toLocaleString(locale)}</span>;
 }
 
 function GuaranteeCard({ Icon, label, tooltip, index }: { Icon: React.ElementType; label: string; tooltip: string; index: number }) {
@@ -192,6 +338,13 @@ function GuaranteeCard({ Icon, label, tooltip, index }: { Icon: React.ElementTyp
 }
 
 export function Pricing() {
+  const lang = useLang();
+  const isCOEn = lang.startsWith("en");
+  const ui = PRICING_UI[isCOEn ? "EN" : "ES"];
+  const activePlans = (isCOEn ? PLANS_EN : PLANS_ES).map((p, i) => ({ ...PLAN_VISUAL[i], ...p }));
+  const activeStandards = isCOEn ? STANDARDS_EN : STANDARDS_ES;
+  const waPlans = isCOEn ? WA_PLANS_EN : WA_PLANS_ES;
+
   const scrollToContact = () => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
 
   return (
@@ -214,7 +367,7 @@ export function Pricing() {
               style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
             >
               <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>
-                Planes e Inversión
+                {ui.badge}
               </span>
             </motion.div>
 
@@ -225,10 +378,10 @@ export function Pricing() {
               transition={{ duration: 0.6, delay: 0.1 }}
               style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 4vw, 2.75rem)", letterSpacing: "-0.04em", lineHeight: 1.1, color: "#fff", marginBottom: "16px" }}
             >
-              Una valla publicitaria cuesta $800.000/mes.
+              {ui.h2}
               <br />
               <span style={{ background: "linear-gradient(135deg, #818cf8, #a78bfa, #c084fc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Tu web trabaja 365 días por mucho menos.
+                {ui.h2Highlight}
               </span>
             </motion.h2>
 
@@ -239,7 +392,7 @@ export function Pricing() {
               transition={{ duration: 0.5, delay: 0.15 }}
               style={{ fontFamily: "Inter, sans-serif", fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.4)", maxWidth: "480px", margin: "0 auto 24px" }}
             >
-              Inversión única. Sin mensualidades. El 90% de nuestros clientes recuperan la inversión con el primer cliente nuevo que llega por la web.
+              {ui.subtitle}
             </motion.p>
 
             {/* Social proof bar */}
@@ -259,7 +412,7 @@ export function Pricing() {
                   ))}
                 </div>
                 <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.45)" }}>
-                  <strong style={{ color: "rgba(255,255,255,0.75)" }}>+40 negocios</strong> ya confían en nosotros
+                  <strong style={{ color: "rgba(255,255,255,0.75)" }}>{ui.socialProofCount}</strong> {ui.socialProofSuffix}
                 </span>
               </div>
               <div className="flex items-center gap-1.5">
@@ -271,7 +424,7 @@ export function Pricing() {
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
                 <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "12px", color: "rgba(255,255,255,0.4)" }}>
-                  <strong style={{ color: "rgba(255,255,255,0.7)" }}>50% al iniciar · 50% al entregar</strong>
+                  <strong style={{ color: "rgba(255,255,255,0.7)" }}>{ui.paymentTerms}</strong>
                 </span>
               </div>
             </motion.div>
@@ -279,7 +432,7 @@ export function Pricing() {
 
           {/* ── PLAN CARDS ── */}
           <div className="grid lg:grid-cols-3 gap-5 items-center">
-            {plans.map((plan, i) => (
+            {activePlans.map((plan, i) => (
               <motion.div
                 key={plan.id}
                 initial={{ opacity: 0, y: 40 }}
@@ -302,12 +455,10 @@ export function Pricing() {
                       }
                 }
               >
-                {/* Glow blob for featured */}
                 {plan.featured && (
                   <div className="absolute -inset-px rounded-3xl pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.08), transparent 50%, rgba(168,85,247,0.05))", zIndex: -1 }} />
                 )}
 
-                {/* Badge */}
                 {plan.badge && (
                   <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-10">
                     <motion.div
@@ -344,12 +495,12 @@ export function Pricing() {
                     {plan.price > 0 ? (
                       <>
                         <p style={{ fontFamily: "Inter, sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "4px" }}>
-                          Inversión única
+                          {ui.priceOneTime}
                         </p>
                         <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 3vw, 2.6rem)", letterSpacing: "-0.04em", lineHeight: 1, color: "#fff" }}>
-                          <AnimatedPrice value={plan.price} />
+                          <AnimatedPrice value={plan.price} locale={ui.locale} />
                         </p>
-                        <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "5px" }}>COP · pago único</p>
+                        <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "5px" }}>{ui.priceNote}</p>
                       </>
                     ) : (
                       <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "1.7rem", color: plan.accent, letterSpacing: "-0.03em" }}>
@@ -394,7 +545,7 @@ export function Pricing() {
                   <div className="flex items-center gap-2 px-3 py-2 rounded-xl mb-5" style={{ background: plan.featured ? "rgba(129,140,248,0.08)" : "rgba(255,255,255,0.04)", border: `1px solid ${plan.featured ? "rgba(129,140,248,0.15)" : "rgba(255,255,255,0.06)"}` }}>
                     <Clock size={13} style={{ color: plan.featured ? "#a78bfa" : "#818cf8", flexShrink: 0 }} />
                     <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "12px", color: plan.featured ? "#c4b5fd" : "rgba(255,255,255,0.5)" }}>
-                      Entrega: {plan.delivery}
+                      {ui.deliveryLabel} {plan.delivery}
                     </span>
                   </div>
 
@@ -418,12 +569,12 @@ export function Pricing() {
                     ))}
                   </ul>
 
-                  {/* Missing features ❌ — Loss aversion for Plan Inicio */}
+                  {/* Missing features ❌ */}
                   {plan.missing.length > 0 && (
                     <div className="mb-5">
                       <div className="w-full h-px mb-4" style={{ background: "rgba(255,255,255,0.05)" }} />
                       <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "11px", color: "rgba(255,80,80,0.6)", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: "10px" }}>
-                        Lo que NO incluye este plan
+                        {ui.missingTitle}
                       </p>
                       <ul className="flex flex-col gap-2">
                         {plan.missing.map((m) => (
@@ -472,16 +623,16 @@ export function Pricing() {
                     </motion.button>
 
                     <motion.a
-                      href={WA_PLANS[plan.id] ?? WA}
+                      href={waPlans[plan.id] ?? WA}
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.01 }}
                       className="w-full py-2.5 rounded-xl flex items-center justify-center gap-2 cursor-pointer text-sm"
                       style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, background: "rgba(37,211,102,0.08)", color: "#4ade80", border: "1px solid rgba(37,211,102,0.18)", textDecoration: "none" }}
-                      aria-label={`Preguntar por WhatsApp sobre ${plan.name}`}
+                      aria-label={`${ui.waBtn} — ${plan.name}`}
                     >
                       <MessageCircle size={14} aria-hidden="true" />
-                      Preguntar por WhatsApp
+                      {ui.waBtn}
                     </motion.a>
                   </div>
                 </div>
@@ -503,8 +654,8 @@ export function Pricing() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               </div>
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
-                ¿Tienes una clínica, restaurante o empresa de servicios?{" "}
-                <span style={{ color: "rgba(255,255,255,0.65)" }}>El <strong style={{ color: "#a78bfa" }}>Plan Crecimiento</strong> fue diseñado exactamente para ti. 7 de cada 10 clientes nuestros lo eligen.</span>
+                {ui.comparisonText}{" "}
+                <span style={{ color: "rgba(255,255,255,0.65)" }}>{ui.comparisonHighlight}</span>
               </p>
             </div>
             <motion.a
@@ -516,7 +667,7 @@ export function Pricing() {
               style={{ fontFamily: "Inter, sans-serif", background: "rgba(37,211,102,0.1)", color: "#4ade80", border: "1px solid rgba(37,211,102,0.2)", textDecoration: "none" }}
             >
               <MessageCircle size={15} />
-              Asesoría gratuita
+              {ui.comparisonCta}
             </motion.a>
           </motion.div>
 
@@ -535,19 +686,19 @@ export function Pricing() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
               <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>
-                Incluido en todos los planes
+                {ui.standardsBadge}
               </span>
             </div>
             <h3 style={{ fontFamily: "Inter, sans-serif", fontWeight: 800, fontSize: "clamp(1.4rem, 2.5vw, 2rem)", letterSpacing: "-0.03em", color: "#fff", marginBottom: "10px" }}>
-              Todo lo que garantizamos en cada proyecto
+              {ui.standardsTitle}
             </h3>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.35)", lineHeight: 1.6 }}>
-              Pasa el cursor sobre cada elemento para saber qué significa para tu negocio.
+              {ui.standardsSubtitle}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {standards.map((s, i) => (
+            {activeStandards.map((s, i) => (
               <GuaranteeCard key={s.label} {...s} index={i} />
             ))}
           </div>
@@ -560,7 +711,7 @@ export function Pricing() {
             className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-2"
             style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.3)" }}
           >
-            {["SSL incluido en todos los planes", "Sin costos ocultos", "Precios fijos garantizados", "50% inicio · 50% entrega"].map((item) => (
+            {ui.trustItems.map((item) => (
               <span key={item} className="flex items-center gap-1.5 whitespace-nowrap">
                 <span style={{ color: "#22c55e" }}>✓</span>
                 {item}
@@ -582,9 +733,9 @@ export function Pricing() {
               whileTap={{ scale: 0.97 }}
               className="px-8 py-3.5 rounded-xl font-semibold text-sm cursor-pointer inline-flex items-center gap-2 group"
               style={{ fontFamily: "Inter, sans-serif", background: "linear-gradient(135deg, #6366f1, #a855f7)", color: "#fff", boxShadow: "0 8px 24px rgba(99,102,241,0.3)" }}
-              aria-label="Quiero mi página web ahora — ir al formulario de contacto"
+              aria-label={ui.ctaMain}
             >
-              Quiero mi página web ahora
+              {ui.ctaMain}
               <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
             </motion.button>
             <motion.a
@@ -596,7 +747,7 @@ export function Pricing() {
               style={{ fontFamily: "Inter, sans-serif", background: "rgba(37,211,102,0.1)", color: "#4ade80", border: "1px solid rgba(37,211,102,0.2)", textDecoration: "none" }}
             >
               <MessageCircle size={16} />
-              Hablar por WhatsApp
+              {ui.ctaWA}
             </motion.a>
           </motion.div>
         </div>

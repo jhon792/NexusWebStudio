@@ -4,11 +4,12 @@ import { motion } from "motion/react";
 import { Send, CheckCircle2, ArrowRight } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { useRegion } from "../../hooks/useRegion";
+import { useLang } from "../../hooks/useLang";
 import { CONTACT_SPAIN, type Region4 } from "../../i18n/spainContent";
 
 const WA = "https://wa.me/573123198706?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20gratuita%20para%20mi%20p%C3%A1gina%20web.";
 
-const projectTypesCO = [
+const projectTypesCO_ES = [
   "Landing Page",
   "Sitio Empresarial",
   "Tienda Virtual",
@@ -19,6 +20,17 @@ const projectTypesCO = [
   "Otro",
 ];
 
+const projectTypesCO_EN = [
+  "Landing Page",
+  "Corporate Website",
+  "Online Store",
+  "Custom Web System",
+  "Web Maintenance",
+  "SEO Optimization",
+  "Website Redesign",
+  "Other",
+];
+
 const projectTypesES = {
   ES: ["Landing Page", "Sitio Corporativo", "Tienda Online", "Sistema de Citas", "Mantenimiento Web", "SEO España", "Rediseño de Sitio Web", "Otro"],
   EN: ["Landing Page", "Corporate Website", "Online Store", "Booking System", "Web Maintenance", "Spain SEO", "Website Redesign", "Other"],
@@ -26,7 +38,7 @@ const projectTypesES = {
   IT: ["Landing Page", "Sito Aziendale", "Negozio Online", "Sistema di Prenotazione", "Manutenzione Web", "SEO Spagna", "Ridisegno Sito Web", "Altro"],
 } as const;
 
-const CO_TEXT = {
+const CO_TEXT_ES = {
   available: "Disponible para nuevos proyectos",
   ctaBadge: "Disponible para nuevos proyectos",
   ctaTitle1: "Cada semana que pasa sin web,",
@@ -59,15 +71,68 @@ const CO_TEXT = {
   waBtn: "Escríbenos directo por WhatsApp",
   waLabel: "WhatsApp — Respuesta en menos de 2 horas",
   formNote: "Al enviar aceptas que te contactemos sobre tu proyecto. Sin spam.",
+  responseLabel: "Garantía de respuesta:",
+  responseText: "Respondemos todas las consultas en menos de 24 horas.",
+  businessTypeLabel: "¿Para qué tipo de negocio?",
+  businessTypes: ["Clínicas y consultorios → +citas online", "Restaurantes → reservas sin llamadas", "Escuelas → más inscripciones", "Empresas de servicios → más consultas", "Emprendedores → presencia profesional"],
+  selectType: "Seleccionar tipo...",
+  selectRange: "Seleccionar rango...",
+  paymentLabel: "Forma de pago:",
+  paymentTerms: "50% al iniciar · 50% al entregar",
+};
+
+const CO_TEXT_EN = {
+  available: "Available for new projects",
+  ctaBadge: "Available for new projects",
+  ctaTitle1: "Every week that passes without a website,",
+  ctaTitle2: "your competition gets your clients.",
+  ctaSubtitle: "Request your free diagnosis today. In 24 hours we'll tell you exactly what your business needs and how much it would cost. No commitment.",
+  ctaBtn: "I want my free diagnosis",
+  ctaBtn2: "Request a Quote",
+  formBadge: "Contact Us",
+  formTitle1: "Your project — in 24 hours you'll have",
+  formTitle2: "a real proposal in your inbox.",
+  formSubtitle: "More than 40 Colombian businesses have already trusted this process. You'll be next.",
+  labelName: "Full name",
+  labelEmail: "Email address",
+  labelPhone: "WhatsApp / Phone",
+  labelProject: "Project type",
+  labelBudget: "Approximate budget",
+  labelMessage: "Tell us about your project",
+  placeholderName: "Your name",
+  placeholderEmail: "you@company.com",
+  placeholderPhone: "Contact number",
+  placeholderMessage: "Describe your business, what you need and what your goals are...",
+  submit: "I want my quote in 24 hours",
+  sending: "Sending...",
+  successTitle: "Message received!",
+  successBody: "We'll get back to you in less than 24 hours with a personalised proposal.",
+  successBtn: "Write to us on WhatsApp",
+  errorEmail: "Please enter a valid email address.",
+  errorMessage: "Please describe your project with at least 20 characters.",
+  errorSend: "Could not send. Please write to us directly on WhatsApp.",
+  waBtn: "Write to us directly on WhatsApp",
+  waLabel: "WhatsApp — Response in less than 2 hours",
+  formNote: "By submitting you accept that we may contact you about your project. No spam.",
+  responseLabel: "Response guarantee:",
+  responseText: "We respond to all enquiries in less than 24 hours.",
+  businessTypeLabel: "What type of business?",
+  businessTypes: ["Clinics → +online appointments", "Restaurants → reservations, no calls", "Schools → more enrolments", "Service companies → more enquiries", "Entrepreneurs → professional presence"],
+  selectType: "Select type...",
+  selectRange: "Select range...",
+  paymentLabel: "Payment:",
+  paymentTerms: "50% to start · 50% on delivery",
 };
 
 export function Contact() {
   const { pathname } = useLocation();
   const region = useRegion();
+  const lang = useLang();
   const isSpain = pathname.startsWith("/en");
   const r = region as Region4;
+  const isCOEn = !isSpain && lang.startsWith("en");
 
-  const t = isSpain ? (CONTACT_SPAIN[r] ?? CONTACT_SPAIN.ES) : CO_TEXT;
+  const t = isSpain ? (CONTACT_SPAIN[r] ?? CONTACT_SPAIN.ES) : (isCOEn ? CO_TEXT_EN : CO_TEXT_ES);
 
   const budgetOptions = isSpain
     ? [
@@ -83,10 +148,10 @@ export function Contact() {
         "$1.000.000 – $2.000.000 COP",
         "$2.000.000 – $3.500.000 COP",
         "Más de $3.500.000 COP",
-        "Aún no lo tengo definido",
+        isCOEn ? "Haven't decided yet" : "Aún no lo tengo definido",
       ];
 
-  const projectTypes = isSpain ? (projectTypesES[r] ?? projectTypesES.ES) : projectTypesCO;
+  const projectTypes = isSpain ? (projectTypesES[r] ?? projectTypesES.ES) : (isCOEn ? projectTypesCO_EN : projectTypesCO_ES);
 
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
@@ -361,9 +426,9 @@ export function Contact() {
                 <CheckCircle2 size={16} style={{ color: "#22c55e", flexShrink: 0 }} />
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>
                   <strong style={{ color: "rgba(255,255,255,0.75)" }}>
-                    {isSpain ? (r === "EN" ? "Response guarantee:" : r === "FR" ? "Garantie de réponse :" : r === "IT" ? "Garanzia di risposta:" : "Garantía de respuesta:") : "Garantía de respuesta:"}
+                    {isSpain ? (r === "EN" ? "Response guarantee:" : r === "FR" ? "Garantie de réponse :" : r === "IT" ? "Garanzia di risposta:" : "Garantía de respuesta:") : t.responseLabel}
                   </strong>{" "}
-                  {isSpain ? (r === "EN" ? "We respond to all enquiries in less than 24 hours." : r === "FR" ? "Nous répondons à toutes les demandes en moins de 24 heures." : r === "IT" ? "Rispondiamo a tutte le richieste in meno di 24 ore." : "Respondemos todas las consultas en menos de 24 horas.") : "Respondemos todas las consultas en menos de 24 horas."}
+                  {isSpain ? (r === "EN" ? "We respond to all enquiries in less than 24 hours." : r === "FR" ? "Nous répondons à toutes les demandes en moins de 24 heures." : r === "IT" ? "Rispondiamo a tutte le richieste in meno di 24 ore." : "Respondemos todas las consultas en menos de 24 horas.") : t.responseText}
                 </p>
               </div>
 
@@ -372,7 +437,7 @@ export function Contact() {
                 style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
               >
                 <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "14px", color: "rgba(255,255,255,0.7)", marginBottom: "12px" }}>
-                  {isSpain ? (r === "EN" ? "What type of business?" : r === "FR" ? "Quel type d'entreprise ?" : r === "IT" ? "Che tipo di azienda?" : "¿Para qué tipo de negocio?") : "¿Para qué tipo de negocio?"}
+                  {isSpain ? (r === "EN" ? "What type of business?" : r === "FR" ? "Quel type d'entreprise ?" : r === "IT" ? "Che tipo di azienda?" : "¿Para qué tipo de negocio?") : t.businessTypeLabel}
                 </p>
                 {(isSpain
                   ? (r === "EN"
@@ -383,7 +448,7 @@ export function Contact() {
                           ? ["Cliniche → +appuntamenti online", "Ristoranti → prenotazioni senza chiamate", "Scuole → più iscrizioni", "Aziende di servizi → più richieste", "Imprenditori → presenza professionale"]
                           : ["Clínicas y consultorios → +citas online", "Restaurantes → reservas sin llamadas", "Despachos → captación de clientes", "Empresas de servicios → más consultas", "Emprendedores → presencia profesional"]
                     )
-                  : ["Clínicas y consultorios → +citas online", "Restaurantes → reservas sin llamadas", "Escuelas → más inscripciones", "Empresas de servicios → más consultas", "Emprendedores → presencia profesional"]
+                  : t.businessTypes
                 ).map((item) => (
                   <div key={item} className="flex items-start gap-2 mb-2">
                     <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ background: "#818cf8" }} />
@@ -524,7 +589,7 @@ export function Contact() {
                         }}
                       >
                         <option value="" style={{ background: "#18181b" }}>
-                          {isSpain ? (r === "EN" ? "Select type..." : r === "FR" ? "Sélectionner..." : r === "IT" ? "Selezionare..." : "Seleccionar tipo...") : "Seleccionar tipo..."}
+                          {isSpain ? (r === "EN" ? "Select type..." : r === "FR" ? "Sélectionner..." : r === "IT" ? "Selezionare..." : "Seleccionar tipo...") : t.selectType}
                         </option>
                         {(projectTypes as readonly string[]).map((pt) => (
                           <option key={pt} value={pt} style={{ background: "#18181b" }}>{pt}</option>
@@ -551,7 +616,7 @@ export function Contact() {
                       }}
                     >
                       <option value="" style={{ background: "#18181b" }}>
-                        {isSpain ? (r === "EN" ? "Select range..." : r === "FR" ? "Sélectionner..." : r === "IT" ? "Selezionare..." : "Seleccionar rango...") : "Seleccionar rango..."}
+                        {isSpain ? (r === "EN" ? "Select range..." : r === "FR" ? "Sélectionner..." : r === "IT" ? "Selezionare..." : "Seleccionar rango...") : t.selectRange}
                       </option>
                       {budgetOptions.map((opt) => (
                         <option key={opt} style={{ background: "#18181b" }}>{opt}</option>
@@ -560,11 +625,11 @@ export function Contact() {
                     <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "rgba(255,255,255,0.3)", marginTop: "6px" }}>
                       {isSpain
                         ? (r === "EN" ? "Payment: " : r === "FR" ? "Paiement : " : r === "IT" ? "Pagamento: " : "Forma de pago: ")
-                        : "Forma de pago: "}
+                        : t.paymentLabel + " "}
                       <strong style={{ color: "rgba(255,255,255,0.5)" }}>
                         {isSpain
                           ? (r === "EN" ? "50% to start · 50% on delivery" : r === "FR" ? "50% au départ · 50% à la livraison" : r === "IT" ? "50% all'inizio · 50% alla consegna" : "50% al iniciar · 50% al entregar")
-                          : "50% al iniciar · 50% al entregar"}
+                          : t.paymentTerms}
                       </strong>
                     </p>
                   </div>

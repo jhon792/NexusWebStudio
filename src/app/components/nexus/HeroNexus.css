@@ -1,0 +1,369 @@
+/* ============================================================================
+   COMPONENTE 1 · HERO ASIMÉTRICO
+   ============================================================================ */
+
+.nx-hero {
+  position: relative;
+  background: var(--nx-bg);
+  padding: clamp(5rem, 12vh, 9rem) 1.5rem clamp(4rem, 9vh, 7rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Halo de marca descentrado (no simétrico) */
+.nx-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 50% at 78% 8%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+    radial-gradient(55% 60% at 12% 92%, rgba(11, 34, 64, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Rejilla técnica tenue */
+.nx-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--nx-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--nx-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(70% 60% at 70% 30%, #000 0%, transparent 75%);
+          mask-image: radial-gradient(70% 60% at 70% 30%, #000 0%, transparent 75%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Layout ASIMÉTRICO deliberado: 1.35fr texto / 1fr visual */
+.nx-hero__grid {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+/* ── Columna de texto ─────────────────────────────────────── */
+.nx-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--nx-line-strong);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--nx-navy-700);
+  margin-bottom: 1.6rem;
+}
+.nx-hero__eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--nx-gold);
+  box-shadow: 0 0 0 4px var(--nx-gold-soft);
+}
+
+.nx-hero__title {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5.4vw, 4.3rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  color: var(--nx-ink);
+  margin: 0 0 1.5rem;
+  max-width: 16ch;
+}
+.nx-hero__title-lead {
+  display: block;
+  color: var(--nx-navy);
+}
+
+/* Slot de nicho rotativo — altura reservada => sin layout shift */
+.nx-hero__rotator {
+  display: inline-block;
+  position: relative;
+  min-height: 1.12em;
+  vertical-align: bottom;
+}
+.nx-hero__niche {
+  background: linear-gradient(100deg, var(--nx-gold) 0%, var(--nx-gold-hover) 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+  white-space: nowrap;
+}
+.nx-hero__niche-underline {
+  display: block;
+  height: 3px;
+  width: 100%;
+  margin-top: 0.15em;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--nx-gold), transparent);
+  transform-origin: left center;
+}
+
+.nx-hero__subtitle {
+  font-family: var(--nx-sans);
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  line-height: 1.65;
+  color: var(--nx-muted);
+  max-width: 46ch;
+  margin: 0 0 2.4rem;
+}
+
+.nx-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.1rem 1.6rem;
+}
+
+/* ── CTA magnético premium ────────────────────────────────── */
+.nx-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.05rem 1.6rem 1.05rem 1.9rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--nx-gold);
+  color: var(--nx-navy);
+  font-family: var(--nx-sans);
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: var(--nx-shadow-gold);
+  transition: transform 0.5s var(--nx-ease-magnet),
+              box-shadow 0.45s var(--nx-ease);
+  will-change: transform;
+}
+/* Relleno de fondo que se desplaza con pseudo-elemento */
+.nx-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(120deg, var(--nx-gold-hover), var(--nx-navy));
+  transform: translateX(-101%);
+  transition: transform 0.55s var(--nx-ease);
+}
+.nx-cta:hover {
+  color: #fff;
+  box-shadow: 0 22px 48px -12px rgba(11, 34, 64, 0.5);
+}
+.nx-cta:hover::before {
+  transform: translateX(0);
+}
+.nx-cta:focus-visible {
+  outline: 3px solid var(--nx-navy);
+  outline-offset: 3px;
+}
+.nx-cta__arrow {
+  display: inline-flex;
+  transition: transform 0.45s var(--nx-ease);
+}
+.nx-cta:hover .nx-cta__arrow {
+  transform: translateX(5px);
+}
+/* Pulso de escala magnético muy discreto */
+.nx-cta__pulse {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  border-radius: inherit;
+  background: var(--nx-gold);
+  opacity: 0.55;
+  animation: nx-cta-pulse 2.8s var(--nx-ease) infinite;
+}
+@keyframes nx-cta-pulse {
+  0%   { transform: scale(1);    opacity: 0.5; }
+  70%  { transform: scale(1.18); opacity: 0;   }
+  100% { transform: scale(1.18); opacity: 0;   }
+}
+
+.nx-cta--ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: transparent;
+  border: none;
+  color: var(--nx-navy);
+  font-family: var(--nx-sans);
+  font-weight: 600;
+  font-size: 0.98rem;
+  cursor: pointer;
+  padding: 0.5rem 0.25rem;
+  position: relative;
+}
+.nx-cta--ghost::after {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  right: 0.25rem;
+  bottom: 0.25rem;
+  height: 1.5px;
+  background: var(--nx-navy);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--nx-ease);
+}
+.nx-cta--ghost:hover::after { transform: scaleX(1); }
+
+/* ── Prueba de confianza bajo los CTA ─────────────────────── */
+.nx-hero__trust {
+  margin-top: 2.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--nx-muted);
+  font-size: 0.85rem;
+}
+.nx-hero__avatars { display: flex; }
+.nx-hero__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--nx-bg);
+  margin-left: -8px;
+  display: grid;
+  place-items: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+.nx-hero__avatar:first-child { margin-left: 0; }
+
+/* ── Columna visual (render estilizado, descentrado) ──────── */
+.nx-hero__visual {
+  position: relative;
+  justify-self: end;
+  width: 100%;
+  max-width: 420px;
+  transform: rotate(1.4deg);
+}
+.nx-hero__card {
+  position: relative;
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-line);
+  border-radius: 22px;
+  box-shadow: var(--nx-shadow-lg);
+  padding: 1.1rem;
+  transform: rotate(-1.4deg);
+}
+.nx-hero__card-bar {
+  display: flex;
+  gap: 6px;
+  padding: 0.2rem 0.4rem 0.9rem;
+}
+.nx-hero__card-bar span {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--nx-line-strong);
+}
+.nx-hero__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+.nx-hero__card-skeleton {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--nx-surface-2);
+  aspect-ratio: 4 / 3.4;
+  display: flex;
+  flex-direction: column;
+}
+.nx-hero__card-head {
+  height: 42%;
+  background:
+    radial-gradient(120% 120% at 80% 10%, rgba(212,175,55,0.22), transparent 55%),
+    linear-gradient(135deg, var(--nx-navy), var(--nx-navy-700));
+  position: relative;
+}
+.nx-hero__card-pill {
+  position: absolute;
+  left: 14px; bottom: 14px;
+  width: 46%; height: 9px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.85);
+}
+.nx-hero__card-pill::after {
+  content: "";
+  position: absolute;
+  left: 0; top: 16px;
+  width: 70%; height: 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.45);
+}
+.nx-hero__card-body {
+  flex: 1;
+  padding: 1rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.nx-hero__card-line { height: 9px; border-radius: 999px; background: var(--nx-line-strong); }
+.nx-hero__card-line.w-90 { width: 90%; }
+.nx-hero__card-line.w-70 { width: 70%; }
+.nx-hero__card-cta {
+  margin-top: auto;
+  height: 34px; width: 55%;
+  border-radius: 999px;
+  background: var(--nx-gold);
+}
+
+/* Métrica flotante (descentrada, refuerza ROI) */
+.nx-hero__float {
+  position: absolute;
+  bottom: -22px;
+  left: -28px;
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-line);
+  border-radius: 16px;
+  box-shadow: var(--nx-shadow-md);
+  padding: 0.85rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  transform: rotate(-1.4deg);
+}
+.nx-hero__float-num {
+  font-family: var(--nx-serif);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--nx-success);
+  line-height: 1;
+}
+.nx-hero__float-label {
+  font-size: 0.72rem;
+  color: var(--nx-muted);
+  line-height: 1.3;
+  max-width: 12ch;
+}
+
+/* ── Responsive (Mobile-First reflow) ─────────────────────── */
+@media (max-width: 920px) {
+  .nx-hero__grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .nx-hero__visual { justify-self: center; max-width: 360px; }
+  .nx-hero__title { max-width: 100%; }
+}
+@media (max-width: 480px) {
+  .nx-hero__actions { gap: 0.9rem; }
+  .nx-cta { width: 100%; justify-content: center; }
+  .nx-hero__float { left: -8px; bottom: -16px; }
+}

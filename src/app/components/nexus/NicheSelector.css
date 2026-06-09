@@ -1,0 +1,258 @@
+/* ============================================================================
+   COMPONENTE 2 · SELECTOR DE NICHOS (Portafolio Premium Híbrido)
+   ============================================================================ */
+
+.nx-niche {
+  position: relative;
+  background: var(--nx-surface);
+  padding: clamp(4.5rem, 10vh, 7rem) 1.5rem;
+  border-top: 1px solid var(--nx-line);
+  border-bottom: 1px solid var(--nx-line);
+}
+
+.nx-niche__head {
+  max-width: 1180px;
+  margin: 0 auto 2.6rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.nx-niche__title {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--nx-ink);
+  margin: 0;
+  max-width: 18ch;
+}
+.nx-niche__title em {
+  font-style: italic;
+  color: var(--nx-gold-hover);
+}
+.nx-niche__lead {
+  font-size: 0.98rem;
+  color: var(--nx-muted);
+  max-width: 34ch;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Selector de texto minimalista (sin pestañas grises) ───── */
+.nx-niche__tabs {
+  position: relative;
+  display: inline-flex;
+  gap: 0.4rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  background: var(--nx-surface-2);
+  border: 1px solid var(--nx-line);
+}
+.nx-niche__tab {
+  position: relative;
+  z-index: 1;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.6rem 1.15rem;
+  border-radius: 999px;
+  font-family: var(--nx-sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--nx-muted);
+  white-space: nowrap;
+  transition: color 0.4s var(--nx-ease);
+}
+.nx-niche__tab:hover { color: var(--nx-navy); }
+.nx-niche__tab[aria-selected="true"] { color: #fff; }
+.nx-niche__tab:focus-visible {
+  outline: 2px solid var(--nx-gold);
+  outline-offset: 2px;
+}
+.nx-niche__pill {
+  position: absolute;
+  z-index: 0;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  border-radius: 999px;
+  background: var(--nx-navy);
+  box-shadow: var(--nx-shadow-md);
+}
+
+/* ── Escenario: copy + mockup ──────────────────────────────── */
+.nx-niche__stage {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.nx-niche__panel { min-height: 320px; }
+.nx-niche__kicker {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--nx-gold-hover);
+  margin-bottom: 0.9rem;
+}
+.nx-niche__h3 {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  line-height: 1.15;
+  color: var(--nx-ink);
+  margin: 0 0 1rem;
+}
+.nx-niche__text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--nx-muted);
+  margin: 0 0 1.6rem;
+  max-width: 44ch;
+}
+.nx-niche__points {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.nx-niche__point {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.95rem;
+  color: var(--nx-ink-soft);
+  line-height: 1.45;
+}
+.nx-niche__point svg { flex-shrink: 0; margin-top: 2px; color: var(--nx-gold-hover); }
+
+.nx-niche__metrics { display: flex; gap: 2rem; }
+.nx-niche__metric-num {
+  font-family: var(--nx-serif);
+  font-weight: 700;
+  font-size: 1.65rem;
+  color: var(--nx-navy);
+  line-height: 1;
+}
+.nx-niche__metric-label {
+  font-size: 0.78rem;
+  color: var(--nx-muted);
+  margin-top: 0.3rem;
+}
+
+/* ── Mockup estilizado (cambia por nicho) ──────────────────── */
+.nx-niche__viewport {
+  position: relative;
+  perspective: 1400px;
+}
+.nx-niche__mock {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-line);
+  box-shadow: var(--nx-shadow-lg);
+  aspect-ratio: 16 / 12;
+}
+.nx-niche__mock-top {
+  height: 46%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.4rem;
+}
+.nx-niche__mock-badge {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+.nx-niche__mock-title {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: #fff;
+  line-height: 1.15;
+  max-width: 70%;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+.nx-niche__mock-body {
+  padding: 1.3rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.nx-niche__mock-row {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--nx-surface-2);
+}
+.nx-niche__mock-row.w-95 { width: 95%; }
+.nx-niche__mock-row.w-80 { width: 80%; }
+.nx-niche__mock-row.w-60 { width: 60%; }
+.nx-niche__mock-cta {
+  margin-top: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: var(--nx-gold);
+  color: var(--nx-navy);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Tarjeta flotante de confianza sobre el mock */
+.nx-niche__mock-chip {
+  position: absolute;
+  left: -18px;
+  bottom: 22px;
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-line);
+  border-radius: 14px;
+  box-shadow: var(--nx-shadow-md);
+  padding: 0.7rem 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--nx-ink);
+}
+.nx-niche__mock-chip-icon {
+  width: 30px; height: 30px;
+  border-radius: 9px;
+  display: grid; place-items: center;
+  background: var(--nx-gold-soft);
+  color: var(--nx-gold-hover);
+}
+
+@media (max-width: 920px) {
+  .nx-niche__stage { grid-template-columns: 1fr; gap: 2.8rem; }
+  .nx-niche__panel { min-height: 0; }
+  .nx-niche__head { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 560px) {
+  .nx-niche__tabs { width: 100%; justify-content: space-between; }
+  .nx-niche__tab { padding: 0.6rem 0.7rem; font-size: 0.82rem; }
+  .nx-niche__mock-chip { left: 8px; }
+}

@@ -1,0 +1,208 @@
+/* ============================================================================
+   COMPONENTE 4 · PRUEBA SOCIAL INVERSA & TRANSPARENCIA GARANTIZADA
+   ============================================================================ */
+
+.nx-trust {
+  background: var(--nx-bg);
+  padding: clamp(4.5rem, 10vh, 7rem) 1.5rem;
+}
+.nx-trust__head {
+  max-width: 680px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+.nx-trust__eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nx-gold-hover);
+}
+.nx-trust__title {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  line-height: 1.12;
+  color: var(--nx-ink);
+  margin: 0.7rem 0 0.8rem;
+}
+.nx-trust__sub {
+  color: var(--nx-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Layout asimétrico: 2 garantías grandes + columna de contadores */
+.nx-trust__grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1.1fr 0.95fr;
+  gap: 1.1rem;
+}
+
+.nx-trust__card {
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-line);
+  border-radius: var(--nx-radius);
+  padding: 1.7rem;
+  box-shadow: var(--nx-shadow-sm);
+  transition: transform 0.45s var(--nx-ease), box-shadow 0.45s var(--nx-ease);
+}
+.nx-trust__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--nx-shadow-md);
+}
+.nx-trust__card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.1rem;
+}
+.nx-trust__icon {
+  width: 46px; height: 46px;
+  border-radius: 13px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.nx-trust__icon--gold { background: var(--nx-gold-soft); color: var(--nx-gold-hover); }
+.nx-trust__icon--navy { background: rgba(11, 34, 64, 0.07); color: var(--nx-navy); }
+.nx-trust__card-label {
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--nx-ink);
+}
+.nx-trust__card-text {
+  font-size: 0.92rem;
+  color: var(--nx-muted);
+  line-height: 1.6;
+  margin: 0 0 1.3rem;
+}
+
+/* ── Garantía de Velocidad: medidor animado ────────────────── */
+.nx-trust__gauge {
+  background: var(--nx-surface-2);
+  border-radius: var(--nx-radius-sm);
+  padding: 1rem 1.1rem;
+}
+.nx-trust__gauge-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+.nx-trust__gauge-time {
+  font-family: var(--nx-serif);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--nx-success);
+  line-height: 1;
+}
+.nx-trust__gauge-target { font-size: 0.78rem; color: var(--nx-muted); }
+.nx-trust__gauge-bar {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--nx-line-strong);
+  overflow: hidden;
+}
+.nx-trust__gauge-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--nx-success), #46c08b);
+  width: 0;
+  transition: width 1.4s var(--nx-ease);
+}
+.nx-trust__gauge-threshold {
+  position: absolute;
+  top: -3px; bottom: -3px;
+  left: 71%;
+  width: 2px;
+  background: var(--nx-navy);
+}
+.nx-trust__gauge-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--nx-navy);
+}
+
+/* ── Cumplimiento legal: distintivo ────────────────────────── */
+.nx-trust__seal {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px dashed var(--nx-line-strong);
+  border-radius: var(--nx-radius-sm);
+  font-size: 0.84rem;
+  color: var(--nx-ink-soft);
+}
+.nx-trust__seal + .nx-trust__seal { margin-top: 0.6rem; }
+.nx-trust__seal-tick {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(31, 157, 107, 0.14);
+  color: var(--nx-success);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Columna de métricas de intención ──────────────────────── */
+.nx-trust__metrics {
+  background: var(--nx-navy);
+  border-radius: var(--nx-radius);
+  padding: 1.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+  box-shadow: var(--nx-shadow-md);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.nx-trust__metrics::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(70% 60% at 90% 0%, rgba(212,175,55,0.18), transparent 60%);
+}
+.nx-trust__metric { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.1rem; }
+.nx-trust__metric:last-child { border-bottom: none; padding-bottom: 0; }
+.nx-trust__metric-num {
+  font-family: var(--nx-serif);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--nx-gold);
+  line-height: 1;
+}
+.nx-trust__metric-label {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 0.45rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 920px) {
+  .nx-trust__grid { grid-template-columns: 1fr; }
+  .nx-trust__metrics { flex-direction: row; flex-wrap: wrap; }
+  .nx-trust__metric {
+    flex: 1 1 30%;
+    border-bottom: none;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    padding: 0 1rem 0 0;
+  }
+  .nx-trust__metric:last-child { border-right: none; }
+}
+@media (max-width: 540px) {
+  .nx-trust__metrics { flex-direction: column; }
+  .nx-trust__metric { border-right: none; padding: 0 0 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .nx-trust__metric:last-child { border-bottom: none; padding-bottom: 0; }
+}

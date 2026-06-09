@@ -1,0 +1,46 @@
+/* ============================================================================
+   Selector de idioma premium (inline en barra superior · o flotante)
+   ============================================================================ */
+
+.nx-lang {
+  display: inline-flex;
+  gap: 0.2rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: var(--nx-surface-2);
+  border: 1px solid var(--nx-line);
+}
+.nx-lang--floating {
+  position: fixed;
+  top: 1.1rem;
+  right: 1.1rem;
+  z-index: 60;
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--nx-line-strong);
+  box-shadow: var(--nx-shadow-md);
+  backdrop-filter: blur(10px);
+}
+.nx-lang__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  font-family: var(--nx-sans);
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--nx-muted);
+  transition: background 0.35s var(--nx-ease), color 0.35s var(--nx-ease);
+}
+.nx-lang__btn:hover { color: var(--nx-navy); }
+.nx-lang__btn--on { background: var(--nx-navy); color: #fff; }
+.nx-lang__btn--on:hover { color: #fff; }
+.nx-lang__code { letter-spacing: 0.02em; }
+
+@media (max-width: 560px) {
+  .nx-lang__btn { padding: 0.3rem 0.4rem; }
+  .nx-lang__code { display: none; } /* solo banderas en móvil */
+}

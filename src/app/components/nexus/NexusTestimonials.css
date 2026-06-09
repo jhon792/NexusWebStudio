@@ -1,0 +1,89 @@
+/* ============================================================================
+   SECCIÓN · TESTIMONIOS ("Lo que dicen de nosotros")
+   ============================================================================ */
+
+.nx-tst {
+  background: var(--nx-surface);
+  padding: clamp(4rem, 9vh, 6.5rem) 1.5rem;
+  border-top: 1px solid var(--nx-line);
+}
+.nx-tst__title {
+  text-align: center;
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  color: var(--nx-ink);
+  margin: 0 auto 3rem;
+  max-width: 22ch;
+}
+
+.nx-tst__grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem 0;
+}
+@media (min-width: 640px) { .nx-tst__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) {
+  .nx-tst__grid { grid-template-columns: repeat(3, 1fr); }
+  .nx-tst__item + .nx-tst__item { border-left: 1px solid var(--nx-line); }
+}
+
+.nx-tst__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.3rem;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+.nx-tst__quote {
+  color: var(--nx-ink-soft);
+  font-size: 1rem;
+  line-height: 1.7;
+  position: relative;
+}
+.nx-tst__quote::before {
+  content: "\201C";
+  display: block;
+  font-family: var(--nx-serif);
+  font-size: 2.6rem;
+  line-height: 0.5;
+  color: var(--nx-gold);
+  margin-bottom: 0.6rem;
+}
+.nx-tst__stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--nx-gold);
+}
+.nx-tst__person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+}
+@media (min-width: 640px) {
+  .nx-tst__person { flex-direction: row; }
+}
+.nx-tst__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--nx-surface-2);
+  box-shadow: var(--nx-shadow-md);
+  flex-shrink: 0;
+}
+.nx-tst__avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.nx-tst__name {
+  font-family: var(--nx-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--nx-navy);
+}
+.nx-tst__role {
+  font-size: 0.84rem;
+  color: var(--nx-muted);
+  margin-top: 2px;
+}

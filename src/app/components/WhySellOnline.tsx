@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Shield, TrendingUp, Clock, Globe, MessageSquare, Star } from "lucide-react";
 import { useRegion } from "../../hooks/useRegion";
+import { useLang } from "../../hooks/useLang";
 import { WHY_SPAIN, type Region4 } from "../../i18n/spainContent";
 
 const ICON_META = [
@@ -12,7 +13,7 @@ const ICON_META = [
   { icon: TrendingUp,   accent: "#60a5fa", glow: "rgba(96,165,250,0.12)" },
 ];
 
-const CO_BENEFITS = [
+const CO_BENEFITS_ES = [
   { title: "Más confianza",            description: "Un sitio web profesional transmite seriedad y autoridad. Tus clientes te perciben como una empresa establecida antes incluso de contactarte." },
   { title: "Mejor imagen profesional", description: "Tu negocio se diferencia visualmente de la competencia con un diseño moderno, elegante y alineado con tu identidad de marca." },
   { title: "Mayor visibilidad",        description: "Aparece en Google cuando alguien busca tus servicios en tu ciudad. Las personas que te buscan activamente son tus mejores prospectos." },
@@ -21,17 +22,33 @@ const CO_BENEFITS = [
   { title: "Presencia digital sólida", description: "Construye una base digital que respalda tus redes sociales y campañas publicitarias, multiplicando el impacto de tu marketing." },
 ];
 
+const CO_BENEFITS_EN = [
+  { title: "More trust",               description: "A professional website conveys seriousness and authority. Your clients perceive you as an established business even before contacting you." },
+  { title: "Better professional image",description: "Your business stands out visually from the competition with a modern, elegant design aligned with your brand identity." },
+  { title: "Greater visibility",       description: "Appear on Google when someone searches for your services in your city. People actively searching for you are your best prospects." },
+  { title: "Direct contact channel",   description: "Integrate WhatsApp, forms and maps so your clients can contact you with a single click, at any time." },
+  { title: "Round-the-clock availability",description: "Your website presents your services, schedules and prices 24 hours a day. You capture clients even when your business is closed." },
+  { title: "Solid digital presence",   description: "Build a digital foundation that supports your social media and advertising campaigns, multiplying the impact of your marketing." },
+];
+
+const CO_HEADER = {
+  ES: { badge: "Beneficios", heading: "¿Qué puede aportar una página web", highlight: "a tu negocio?", subtitle: "Una inversión que trabaja para ti todos los días del año, sin descanso." },
+  EN: { badge: "Benefits",   heading: "What can a website bring",           highlight: "to your business?", subtitle: "An investment that works for you every day of the year, without rest." },
+};
+
 export function WhySellOnline() {
   const region = useRegion();
+  const lang = useLang();
   const isSpain = region !== "CO";
   const r = region as Region4;
   const d = isSpain ? (WHY_SPAIN[r] ?? WHY_SPAIN.ES) : null;
+  const co = CO_HEADER[!isSpain && lang.startsWith("en") ? "EN" : "ES"];
 
-  const badge    = d?.badge    ?? "Beneficios";
-  const heading  = d?.heading  ?? "¿Qué puede aportar una página web";
-  const highlight= d?.headingHighlight ?? "a tu negocio?";
-  const subtitle = d?.subtitle ?? "Una inversión que trabaja para ti todos los días del año, sin descanso.";
-  const textItems= d?.benefits ?? CO_BENEFITS;
+  const badge    = d?.badge    ?? co.badge;
+  const heading  = d?.heading  ?? co.heading;
+  const highlight= d?.headingHighlight ?? co.highlight;
+  const subtitle = d?.subtitle ?? co.subtitle;
+  const textItems= d?.benefits ?? (!isSpain && lang.startsWith("en") ? CO_BENEFITS_EN : CO_BENEFITS_ES);
 
   const benefits = ICON_META.map((meta, i) => ({
     ...meta,

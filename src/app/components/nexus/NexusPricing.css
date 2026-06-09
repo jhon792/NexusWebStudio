@@ -1,0 +1,242 @@
+/* ============================================================================
+   SECCIÓN · PRECIOS PREMIUM (optimizada para SEO)
+   ============================================================================ */
+
+.nx-price {
+  background: var(--nx-bg);
+  padding: clamp(4.5rem, 10vh, 7rem) 1.5rem;
+  border-top: 1px solid var(--nx-line);
+}
+.nx-price__head {
+  max-width: 680px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+.nx-price__eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nx-gold-hover);
+}
+.nx-price__title {
+  font-family: var(--nx-serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  line-height: 1.12;
+  color: var(--nx-ink);
+  margin: 0.7rem 0 0.8rem;
+}
+.nx-price__sub {
+  color: var(--nx-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.nx-price__grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.nx-price__card {
+  position: relative;
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-line);
+  border-radius: var(--nx-radius);
+  padding: 2rem 1.7rem;
+  box-shadow: var(--nx-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.45s var(--nx-ease), box-shadow 0.45s var(--nx-ease);
+}
+.nx-price__card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--nx-shadow-md);
+}
+/* Plan destacado: elevado, marco oro */
+.nx-price__card--featured {
+  border-color: var(--nx-gold);
+  box-shadow: 0 0 0 1px var(--nx-gold), var(--nx-shadow-lg);
+  transform: scale(1.04);
+  z-index: 2;
+}
+.nx-price__card--featured:hover { transform: scale(1.04) translateY(-5px); }
+
+.nx-price__badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(120deg, var(--nx-gold), var(--nx-gold-hover));
+  color: var(--nx-navy);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: var(--nx-shadow-gold);
+}
+
+.nx-price__plan {
+  font-family: var(--nx-sans);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--nx-ink);
+}
+.nx-price__for {
+  font-size: 0.86rem;
+  color: var(--nx-muted);
+  margin: 0.3rem 0 1.3rem;
+  line-height: 1.4;
+}
+
+.nx-price__amount {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+.nx-price__currency { font-size: 1rem; font-weight: 700; color: var(--nx-navy); }
+.nx-price__num {
+  font-family: var(--nx-serif);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 4vw, 2.7rem);
+  color: var(--nx-navy);
+  line-height: 1;
+}
+.nx-price__note {
+  font-size: 0.8rem;
+  color: var(--nx-muted);
+  margin: 0.5rem 0 1.4rem;
+}
+/* Badge de idiomas incluidos en la web entregada (con banderas) */
+.nx-price__langs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.3rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 12px;
+  background: var(--nx-gold-soft);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+.nx-price__flags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.nx-price__flag {
+  filter: drop-shadow(0 1px 1px rgba(11, 34, 64, 0.15));
+}
+.nx-price__langs-text {
+  font-family: var(--nx-sans);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--nx-gold-hover);
+}
+
+.nx-price__divider {
+  height: 1px;
+  background: var(--nx-line);
+  margin-bottom: 1.4rem;
+}
+
+.nx-price__features {
+  list-style: none;
+  margin: 0 0 1.8rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+.nx-price__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--nx-ink-soft);
+}
+.nx-price__feature svg { flex-shrink: 0; margin-top: 2px; color: var(--nx-gold-hover); }
+
+/* «Lo que NO incluye» (solo Esencial) */
+.nx-price__excluded {
+  margin-bottom: 1.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--nx-line-strong);
+}
+.nx-price__excluded-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nx-danger);
+  opacity: 0.8;
+  margin-bottom: 0.85rem;
+}
+.nx-price__exfeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--nx-muted);
+}
+.nx-price__exfeature svg { flex-shrink: 0; margin-top: 2px; color: var(--nx-danger); opacity: 0.65; }
+
+.nx-price__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.95rem 1.2rem;
+  border: 1.5px solid var(--nx-navy);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--nx-navy);
+  font-family: var(--nx-sans);
+  font-weight: 700;
+  font-size: 0.98rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.4s var(--nx-ease), color 0.4s var(--nx-ease),
+              transform 0.4s var(--nx-ease-magnet);
+}
+.nx-price__cta:hover { background: var(--nx-navy); color: #fff; transform: translateY(-2px); }
+.nx-price__cta--gold {
+  background: var(--nx-gold);
+  border-color: var(--nx-gold);
+  color: var(--nx-navy);
+  box-shadow: var(--nx-shadow-gold);
+}
+.nx-price__cta--gold:hover { background: var(--nx-gold-hover); border-color: var(--nx-gold-hover); color: var(--nx-navy); }
+
+.nx-price__foot {
+  max-width: 1120px;
+  margin: 2.2rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 2rem;
+  font-size: 0.86rem;
+  color: var(--nx-muted);
+}
+.nx-price__foot span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.nx-price__foot svg { color: var(--nx-success); }
+
+@media (max-width: 900px) {
+  .nx-price__grid { grid-template-columns: 1fr; max-width: 440px; }
+  .nx-price__card--featured { transform: none; order: -1; }
+  .nx-price__card--featured:hover { transform: translateY(-5px); }
+}

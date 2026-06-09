@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { useRegion } from "../../hooks/useRegion";
+import { useLang } from "../../hooks/useLang";
 import { PROJECTS_SPAIN, type Region4 } from "../../i18n/spainContent";
 
 const DEMO_IMAGES = [
@@ -12,7 +13,7 @@ const DEMO_IMAGES = [
 
 const DEMO_ACCENTS = ["#c084fc", "#fbbf24", "#fb923c", "#34d399", "#60a5fa"];
 
-const CO_ITEMS = [
+const CO_ITEMS_ES = [
   { category: "Clínica Estética",    title: "Diseño para clínica de estética",    description: "Ejemplo de cómo podría verse el sitio web de una clínica estética: presentación de tratamientos, galería de resultados, formulario de citas y sección de confianza.", tags: ["Citas online", "Galería de servicios", "WhatsApp integrado"] },
   { category: "Escuela de Conducción",title: "Diseño para autoescuela",            description: "Sitio web orientado a captar estudiantes: cursos disponibles, horarios, precios, proceso de inscripción y contacto directo por WhatsApp.", tags: ["Inscripción online", "Horarios", "Cotización rápida"] },
   { category: "Restaurante",          title: "Diseño para restaurante",            description: "Presencia digital para restaurante con menú visual, reservas, ubicación interactiva y galería de platos para despertar el apetito antes de la visita.", tags: ["Menú digital", "Reservas", "Google Maps"] },
@@ -20,29 +21,41 @@ const CO_ITEMS = [
   { category: "Empresa Corporativa",  title: "Diseño corporativo empresarial",    description: "Sitio web de imagen corporativa con presentación de empresa, servicios, portafolio de proyectos, equipo y canales de contacto para clientes B2B.", tags: ["Imagen corporativa", "Portafolio", "Contacto B2B"] },
 ];
 
+const CO_ITEMS_EN = [
+  { category: "Aesthetic Clinic",  title: "Design for aesthetic clinic",        description: "Example of what an aesthetic clinic website could look like: treatment presentation, results gallery, appointment form and trust section.", tags: ["Online appointments", "Services gallery", "WhatsApp integrated"] },
+  { category: "Driving School",    title: "Design for driving school",           description: "Website focused on capturing students: available courses, schedules, prices, enrolment process and direct WhatsApp contact.", tags: ["Online enrolment", "Schedules", "Quick quote"] },
+  { category: "Restaurant",        title: "Design for restaurant",               description: "Digital presence for restaurant with visual menu, reservations, interactive location and dish gallery to whet the appetite before the visit.", tags: ["Digital menu", "Reservations", "Google Maps"] },
+  { category: "Dentistry",         title: "Design for dental practice",          description: "Website for dentists with treatment presentation, professional team, appointment system and trust section that converts visitors into patients.", tags: ["Appointment booking", "Treatments", "Medical team"] },
+  { category: "Corporate Company", title: "Corporate business design",           description: "Corporate image website with company presentation, services, project portfolio, team and contact channels for B2B clients.", tags: ["Corporate image", "Portfolio", "B2B contact"] },
+];
+
 const WA_CO = "https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20ver%20un%20dise%C3%B1o%20para%20mi%20negocio.";
 const WA_ES = "https://wa.me/573123198706?text=Hola%2C%20me%20interesa%20ver%20un%20dise%C3%B1o%20para%20mi%20negocio%20en%20Espa%C3%B1a.";
 
 export function Projects() {
   const region = useRegion();
+  const lang = useLang();
   const isSpain = region !== "CO";
   const r = region as Region4;
   const d = isSpain ? (PROJECTS_SPAIN[r] ?? PROJECTS_SPAIN.ES) : null;
+  const isCOEn = !isSpain && lang.startsWith("en");
 
-  const badge     = d?.badge ?? "Ejemplos de Diseño";
-  const heading   = d?.heading ?? "Proyectos";
-  const highlight = d?.headingHighlight ?? "Demostrativos";
-  const subtitle  = d?.subtitle ?? "Estos diseños muestran ejemplos de cómo podría verse la presencia digital de distintos tipos de negocios. Cada proyecto real se diseña completamente a medida para tu negocio específico.";
-  const rawItems  = d?.items ?? CO_ITEMS;
+  const badge     = d?.badge ?? (isCOEn ? "Design Examples"     : "Ejemplos de Diseño");
+  const heading   = d?.heading ?? (isCOEn ? "Projects"           : "Proyectos");
+  const highlight = d?.headingHighlight ?? (isCOEn ? "Demonstrative" : "Demostrativos");
+  const subtitle  = d?.subtitle ?? (isCOEn
+    ? "These designs show examples of what the digital presence of different types of businesses could look like. Every real project is designed completely custom for your specific business."
+    : "Estos diseños muestran ejemplos de cómo podría verse la presencia digital de distintos tipos de negocios. Cada proyecto real se diseña completamente a medida para tu negocio específico.");
+  const rawItems  = d?.items ?? (isCOEn ? CO_ITEMS_EN : CO_ITEMS_ES);
   const waLink    = isSpain ? WA_ES : WA_CO;
 
   const ctaLabel = isSpain
     ? (r === "EN" ? "Request design for my business" : r === "FR" ? "Demander un design pour mon entreprise" : r === "IT" ? "Richiedere un design per la mia azienda" : "Solicitar diseño para mi negocio")
-    : "Solicitar diseño para mi negocio";
+    : (isCOEn ? "Request design for my business" : "Solicitar diseño para mi negocio");
 
   const ctaQuestion = isSpain
     ? (r === "EN" ? "Want to see what your business website could look like?" : r === "FR" ? "Vous voulez voir à quoi pourrait ressembler le site web de votre entreprise ?" : r === "IT" ? "Vuoi vedere come potrebbe essere il sito web della tua azienda?" : "¿Quieres ver cómo podría verse el sitio web de tu negocio?")
-    : "¿Quieres ver cómo podría verse el sitio web de tu negocio?";
+    : (isCOEn ? "Want to see what your business website could look like?" : "¿Quieres ver cómo podría verse el sitio web de tu negocio?");
 
   const demos = (rawItems as readonly { category: string; title: string; description: string; tags: readonly string[] }[]).map((item, i) => ({
     ...item,
