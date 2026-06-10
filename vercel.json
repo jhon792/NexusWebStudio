@@ -7,7 +7,12 @@
       "has": [{ "type": "host", "value": "nexsustudio.site" }],
       "destination": "https://www.nexsustudio.site/$1",
       "permanent": true
-    }
+    },
+    { "source": "/en", "destination": "/es", "permanent": true },
+    { "source": "/en/", "destination": "/es", "permanent": true },
+    { "source": "/en/en", "destination": "/es", "permanent": true },
+    { "source": "/en/fr", "destination": "/es", "permanent": true },
+    { "source": "/en/it", "destination": "/es", "permanent": true }
   ],
   "headers": [
     {
