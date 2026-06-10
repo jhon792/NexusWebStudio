@@ -1,7 +1,10 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useNexus } from "./NexusLangContext";
 import "./NicheSelector.css";
+
+/** useLayoutEffect en cliente, useEffect en servidor (evita el warning SSR). */
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /* Gradiente de cabecera del mockup por sector (identidad visual, no traducible) */
 const GRADIENTS: Record<string, string> = {
@@ -23,7 +26,7 @@ export function NicheSelector() {
   const tabsRef = useRef<HTMLDivElement>(null);
   const [pill, setPill] = useState({ left: 0, width: 0 });
 
-  useLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
     const container = tabsRef.current;
     if (!container) return;
     const btn = container.querySelectorAll<HTMLButtonElement>(".nx-niche__tab")[active];

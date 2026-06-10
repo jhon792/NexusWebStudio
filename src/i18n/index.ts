@@ -27,7 +27,9 @@ i18n.use(initReactI18next).init({
     fr:      { common: esESCommon, pricing: esESPricing },
     it:      { common: esESCommon, pricing: esESPricing },
   },
-  lng: getLangFromPath(window.location.pathname),
+  // Guarda SSR: en el prerender (Node) no existe `window`. Por defecto es-CO;
+  // el cliente ajusta el idioma por ruta vía LanguageSync al hidratar.
+  lng: getLangFromPath(typeof window !== "undefined" ? window.location.pathname : "/"),
   fallbackLng: "es-CO",
   ns: ["common", "pricing"],
   defaultNS: "common",

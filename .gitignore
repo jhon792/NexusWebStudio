@@ -7,3 +7,7 @@ dist
 NexusWebStudio/
 
 .vercel
+
+# Build SSR / prerender (artefactos temporales)
+.ssr
+.vite-react-ssg-temp
