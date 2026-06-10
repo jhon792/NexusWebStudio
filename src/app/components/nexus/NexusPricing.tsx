@@ -106,7 +106,8 @@ export function NexusPricing({ onSelect }: NexusPricingProps) {
               <div className="nx-price__amount">{renderAmount(plan.id)}</div>
               <p className="nx-price__note">{noteFor(plan.note)}</p>
 
-              {p.langs[plan.id] && (
+              {/* Los idiomas son gancho de venta en Europa; en Colombia sobran. */}
+              {region !== "CO" && p.langs[plan.id] && (
                 <div className="nx-price__langs">
                   <span className="nx-price__flags" aria-hidden="true">
                     {(PLAN_FLAGS[plan.id] ?? []).map((flag, idx) => (
