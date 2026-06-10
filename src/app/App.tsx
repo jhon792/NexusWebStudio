@@ -5,6 +5,10 @@ import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { GlobalEffects } from "./components/GlobalEffects";
 import { useAnalytics } from "../hooks/useAnalytics";
 import { detectCountry, readCachedCountry, isLikelyCrawler } from "./components/nexus/nexus-geo";
+// Home Nexus: carga EAGER (no lazy) — es la página de entrada. Evita el waterfall
+// de un segundo chunk + motion antes del hero → baja el LCP móvil (el hero pinta
+// de una, sin pasar por el spinner de Suspense).
+import NexusLanding from "./components/nexus/NexusLanding";
 import i18n, { getLangFromPath } from "../i18n";
 
 // ── Colombia ──────────────────────────────────────────────────────────────────
@@ -13,8 +17,7 @@ const Villavicencio = lazy(() => import("./pages/Villavicencio"));
 const Bogota      = lazy(() => import("./pages/Bogota"));
 const Medellin    = lazy(() => import("./pages/Medellin"));
 
-// ── Home Nexus (única para Colombia y España/Europa; región por IP) ─────────────
-const NexusLanding = lazy(() => import("./components/nexus/NexusLanding"));
+// ── Home Nexus → eager (ver import arriba). El resto de páginas siguen lazy. ────
 
 // ── Compartidas ───────────────────────────────────────────────────────────────
 const BlogArticle    = lazy(() => import("./pages/BlogArticle"));
