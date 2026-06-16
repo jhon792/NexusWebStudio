@@ -6,18 +6,30 @@ import "./NicheSelector.css";
 /** useLayoutEffect en cliente, useEffect en servidor (evita el warning SSR). */
 const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-/* Gradiente de cabecera del mockup por sector (identidad visual, no traducible) */
-const GRADIENTS: Record<string, string> = {
-  estetica:
-    "radial-gradient(120% 130% at 80% 0%, rgba(212,175,55,0.35), transparent 55%), linear-gradient(135deg, #7a5a8c, #0b2240)",
-  odontologia:
-    "radial-gradient(120% 130% at 80% 0%, rgba(212,175,55,0.3), transparent 55%), linear-gradient(135deg, #1f7a8c, #0b2240)",
-  abogados:
-    "radial-gradient(120% 130% at 80% 0%, rgba(212,175,55,0.28), transparent 55%), linear-gradient(135deg, #16365c, #07172b)",
+/* Ejemplo real en vivo por sector (mismo enlace para todos los idiomas) */
+const DEMO_URLS: Record<string, string> = {
+  estetica: "https://clinica-estetica-delta-three.vercel.app/",
+  odontologia: "https://clinica-odontologica-ashy.vercel.app/",
+  abogados: "https://despacho11.vercel.app/",
+};
+
+/* Captura (imagen) de cada sitio para la vista previa de la tarjeta */
+const DEMO_SHOTS: Record<string, string> = {
+  estetica: "/previews/estetica.jpg",
+  odontologia: "/previews/odontologia.jpg",
+  abogados: "/previews/abogados.jpg",
+};
+
+/* Etiqueta del botón "Ver" según idioma */
+const VIEW_LABEL: Record<string, string> = {
+  es: "Ver ejemplo",
+  en: "View example",
+  fr: "Voir l'exemple",
+  it: "Vedi esempio",
 };
 
 export function NicheSelector() {
-  const { t } = useNexus();
+  const { t, lang } = useNexus();
   const data = t.niche;
   const [active, setActive] = useState(0);
   const [dir, setDir] = useState(1);
@@ -130,21 +142,43 @@ export function NicheSelector() {
               exit={{ opacity: 0, x: -36, scale: 0.98 }}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="nx-niche__mock-top" style={{ background: GRADIENTS[niche.id] }}>
-                <span className="nx-niche__mock-badge">{niche.mockBadge}</span>
-                <span className="nx-niche__mock-title">{niche.mockTitle}</span>
-              </div>
-              <div className="nx-niche__mock-body">
-                <span className="nx-niche__mock-row w-95" />
-                <span className="nx-niche__mock-row w-80" />
-                <span className="nx-niche__mock-row w-60" />
-                <span className="nx-niche__mock-cta">
-                  {niche.ctaLabel}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14" /><path d="m13 6 6 6-6 6" />
-                  </svg>
+              {/* Barra tipo navegador */}
+              <div className="nx-niche__bar">
+                <span className="nx-niche__dots" aria-hidden="true"><i /><i /><i /></span>
+                <span className="nx-niche__url">
+                  {DEMO_URLS[niche.id].replace(/^https?:\/\//, "").replace(/\/$/, "")}
                 </span>
+                <a
+                  className="nx-niche__view"
+                  href={DEMO_URLS[niche.id]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${VIEW_LABEL[lang] ?? VIEW_LABEL.es} — ${niche.tab}`}
+                >
+                  {VIEW_LABEL[lang] ?? VIEW_LABEL.es}
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M7 17 17 7" /><path d="M7 7h10v10" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Vista previa del sitio real (imagen / captura) */}
+              <div className="nx-niche__frame">
+                <img
+                  className="nx-niche__shot"
+                  src={DEMO_SHOTS[niche.id]}
+                  alt={`Vista previa del sitio — ${niche.tab}`}
+                  loading="lazy"
+                  draggable={false}
+                />
+                <a
+                  className="nx-niche__frame-link"
+                  href={DEMO_URLS[niche.id]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${VIEW_LABEL[lang] ?? VIEW_LABEL.es} — ${niche.tab}`}
+                />
               </div>
 
               <div className="nx-niche__mock-chip">

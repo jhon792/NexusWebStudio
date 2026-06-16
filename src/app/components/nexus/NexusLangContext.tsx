@@ -23,8 +23,8 @@ const CURRENCY: Record<NexusRegion, NexusCurrency> = {
     locale: "es-CO",
     amounts: {
       esencial: { value: 590000, label: null },
-      autoridad: { value: 990000, label: null },
-      dominio: { value: null, label: "Desde 2.500.000" },
+      autoridad: { value: 2000000, label: null },
+      dominio: { value: null, label: "Desde 3.400.000" },
     },
   },
   EU: {

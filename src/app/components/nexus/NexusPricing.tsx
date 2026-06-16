@@ -69,7 +69,7 @@ export function NexusPricing({ onSelect }: NexusPricingProps) {
         "@type": "Offer",
         name: plan.name,
         priceCurrency: currency.code,
-        price: currency.amounts[plan.id]?.value ?? (region === "CO" ? 2500000 : 1490),
+        price: currency.amounts[plan.id]?.value ?? (region === "CO" ? 3400000 : 1490),
         description: plan.for,
         category: "WebsiteDesign",
       })),

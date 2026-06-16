@@ -188,6 +188,9 @@ function TestimonialCard({
 }
 
 export function Testimonials() {
+  // Sección oculta hasta tener reseñas reales — no mostramos testimonios inventados.
+  return null;
+  // eslint-disable-next-line no-unreachable
   const controls = useAnimation();
 
   const startMarquee = () => {

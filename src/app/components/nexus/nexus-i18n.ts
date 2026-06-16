@@ -291,7 +291,7 @@ const es: NexusDict = {
   pricing: {
     eyebrow: "Inversión, no gasto",
     title: "Planes de diseño web y SEO para captar pacientes y clientes",
-    sub: "Una inversión única que trabaja por ti los 365 días. El 90% de nuestros clientes la recuperan con la primera cita que llega desde la web.",
+    sub: "Una inversión única que trabaja por ti los 365 días: tu web atiende, informa y capta clientes mientras tú trabajas.",
     plans: [
       {
         id: "esencial",
@@ -417,11 +417,7 @@ const es: NexusDict = {
   },
   testimonials: {
     title: "Lo que dicen de nosotros",
-    items: [
-      { quote: "Desde que renovaron mi web, recibo consultas por WhatsApp cada semana. La diferencia es real.", name: "Laura Méndez", role: "Clínica Estética Lumière" },
-      { quote: "Por fin aparezco en Google cuando buscan dentista en mi ciudad. Mi agenda lo nota.", name: "Carlos Ruiz", role: "Clínica Dental Sonríe" },
-      { quote: "Una web seria que transmite la confianza y discreción que mi despacho necesita.", name: "Andrea Pérez", role: "Pérez Abogados" },
-    ],
+    items: [],
   },
   nav: { sectors: "Sectores", services: "Servicios", pricing: "Precios", faq: "FAQ", cta: "Solicitar propuesta" },
   footer: {
@@ -578,7 +574,7 @@ const en: NexusDict = {
   pricing: {
     eyebrow: "Investment, not expense",
     title: "Web design and SEO plans to win patients and clients",
-    sub: "A one-time investment that works for you 365 days a year. 90% of our clients recover it with the first appointment that comes from the website.",
+    sub: "A one-time investment that works for you 365 days a year: your website attracts, informs and captures clients while you work.",
     plans: [
       {
         id: "esencial",
@@ -704,11 +700,7 @@ const en: NexusDict = {
   },
   testimonials: {
     title: "What others say about us",
-    items: [
-      { quote: "Since they renewed my website, I get WhatsApp enquiries every week. The difference is real.", name: "Laura Méndez", role: "Lumière Aesthetic Clinic" },
-      { quote: "I finally show up on Google when people search for a dentist in my city. My calendar feels it.", name: "Carlos Ruiz", role: "Sonríe Dental Clinic" },
-      { quote: "A serious website that conveys the trust and discretion my firm needs.", name: "Andrea Pérez", role: "Pérez Law Firm" },
-    ],
+    items: [],
   },
   nav: { sectors: "Sectors", services: "Services", pricing: "Pricing", faq: "FAQ", cta: "Request proposal" },
   footer: {
@@ -865,7 +857,7 @@ const fr: NexusDict = {
   pricing: {
     eyebrow: "Un investissement, pas une dépense",
     title: "Formules de design web et SEO pour attirer patients et clients",
-    sub: "Un investissement unique qui travaille pour vous 365 jours par an. 90% de nos clients le récupèrent dès le premier rendez-vous venu du site.",
+    sub: "Un investissement unique qui travaille pour vous 365 jours par an : votre site attire, informe et capte des clients pendant que vous travaillez.",
     plans: [
       {
         id: "esencial",
@@ -991,11 +983,7 @@ const fr: NexusDict = {
   },
   testimonials: {
     title: "Ce qu'ils disent de nous",
-    items: [
-      { quote: "Depuis qu'ils ont refait mon site, je reçois des demandes sur WhatsApp chaque semaine. La différence est réelle.", name: "Laura Méndez", role: "Clinique Esthétique Lumière" },
-      { quote: "J'apparais enfin sur Google quand on cherche un dentiste dans ma ville. Mon agenda le ressent.", name: "Carlos Ruiz", role: "Clinique Dentaire Sonríe" },
-      { quote: "Un site sérieux qui transmet la confiance et la discrétion dont mon cabinet a besoin.", name: "Andrea Pérez", role: "Pérez Avocats" },
-    ],
+    items: [],
   },
   nav: { sectors: "Secteurs", services: "Services", pricing: "Tarifs", faq: "FAQ", cta: "Demander une proposition" },
   footer: {
@@ -1152,7 +1140,7 @@ const it: NexusDict = {
   pricing: {
     eyebrow: "Un investimento, non una spesa",
     title: "Piani di design web e SEO per acquisire pazienti e clienti",
-    sub: "Un investimento una tantum che lavora per te 365 giorni l'anno. Il 90% dei nostri clienti lo recupera con il primo appuntamento arrivato dal sito.",
+    sub: "Un investimento una tantum che lavora per te 365 giorni l'anno: il tuo sito attrae, informa e cattura clienti mentre tu lavori.",
     plans: [
       {
         id: "esencial",
@@ -1278,11 +1266,7 @@ const it: NexusDict = {
   },
   testimonials: {
     title: "Cosa dicono di noi",
-    items: [
-      { quote: "Da quando hanno rinnovato il mio sito, ricevo richieste su WhatsApp ogni settimana. La differenza è reale.", name: "Laura Méndez", role: "Clinica Estetica Lumière" },
-      { quote: "Finalmente compaio su Google quando cercano un dentista nella mia città. La mia agenda lo sente.", name: "Carlos Ruiz", role: "Clinica Dentale Sonríe" },
-      { quote: "Un sito serio che trasmette la fiducia e la discrezione di cui il mio studio ha bisogno.", name: "Andrea Pérez", role: "Pérez Avvocati" },
-    ],
+    items: [],
   },
   nav: { sectors: "Settori", services: "Servizi", pricing: "Prezzi", faq: "FAQ", cta: "Richiedi proposta" },
   footer: {

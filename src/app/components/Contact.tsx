@@ -49,7 +49,7 @@ const CO_TEXT_ES = {
   formBadge: "Contáctanos",
   formTitle1: "Tu proyecto, en 24 horas tienes",
   formTitle2: "una propuesta real en tu correo.",
-  formSubtitle: "Más de 40 negocios colombianos ya confiaron en este proceso. Tú serás el siguiente.",
+  formSubtitle: "Cuéntanos tu proyecto y te respondemos con una propuesta real en menos de 24 horas.",
   labelName: "Nombre completo",
   labelEmail: "Correo electrónico",
   labelPhone: "WhatsApp / Teléfono",

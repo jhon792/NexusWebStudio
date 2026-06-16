@@ -10,20 +10,20 @@ import { useLang } from "../../hooks/useLang";
 const WA_BASE = "https://wa.me/573123198706?text=";
 const WA_PLANS_ES: Record<string, string> = {
   inicio:      WA_BASE + encodeURIComponent("Hola, me interesa el Plan Esencial ($590.000 COP). ¿Pueden darme más información?"),
-  crecimiento: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Profesional ($990.000 COP). ¿Pueden darme más información?"),
-  empresarial: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Empresarial (desde $2.500.000 COP). ¿Pueden darme más información?"),
+  crecimiento: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Profesional ($2.000.000 COP). ¿Pueden darme más información?"),
+  empresarial: WA_BASE + encodeURIComponent("Hola, me interesa el Plan Empresarial (desde $3.400.000 COP). ¿Pueden darme más información?"),
 };
 const WA_PLANS_EN: Record<string, string> = {
   inicio:      WA_BASE + encodeURIComponent("Hello, I'm interested in the Essential Plan ($590,000 COP). Can you give me more information?"),
-  crecimiento: WA_BASE + encodeURIComponent("Hello, I'm interested in the Professional Plan ($990,000 COP). Can you give me more information?"),
-  empresarial: WA_BASE + encodeURIComponent("Hello, I'm interested in the Business Plan (from $2,500,000 COP). Can you give me more information?"),
+  crecimiento: WA_BASE + encodeURIComponent("Hello, I'm interested in the Professional Plan ($2,000,000 COP). Can you give me more information?"),
+  empresarial: WA_BASE + encodeURIComponent("Hello, I'm interested in the Business Plan (from $3,400,000 COP). Can you give me more information?"),
 };
 const WA = WA_BASE + encodeURIComponent("Hola, me interesa cotizar una página web para mi negocio.");
 
 const PLAN_VISUAL = [
   { id: "inicio",      price: 590000, priceLabel: null,              accent: "#818cf8", featured: false },
-  { id: "crecimiento", price: 990000, priceLabel: null,              accent: "#a78bfa", featured: true  },
-  { id: "empresarial", price: 0,      priceLabel: "Desde $2.500.000",accent: "#34d399", featured: false },
+  { id: "crecimiento", price: 2000000, priceLabel: null,             accent: "#a78bfa", featured: true  },
+  { id: "empresarial", price: 0,      priceLabel: "Desde $3.400.000",accent: "#34d399", featured: false },
 ];
 
 const PLANS_ES = [
@@ -227,9 +227,9 @@ const PRICING_UI = {
     badge: "Planes e Inversión",
     h2: "Una valla publicitaria cuesta $800.000/mes.",
     h2Highlight: "Tu web trabaja 365 días por mucho menos.",
-    subtitle: "Inversión única. Sin mensualidades. El 90% de nuestros clientes recuperan la inversión con el primer cliente nuevo que llega por la web.",
-    socialProofCount: "+40 negocios",
-    socialProofSuffix: "ya confían en nosotros",
+    subtitle: "Inversión única. Sin mensualidades. Tu web trabaja 365 días al año captando clientes mientras tú te enfocas en tu negocio.",
+    socialProofCount: "Trato directo",
+    socialProofSuffix: "con el fundador, sin intermediarios",
     paymentTerms: "50% al iniciar · 50% al entregar",
     deliveryLabel: "Entrega:",
     priceOneTime: "Inversión única",
@@ -251,9 +251,9 @@ const PRICING_UI = {
     badge: "Plans & Investment",
     h2: "A billboard costs $800,000/month.",
     h2Highlight: "Your website works 365 days for much less.",
-    subtitle: "One-time investment. No monthly fees. 90% of our clients recover their investment with the first new client from the web.",
-    socialProofCount: "+40 businesses",
-    socialProofSuffix: "already trust us",
+    subtitle: "One-time investment. No monthly fees. Your website works 365 days a year capturing clients while you focus on your business.",
+    socialProofCount: "Direct contact",
+    socialProofSuffix: "with the founder, no middlemen",
     paymentTerms: "50% to start · 50% on delivery",
     deliveryLabel: "Delivery:",
     priceOneTime: "One-time investment",

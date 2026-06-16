@@ -4,9 +4,11 @@ import {
 } from "react-router";
 import { CookieBanner } from "./app/components/CookieBanner";
 import { FloatingWhatsApp } from "./app/components/FloatingWhatsApp";
+import { RegionBanner } from "./app/components/RegionBanner";
 import { GlobalEffects } from "./app/components/GlobalEffects";
 import { useAnalytics } from "./hooks/useAnalytics";
 import { detectCountry, readCachedCountry, isLikelyCrawler } from "./app/components/nexus/nexus-geo";
+import { isEuropean } from "./geo-europe";
 import NexusLanding from "./app/components/nexus/NexusLanding";
 import i18n, { getLangFromPath } from "./i18n";
 
@@ -62,9 +64,11 @@ function LanguageSync() {
 }
 
 /**
- * Home de Colombia (`/`). El redirect server-side del edge ya manda a `/es` a
- * las IPs no-CO; este redirect cliente es respaldo para navegación interna SPA.
- * No redirige a crawlers (que indexen `/`).
+ * Home de Colombia (`/`). Responde 200 para todos (incluido Google). Solo a
+ * visitantes EUROPEOS reales se les reenvía a `/es` (€) — para que España/Europa
+ * no vea el precio de Colombia (COP). LatAm y el resto se quedan aquí. No
+ * redirige a crawlers (que indexen `/`). Respaldo para navegación interna SPA;
+ * el edge ya cubre la carga inicial.
  */
 function NexusHomeColombia() {
   const navigate = useNavigate();
@@ -72,12 +76,12 @@ function NexusHomeColombia() {
     if (isLikelyCrawler()) return;
     let alive = true;
     const cached = readCachedCountry();
-    if (cached && cached !== "CO") {
+    if (isEuropean(cached)) {
       navigate("/es", { replace: true });
       return;
     }
     detectCountry().then((country) => {
-      if (alive && country && country !== "CO") navigate("/es", { replace: true });
+      if (alive && isEuropean(country)) navigate("/es", { replace: true });
     });
     return () => { alive = false; };
   }, [navigate]);
@@ -96,6 +100,7 @@ function RootLayout() {
     <>
       <GlobalEffects />
       <CookieBanner />
+      <RegionBanner />
       <FloatingWhatsApp />
       <LanguageSync />
       <Suspense fallback={<PageLoader />}>

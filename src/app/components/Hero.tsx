@@ -143,7 +143,7 @@ export function Hero() {
   const content = isEN ? {
     badge: "Only 2 spots available in June",
     headingLines: ["Web design that", "generates clients", "in Colombia."],
-    subtitle: "We are Nexsu Studio — we design websites for clinics, restaurants, lawyers and SMEs in Villavicencio, Bogotá and Medellín that need real results, not just a pretty site. +40 businesses trust us.",
+    subtitle: "We are Nexsu Studio — we design websites for clinics, restaurants, lawyers and SMEs in Villavicencio, Bogotá and Medellín that need real results, not just a pretty site.",
     citiesLabel: "We serve in:",
     ctaPrimary: "Get a free quote — WhatsApp",
     ctaSecondary: "See design examples",
@@ -153,11 +153,11 @@ export function Hero() {
     priceLast: "No contracts",
     seePlans: "→ View plans",
     seePlansAriaLabel: "View all pricing plans",
-    trustItems: ["+40 businesses served", "3 to 15 day delivery", "Verifiable results", "Post-delivery support", "No hidden costs"],
+    trustItems: ["Direct attention from the founder", "3 to 15 day delivery", "Verifiable results", "Post-delivery support", "No hidden costs"],
   } : {
     badge: "Solo quedan 2 cupos disponibles en junio",
     headingLines: ["Diseño web que", "genera clientes", "en Colombia."],
-    subtitle: "Somos Nexus Studio — diseñamos webs para clínicas, restaurantes, abogados y pymes en Villavicencio, Bogotá y Medellín que necesitan resultados reales, no solo un sitio bonito. +40 negocios ya confían en nosotros.",
+    subtitle: "Somos Nexus Studio — diseñamos webs para clínicas, restaurantes, abogados y pymes en Villavicencio, Bogotá y Medellín que necesitan resultados reales, no solo un sitio bonito.",
     citiesLabel: "Atendemos en:",
     ctaPrimary: "Cotizar gratis — WhatsApp",
     ctaSecondary: "Ver ejemplos de diseño",
@@ -167,7 +167,7 @@ export function Hero() {
     priceLast: "Sin permanencia",
     seePlans: "→ Ver planes",
     seePlansAriaLabel: "Ver todos los planes de precios",
-    trustItems: ["+40 negocios atendidos", "Entrega en 3 a 15 días", "Resultados verificables", "Soporte post-entrega", "Sin costos ocultos"],
+    trustItems: ["Atención directa del fundador", "Entrega en 3 a 15 días", "Resultados verificables", "Soporte post-entrega", "Sin costos ocultos"],
   };
 
   const sectionRef = useRef<HTMLElement>(null);

@@ -10,7 +10,7 @@ const FAQS_ES = [
   {
     question: "¿Cuánto cuesta una página web en Colombia?",
     answer:
-      "Manejamos tres planes de inversión. El Plan Inicio vale $590.000 COP e incluye landing page profesional lista en 3 a 5 días. El Plan Crecimiento vale $990.000 COP e incluye SEO, dominio propio y hosting por un año completo — es el más elegido por negocios colombianos que quieren aparecer en Google. Para proyectos a medida —tiendas virtuales, sistemas de citas o apps web— el Plan Empresarial parte desde $2.500.000 COP. Todos son pagos únicos, sin mensualidades.",
+      "Manejamos tres planes de inversión. El Plan Inicio vale $590.000 COP e incluye landing page profesional lista en 3 a 5 días. El Plan Crecimiento vale $2.000.000 COP e incluye SEO, dominio propio y hosting por un año completo — es el más elegido por negocios colombianos que quieren aparecer en Google. Para proyectos a medida —tiendas virtuales, sistemas de citas o apps web— el Plan Empresarial parte desde $3.400.000 COP. Todos son pagos únicos, sin mensualidades.",
   },
   {
     question: "¿Las páginas web que hacen aparecen en Google?",
@@ -50,7 +50,7 @@ const FAQS_ES = [
   {
     question: "¿Vale la pena la inversión si mi negocio es pequeño?",
     answer:
-      "El tamaño del negocio no define si necesitas web — lo define si tienes clientes que te buscan en internet. Si alguien en tu ciudad busca en Google 'dentista cerca' o 'restaurante en Villavicencio' y tú no apareces, ese cliente va a tu competencia. Con el Plan Crecimiento ($990.000, pago único), un solo cliente nuevo recupera toda la inversión. La mayoría de nuestros clientes lo reciben en las primeras semanas.",
+      "El tamaño del negocio no define si necesitas web — lo define si tienes clientes que te buscan en internet. Si alguien en tu ciudad busca en Google 'dentista cerca' o 'restaurante en Villavicencio' y tú no apareces, ese cliente va a tu competencia. Con el Plan Crecimiento ($2.000.000, pago único), un solo cliente nuevo recupera toda la inversión. La mayoría de nuestros clientes lo reciben en las primeras semanas.",
   },
   {
     question: "¿Qué necesito tener listo para empezar?",
@@ -63,7 +63,7 @@ const FAQS_EN = [
   {
     question: "How much does a website cost in Colombia?",
     answer:
-      "We offer three investment plans. The Starter Plan costs $590,000 COP and includes a professional landing page ready in 3 to 5 days. The Growth Plan costs $990,000 COP and includes SEO, a custom domain and hosting for a full year — it's the most popular choice for Colombian businesses that want to appear on Google. For custom projects — online stores, booking systems or web apps — the Business Plan starts at $2,500,000 COP. All are one-time payments, no monthly fees.",
+      "We offer three investment plans. The Starter Plan costs $590,000 COP and includes a professional landing page ready in 3 to 5 days. The Growth Plan costs $2,000,000 COP and includes SEO, a custom domain and hosting for a full year — it's the most popular choice for Colombian businesses that want to appear on Google. For custom projects — online stores, booking systems or web apps — the Business Plan starts at $3,400,000 COP. All are one-time payments, no monthly fees.",
   },
   {
     question: "Do your websites appear on Google?",
@@ -103,7 +103,7 @@ const FAQS_EN = [
   {
     question: "Is the investment worth it if my business is small?",
     answer:
-      "The size of the business doesn't define whether you need a website — what defines it is whether you have clients searching for you online. If someone in your city searches Google for 'dentist nearby' or 'restaurant in Villavicencio' and you don't appear, that client goes to your competition. With the Growth Plan ($990,000, one-time payment), a single new client recovers the entire investment. Most of our clients receive it within the first few weeks.",
+      "The size of the business doesn't define whether you need a website — what defines it is whether you have clients searching for you online. If someone in your city searches Google for 'dentist nearby' or 'restaurant in Villavicencio' and you don't appear, that client goes to your competition. With the Growth Plan ($2,000,000, one-time payment), a single new client recovers the entire investment. Most of our clients receive it within the first few weeks.",
   },
   {
     question: "What do I need to have ready to get started?",

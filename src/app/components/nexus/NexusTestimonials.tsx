@@ -25,6 +25,9 @@ export function NexusTestimonials() {
   const { t } = useNexus();
   const data = t.testimonials;
 
+  // Sin reseñas reales aún: no se muestra la sección (nada de testimonios inventados).
+  if (!data.items || data.items.length === 0) return null;
+
   return (
     <section className="nx nx-tst" id="nx-testimonials" aria-labelledby="nx-tst-title">
       <h2 className="nx-tst__title" id="nx-tst-title">{data.title}</h2>

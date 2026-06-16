@@ -20,8 +20,8 @@
       "name": "Plan Crecimiento",
       "label": "La inversión más inteligente",
       "tagline": "El que usan el 70% de nuestros clientes colombianos",
-      "price": 990000,
-      "price_display": "$990.000",
+      "price": 2000000,
+      "price_display": "$2.000.000",
       "delivery": "7 a 15 días hábiles",
       "cta": "Quiero más clientes"
     },
@@ -31,7 +31,7 @@
       "label": "Para proyectos a medida",
       "tagline": "Funcionalidades únicas para tu negocio",
       "price": 0,
-      "price_display": "Desde $2.500.000",
+      "price_display": "Desde $3.400.000",
       "delivery": "Según alcance del proyecto",
       "cta": "Solicitar cotización"
     }

@@ -156,69 +156,65 @@
 }
 .nx-niche__mock {
   position: relative;
-  border-radius: 22px;
+  border-radius: 18px;
   overflow: hidden;
-  background: var(--nx-surface);
+  background: #fff;
   border: 1px solid var(--nx-line);
   box-shadow: var(--nx-shadow-lg);
-  aspect-ratio: 16 / 12;
 }
-.nx-niche__mock-top {
-  height: 46%;
-  position: relative;
+
+/* Barra superior tipo navegador */
+.nx-niche__bar {
   display: flex;
-  align-items: flex-end;
-  padding: 1.4rem;
-}
-.nx-niche__mock-badge {
-  position: absolute;
-  top: 1rem; right: 1rem;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  backdrop-filter: blur(4px);
-}
-.nx-niche__mock-title {
-  font-family: var(--nx-serif);
-  font-weight: 600;
-  font-size: 1.35rem;
-  color: #fff;
-  line-height: 1.15;
-  max-width: 70%;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-}
-.nx-niche__mock-body {
-  padding: 1.3rem 1.4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-.nx-niche__mock-row {
-  height: 10px;
-  border-radius: 999px;
-  background: var(--nx-surface-2);
-}
-.nx-niche__mock-row.w-95 { width: 95%; }
-.nx-niche__mock-row.w-80 { width: 80%; }
-.nx-niche__mock-row.w-60 { width: 60%; }
-.nx-niche__mock-cta {
-  margin-top: 0.6rem;
-  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  align-self: flex-start;
-  padding: 0.6rem 1.1rem;
+  gap: 0.7rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--nx-navy);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.nx-niche__dots { display: inline-flex; gap: 6px; flex-shrink: 0; }
+.nx-niche__dots i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+.nx-niche__dots i:nth-child(1) { background: #ff5f57; }
+.nx-niche__dots i:nth-child(2) { background: #febc2e; }
+.nx-niche__dots i:nth-child(3) { background: #28c840; }
+.nx-niche__url {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--nx-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.32rem 0.75rem;
   border-radius: 999px;
-  background: var(--nx-gold);
-  color: var(--nx-navy);
-  font-size: 0.8rem;
-  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Marco con la vista en vivo (miniatura responsiva del sitio real) */
+.nx-niche__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #fff;
+}
+.nx-niche__shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;   /* muestra la portada del sitio */
+  display: block;
+  user-select: none;
+}
+.nx-niche__frame-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
 }
 
 /* Tarjeta flotante de confianza sobre el mock */
@@ -244,6 +240,44 @@
   display: grid; place-items: center;
   background: var(--nx-gold-soft);
   color: var(--nx-gold-hover);
+}
+
+/* Botón "Ver ejemplo" — abre el sitio real en vivo (vive en la barra) */
+.nx-niche__view {
+  flex-shrink: 0;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-family: var(--nx-sans);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--nx-navy);
+  background: var(--nx-gold);
+  border: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s var(--nx-ease), background 0.2s, color 0.2s;
+}
+.nx-niche__view:hover {
+  transform: translateY(-1px);
+  background: var(--nx-gold-hover);
+  color: #fff;
+}
+.nx-niche__view svg { transition: transform 0.2s var(--nx-ease); }
+.nx-niche__view:hover svg { transform: translate(2px, -2px); }
+.nx-niche__view:focus-visible { outline: 2px solid var(--nx-gold); outline-offset: 2px; }
+
+/* La tarjeta "se asoma" un poco al pasar el cursor */
+.nx-niche__mock {
+  transition: transform 0.35s var(--nx-ease), box-shadow 0.35s var(--nx-ease);
+}
+.nx-niche__viewport:hover .nx-niche__mock {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.22);
 }
 
 @media (max-width: 920px) {

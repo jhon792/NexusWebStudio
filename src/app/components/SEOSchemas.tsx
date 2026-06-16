@@ -14,7 +14,7 @@ const schemaFAQ = {
       name: "¿Cuánto cuesta una página web en Colombia?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "En Nexus Studio manejamos tres planes de inversión. El Plan Inicio vale $590.000 COP e incluye landing page profesional lista en 3 a 5 días. El Plan Crecimiento vale $990.000 COP e incluye SEO, dominio propio y hosting por un año completo; es el más elegido por negocios colombianos que quieren aparecer en Google. Para proyectos a medida —tiendas virtuales, sistemas de citas o aplicaciones web— el Plan Empresarial parte desde $2.500.000 COP. Todos son pagos únicos sin mensualidades ocultas. Consulta los detalles en https://www.nexsustudio.site.",
+        text: "En Nexus Studio manejamos tres planes de inversión. El Plan Inicio vale $590.000 COP e incluye landing page profesional lista en 3 a 5 días. El Plan Crecimiento vale $2.000.000 COP e incluye SEO, dominio propio y hosting por un año completo; es el más elegido por negocios colombianos que quieren aparecer en Google. Para proyectos a medida —tiendas virtuales, sistemas de citas o aplicaciones web— el Plan Empresarial parte desde $3.400.000 COP. Todos son pagos únicos sin mensualidades ocultas. Consulta los detalles en https://www.nexsustudio.site.",
       },
     },
     {

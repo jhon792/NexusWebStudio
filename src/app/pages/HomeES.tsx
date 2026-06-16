@@ -153,7 +153,7 @@ const HERO_CONTENT: Record<string, HeroLang> = {
     ctaPrimary: "Solicitar presupuesto — WhatsApp", ctaSecondary: "Ver casos de éxito",
     ctaPrimaryAriaLabel: "Solicitar presupuesto de diseño web por WhatsApp",
     ctaSecondaryAriaLabel: "Ver casos de éxito y ejemplos de diseño web para España",
-    trustItems: ["+40 negocios atendidos", "Entrega en 15 a 30 días", "Resultados medibles", "Soporte incluido", "Sin costes ocultos"],
+    trustItems: ["Atención directa del fundador", "Entrega en 15 a 30 días", "Resultados medibles", "Soporte incluido", "Sin costes ocultos"],
   },
   EN: {
     badge: "🇪🇸 Web specialists for Spain and Europe",
@@ -172,7 +172,7 @@ const HERO_CONTENT: Record<string, HeroLang> = {
     ctaPrimary: "Request a quote — WhatsApp", ctaSecondary: "See case studies",
     ctaPrimaryAriaLabel: "Request a web design quote via WhatsApp",
     ctaSecondaryAriaLabel: "See web design case studies for Spain",
-    trustItems: ["+40 businesses served", "15 to 30 day delivery", "Measurable results", "Support included", "No hidden fees"],
+    trustItems: ["Direct attention from the founder", "15 to 30 day delivery", "Measurable results", "Support included", "No hidden fees"],
   },
   FR: {
     badge: "🇪🇸 Spécialistes web pour l'Espagne et l'Europe",
@@ -191,7 +191,7 @@ const HERO_CONTENT: Record<string, HeroLang> = {
     ctaPrimary: "Demander un devis — WhatsApp", ctaSecondary: "Voir les réalisations",
     ctaPrimaryAriaLabel: "Demander un devis web design via WhatsApp",
     ctaSecondaryAriaLabel: "Voir les réalisations de design web pour l'Espagne",
-    trustItems: ["+40 entreprises servies", "Livraison en 15 à 30 jours", "Résultats mesurables", "Support inclus", "Sans frais cachés"],
+    trustItems: ["Attention directe du fondateur", "Livraison en 15 à 30 jours", "Résultats mesurables", "Support inclus", "Sans frais cachés"],
   },
   IT: {
     badge: "🇪🇸 Specialisti web per la Spagna e l'Europa",
@@ -210,7 +210,7 @@ const HERO_CONTENT: Record<string, HeroLang> = {
     ctaPrimary: "Richiedi preventivo — WhatsApp", ctaSecondary: "Vedi casi di successo",
     ctaPrimaryAriaLabel: "Richiedi un preventivo web design via WhatsApp",
     ctaSecondaryAriaLabel: "Vedi casi di successo di web design per la Spagna",
-    trustItems: ["+40 aziende servite", "Consegna in 15-30 giorni", "Risultati misurabili", "Supporto incluso", "Senza costi nascosti"],
+    trustItems: ["Attenzione diretta dal fondatore", "Consegna in 15-30 giorni", "Risultati misurabili", "Supporto incluso", "Senza costi nascosti"],
   },
 };
 
