@@ -8,6 +8,29 @@
    index.html (una sola petición preconectada). Antes este @import duplicaba la
    carga de Inter y bloqueaba el render con una petición encadenada. */
 
+/* ── Fuentes de respaldo con métricas ajustadas (anti-CLS) ──────────────────
+   Mientras Inter/Playfair se descargan, el navegador pinta con estas fuentes
+   locales (Arial/Georgia) AJUSTADAS para ocupar exactamente el mismo espacio
+   que la fuente web. Así, cuando la fuente web entra, NO hay reflujo → CLS ~0.
+   No cambia el aspecto final (la web font sigue mandando); solo iguala el
+   layout del estado intermedio. Valores estándar (estilo next/font). */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  ascent-override: 90.49%;
+  descent-override: 22.56%;
+  line-gap-override: 0%;
+  size-adjust: 107.06%;
+}
+@font-face {
+  font-family: "Playfair Fallback";
+  src: local("Georgia");
+  ascent-override: 96.6%;
+  descent-override: 23.3%;
+  line-gap-override: 0%;
+  size-adjust: 111%;
+}
+
 :root {
   /* ── Superficies ─────────────────────────────────────────── */
   --nx-bg:            #f8f9fa;   /* fondo principal ultra-limpio   */
@@ -31,7 +54,9 @@
   /* ── Tinta / texto ───────────────────────────────────────── */
   --nx-ink:           #0b2240;
   --nx-ink-soft:      #33485f;
-  --nx-muted:         #64748b;
+  /* #64748b daba 4.17–4.28:1 sobre fondos tintados (#f4f0e3 topbar, #f1f3f6
+     surface-2) → fallaba WCAG AA. #5b6b7e pasa 4.5:1 en todos esos fondos. */
+  --nx-muted:         #5b6b7e;
   --nx-line:          rgba(11, 34, 64, 0.08);
   --nx-line-strong:   rgba(11, 34, 64, 0.16);
 
@@ -40,8 +65,8 @@
   --nx-danger:        #c0392b;
 
   /* ── Tipografía ──────────────────────────────────────────── */
-  --nx-serif: "Playfair Display", "Lora", Georgia, "Times New Roman", serif;
-  --nx-sans:  "Inter", "Montserrat", system-ui, -apple-system, sans-serif;
+  --nx-serif: "Playfair Display", "Playfair Fallback", "Lora", Georgia, "Times New Roman", serif;
+  --nx-sans:  "Inter", "Inter Fallback", "Montserrat", system-ui, -apple-system, sans-serif;
 
   /* ── Curvas de aceleración (60 FPS, sin layout shift) ────── */
   --nx-ease:        cubic-bezier(0.16, 1, 0.30, 1);  /* salida expresiva  */
