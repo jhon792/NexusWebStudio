@@ -39,7 +39,9 @@ export function NexusSeo() {
 /* ── Vídeo con carga diferida (facade) — no carga el iframe hasta el clic ── */
 function LiteYouTube({ id, label }: { id: string; label: string }) {
   const [open, setOpen] = useState(false);
-  const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+  /* Miniatura auto-alojada (WebP 960x540) en vez de i.ytimg.com: evita la
+     conexión a un tercero y el aviso de caché (TTL 2h de YouTube). */
+  const thumb = "/previews/video-thumb.webp";
 
   if (open) {
     return (
@@ -57,7 +59,7 @@ function LiteYouTube({ id, label }: { id: string; label: string }) {
 
   return (
     <button type="button" className="nx-video" onClick={() => setOpen(true)} aria-label={label}>
-      <img className="nx-video__thumb" src={thumb} alt={label} loading="lazy" decoding="async" />
+      <img className="nx-video__thumb" src={thumb} alt={label} width={960} height={540} loading="lazy" decoding="async" />
       <span className="nx-video__play">
         <span className="nx-video__btn" aria-hidden="true">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">

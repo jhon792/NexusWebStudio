@@ -13,11 +13,12 @@ const DEMO_URLS: Record<string, string> = {
   abogados: "https://despacho11.vercel.app/",
 };
 
-/* Captura (imagen) de cada sitio para la vista previa de la tarjeta */
+/* Captura (imagen) de cada sitio para la vista previa de la tarjeta.
+   WebP optimizado (≈900px, q78): ~60% más liviano que el JPG original. */
 const DEMO_SHOTS: Record<string, string> = {
-  estetica: "/previews/estetica.jpg",
-  odontologia: "/previews/odontologia.jpg",
-  abogados: "/previews/abogados.jpg",
+  estetica: "/previews/estetica.webp",
+  odontologia: "/previews/odontologia.webp",
+  abogados: "/previews/abogados.webp",
 };
 
 /* Etiqueta del botón "Ver" según idioma */
@@ -169,7 +170,10 @@ export function NicheSelector() {
                   className="nx-niche__shot"
                   src={DEMO_SHOTS[niche.id]}
                   alt={`Vista previa del sitio — ${niche.tab}`}
+                  width={900}
+                  height={632}
                   loading="lazy"
+                  decoding="async"
                   draggable={false}
                 />
                 <a
