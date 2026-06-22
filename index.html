@@ -10,17 +10,20 @@
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://api.emailjs.com" />
 
-    <!-- ===== FUENTE: Inter — carga asíncrona (no bloquea render) ===== -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" crossorigin="anonymous" />
+    <!-- ===== FUENTES: Inter + Playfair Display — UNA sola petición, carga
+         asíncrona (no bloquea render). Antes se cargaban en 3 sitios distintos
+         (index.html + fonts.css @import + nexus-theme.css @import), creando
+         peticiones render-blocking encadenadas. Consolidado aquí. ===== -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" crossorigin="anonymous" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
       media="print"
       onload="this.media='all'"
       crossorigin="anonymous"
     />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" />
     </noscript>
 
     <!-- ===== SEO PRIMARIO ===== -->
@@ -129,6 +132,27 @@
             "query-input": "required name=search_term_string"
           },
           "publisher": { "@id": "https://www.nexsustudio.site/#business" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://www.nexsustudio.site/#webpage",
+          "url": "https://www.nexsustudio.site/",
+          "name": "Diseño Web Profesional en Colombia | Nexus Studio",
+          "description": "Nexus Studio: diseño y desarrollo web profesional en Colombia. Páginas web desde $590.000 COP, entrega en 10 días. Atendemos Bogotá, Medellín y Villavicencio.",
+          "inLanguage": "es-CO",
+          "isPartOf": { "@id": "https://www.nexsustudio.site/#website" },
+          "about": { "@id": "https://www.nexsustudio.site/#business" },
+          "primaryImageOfPage": "https://www.nexsustudio.site/og-image.jpg",
+          "breadcrumb": { "@id": "https://www.nexsustudio.site/#breadcrumb" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://www.nexsustudio.site/#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.nexsustudio.site/" },
+            { "@type": "ListItem", "position": 2, "name": "Diseño Web Colombia", "item": "https://www.nexsustudio.site/#nx-services" },
+            { "@type": "ListItem", "position": 3, "name": "Planes y Precios", "item": "https://www.nexsustudio.site/#nx-pricing" }
+          ]
         },
         {
           "@type": ["LocalBusiness", "ProfessionalService", "WebDesigner"],

@@ -17,7 +17,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--nx-gold-hover);
+  color: var(--nx-gold-text);
 }
 .nx-seo__title {
   font-family: var(--nx-serif);

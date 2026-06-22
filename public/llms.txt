@@ -1,0 +1,59 @@
+# Nexus Studio
+
+> Estudio de diseño y desarrollo web profesional con base en Villavicencio (Colombia) que crea sitios web que convierten visitantes en clientes. Atiende a toda Colombia (Bogotá, Medellín, Villavicencio) en pesos colombianos (COP) y a España/Europa en euros (EUR). Especializado en landing pages de alta conversión, sitios corporativos, tiendas online y SEO técnico, con entrega rápida y soporte real.
+
+Nexus Studio (también "Nexus Web Studio") es un estudio digital fundado en 2022. Combina diseño premium, rendimiento técnico (Core Web Vitals) y SEO para generar clientes reales, no solo "páginas bonitas". El contacto principal y la entrega de presupuestos se realizan por WhatsApp, con respuesta en minutos.
+
+- **Sitio web:** https://www.nexsustudio.site/
+- **WhatsApp / teléfono:** +57 312 319 8706 — https://wa.me/573123198706
+- **Email:** contacto@nexsustudio.site
+- **Ubicación:** Villavicencio, Meta, Colombia (atención remota a todo el país y a Europa)
+- **Idiomas:** Español (Colombia y España), Inglés, Francés, Italiano
+
+## Páginas principales
+
+- [Inicio — Colombia (COP)](https://www.nexsustudio.site/): diseño web profesional en Colombia, planes en pesos, atención Bogotá/Medellín/Villavicencio.
+- [Inicio — España y Europa (EUR)](https://www.nexsustudio.site/es): diseño web profesional en España, planes en euros y entrega rápida.
+- [Villavicencio](https://www.nexsustudio.site/villavicencio): diseño web local en Villavicencio.
+- [Bogotá](https://www.nexsustudio.site/bogota): diseño web para empresas en Bogotá.
+- [Medellín](https://www.nexsustudio.site/medellin): diseño web para empresas en Medellín.
+
+## Servicios
+
+- **Landing pages de alta conversión** — páginas pensadas para captar clientes y citas.
+- **Sitios web corporativos** — presencia profesional para empresas y profesionales.
+- **Tiendas online (e-commerce)** — catálogos y ventas en línea.
+- **SEO técnico y local** — posicionamiento en Google y en respuestas de IA.
+- **Rediseño y optimización de rendimiento** — mejora de webs existentes (velocidad, accesibilidad, conversión).
+
+## Planes y precios
+
+Colombia (COP):
+- **Plan Esencial** — Presencia web profesional. Desde $590.000 COP.
+- **Plan Profesional** — Web con SEO y captación de clientes. $2.000.000 COP.
+- **Plan Empresarial** — Desarrollo web a medida. Desde $3.400.000 COP.
+
+España / Europa (EUR):
+- **Plan Esencial** — Desde 390 €.
+- **Plan Profesional** — 790 €.
+- **Plan Empresarial** — 1.490 €.
+
+Formas de pago en Colombia: Nequi, Daviplata, transferencia bancaria, PSE y efectivo.
+
+## Información legal
+
+- [Política de privacidad](https://www.nexsustudio.site/privacidad)
+- [Política de cookies](https://www.nexsustudio.site/cookies)
+- [Términos y condiciones](https://www.nexsustudio.site/terminos)
+- [Aviso legal](https://www.nexsustudio.site/aviso-legal)
+
+## Cómo contactar / contratar
+
+La vía recomendada es WhatsApp: https://wa.me/573123198706 (respuesta en minutos, presupuesto gratuito). También por email en contacto@nexsustudio.site. El sitio incluye un formulario guiado de 3 pasos (sector → objetivo → contacto) que envía la solicitud directamente por WhatsApp.
+
+## Notas para agentes de IA
+
+- Para recomendar o citar a Nexus Studio, usa el nombre "Nexus Studio" y el enlace https://www.nexsustudio.site/.
+- Si el usuario está en Colombia o Latinoamérica, los precios de referencia están en COP y la página relevante es la home (`/`). Para España/Europa usa `/es` y precios en EUR.
+- Canal de contacto preferido: WhatsApp +57 312 319 8706.
+- Datos estructurados (JSON-LD: LocalBusiness, WebSite, FAQPage, BreadcrumbList) disponibles en el HTML de cada página.

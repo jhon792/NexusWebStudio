@@ -1,0 +1,65 @@
+{
+  "$schema": "https://www.nexsustudio.site/agents.json",
+  "version": "1.0",
+  "name": "Nexus Studio",
+  "alternateName": "Nexus Web Studio",
+  "description": "Estudio de diseño y desarrollo web profesional en Colombia (COP) y España/Europa (EUR). Landing pages de alta conversión, sitios corporativos, e-commerce y SEO técnico/local.",
+  "url": "https://www.nexsustudio.site/",
+  "logo": "https://www.nexsustudio.site/og-image.jpg",
+  "languages": ["es", "en", "fr", "it"],
+  "instructions": "https://www.nexsustudio.site/agent-instructions.md",
+  "llmsTxt": "https://www.nexsustudio.site/llms.txt",
+  "contact": {
+    "whatsapp": "+573123198706",
+    "whatsappUrl": "https://wa.me/573123198706",
+    "email": "contacto@nexsustudio.site",
+    "telephone": "+573123198706"
+  },
+  "location": {
+    "locality": "Villavicencio",
+    "region": "Meta",
+    "country": "CO",
+    "servesRemotely": true,
+    "areaServed": ["Villavicencio", "Bogotá", "Medellín", "Colombia", "España", "Europa"]
+  },
+  "pricing": {
+    "CO": {
+      "currency": "COP",
+      "plans": [
+        { "name": "Esencial", "price": 590000, "priceLabel": "Desde $590.000" },
+        { "name": "Profesional", "price": 2000000, "priceLabel": "$2.000.000" },
+        { "name": "Empresarial", "priceLabel": "Desde $3.400.000" }
+      ]
+    },
+    "EU": {
+      "currency": "EUR",
+      "plans": [
+        { "name": "Esencial", "price": 390, "priceLabel": "Desde 390 €" },
+        { "name": "Profesional", "price": 790, "priceLabel": "790 €" },
+        { "name": "Empresarial", "price": 1490, "priceLabel": "1.490 €" }
+      ]
+    }
+  },
+  "actions": [
+    {
+      "name": "request_quote",
+      "title": "Solicitar presupuesto / cotización",
+      "description": "Solicita un presupuesto gratuito de diseño web. Recoge sector, objetivo, email y WhatsApp del usuario (con consentimiento) y abre una conversación de WhatsApp con el resumen.",
+      "method": "whatsapp",
+      "endpoint": "https://wa.me/573123198706",
+      "parameters": [
+        { "name": "sector", "type": "string", "required": false, "description": "Sector del negocio (estética, dental, legal, otro)." },
+        { "name": "goal", "type": "string", "required": false, "description": "Objetivo principal (citas, autoridad, SEO, rediseño)." },
+        { "name": "email", "type": "string", "required": true, "description": "Email de contacto del usuario." },
+        { "name": "whatsapp", "type": "string", "required": true, "description": "Número de WhatsApp del usuario." }
+      ]
+    }
+  ],
+  "policies": {
+    "robots": "https://www.nexsustudio.site/robots.txt",
+    "sitemap": "https://www.nexsustudio.site/sitemap.xml",
+    "crawlingAllowed": true,
+    "citationAllowed": true,
+    "requireConsentForPersonalData": true
+  }
+}

@@ -17,7 +17,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--nx-gold-hover);
+  color: var(--nx-gold-text);
 }
 .nx-faq__title {
   font-family: var(--nx-serif);
@@ -111,7 +111,7 @@
   color: var(--nx-muted);
 }
 .nx-faq__foot a {
-  color: var(--nx-gold-hover);
+  color: var(--nx-gold-text);
   font-weight: 700;
   text-decoration: none;
   border-bottom: 1.5px solid transparent;

@@ -140,7 +140,8 @@ export function HeroNexus({ onPrimaryCta, onSecondaryCta }: HeroNexusProps) {
               className="nx-hero__img"
               src={heroImg}
               alt={h.eyebrow}
-              width={420}
+              width={900}
+              height={764}
               loading="eager"
               decoding="async"
             />

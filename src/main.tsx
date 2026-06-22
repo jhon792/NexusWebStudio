@@ -1,6 +1,7 @@
 import { hydrateRoot, createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { routes } from "./routes";
+import { registerWebMCP } from "./webmcp";
 import "./styles/index.css";
 import "./i18n";
 
@@ -15,3 +16,11 @@ if (root.firstChild) {
 } else {
   createRoot(root).render(app);
 }
+
+// WebMCP (experimental, no-op en navegadores sin la API). Diferido para no
+// competir con la hidratación ni con el LCP.
+const idle = (cb: () => void) =>
+  "requestIdleCallback" in window
+    ? (window as unknown as { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(cb)
+    : setTimeout(cb, 1200);
+idle(registerWebMCP);

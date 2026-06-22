@@ -31,7 +31,7 @@
 }
 .nx-niche__title em {
   font-style: italic;
-  color: var(--nx-gold-hover);
+  color: var(--nx-gold-text);
 }
 .nx-niche__lead {
   font-size: 0.98rem;
@@ -99,7 +99,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--nx-gold-hover);
+  color: var(--nx-gold-text);
   margin-bottom: 0.9rem;
 }
 .nx-niche__h3 {

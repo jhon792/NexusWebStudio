@@ -4,7 +4,9 @@
    Importa este archivo UNA sola vez (p. ej. en main.tsx o el layout raíz).
    ============================================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap");
+/* Las fuentes (Inter + Playfair Display) se cargan de forma asíncrona desde
+   index.html (una sola petición preconectada). Antes este @import duplicaba la
+   carga de Inter y bloqueaba el render con una petición encadenada. */
 
 :root {
   /* ── Superficies ─────────────────────────────────────────── */
@@ -21,6 +23,10 @@
   --nx-gold:          #d4af37;   /* oro viejo premium              */
   --nx-gold-hover:    #b89225;
   --nx-gold-soft:     rgba(212, 175, 55, 0.12);
+  /* Dorado accesible SOLO para texto sobre fondo claro: cumple WCAG AA
+     (≥4.5:1 sobre blanco/#f8f9fa). El dorado brillante se reserva para
+     fondos, bordes, iconos y texto sobre navy (donde sí contrasta). */
+  --nx-gold-text:     #8a6d12;
 
   /* ── Tinta / texto ───────────────────────────────────────── */
   --nx-ink:           #0b2240;

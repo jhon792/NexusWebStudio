@@ -6,11 +6,15 @@
 # Regla general — todos los bots
 User-agent: *
 Allow: /
+# Archivos de descubrimiento para agentes de IA (deben quedar accesibles)
+Allow: /agents.json
+Allow: /.well-known/
+Allow: /llms.txt
+Allow: /site.webmanifest
 
 # Bloquear rutas que no deben indexarse
 Disallow: /cdn-cgi/
 Disallow: /api/
-Disallow: /*.json$
 
 # ── Bots de búsqueda principales ──────────────────────────────
 User-agent: Googlebot
@@ -61,3 +65,6 @@ Crawl-delay: 20
 
 # ── Sitemaps ───────────────────────────────────────────────────
 Sitemap: https://www.nexsustudio.site/sitemap.xml
+
+# ── Resumen para LLMs (llmstxt.org) ────────────────────────────
+# https://www.nexsustudio.site/llms.txt
