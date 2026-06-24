@@ -5,6 +5,7 @@ import { useLang } from "../../hooks/useLang";
 
 const WA =
   "https://wa.me/573123198706?text=Hola%2C%20vi%20tu%20sitio%20web%20y%20me%20interesa%20cotizar%20un%20proyecto.";
+const TIKTOK = "https://www.tiktok.com/@nexus_studio2";
 
 const TOOLTIP_TEXT: Record<string, { title: string; subtitle: string }> = {
   ES:    { title: "¿Tienes dudas?",    subtitle: "Escríbenos ahora, respondemos en minutos." },
@@ -20,6 +21,7 @@ export function FloatingWhatsApp() {
   const lang = useLang();
   const [visible, setVisible] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [showSocial, setShowSocial] = useState(false);
 
   const tooltipKey = region === "CO"
     ? (lang === "en" ? "CO_EN" : "CO_ES")
@@ -43,8 +45,37 @@ export function FloatingWhatsApp() {
       {visible && (
         <div
           className="fixed bottom-6 right-6 z-[990] flex flex-col items-end gap-3"
-          aria-label="Contactar por WhatsApp"
+          aria-label="Contacto y redes sociales"
+          onMouseEnter={() => setShowSocial(true)}
+          onMouseLeave={() => setShowSocial(false)}
+          onFocus={() => setShowSocial(true)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setShowSocial(false);
+          }}
         >
+          {/* TikTok — aparece al pasar el cursor (o con foco de teclado) sobre el área */}
+          <AnimatePresence>
+            {showSocial && (
+              <motion.a
+                key="tiktok"
+                href={TIKTOK}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0.4, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.4, y: 12 }}
+                transition={{ type: "spring", stiffness: 320, damping: 20 }}
+                whileHover={{ scale: 1.12 }}
+                whileTap={{ scale: 0.92 }}
+                className="w-12 h-12 rounded-full flex items-center justify-center shadow-2xl"
+                style={{ background: "#010101", boxShadow: "0 8px 28px rgba(0,0,0,0.45)" }}
+                aria-label="Síguenos en TikTok — @nexus_studio2"
+              >
+                <TikTokLogo />
+              </motion.a>
+            )}
+          </AnimatePresence>
+
           {/* Tooltip */}
           <AnimatePresence>
             {showTooltip && (
@@ -127,5 +158,19 @@ export function FloatingWhatsApp() {
         </div>
       )}
     </AnimatePresence>
+  );
+}
+
+/* Logo oficial de TikTok con su efecto de color (cian #25F4EE + magenta #FE2C55
+   desplazados sobre blanco) — la nota musical reconocible de la marca. */
+function TikTokLogo() {
+  const d =
+    "M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z";
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <path d={d} fill="#25F4EE" transform="translate(-1,0.6)" />
+      <path d={d} fill="#FE2C55" transform="translate(1,-0.6)" />
+      <path d={d} fill="#FFFFFF" />
+    </svg>
   );
 }

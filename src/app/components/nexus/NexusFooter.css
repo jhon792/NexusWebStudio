@@ -73,6 +73,29 @@
 }
 .nx-footer__wa:hover { transform: translateY(-2px); }
 
+/* Enlace social (TikTok) — pill negro de marca con glow cian/magenta al hover */
+.nx-footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.6rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: transform 0.4s var(--nx-ease-magnet), box-shadow 0.4s var(--nx-ease);
+}
+.nx-footer__social--tiktok {
+  background: #010101;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.nx-footer__social--tiktok:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px #25f4ee, 0 10px 24px -8px rgba(254, 44, 85, 0.6);
+}
+
 .nx-footer__col-title {
   font-size: 0.74rem;
   font-weight: 700;

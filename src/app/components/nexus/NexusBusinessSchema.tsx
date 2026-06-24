@@ -67,6 +67,7 @@ const SPAIN_GRAPH = {
       ],
       sameAs: [
         "https://wa.me/573123198706",
+        "https://www.tiktok.com/@nexus_studio2",
         "https://www.instagram.com/nexsustudio",
         "https://www.facebook.com/nexsustudio",
       ],
