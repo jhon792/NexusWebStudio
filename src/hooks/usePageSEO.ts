@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { setSsrHead } from "../seo-head";
 
 /** Una variante hreflang: idioma/región → URL absoluta. */
 interface Alternate {
@@ -38,6 +39,12 @@ export function usePageSEO({
   htmlLang,
   alternates,
 }: PageSEOOptions) {
+  // SSR/prerender: el effect no corre en el servidor, así que capturamos el head
+  // de forma síncrona para que prerender.mjs lo escriba en el HTML estático.
+  if (typeof window === "undefined") {
+    setSsrHead({ title, description, canonical, ogLocale, htmlLang, alternates });
+  }
+
   useEffect(() => {
     document.title = title;
 

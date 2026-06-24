@@ -52,9 +52,77 @@
   </url>
 
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <!--  SECTORES ESPAÑA — futuros /es/sectores/* (Fase 6)          -->
-  <!--  Se añadirán bajo /es/ cuando existan las páginas.          -->
+  <!--  SECTORES — Colombia (/sectores/*) y España (/es/sectores/*) -->
+  <!--  hreflang solo en pares CO↔ES (inmobiliarias, restaurantes). -->
   <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Colombia (COP) -->
+  <url>
+    <loc>https://www.nexsustudio.site/sectores/inmobiliarias</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO"     href="https://www.nexsustudio.site/sectores/inmobiliarias"/>
+    <xhtml:link rel="alternate" hreflang="es-ES"     href="https://www.nexsustudio.site/es/sectores/inmobiliarias"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nexsustudio.site/sectores/inmobiliarias"/>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/sectores/restaurantes</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO"     href="https://www.nexsustudio.site/sectores/restaurantes"/>
+    <xhtml:link rel="alternate" hreflang="es-ES"     href="https://www.nexsustudio.site/es/sectores/restaurantes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nexsustudio.site/sectores/restaurantes"/>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/sectores/constructoras</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+  </url>
+
+  <!-- España (EUR) -->
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/clinicas-dentales</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/abogados</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/clinicas-esteticas</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/fisioterapeutas</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/psicologos</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/inmobiliarias</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO"     href="https://www.nexsustudio.site/sectores/inmobiliarias"/>
+    <xhtml:link rel="alternate" hreflang="es-ES"     href="https://www.nexsustudio.site/es/sectores/inmobiliarias"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nexsustudio.site/sectores/inmobiliarias"/>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/restaurantes</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO"     href="https://www.nexsustudio.site/sectores/restaurantes"/>
+    <xhtml:link rel="alternate" hreflang="es-ES"     href="https://www.nexsustudio.site/es/sectores/restaurantes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nexsustudio.site/sectores/restaurantes"/>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/arquitectos</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/peluquerias</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexsustudio.site/es/sectores/gimnasios</loc>
+    <lastmod>2026-06-09</lastmod><changefreq>monthly</changefreq><priority>0.85</priority>
+  </url>
 
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!--  PÁGINAS LEGALES (es-CO)                                    -->

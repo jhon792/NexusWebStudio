@@ -10,6 +10,7 @@ import { useAnalytics } from "./hooks/useAnalytics";
 import { detectCountry, readCachedCountry, isLikelyCrawler } from "./app/components/nexus/nexus-geo";
 import { isEuropean } from "./geo-europe";
 import NexusLanding from "./app/components/nexus/NexusLanding";
+import SectorPage from "./app/pages/SectorPage";
 import i18n, { getLangFromPath } from "./i18n";
 
 /* Helper: convierte un import dinámico de página en una ruta `lazy` de
@@ -119,6 +120,10 @@ export const routes: RouteObject[] = [
       { index: true, element: <NexusHomeColombia /> },
       { path: "es", element: <LightSuspense><NexusLanding region="EU" /></LightSuspense> },
       { path: "nexus", element: <LightSuspense><NexusLanding /></LightSuspense> },
+
+      // ── Páginas de sector (SEO programático, prerenderizadas) ─────
+      { path: "sectores/:slug", element: <SectorPage /> },
+      { path: "es/sectores/:slug", element: <SectorPage /> },
 
       // ── Colombia + compartidas (lazy + prerenderizables) ──────────
       { path: "home-clasico", lazy: page(() => import("./app/pages/Home")) },

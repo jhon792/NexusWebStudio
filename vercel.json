@@ -107,7 +107,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!es$|sitemap\\.xml|robots\\.txt|llms\\.txt|agents\\.json|agent-instructions\\.md|\\.well-known/|site\\.webmanifest|android-chrome|previews/|_headers|favicon|og-image\\.|apple-touch-icon\\.|assets/|app\\.html).+)",
+      "source": "/((?!es$|sectores/|es/sectores/|sitemap\\.xml|robots\\.txt|llms\\.txt|agents\\.json|agent-instructions\\.md|\\.well-known/|site\\.webmanifest|android-chrome|previews/|_headers|favicon|og-image\\.|apple-touch-icon\\.|assets/|app\\.html).+)",
       "destination": "/app.html"
     }
   ]
