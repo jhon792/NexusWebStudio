@@ -1,18 +1,21 @@
 import { Link } from "react-router";
 import { useNexus } from "./NexusLangContext";
+import { SECTORS, sectorPath } from "../../../data/sectores";
 import "./NexusFooter.css";
 
 const WA = "https://wa.me/573123198706";
 const TIKTOK = "https://www.tiktok.com/@nexus_studio2";
 
 /* Anclas internas (estables); las etiquetas vienen del diccionario */
-const SECTOR_HREFS = ["#nx-portfolio", "#nx-portfolio", "#nx-portfolio", "#nx-pricing"];
 const NAV_HREFS = ["#nx-portfolio", "#nx-services", "#nx-pricing", "#nx-faq", "#nx-funnel"];
 const LEGAL_HREFS = ["/privacidad", "/cookies", "/terminos", "/aviso-legal"];
 
 export function NexusFooter() {
-  const { t } = useNexus();
+  const { t, region } = useNexus();
   const fo = t.footer;
+  // Enlaces reales a las páginas de sector de la región actual (CO o ES) →
+  // rutas de rastreo internas para que Google descubra e indexe los sectores.
+  const sectorLinks = SECTORS.filter((s) => s.region === region);
 
   const scrollTo = (href: string) =>
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
@@ -50,11 +53,9 @@ export function NexusFooter() {
         <nav className="nx-footer__col" aria-label={fo.servicesTitle}>
           <div className="nx-footer__col-title">{fo.servicesTitle}</div>
           <ul className="nx-footer__list">
-            {fo.sectors.map((label, i) => (
-              <li key={label}>
-                <button type="button" className="nx-footer__link" onClick={() => scrollTo(SECTOR_HREFS[i])}>
-                  {label}
-                </button>
+            {sectorLinks.map((s) => (
+              <li key={s.slug}>
+                <Link className="nx-footer__link" to={sectorPath(s)}>{s.professionTitle}</Link>
               </li>
             ))}
           </ul>
